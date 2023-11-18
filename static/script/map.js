@@ -1,6 +1,6 @@
 
 // function to Post data to API
-async function postData(url = "", data) {
+async function postData(url = "", data ) {
     // Default options are marked with *
     const response = await fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -9,7 +9,7 @@ async function postData(url = "", data) {
         },
         body: JSON.stringify(data), // body data type must match "Content-Type" header
         });
-        console.log(JSON.stringify(data))
+        // console.log(JSON.stringify(data))
         return response.json(); // parses JSON response into native JavaScript objects
     }
 
@@ -26,8 +26,8 @@ function initMap() {
         position: constPos,
     });
 
-    var location = { latitude: 51.498356, longitude: -0.176894};
-    postData("https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio", {location}).then((data) => {
+    var dataLoc = {location:{latitude: 51.498356, longitude: -0.176894}, extraComputations:"HEALTH_RECOMMENDATIONS"};
+    postData("https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio", dataLoc).then((data) => {
             infoWindow.setContent(
             JSON.stringify(data),
         );
@@ -43,18 +43,18 @@ function initMap() {
         });
         let newLoc = mapsMouseEvent.latLng.toJSON();
 
-        const { lat, lng} = newLoc;
+        const {lat, lng} = newLoc;
         const location = {
             latitude: lat,
             longitude: lng
         };
-
-        postData("https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio", {location}).then((data) => {
+        const extraComputations = "HEALTH_RECOMMENDATIONS";
+        const dataLoc = {location, extraComputations};
+        postData("https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio", dataLoc).then((data) => {
                 infoWindow.setContent(
                 JSON.stringify(data),
             );
             });  
-        
         
         infoWindow.open(map);
         });
