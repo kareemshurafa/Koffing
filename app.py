@@ -37,8 +37,10 @@ class UserData(db.Model):
 with app.app_context():
     db.create_all()
 
-    db.session.add(UserData('admin', 20, "bleh", "blehx2"))
+    db.session.delete()
+    db.session.add(UserData('admin', 20, "bleh", 4))
     db.session.commit()
+
 
     users = UserData.query.all()
 
@@ -53,7 +55,7 @@ def mapview():
 
 @app.route("/database")
 def databaseview():
-    return "<h2>{users}</h2>"
+    return users
 
 
 if __name__ == "__main__":
