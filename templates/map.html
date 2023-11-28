@@ -2,11 +2,8 @@
   <head>
     <title>Air Quality Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/style.css')}}" />
-    {% comment %} <script type="module" src="{{ url_for('static',filename='script/map.js') }}"></script> {% endcomment %}
     <script type="module" src="{{ url_for('static', filename='script/map.js') }}" defer></script>
-
   </head>
   <body>
     <h1>Air Quality Map</h1>
