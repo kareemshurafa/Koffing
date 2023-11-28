@@ -17,66 +17,36 @@ async function getData(url = "") {
     const response = await fetch(url, {
         method: "GET", 
         });
-        // console.log(response)
-        return response; 
+        let imageData = response.blob();
+        return imageData
+        
     }
 
+class airQualityHeatmap{
+    tileSize;
+    minZoom = 0;
+    maxZoom = 16;
+    name = "Air Quality Heatmap";
+    alt = "Heatmap";
 
-
-
-// class CoordMapType {
-//         tileSize;
-//         maxZoom = 19;
-//         name = "Heatmap";
-//         alt = "Heatmap";
-//         constructor(tileSize) {
-//           this.tileSize = tileSize;
-//         }
-//         getTile(coord, zoom, ownerDocument) {
-//           const div = ownerDocument.createElement("div");
-      
-//           div.innerHTML = String(coord);
-//           div.style.width = this.tileSize.width + "px";
-//           div.style.height = this.tileSize.height + "px";
-//           div.style.fontSize = "10";
-//           div.style.borderStyle = "solid";
-//           div.style.borderWidth = "1px";
-//           div.style.borderColor = "#AAAAAA";
-//           div.style.backgroundColor = "#E5E3DF";
-//           return div;
-//         }
-//         releaseTile(tile) {}
-    // }
-
-class CoordMapType {
-        tileSize;
-        maxZoom = 19;
-        name = "Heatmap";
-        alt = "Heatmap";
-        constructor(tileSize) {
+    constructor(tileSize) {
         this.tileSize = tileSize;
-        }
-
-        heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/US_AQI/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
-        params = {}
-        getTile(coord, zoom, ownerDocument) {
-            var img = ownerDocument.createElement("img")
-            this.params.zoom = zoom;
-            this.params.x = coord.x;
-            this.params.y = coord.y;
-
-            this.heatmapURl = addParametersToURL(this.heatmapURl, this.params);
-
-            getData(this.heatmapURl).then((data) => {
-                // console.log(data)
-                img = data;
-                console.log(img);
-                return img
-            })
-        }
-
-        releaseTile(tile) {}
     }
+    getTile(coord, zoom, ownerDocument) {
+        const div = ownerDocument.createElement('div');
+        let heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/UAQI_INDIGO_PERSIAN/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+        let params = {};
+        params.zoom = zoom;
+        params.x = coord.x;
+        params.y = coord.y;
+        const opacity = 0.45
+
+        heatmapURl = addParametersToURL(heatmapURl, params);
+        div.innerHTML = `<img style="opacity: ${opacity}"src="${heatmapURl}" alt="Air Quality Tile">`;
+        return div;
+    };
+}
+
 
 
 
@@ -99,18 +69,13 @@ function initMap() {
     let parameters = {}
     const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key={api_key}"
     parameters.api_key = "AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
-    // console.log(parameters)
 
 
     let getAQInfo = addParametersToURL(AQInfo_URL, parameters);
+
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
         center: constPos,
-        mapTypeId: "coordinate",
-        mapTypeControlOptions: {
-            mapTypeIds: ["coordinate", "roadmap"],
-            style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-        },
         });
     // Create the initial InfoWindow.
     let infoWindow = new google.maps.InfoWindow({  
@@ -156,10 +121,23 @@ function initMap() {
         infoWindow.open(map);
         });
 
-    map.mapTypes.set("coordinate", new CoordMapType(new google.maps.Size(256, 256)));
+    let airQualityOverlayVisible = false; // Initial state
+    const airQualitymap = new airQualityHeatmap(new google.maps.Size(256, 256));
+    
+    var toggleButton = document.createElement('button');
+    toggleButton.textContent = 'Air Pollution Heatmap';
+    toggleButton.addEventListener('click', function () {
+        if (airQualityOverlayVisible) {
+            // If the overlay is visible, remove it
+            map.overlayMapTypes.removeAt(0);
+        } else {
+            // If the overlay is not visible, add it
+            map.overlayMapTypes.insertAt(0, airQualitymap);
+        }
+        airQualityOverlayVisible = !airQualityOverlayVisible;
+    });
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
+}
 
-        // map.overlayMapTypes.insertAt(0, coordMapType);
-
-    }
 
 window.initMap = initMap;
