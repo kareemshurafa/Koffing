@@ -35,12 +35,12 @@ class UserData(db.Model):
         return '<User %r>' % self.user
 
 with app.app_context():
-    db.create_all()
 
-    db.session.delete()
-    db.session.add(UserData('admin', 20, "bleh", 4))
+    newobj = UserData('atreus', 15, "boy", 12)
+
+    
+    db.session.add(newobj)
     db.session.commit()
-
 
     users = UserData.query.all()
 
