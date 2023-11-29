@@ -36,12 +36,6 @@ class UserData(db.Model):
 
 with app.app_context():
 
-    newobj = UserData('atreus', 15, "boy", 12)
-
-    
-    db.session.add(newobj)
-    db.session.commit()
-
     users = UserData.query.all()
 
 
