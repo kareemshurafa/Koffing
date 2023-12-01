@@ -1,0 +1,541 @@
+	.mediaViewInfo {
+		--web-view-name: Web 1920 – 7;
+		--web-view-id: Web_1920__7;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Web_1920__7;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#Web_1920__7 {
+		position: absolute;
+		width: 1920px;
+		height: 1378px;
+		background-color: rgba(231,240,252,1);
+		overflow: hidden;
+		--web-view-name: Web 1920 – 7;
+		--web-view-id: Web_1920__7;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	#Rectangle_13 {
+		fill: rgba(112,112,112,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_13 {
+		position: absolute;
+		overflow: visible;
+		width: 1920px;
+		height: 93px;
+		left: 0px;
+		top: 0px;
+	}
+	#Koffing {
+		left: 103px;
+		top: 19px;
+		position: absolute;
+		overflow: visible;
+		width: 112px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgba(255,255,255,1);
+	}
+	#Component_14__1 {
+		position: absolute;
+		width: 160px;
+		height: 36px;
+		left: 1742px;
+		top: 30px;
+		overflow: visible;
+	}
+	#My_Account_ {
+		left: 0px;
+		top: 2px;
+		position: absolute;
+		overflow: visible;
+		width: 141px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 27px;
+		color: rgba(255,255,255,1);
+	}
+	#Icon_awesome-user-alt {
+		fill: rgba(255,255,255,1);
+	}
+	.Icon_awesome-user-alt {
+		overflow: visible;
+		position: absolute;
+		width: 27px;
+		height: 27px;
+		left: 1703.3px;
+		top: 33px;
+		transform: matrix(1,0,0,1,0,0);
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: Logbook.html;
+		cursor: pointer;
+	}
+	#Rectangle_15 {
+		fill: rgba(187,191,193,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_15 {
+		position: absolute;
+		overflow: visible;
+		width: 1920px;
+		height: 71px;
+		left: 0px;
+		top: 93px;
+	}
+	#Repeat_Grid_1 {
+		position: absolute;
+		width: 1476px;
+		height: 71px;
+		left: 444px;
+		top: 93px;
+		overflow: hidden;
+	}
+	#Group {
+		position: absolute;
+		width: 1px;
+		height: 71px;
+		left: -444px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Line_4 {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 3px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_4 {
+		overflow: visible;
+		position: absolute;
+		width: 3px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Group_z {
+		position: absolute;
+		width: 1px;
+		height: 71px;
+		left: 196px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Line_4_ {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 3px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_4_ {
+		overflow: visible;
+		position: absolute;
+		width: 3px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Group_ {
+		position: absolute;
+		width: 1px;
+		height: 71px;
+		left: 836px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Line_4_ba {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 3px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_4_ba {
+		overflow: visible;
+		position: absolute;
+		width: 3px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Group_5 {
+		position: absolute;
+		width: 638px;
+		height: 71px;
+		left: 641px;
+		top: 93px;
+		overflow: visible;
+	}
+	#Rectangle_55 {
+		fill: rgba(187,191,193,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_55 {
+		position: absolute;
+		overflow: visible;
+		width: 638px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+	}
+	#Asthma_Logbook_ {
+		left: 217px;
+		top: 20px;
+		position: absolute;
+		overflow: visible;
+		width: 170px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: Logbook.html;
+		cursor: pointer;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#Group_6 {
+		position: absolute;
+		width: 639px;
+		height: 71px;
+		left: 1281px;
+		top: 92px;
+		overflow: visible;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: Web_1920___9.html;
+		cursor: pointer;
+	}
+	#Rectangle_55_ {
+		fill: rgba(187,191,193,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_55_ {
+		position: absolute;
+		overflow: visible;
+		width: 639px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+	}
+	#FAQ {
+		left: 300px;
+		top: 24px;
+		position: absolute;
+		overflow: visible;
+		width: 41px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#Rectangle_56 {
+		fill: rgba(245,208,236,1);
+	}
+	.Rectangle_56 {
+		position: absolute;
+		overflow: visible;
+		width: 529px;
+		height: 210px;
+		left: 78px;
+		top: 340px;
+	}
+	#ASTHMA_ {
+		left: 1155px;
+		top: 301px;
+		position: absolute;
+		overflow: visible;
+		width: 138px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(0,0,0,1);
+	}
+	#n__ {
+		left: 688px;
+		top: 429px;
+		position: absolute;
+		overflow: visible;
+		width: 1px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(112,112,112,1);
+	}
+	#Asthma_is_a_chronic_respirator {
+		left: 725px;
+		top: 369px;
+		position: absolute;
+		overflow: hidden;
+		width: 1098px;
+		height: 466px;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 25px;
+		color: rgba(0,0,0,1);
+	}
+	#INFO_WHETHER_YOU_TOOK_YOUR_MED {
+		left: 103px;
+		top: 420px;
+		position: absolute;
+		overflow: visible;
+		width: 498px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 25px;
+		color: rgba(0,0,0,1);
+	}
+	#Scroll_Group_2 {
+		mix-blend-mode: normal;
+		position: absolute;
+		width: 234px;
+		height: 63px;
+		left: 1107px;
+		top: 953px;
+		overflow: hidden;
+	}
+	#WHAT_DO_WE_DO {
+		left: 0px;
+		top: -1px;
+		position: absolute;
+		overflow: visible;
+		width: 235px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(23,78,180,1);
+	}
+	#Rectangle_61 {
+		fill: rgba(245,208,236,1);
+	}
+	.Rectangle_61 {
+		position: absolute;
+		overflow: visible;
+		width: 529px;
+		height: 210px;
+		left: 78px;
+		top: 670px;
+	}
+	#Rectangle_62 {
+		fill: rgba(245,208,236,1);
+	}
+	.Rectangle_62 {
+		position: absolute;
+		overflow: visible;
+		width: 529px;
+		height: 210px;
+		left: 78px;
+		top: 1043px;
+	}
+	#Component_30__1 {
+		position: absolute;
+		width: 641px;
+		height: 71px;
+		left: 0px;
+		top: 93px;
+		overflow: visible;
+	}
+	#Rectangle_53 {
+		fill: rgba(187,191,193,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_53 {
+		position: absolute;
+		overflow: visible;
+		width: 641px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+	}
+	#Air_Quality_Info_ {
+		left: 250px;
+		top: 23px;
+		position: absolute;
+		overflow: visible;
+		width: 148px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#Group_4 {
+		position: absolute;
+		width: 21px;
+		height: 10.5px;
+		left: 555.5px;
+		top: 35px;
+		overflow: visible;
+	}
+	#Line_14 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_14 {
+		overflow: visible;
+		position: absolute;
+		width: 12.345px;
+		height: 11.48px;
+		left: 10px;
+		top: 0.5px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Line_15 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_15 {
+		overflow: visible;
+		position: absolute;
+		width: 12.381px;
+		height: 11.947px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Koffing_is_a_web-based_app_tha {
+		left: 698px;
+		top: 1015.5px;
+		position: absolute;
+		overflow: visible;
+		width: 1106px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 27px;
+		color: rgba(0,0,0,1);
+	}
+	#AIR_POLLUTION_NEWS_UPDATE {
+		left: 159px;
+		top: 731px;
+		position: absolute;
+		overflow: visible;
+		width: 363px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 28px;
+		color: rgba(0,0,0,1);
+	}
+	#What_to_do_in_emergency_vidor_ {
+		left: 136px;
+		top: 1071px;
+		position: absolute;
+		overflow: visible;
+		width: 410px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 28px;
+		color: rgba(0,0,0,1);
+	}
+	#puffer {
+		position: absolute;
+		width: 82px;
+		height: 89px;
+		left: 11px;
+		top: 0px;
+		overflow: visible;
+	}
