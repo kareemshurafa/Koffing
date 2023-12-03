@@ -29,11 +29,11 @@ class AsthmaInfo(db.Model):
     gptele = db.Column(db.Integer, nullable = True)
     gpaddy = db.Column(db.String(500), nullable=True)
 
-    info_id = db.Column(db.Integer, db.ForeignKey(userdata.id))   
+    # info_id = db.Column(db.Integer, db.ForeignKey(userdata.id))   
 
 class AsthmaLog(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    log_id = db.Column(db.Integer, db.ForeignKey(userdata.id))
+    # log_id = db.Column(db.Integer, db.ForeignKey(userdata.id))
     medtype = db.Column(db.String(100), nullable = False)
     dosageamt = db.Column(db.Integer, nullable = False)
     puffno = db.Column(db.Integer, nullable = False)
