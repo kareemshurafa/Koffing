@@ -66,7 +66,7 @@ class UserData(db.Model):
 
 @app.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 def add_user():
-    return(render_template("sql-data.html"))
+    return(render_template("html/Login_page.html"))
 
 @app.route("/")
 def hello_world():
