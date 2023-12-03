@@ -1,0 +1,128 @@
+	#Component_9__1 {
+		position: absolute;
+		width: 2054.883px;
+		height: 1724.086px;
+		left: 0px;
+		top: -343.043px;
+		overflow: visible;
+	}
+	#Rectangle_5 {
+		fill: rgba(231,240,252,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_5 {
+		position: absolute;
+		overflow: visible;
+		width: 1813.883px;
+		height: 1245px;
+		left: 0px;
+		top: 202.086px;
+	}
+	#Path_2 {
+		fill: rgba(245,210,237,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_2 {
+		overflow: visible;
+		position: absolute;
+		width: 720.092px;
+		height: 1249.051px;
+		left: 944.754px;
+		top: 201.086px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Ellipse_1 {
+		fill: rgba(245,210,237,1);
+	}
+	.Ellipse_1 {
+		position: absolute;
+		overflow: visible;
+		width: 1090px;
+		height: 996px;
+		left: 964.883px;
+		top: 728.086px;
+	}
+	#Ellipse_2 {
+		fill: rgba(245,210,237,1);
+	}
+	.Ellipse_2 {
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 1131px;
+		left: 1586.883px;
+		top: 95.086px;
+	}
+	#Ellipse_3 {
+		fill: rgba(245,210,237,1);
+	}
+	.Ellipse_3 {
+		position: absolute;
+		overflow: visible;
+		width: 217px;
+		height: 156px;
+		left: 1529.689px;
+		top: 616.086px;
+	}
+	#Ellipse_4 {
+		fill: rgba(245,210,237,1);
+	}
+	.Ellipse_4 {
+		position: absolute;
+		overflow: visible;
+		width: 331px;
+		height: 350px;
+		left: 956.465px;
+		top: 1272.086px;
+	}
+	#Path_3 {
+		fill: rgba(231,240,252,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_3 {
+		overflow: visible;
+		position: absolute;
+		width: 371.003px;
+		height: 568.131px;
+		left: 1352.337px;
+		top: 201.586px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Ellipse_5 {
+		fill: rgba(231,240,252,1);
+	}
+	.Ellipse_5 {
+		width: 57px;
+		height: 874.809px;
+		position: absolute;
+		overflow: visible;
+		transform: translate(0px, 0px) matrix(1,0,0,1,1558.3828,-51.3618) rotate(32deg);
+		transform-origin: center;
+	}
+	#puffer_cartoon {
+		position: absolute;
+		width: 704px;
+		height: 540px;
+		left: 1171.734px;
+		top: 909.086px;
+		overflow: visible;
+	}
+
+
+Warnings:
+1. Rotation support: Rotation not fully supported on all elements. Confirm valid rotation, remove rotation, commit the rotation, adjust the position manually or use the export as image feature" on "Ellipse_5"

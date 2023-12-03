@@ -1,0 +1,420 @@
+	.mediaViewInfo {
+		--web-view-name: Web 1920 – 15;
+		--web-view-id: Web_1920__15;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Web_1920__15;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#Web_1920__15 {
+		position: absolute;
+		width: 1920px;
+		height: 1080px;
+		background-color: rgba(231,240,252,1);
+		overflow: hidden;
+		--web-view-name: Web 1920 – 15;
+		--web-view-id: Web_1920__15;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	#Rectangle_13 {
+		fill: rgba(112,112,112,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_13 {
+		position: absolute;
+		overflow: visible;
+		width: 1920px;
+		height: 93px;
+		left: 0px;
+		top: 0px;
+	}
+	#Koffing {
+		left: 103px;
+		top: 16px;
+		position: absolute;
+		overflow: visible;
+		width: 131px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgba(255,255,255,1);
+	}
+	#Component_14__3 {
+		position: absolute;
+		width: 160px;
+		height: 36px;
+		left: 1742px;
+		top: 30px;
+		overflow: visible;
+	}
+	#My_Account_ {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 161px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 27px;
+		color: rgba(255,255,255,1);
+	}
+	#Icon_awesome-user-alt {
+		fill: rgba(255,255,255,1);
+	}
+	.Icon_awesome-user-alt {
+		overflow: visible;
+		position: absolute;
+		width: 27px;
+		height: 27px;
+		left: 1703.3px;
+		top: 33px;
+		transform: matrix(1,0,0,1,0,0);
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: Logbook.html;
+		cursor: pointer;
+	}
+	#Group_5 {
+		position: absolute;
+		width: 638px;
+		height: 71px;
+		left: 641px;
+		top: 93px;
+		overflow: visible;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: Logbook.html;
+		cursor: pointer;
+	}
+	#Rectangle_55 {
+		fill: rgba(187,191,193,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_55 {
+		position: absolute;
+		overflow: visible;
+		width: 638px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+	}
+	#Asthma_Logbook_ {
+		left: 217px;
+		top: 22px;
+		position: absolute;
+		overflow: visible;
+		width: 170px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#Group_6 {
+		position: absolute;
+		width: 639px;
+		height: 71px;
+		left: 1281px;
+		top: 93px;
+		overflow: visible;
+	}
+	#Rectangle_55_z {
+		fill: rgba(187,191,193,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_55_z {
+		position: absolute;
+		overflow: visible;
+		width: 639px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+	}
+	#Home {
+		left: 300px;
+		top: 26px;
+		position: absolute;
+		overflow: visible;
+		width: 57px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#Icon_awesome-home {
+		fill: rgba(255,255,255,1);
+	}
+	.Icon_awesome-home {
+		overflow: visible;
+		position: absolute;
+		width: 28.709px;
+		height: 24.042px;
+		left: 258.006px;
+		top: 23.479px;
+		transform: matrix(1,0,0,1,0,0);
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: Web_1920___7.html;
+		cursor: pointer;
+	}
+	#Line_16 {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 3px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_16 {
+		overflow: visible;
+		position: absolute;
+		width: 3px;
+		height: 71px;
+		left: 1281px;
+		top: 93px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Rectangle_59 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(0,0,0,1);
+		stroke-width: 1.25px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_59 {
+		position: absolute;
+		overflow: visible;
+		width: 1151px;
+		height: 574px;
+		left: 184px;
+		top: 347px;
+	}
+	#Rectangle_60 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(0,0,0,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_60 {
+		position: absolute;
+		overflow: visible;
+		width: 419px;
+		height: 64px;
+		left: 1405px;
+		top: 393px;
+	}
+	#Icon_feather-search {
+		position: absolute;
+		width: 20.237px;
+		height: 17.865px;
+		left: 1778.533px;
+		top: 416.067px;
+		overflow: visible;
+	}
+	#Path_13 {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 2px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_13 {
+		overflow: visible;
+		position: absolute;
+		width: 20.141px;
+		height: 17.088px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_14 {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 2px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_14 {
+		overflow: visible;
+		position: absolute;
+		width: 7.578px;
+		height: 7.354px;
+		left: 15.487px;
+		top: 13.339px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Search_for_location_ {
+		left: 1445px;
+		top: 415px;
+		position: absolute;
+		overflow: visible;
+		width: 173px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		color: rgba(112,112,112,1);
+	}
+	#AIR_QUALITY_MAP_ {
+		left: 593px;
+		top: 276px;
+		position: absolute;
+		overflow: visible;
+		width: 315px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(0,0,0,1);
+	}
+	#Component_30__3 {
+		position: absolute;
+		width: 641px;
+		height: 71px;
+		left: 0px;
+		top: 93px;
+		overflow: visible;
+	}
+	#Rectangle_53 {
+		fill: rgba(187,191,193,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_53 {
+		position: absolute;
+		overflow: visible;
+		width: 641px;
+		height: 71px;
+		left: 0px;
+		top: 0px;
+	}
+	#Air_Quality_Info_ {
+		left: 250px;
+		top: 25px;
+		position: absolute;
+		overflow: visible;
+		width: 150px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#Group_4 {
+		position: absolute;
+		width: 21px;
+		height: 10.5px;
+		left: 555.5px;
+		top: 35px;
+		overflow: visible;
+	}
+	#Line_14 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_14 {
+		overflow: visible;
+		position: absolute;
+		width: 12.345px;
+		height: 11.48px;
+		left: 10px;
+		top: 0.5px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Line_15 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_15 {
+		overflow: visible;
+		position: absolute;
+		width: 12.381px;
+		height: 11.947px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#puffer {
+		position: absolute;
+		width: 82px;
+		height: 89px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}

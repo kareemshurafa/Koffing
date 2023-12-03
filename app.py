@@ -3,6 +3,8 @@ import requests
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -29,11 +31,11 @@ class AsthmaInfo(db.Model):
     gptele = db.Column(db.Integer, nullable = True)
     gpaddy = db.Column(db.String(500), nullable=True)
 
-    info_id = db.Column(db.Integer, db.ForeignKey(userdata.id))   
+    # info_id = db.Column(db.Integer, db.ForeignKey(userdata.id))   
 
 class AsthmaLog(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    log_id = db.Column(db.Integer, db.ForeignKey(userdata.id))
+    # log_id = db.Column(db.Integer, db.ForeignKey(userdata.id))
     medtype = db.Column(db.String(100), nullable = False)
     dosageamt = db.Column(db.Integer, nullable = False)
     puffno = db.Column(db.Integer, nullable = False)
@@ -41,7 +43,6 @@ class AsthmaLog(db.Model):
     pufftime = db.Column(db.DateTime, default=datetime.utcnow) #Need to double check if this actually outputs the time
     
 class UserData(db.Model):
-    
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(200), nullable = False)
     email = db.Column(db.String(120), nullable = False, unique=True)
@@ -66,7 +67,6 @@ class UserData(db.Model):
 @app.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 def add_user():
     return(render_template("sql-data.html"))
-
 
 @app.route("/")
 def hello_world():
