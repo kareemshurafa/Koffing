@@ -41,7 +41,6 @@ class AsthmaLog(db.Model):
     pufftime = db.Column(db.DateTime, default=datetime.utcnow) #Need to double check if this actually outputs the time
     
 class UserData(db.Model):
-    
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(200), nullable = False)
     email = db.Column(db.String(120), nullable = False, unique=True)
@@ -66,7 +65,6 @@ class UserData(db.Model):
 @app.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 def add_user():
     return(render_template("sql-data.html"))
-
 
 @app.route("/")
 def hello_world():
