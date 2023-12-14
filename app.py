@@ -76,5 +76,19 @@ def hello_world():
 def mapview():
     return render_template('map.html')
 
+@app.route("/signup")
+def signupview():
+    return render_template('Sign_up_page_template.html')
+
+@app.route("/login")
+def loginview():
+    return render_template('Login_page_template.html')
+
+@app.route("/logbook")
+def logbookview():
+    return render_template('Logbook_template.html')
+
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
