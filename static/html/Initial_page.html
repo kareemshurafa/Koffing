@@ -4,16 +4,25 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web 1920 – 2</title>
+<title>Initial Page</title>
+<svg>
+    <defs>
+        <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#b6d0ff;"/>
+            <stop offset="100%" style="stop-color:#7a9bea;"/>
+        </linearGradient>
+    </defs>
+    <!-- Your SVG content here -->
+</svg>
 <style id="applicationStylesheet" type="text/css">
 	.mediaViewInfo {
-		--web-view-name: Web 1920 – 2;
-		--web-view-id: Web_1920__2;
+		--web-view-name: Initial Page;
+		--web-view-id: Initial_Page;
 		--web-scale-on-resize: true;
 		--web-enable-deep-linking: true;
 	}
 	:root {
-		--web-view-ids: Web_1920__2;
+		--web-view-ids: Initial_Page;
 	}
 	* {
 		margin: 0;
@@ -21,14 +30,14 @@
 		box-sizing: border-box;
 		border: none;
 	}
-	#Web_1920__2 {
+	#Initial_Page {
 		position: absolute;
 		width: 1918px;
 		height: 1078px;
 		background-color: rgba(231,240,252,1);
 		overflow: hidden;
-		--web-view-name: Web 1920 – 2;
-		--web-view-id: Web_1920__2;
+		--web-view-name: Initial Page;
+		--web-view-id: Initial_Page;
 		--web-scale-on-resize: true;
 		--web-enable-deep-linking: true;
 	}
@@ -41,11 +50,11 @@
 	
 	}
 	#WELCOME_TO_KOFFING__An_Imperia {
-		left: 325px;
-		top: 418px;
+		left: 265px;
+		top: 416px;
 		position: absolute;
 		overflow: visible;
-		width: 1269px;
+		width: 1389px;
 		white-space: nowrap;
 		text-align: center;
 		font-family: Adobe Clean;
@@ -93,10 +102,10 @@
 	}
 	#Log_In {
 		left: 180.746px;
-		top: 22px;
+		top: 19px;
 		position: absolute;
 		overflow: visible;
-		width: 84px;
+		width: 95px;
 		white-space: nowrap;
 		text-align: left;
 		font-family: Adobe Clean;
@@ -132,10 +141,10 @@
 	}
 	#Create_Account_ {
 		left: 120.444px;
-		top: 24px;
+		top: 22px;
 		position: absolute;
 		overflow: visible;
-		width: 199px;
+		width: 224px;
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
@@ -178,6 +187,21 @@
 		top: 538px;
 		overflow: visible;
 	}
+    #LogIn_Button:hover #Rectangle_7{
+        fill: url(#blueGradient); 
+}
+    #LogIn_Button:hover #Log_In{
+    color: white; 
+    
+}
+
+#Account_Button:hover #Rectangle_9{
+        fill: url(#blueGradient); 
+}
+#Account_Button:hover #Create_Account_ {
+    color: white; 
+    
+}
 </style>
 <script id="applicationScript">
 ///////////////////////////////////////
@@ -188,7 +212,25 @@
  * Functionality for scaling, showing by media query, and navigation between multiple pages on a single page. 
  * Code subject to change.
  **/
-
+ document.addEventListener('DOMContentLoaded', function() {
+    var loginButton = document.getElementById('LogIn_Button');
+    loginButton.addEventListener('mouseover', function() {
+        this.style.cursor = 'pointer';
+    });
+    loginButton.addEventListener('click', function() {
+        window.location.href = 'Login_page.html'; // Assuming 'Home – 1.html' is the correct path
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var loginButton = document.getElementById('Account_Button');
+    loginButton.addEventListener('mouseover', function() {
+        this.style.cursor = 'pointer';
+    });
+    loginButton.addEventListener('click', function() {
+        window.location.href = 'Sign_up_page.html'; // Assuming 'Home – 1.html' is the correct path
+    });
+});       
+    
 if (window.console==null) { window["console"] = { log : function() {} } }; // some browsers do not set console
 
 var Application = function() {
@@ -3091,7 +3133,7 @@ window.application = new Application();
 </script>
 </head>
 <body>
-<div id="Web_1920__2">
+<div id="Initial_Page">
 	<div id="WELCOME_TO_KOFFING__An_Imperia">
 		<span>WELCOME TO KOFFING</span><br/><span style="font-family:Impact;font-style:normal;font-weight:normal;font-size:27px;"> </span><span style="font-style:normal;font-weight:normal;font-size:35px;">An Imperial College London based web app offering a novel approach to asthma tracking</span><span style="font-family:Impact;font-style:normal;font-weight:normal;font-size:27px;"> </span>
 	</div>
@@ -3123,5 +3165,6 @@ window.application = new Application();
 	<img id="puffer_cartoon" src="puffer_cartoon.png" srcset="puffer_cartoon.png 1x, puffer_cartoon@2x.png 2x">
 		
 </div>
+
 </body>
 </html>
