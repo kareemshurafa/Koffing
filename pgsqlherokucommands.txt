@@ -1,0 +1,8 @@
+heroku pg:psql --app koffing HEROKU_POSTGRESQL_CHARCOAL_URL
+
+\d to see all tables
+\d to see details for a particular tables
+select * from tablename to view table contents
+
+
+https://devcenter.heroku.com/articles/managing-heroku-postgres-using-cli

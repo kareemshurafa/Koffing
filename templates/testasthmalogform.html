@@ -1,0 +1,13 @@
+{%if med %}
+    <h1> {{ med }} taken </h1>
+{% else %}
+    <h1> What does did you take? </h1>
+    <form method = 'POST'>
+        {{form.hidden_tag() }} <!-- Creates Secret key token-->
+        {{form.med.label}}
+        {{form.med}}
+        <br/>
+        {{form.submit()}}    
+    </form>
+
+{% endif %}
