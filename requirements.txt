@@ -4,9 +4,11 @@ charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
 docopt==0.6.2
+flash==1.0.3
 Flask==3.0.0
 flask-googlemaps==0.4.1
 Flask-SQLAlchemy==3.1.1
+Flask-WTF==1.2.1
 ghp-import==2.1.0
 greenlet==3.0.1
 gunicorn==21.2.0
@@ -50,4 +52,5 @@ urllib3==2.1.0
 watchdog==3.0.0
 Werkzeug==3.0.1
 wheel==0.41.2
+WTForms==3.1.1
 yarg==0.1.9

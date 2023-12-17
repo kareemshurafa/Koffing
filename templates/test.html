@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Please rate your service</title>
+</head>
+<body>
+    <div class="container">
+        {% if message %}
+            <p class="message">{{message | safe }}</p>
+        {% endif %}
+        <!-- @todo - message -->
+        <form action="/submit" method = "Post">
+            <div class="form-group">
+                <h3>Customer Name</h3>
+                <input 
+                type="text"
+                name="customer"
+                placeholder="Name of owner"/>
+            </div>
+            <div>
+                <h3>Inhaler</h3>
+                <select name="inhaler">  
+                    <!-- Creates a drop down menu where you pick the inhaler you want -->
+                    <option value="">Select Inhaler</option>
+                    <option value="Reliever">Reliever</option>
+                    <option value="Long-acting">Long-Acting</option>
+                    <option value="Combination">Combination</option>
+                </select>
+            </div>
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>    
+</body>
+</html>
