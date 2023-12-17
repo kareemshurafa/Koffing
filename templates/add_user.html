@@ -1,0 +1,23 @@
+{% if name %}
+    <h1> Hello {{name}} </h1>
+    <br/>
+    
+{%else%}
+    <h1>User List:</h1>
+    <br/>
+    <form method="POST">
+        {{form.hidden_tag()}}
+
+        {{form.name.label()}}
+
+        {{form.name()}}
+        
+        {{form.email.label()}}
+
+        {{form.email()}}
+    <br/>
+
+    {{form.submit()}}
+{% endif%}
+
+    </form>

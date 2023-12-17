@@ -8,6 +8,7 @@ from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
+import flash
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Koffing123!' #Should likely hide this
@@ -52,19 +53,28 @@ def testlog():
                            med = med)
     
 @app.route('/user/add', methods = ['GET','POST'])
-def add_user():
+def add_users():
+    name = None
+    form = UserForm()
+    
+    #Validate form
+    if form.validate_on_submit(): 
+        name = form.name.data
+        user = UserData.query.filter_by(name = form.name.data).first()
+        form.name.data = ''
+        flash("User Made Successfully")
+    
     return render_template("add_user.html",
-                           form = form,
-                           med = med)
+                           form = form)
 
 #Create a form class
 class AsthmaLogForm(FlaskForm):
     med = StringField("What puff did you take?", validators = [DataRequired()]) #If not filled out, makes sure it gets filled
     submit = SubmitField("Puff!")
 
-def UserForm(FlaskForm):
+class UserForm(FlaskForm):
     name = StringField("What name?", validators = [DataRequired()]) #If not filled out, makes sure it gets filled   
-    name = StringField("Email", validators = [DataRequired()]) #Can change to email validator
+    email = StringField("Email", validators = [DataRequired()]) #Can change to email validator
     submit = SubmitField("Submitf!")
 
 if __name__ == "__main__":

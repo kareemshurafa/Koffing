@@ -6,3 +6,6 @@ select * from tablename to view table contents
 
 
 https://devcenter.heroku.com/articles/managing-heroku-postgres-using-cli
+
+
+https://www.digitalocean.com/community/tutorials/how-to-use-a-postgresql-database-in-a-flask-application
