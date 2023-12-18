@@ -12,6 +12,7 @@ import flash
 
 ENV = "dev"
 
+app = Flask(__name__)
 
 if ENV == "dev":
     app.debug = True
@@ -21,8 +22,8 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = ''
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
 
-app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Koffing123!' #Should likely hide this
 
 db = SQLAlchemy(app)
@@ -31,6 +32,7 @@ db = SQLAlchemy(app)
 
 
 class UserData(db.Model):
+    __tablename__ = 'feedback'
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(200), nullable = False)
     email = db.Column(db.String(120), nullable = False, unique=True)
@@ -53,6 +55,9 @@ class UserData(db.Model):
     
     def __repr__(self):
         return '<User %r>' % self.id
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 def add_user():
