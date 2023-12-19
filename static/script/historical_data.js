@@ -1,4 +1,6 @@
-  // (Mozilla) function to Post data to API
+
+
+// (Mozilla) function to Post data to API
 async function postData(url = "", data = {}, mode) {
     // Default options are marked with *
     const response = await fetch(url, {
@@ -48,9 +50,6 @@ async function updateWidget() {
         })
     
     }
-    // console.log(timeLabels)
-    // console.log(dateLabels)
-    // console.log(aqiPoints)
     return [aqiPoints.reverse(), timeLabels.reverse()]
 }
 
@@ -58,7 +57,6 @@ async function updateWidget() {
 
 async function aqiChart() {
     const dataObt = await updateWidget();
-    // console.log(dataObt[0])
     const data = {
         labels: dataObt[1],
         datasets: [{
@@ -77,7 +75,14 @@ async function aqiChart() {
                 scales: {
                     y: {
                         beginAtZero: true
-                    }
+                    },
+                    // x:{
+                    //     type: 'time',
+                    //     time: {
+                    //         parser: 'MM/DD/YYYY, h:mm:ss A', // Specify your date format here
+                    //         tooltipFormat: 'll HH:mm:ss'
+                    //     }
+                    // }
                 },
                 elements: {
                     point: {
@@ -87,7 +92,10 @@ async function aqiChart() {
                 plugins: {
                     tooltip: {
                     enabled: true
-                    }
+                    },
+                decimation:{
+                    enabled: true
+                }
                 
             }
         }
