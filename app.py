@@ -82,10 +82,6 @@ def mapview():
 def historyview():
     return render_template('historical_data.html')
 
-@app.route("/aqigraph")
-def aqigraphview():
-    return render_template('aqi_graph.html')
-
 @app.route("/signup")
 def signupview():
     return render_template('Sign_up_page_template.html')
