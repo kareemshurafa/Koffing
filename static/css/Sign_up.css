@@ -1,11 +1,11 @@
 .mediaViewInfo {
-    --web-view-name: Login page;
-    --web-view-id: Login_page;
+    --web-view-name: Sign up page;
+    --web-view-id: Sign_up_page;
     --web-scale-on-resize: true;
     --web-enable-deep-linking: true;
 }
 :root {
-    --web-view-ids: Login_page;
+    --web-view-ids: Sign_up_page;
 }
 * {
     margin: 0;
@@ -13,23 +13,27 @@
     box-sizing: border-box;
     border: none;
 }
-#Login_page {
+#Sign_up_page {
     position: absolute;
-    width: 1920px;
-    height: 1080px;
+    width: 1881px;
+    height: 1056px;
     background-color: rgba(255,255,255,1);
     overflow: hidden;
-    --web-view-name: Login page;
-    --web-view-id: Login_page;
+    --web-view-name: Sign up page;
+    --web-view-id: Sign_up_page;
     --web-scale-on-resize: true;
     --web-enable-deep-linking: true;
 }
-#Component_9__1 {
+@keyframes  {
+
+
+}
+#Component_9__4 {
     position: absolute;
     width: 2054.883px;
     height: 1724.086px;
     left: 0px;
-    top: -343.043px;
+    top: -374.543px;
     overflow: visible;
 }
 #Rectangle_5 {
@@ -45,7 +49,7 @@
     position: absolute;
     overflow: visible;
     width: 1813.883px;
-    height: 1245px;
+    height: 1247px;
     left: 0px;
     top: 202.086px;
 }
@@ -148,12 +152,20 @@
     top: 909.086px;
     overflow: visible;
 }
-#Welcome_Back_please_log_in {
-    left: 148.616px;
-    top: 406px;
+#Group_9 {
+    position: absolute;
+    width: 744.075px;
+    height: 906px;
+    left: 97.925px;
+    top: 86px;
+    overflow: visible;
+}
+#Welcome_please_sign_up {
+    left: 4.075px;
+    top: 0px;
     position: absolute;
     overflow: visible;
-    width: 495px;
+    width: 430px;
     white-space: nowrap;
     text-align: left;
     font-family: Adobe Clean;
@@ -162,7 +174,29 @@
     font-size: 37px;
     color: rgba(0,0,0,1);
 }
-#Line_11 {
+#Username {
+    position: absolute;
+    width: 503.851px;
+    height: 47px;
+    left: 4.075px;
+    top: 280px;
+    overflow: visible;
+}
+#Email_Address {
+    left: 20.5px;
+    top: 0px;
+    position: absolute;
+    overflow: visible;
+    width: 212px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Adobe Clean;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 35px;
+    color: rgba(0,0,0,1);
+}
+#Line_2 {
     fill: transparent;
     stroke: rgba(0,0,0,1);
     stroke-width: 1px;
@@ -171,14 +205,22 @@
     stroke-miterlimit: 4;
     shape-rendering: auto;
 }
-.Line_11 {
+.Line_2 {
     overflow: visible;
     position: absolute;
-    width: 539.539px;
+    width: 503.851px;
     height: 1px;
-    left: 148.616px;
-    top: 624.5px;
+    left: 0px;
+    top: 46.5px;
     transform: matrix(1,0,0,1,0,0);
+}
+#Password {
+    position: absolute;
+    width: 503.851px;
+    height: 47px;
+    left: 8.149px;
+    top: 445px;
+    overflow: visible;
 }
 #Line_3 {
     fill: transparent;
@@ -192,54 +234,18 @@
 .Line_3 {
     overflow: visible;
     position: absolute;
-    width: 539.539px;
+    width: 503.851px;
     height: 1px;
-    left: 148.616px;
-    top: 778.5px;
+    left: 0px;
+    top: 47px;
     transform: matrix(1,0,0,1,0,0);
 }
-#Forgot_Password {
-    left: 427.131px;
-    top: 797px;
-    position: absolute;
-    overflow: visible;
-    width: 200px;
-    white-space: nowrap;
-	--web-animation: fadein undefineds undefined;
-	--web-action-type: page;
-	--web-action-target: Forgot_password_page.html;
-	cursor: pointer;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    color: rgba(55,112,219,1);
-	left: 560.075px;
-}
-#Component_23__1 {
-    position: absolute;
-    width: 539.384px;
-    height: 393px;
-    left: 148.616px;
-    top: 569px;
-    overflow: visible;
-}
-#Email {
-    position: absolute;
-    width: 499.804px;
-    height: 55.5px;
-    left: 0px;
-    top: 0px;
-    overflow: visible;
-}
-#johnsgmailcom {
-    opacity: 0;
-    left: 0.384px;
+#Password_bd {
+    left: 25.5px;
     top: 0px;
     position: absolute;
     overflow: visible;
-    width: 279px;
+    width: 144px;
     white-space: nowrap;
     text-align: left;
     font-family: Adobe Clean;
@@ -248,15 +254,173 @@
     font-size: 35px;
     color: rgba(0,0,0,1);
 }
-#check {
-    opacity: 0;
+#Password_be {
     position: absolute;
-    width: 30px;
-    height: 30.002px;
-    left: 469.804px;
-    top: 16.999px;
+    width: 512px;
+    height: 47px;
+    left: 0px;
+    top: 607.5px;
     overflow: visible;
 }
+#Line_3_bf {
+    fill: transparent;
+    stroke: rgba(0,0,0,1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+.Line_3_bf {
+    overflow: visible;
+    position: absolute;
+    width: 512px;
+    height: 1px;
+    left: 0px;
+    top: 47px;
+    transform: matrix(1,0,0,1,0,0);
+}
+#Confirm_password {
+    left: 16.5px;
+    top: 0px;
+    position: absolute;
+    overflow: visible;
+    width: 275px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Adobe Clean;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 35px;
+    color: rgba(0,0,0,1);
+}
+#Username_bh {
+    position: absolute;
+    width: 228.333px;
+    height: 47.5px;
+    left: 4.075px;
+    top: 117px;
+    overflow: visible;
+}
+#First_name {
+    left: 20.5px;
+    top: 0px;
+    position: absolute;
+    overflow: visible;
+    width: 160px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Adobe Clean;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 35px;
+    color: rgba(0,0,0,1);
+}
+#Line_2_bj {
+    fill: transparent;
+    stroke: rgba(0,0,0,1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+.Line_2_bj {
+    overflow: visible;
+    position: absolute;
+    width: 228.337px;
+    height: 2px;
+    left: 0px;
+    top: 46.5px;
+    transform: matrix(1,0,0,1,0,0);
+}
+#Username_bk {
+    position: absolute;
+    width: 251px;
+    height: 48.5px;
+    left: 265.075px;
+    top: 116px;
+    overflow: visible;
+}
+#Last_name {
+    left: 20.5px;
+    top: 0px;
+    position: absolute;
+    overflow: visible;
+    width: 157px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Adobe Clean;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 35px;
+    color: rgba(0,0,0,1);
+}
+#Line_2_bm {
+    fill: transparent;
+    stroke: rgba(0,0,0,1);
+    stroke-width: 1px;
+    stroke-linejoin: miter;
+    stroke-linecap: butt;
+    stroke-miterlimit: 4;
+    shape-rendering: auto;
+}
+.Line_2_bm {
+    overflow: visible;
+    position: absolute;
+    width: 251.004px;
+    height: 2px;
+    left: 0px;
+    top: 47.5px;
+    transform: matrix(1,0,0,1,0,0);
+}
+#Login_here {
+    left: 560.075px;
+    top: 857px;
+    position: absolute;
+    overflow: visible;
+    width: 185px;
+    white-space: nowrap;
+    --web-animation: fadein undefineds undefined;
+    --web-action-type: page;
+    --web-action-target: Login_page.html;
+    cursor: pointer;
+    text-align: left;
+    font-family: Adobe Clean;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 37px;
+    color: rgba(0,0,0,1);
+}
+#I_accept_the_Terms_of_Use__Pri {
+    left: 40.075px;
+    top: 732px;
+    position: absolute;
+    overflow: visible;
+    width: 589px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Adobe Clean;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: rgba(0,0,0,1);
+}
+#Already_have_an_account_ {
+    left: 6.075px;
+    top: 854px;
+    position: absolute;
+    overflow: visible;
+    width: 452px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Adobe Clean;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 37px;
+    color: rgba(0,0,0,1);
+}
+
 #Path_11 {
     fill: transparent;
     stroke: rgba(61,175,49,1);
@@ -293,185 +457,30 @@
     top: 3.009px;
     transform: matrix(1,0,0,1,0,0);
 }
-#Email_AddressUsername {
-    left: 0px;
-    top: 8.5px;
-    position: absolute;
-    overflow: visible;
-    width: 379px;
-    white-space: nowrap;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 35px;
-    color: rgba(0,0,0,1);
-}
-#Password {
-    position: absolute;
-    width: 501.304px;
-    height: 54.5px;
-    left: 0px;
-    top: 162.5px;
-    overflow: visible;
-}
-#Password_bj {
-    position: absolute;
-    width: 501.304px;
-    height: 47px;
-    left: 0px;
-    top: 0px;
-    overflow: visible;
-}
-#Password_bk {
-    left: 0px;
-    top: 0px;
-    position: absolute;
-    overflow: visible;
-    width: 144px;
-    white-space: nowrap;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 35px;
-    color: rgba(0,0,0,1);
-}
-#Check_bl {
-    opacity: 0;
-    position: absolute;
-    width: 33px;
-    height: 33.002px;
-    left: 468.303px;
-    top: 6.999px;
-    overflow: visible;
-}
-#Path_11_bm {
-    fill: rgba(0,0,0,1);
-}
-.Path_11_bm {
-    overflow: visible;
-    position: absolute;
-    width: 33px;
-    height: 33.002px;
-    left: 0px;
-    top: 0px;
-    transform: matrix(1,0,0,1,0,0);
-}
-#Path_12_bn {
-    fill: rgba(0,0,0,1);
-}
-.Path_12_bn {
-    overflow: visible;
-    position: absolute;
-    width: 22.5px;
-    height: 18px;
-    left: 10.5px;
-    top: 3.01px;
-    transform: matrix(1,0,0,1,0,0);
-}
-#Show {
-    opacity: 0;
-    left: 364.384px;
-    top: 0.5px;
-    position: absolute;
-    overflow: visible;
-    width: 83px;
-    white-space: nowrap;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 35px;
-    color: rgba(0,0,0,1);
-}
-#Text {
-    opacity: 0;
-    left: 0.384px;
-    top: 7.5px;
-    position: absolute;
-    overflow: visible;
-    width: 104px;
-    white-space: nowrap;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 35px;
-    color: rgba(0,0,0,1);
-}
-#sgdwasc {
-    opacity: 0;
-    left: 0.384px;
-    top: 0.5px;
-    position: absolute;
-    overflow: visible;
-    width: 126px;
-    white-space: nowrap;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 35px;
-    color: rgba(0,0,0,1);
-}
-#Hide {
-    opacity: 0;
-    left: 364.384px;
-    top: 0.5px;
-    position: absolute;
-    overflow: visible;
-    width: 71px;
-    white-space: nowrap;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 35px;
-    color: rgba(0,0,0,1);
-}
-#Rectangle_50_bt {
-    fill: url(#Rectangle_50_bt);
-}
-.Rectangle_50_bt {
-    position: absolute;
-    overflow: visible;
-    width: 97px;
-    height: 96px;
-    left: 0.384px;
-    top: 297px;
-}
-#Login {
-    position: absolute;
-    width: 539px;
-    height: 96px;
-    left: 0.384px;
-    top: 297px;
-    overflow: visible;
-}
-#Rectangle_49_bw {
-    fill: url(#Rectangle_49_bw);
-}
-.Rectangle_49_bw {
-    position: absolute;
-    overflow: visible;
-    width: 539px;
-    height: 96px;
-    left: 0px;
-    top: 0px;
-}
-#Login_bx {
-    left: 197px;
-    top: 24px;
-    position: absolute;
-    overflow: visible;
-    width: 98px;
-    white-space: nowrap;
-    text-align: left;
-    font-family: Adobe Clean;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 37px;
-    color: rgba(0,0,0,1);
-}
 
+body {
+    position: relative;
+}
+/* Container for the checkbox and label */
+.terms-checkbox-container {
+    display: flex;
+    align-items: center;
+    padding: 10px; /* Add padding as needed */
+  }
+  
+  /* Styles for the checkbox */
+  .terms-checkbox {
+    margin-right: 10px; /* Space between checkbox and label */
+    cursor: pointer;
+    /* Make the checkbox visible */
+    opacity: 1;
+    visibility: visible;
+    height: 20px; /* Size as needed */
+    width: 20px; /* Size as needed */
+  }
+  
+  /* Label for the checkbox */
+  .terms-checkbox-container label {
+    cursor: pointer;
+  }
+  
