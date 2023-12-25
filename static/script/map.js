@@ -1,7 +1,12 @@
 
-// (Mozilla) function to Post data to API
+// Import modules according to ES6 spec
+import {aqiChart} from './historical_data.js'
+//--//
+
+//--(Reference) Mozilla function to Post data to API--//
 async function postData(url = "", data = {}, mode) {
     // Default options are marked with *
+    try{
     const response = await fetch(url, {
         method: mode, // *GET, POST, PUT, DELETE, etc.
         headers: {
@@ -11,18 +16,14 @@ async function postData(url = "", data = {}, mode) {
         });
         // console.log(JSON.stringify(data))
         return response.json(); // parses JSON response into native JavaScript objects
+    } catch (error) {
+        console.error('Error fetching data:', error);
     }
-async function getData(url = "") {
+}
+//--End of Reference--//
 
-    const response = await fetch(url, {
-        method: "GET", 
-        });
-        let imageData = response.blob();
-        return imageData
-        
-    }
-
-class airQualityHeatmap{
+// Get Heatmap according to API spec
+class AirQualityHeatmap{
     tileSize;
     minZoom = 0;
     maxZoom = 16;
@@ -48,24 +49,24 @@ class airQualityHeatmap{
 }
 
 
-
-
-//(ChatGPT) Function to add parameters to the URL
+//--(ChatGPT) Function to add parameters to the URL--//
 function addParametersToURL(url, params) {
     let urlWithParams = url;
-  
+
     // Replace placeholders in the URL with actual values
     for (let key in params) {
-      if (params.hasOwnProperty(key)) {
+        if (params.hasOwnProperty(key)) {
         urlWithParams = urlWithParams.replace(`{${key}}`, encodeURIComponent(params[key]));
-      }
+        }
     }
-  
     return urlWithParams;
-  }
+}
+//--End of Reference--//
 
-function initMap() {
-    const constPos = { lat: 51.498356, lng: -0.176894};
+// Initialise Google Map with AQI info
+async function initMap() {
+
+    const location = { lat: 51.498356, lng: -0.176894};
     let parameters = {}
     const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key={api_key}"
     parameters.api_key = "AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
@@ -73,23 +74,28 @@ function initMap() {
 
     let getAQInfo = addParametersToURL(AQInfo_URL, parameters);
 
-    const map = new google.maps.Map(document.getElementById("map"), {
+    //Initialise map
+    const map = await new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
-        center: constPos,
+        center: location,
         });
+
     // Create the initial InfoWindow.
     let infoWindow = new google.maps.InfoWindow({  
 
-        position: constPos,
+        position: location,
     });
+    // Get Historical AQI data from import function
+    
 
     var dataLoc = {location:{latitude: 51.498356, longitude: -0.176894}, extraComputations:"HEALTH_RECOMMENDATIONS"};
+
     postData(getAQInfo, dataLoc, "POST").then((data) => {
         const outputData = data.indexes[0];
-        outputData.rec = data.healthRecommendations["lungDiseasePopulation"]
-
+        outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
         infoWindow.setContent(JSON.stringify(outputData))
     });
+    await aqiChart(location.lat, location.lng);
 
     
     infoWindow.open(map);
@@ -108,22 +114,27 @@ function initMap() {
             latitude: lat,
             longitude: lng
         };
+        
+        console.log(location.latitude);
         const extraComputations = "HEALTH_RECOMMENDATIONS";
         const dataLoc = {location, extraComputations};
         postData(getAQInfo, dataLoc,"POST").then((data) => {
             const outputData = data.indexes[0];
-            outputData.rec = data.healthRecommendations["lungDiseasePopulation"]
+            outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
     
-            infoWindow.setContent(JSON.stringify(outputData))
-            // );
+            infoWindow.setContent(JSON.stringify(outputData));
         });  
         
         infoWindow.open(map);
+        aqiChart(location.latitude, location.longitude);
         });
+        
+        
 
-    let airQualityOverlayVisible = false; // Initial state
-    const airQualitymap = new airQualityHeatmap(new google.maps.Size(256, 256));
+    let airQualityOverlayVisible = false; // Initial state of heatmap (OFF)
+    const airQualitymap = new AirQualityHeatmap(new google.maps.Size(256, 256));
     
+    //Create Heatmap Toggle Button
     var toggleButton = document.createElement('button');
     toggleButton.textContent = 'Air Pollution Heatmap';
     toggleButton.addEventListener('click', function () {
