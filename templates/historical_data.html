@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past AQI Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    
+</head>
+<body>
+    <div style="width: 100%;"><canvas id="acquisitions"></canvas></div>
+    <script type="module" src="{{ url_for('static', filename='script/historical_data.js') }}" defer></script>
+</body>
+</html>

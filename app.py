@@ -80,8 +80,16 @@ def hello_world():
     return "<h2 style='color:red'>Hello Koffing! This is the final test!</h2>"
 
 @app.route("/map")
-def mapview():
+def aqiview():
     return render_template('map.html')
+
+@app.route("/aqi")
+def mapview():
+    return render_template('aqi_widget.html')
+
+@app.route("/history")
+def historyview():
+    return render_template('historical_data.html')
 
 @app.route("/signup")
 def signupview():
