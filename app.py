@@ -31,10 +31,10 @@ db = SQLAlchemy(app)
 #Initialize database
 
 class TestModel(db.Model):
-    __tablename__ = 'testmodel'
+    __tablename__ = 'testmodel' 
     id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(200), nullable = False)
-    inhaler = db.Column(db.String(200),nullable = False)
+    name = db.Column(db.String(200), nullable = False) #Someone can have the same name lol
+    inhaler =db.Column(db.String(200),nullable = False)
 
     def __init__(self,name,inhaler):
         self.name = name
@@ -80,10 +80,18 @@ def hello_world():
     return "<h2 style='color:red'>Hello Koffing! This is the final test!</h2>"
 
 @app.route("/map")
-def mapview():
+def aqiview():
     return render_template('map.html')
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route("/aqi")
+def mapview():
+    return render_template('aqi_widget.html')
+
+@app.route("/history")
+def historyview():
+    return render_template('historical_data.html')
+
+@app.route("/signup")
 def signupview():
     return render_template('Sign_up_page_template.html')
 

@@ -2,6 +2,8 @@
   <head>
     <title>Air Quality Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/style.css')}}" />
     <script type="module" src="{{ url_for('static', filename='script/map.js') }}" defer></script>
   </head>
@@ -20,5 +22,6 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio&callback=initMap&v=weekly"
       defer
     ></script>
+    <div style="width: 100%;"><canvas id="acquisitions"></canvas></div>
   </body>
 </html>
