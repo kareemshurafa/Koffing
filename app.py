@@ -31,10 +31,10 @@ db = SQLAlchemy(app)
 #Initialize database
 
 class TestModel(db.Model):
-    __tablename__ = 'testmodel'
+    __tablename__ = 'testmodel' 
     id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(200), nullable = False)
-    inhaler = db.Column(db.String(200),nullable = False)
+    name = db.Column(db.String(200), nullable = False) #Someone can have the same name lol
+    inhaler =db.Column(db.String(200),nullable = False)
 
     def __init__(self,name,inhaler):
         self.name = name
