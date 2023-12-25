@@ -30,34 +30,46 @@ db = SQLAlchemy(app)
 
 #Initialize database
 
-
-class UserData(db.Model):
-    __tablename__ = 'feedback'
+class TestModel(db.Model):
+    __tablename__ = 'testmodel'
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(200), nullable = False)
-    email = db.Column(db.String(120), nullable = False, unique=True)
-    date_added = db.Column(db.DateTime, default = datetime.utcnow)
-    password = db.Column(db.String(20),nullable=True)
-    addy = db.Column(db.String(500), nullable = True)
-    DOB = db.Column(db.DateTime, default=datetime.utcnow)
-    
-    #User can have many logs
-    #logs = db.relationship('AsthmaLog', backref ='log')
-    #To call info from the user data, you would do log.name, log.email, etc
+    inhaler = db.Column(db.String(200),nullable = False)
 
-    def __init__(self, name, email, date_added, password, addy, DOB):
+    def __init__(self,name,inhaler):
         self.name = name
-        self.email = email
-        self.date_added = date_added
-        self.password = password 
-        self.addy = addy  
-        self.DOB = DOB
+        self.inhaler = inhaler 
     
     def __repr__(self):
         return '<User %r>' % self.id
 
-with app.app_context():
-    db.create_all()
+# class UserData(db.Model):
+#     __tablename__ = 'feedback'
+#     id = db.Column(db.Integer,primary_key = True)
+#     name = db.Column(db.String(200), nullable = False)
+#     email = db.Column(db.String(120), nullable = False, unique=True)
+#     date_added = db.Column(db.DateTime, default = datetime.utcnow)
+#     password = db.Column(db.String(20),nullable=True)
+#     addy = db.Column(db.String(500), nullable = True)
+#     DOB = db.Column(db.DateTime, default=datetime.utcnow)
+    
+#     #User can have many logs
+#     #logs = db.relationship('AsthmaLog', backref ='log')
+#     #To call info from the user data, you would do log.name, log.email, etc
+
+#     def __init__(self, name, email, date_added, password, addy, DOB):
+#         self.name = name
+#         self.email = email
+#         self.date_added = date_added
+#         self.password = password 
+#         self.addy = addy  
+#         self.DOB = DOB
+    
+#     def __repr__(self):
+#         return '<User %r>' % self.id
+
+# with app.app_context():
+#     db.create_all()
 
 @app.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 def add_user():
@@ -97,21 +109,22 @@ def testlog():
     return render_template("testasthmalogform.html",
                            form = form,
                            med = med)
-    
-@app.route('/user/add', methods = ['GET','POST'])
-def add_users():
-    name = None
-    form = UserForm()
+
+
+# @app.route('/user/add', methods = ['GET','POST'])
+# def add_users():
+#     name = None
+#     form = UserForm()
         
-    #Validate form
-    if form.validate_on_submit(): 
-        name = form.name.data
-        user = UserData.query.filter_by(name = form.name.data).first()
-        form.name.data = ''
-        flash("User Made Successfully")
+#     #Validate form
+#     if form.validate_on_submit(): 
+#         name = form.name.data
+#         user = UserData.query.filter_by(name = form.name.data).first()
+#         form.name.data = '' 
+#         flash("User Made Successfully")
     
-    return render_template("add_user.html",
-                           form = form)
+#     return render_template("add_user.html",
+#                            form = form)
 
 @app.route('/test')
 def index():
@@ -120,14 +133,19 @@ def index():
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
-        customer = request.form['customer']
+        name = request.form['name']
         inhaler = request.form['inhaler']
-        # print(customer,inhaler)
-        if customer =='' or inhaler=='':
+        # print(name,inhaler)
+        if name =='' or inhaler=='':
             return render_template('test.html', message='Please enter required fields')
 
-
-        return "<h2 style='color:red'>Yipee!</h2>"
+        if db.session.query(TestModel).filter(TestModel.name == name).count() == 0:
+             #Says that the customer does not exist
+            data = TestModel(name,inhaler) #Form data that we want to submit
+            db.session.add(data)
+            db.session.commit()
+            return "<h2 style='color:red'>Yipee!</h2>"
+        return render_template('test.html', message='You have already submitted')
 
 #Create a form class
 class AsthmaLogForm(FlaskForm):
