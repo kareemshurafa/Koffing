@@ -519,6 +519,27 @@
 		top: 3.009px;
 		transform: matrix(1,0,0,1,0,0);
 	}
+
+	#Submit { /* Added in this CSS for the submit button for testing */
+		left: 75%;
+		top: 68% ;
+		position: absolute;
+		overflow: visible;
+		width: 249px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: italic;
+		font-weight: normal;
+		font-size: 35px;
+		color: rgba(0,0,0,1);
+		background-color: transparent; 
+		border-width: 0px;
+		border: none;
+		outline: none;
+		width: 503.851px;
+	}
+
 </style>
 <script id="applicationScript">
 ///////////////////////////////////////
@@ -3470,7 +3491,7 @@ window.application = new Application();
 			
 	</div>
 	<div id="Group_9">
-		<form>
+		<form action="/logbook" method="POST">
 			<div id="Welcome_please_sign_up">
 				<span>Welcome, please sign up</span>
 			</div>
@@ -3544,6 +3565,9 @@ window.application = new Application();
 					<path id="Path_12" d="M 13.5 16.5 L 18 21 L 33 6">
 					</path>
 				</svg>
+			</div>
+			<div>
+				<input type="submit" value="Submit" id="Submit">
 			</div>
 		</form>
 	</div>

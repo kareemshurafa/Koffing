@@ -83,17 +83,42 @@ def hello_world():
 def mapview():
     return render_template('map.html')
 
-@app.route("/signup")
+@app.route("/signup", methods=['GET', 'POST'])
 def signupview():
     return render_template('Sign_up_page_template.html')
+
+### Test on the form submission and visualisation in template ###
+
+# @app.route("/submitted", methods=['GET', 'POST'])
+# def submittedview():
+#     if request.method == 'POST':
+#         first_name = request.form.get('First_name')
+#         last_name = request.form.get('Last_name')
+#         email = request.form.get('Email_Address')
+#         password = request.form.get('Password')
+#     return render_template("submitted.html",
+#                            first_name = first_name,
+#                            last_name = last_name,
+#                            email = email,
+#                            password = password)
+
 
 @app.route("/login")
 def loginview():
     return render_template('Login_page_template.html')
 
-@app.route("/logbook")
+@app.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
-    return render_template('Logbook_template.html')
+    if request.method == 'POST':
+        first_name = request.form.get('First_name')
+        last_name = request.form.get('Last_name')
+        email = request.form.get('Email_Address')
+        password = request.form.get('Password')
+    return render_template("Logbook_template.html",
+                           first_name = first_name,
+                           last_name = last_name,
+                           email = email,
+                           password = password)
 
 #Create asthma log page:
 @app.route('/testlog', methods = ['GET','POST'])
