@@ -74,14 +74,6 @@ def hello_world():
 def aqiview():
     return render_template('map.html')
 
-@app.route("/aqi")
-def mapview():
-    return render_template('aqi_widget.html')
-
-@app.route("/history")
-def historyview():
-    return render_template('historical_data.html')
-
 @app.route("/signup")
 def signupview():
     return render_template('Sign_up_page_template.html')
