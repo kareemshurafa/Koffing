@@ -189,7 +189,6 @@
 		left: 4.075px;
 		top: 277px;
 		overflow: visible;
-		
 	}
 	#Email_Address {
 		left: 20.5px;
@@ -204,13 +203,6 @@
 		font-weight: normal;
 		font-size: 35px;
 		color: rgba(0,0,0,1);
-		/* New CSS code I added for the email address area */
-		background-color: transparent; 
-		border-width: 0px;
-		border: none;
-		outline: none;
-		width: 503.851px;
-
 	}
 	#Line_2 {
 		fill: transparent;
@@ -269,11 +261,6 @@
 		font-weight: normal;
 		font-size: 35px;
 		color: rgba(0,0,0,1);
-		background-color: transparent; 
-		border-width: 0px;
-		border: none;
-		outline: none;
-		width: 503.851px;
 	}
 	#Password_ba {
 		position: absolute;
@@ -302,7 +289,7 @@
 		transform: matrix(1,0,0,1,0,0);
 	}
 	#Confirm_password {
-		left: 25.5px;
+		left: 16.5px;
 		top: 3px;
 		position: absolute;
 		overflow: visible;
@@ -314,11 +301,6 @@
 		font-weight: normal;
 		font-size: 35px;
 		color: rgba(0,0,0,1);
-		background-color: transparent; 
-		border-width: 0px;
-		border: none;
-		outline: none;
-		width: 503.851px;
 	}
 	#Username_bb {
 		position: absolute;
@@ -327,7 +309,6 @@
 		left: 4.075px;
 		top: 114px;
 		overflow: visible;
-
 	}
 	#First_name {
 		left: 20.5px;
@@ -342,11 +323,6 @@
 		font-weight: normal;
 		font-size: 35px;
 		color: rgba(0,0,0,1);
-		background-color: transparent; 
-		border-width: 0px;
-		border: none;
-		outline: none;
-		width: 200px;
 	}
 	#Line_2_bd {
 		fill: transparent;
@@ -373,7 +349,6 @@
 		left: 265.075px;
 		top: 113px;
 		overflow: visible;
-
 	}
 	#Last_name {
 		left: 20.5px;
@@ -388,11 +363,6 @@
 		font-weight: normal;
 		font-size: 35px;
 		color: rgba(0,0,0,1);
-		background-color: transparent; 
-		border-width: 0px;
-		border: none;
-		outline: none;
-		width: 200px;
 	}
 	#Line_2_bg {
 		fill: transparent;
@@ -3470,82 +3440,77 @@ window.application = new Application();
 			
 	</div>
 	<div id="Group_9">
-		<form>
-			<div id="Welcome_please_sign_up">
-				<span>Welcome, please sign up</span>
+		<div id="Welcome_please_sign_up">
+			<span>Welcome, please sign up</span>
+		</div>
+		<div id="Username" class="Username">
+			<div id="Email_Address">
+				<span>Email Address</span>
 			</div>
-			<div id="Username" class="Username">
-				<div id="Email_Address">
-					<!-- Add input field after the div id tag, replacing the span tag text -->
-					<input type="text" id="Email_Address" name="Email_Address" placeholder="Email Address" size="50"> 
-				</div>
-				<svg class="Line_2" viewBox="0 0 503.851 1">
-					<path id="Line_2" d="M 0 0 L 503.8507080078125 0">
-					</path>
-				</svg>
-			</div>
-			<div id="Password" class="Password">
-				<svg class="Line_3" viewBox="0 0 503.851 1">
-					<path id="Line_3" d="M 0 0 L 503.8507080078125 0">
-					</path>
-				</svg>
-				<div id="Password_">
-					<input type="password" id="Password_" name="Password" placeholder="Password" size="50">
-				</div>
-			</div>
-			<div id="Password_ba" class="Password">
-				<svg class="Line_3_" viewBox="0 0 512 1">
-					<path id="Line_3_" d="M 0 0 L 512 0">
-					</path>
-				</svg>
-				<div id="Confirm_password">
-					<input type="password" id="Confirm_password" name="Confirm_password" placeholder="Confirm password" size="50">
-				</div>
-			</div>
-			<div id="Username_bb" class="Username">
-				<div id="First_name">
-					<input type="text" id="First_name" name="First_name" placeholder="First Name" size="10">
-				</div>
-				<svg class="Line_2_bd" viewBox="0 0 228.333 1">
-					<path id="Line_2_bd" d="M 0 0 L 228.33251953125 1">
-					</path>
-				</svg>
-			</div>
-			<div id="Username_be" class="Username">
-				<div id="Last_name">
-					<input type="text" id="Last_name" name="Last_name" placeholder="Last Name" size="10">
-				</div>
-				<svg class="Line_2_bg" viewBox="0 0 251 1">
-					<path id="Line_2_bg" d="M 0 0 L 251 1">
-					</path>
-				</svg>
-			</div>
-			<div onclick="application.goToTargetView(event)" id="Login_here">
-				<span>Login here</span>
-			</div>
-			<svg class="Rectangle_10">
-				<rect id="Rectangle_10" rx="0" ry="0" x="0" y="0" width="25" height="25">
-				</rect> <!-- this is just a picture and not a checkbox -->
+			<svg class="Line_2" viewBox="0 0 503.851 1">
+				<path id="Line_2" d="M 0 0 L 503.8507080078125 0">
+				</path>
 			</svg>
-			<div id="I_accept_the_Terms_of_Use__Pri">
-				<input type="checkbox" id="I_accept_the_Terms_of_Use__Pri" name="I_accept_the_Terms_of_Use__Pri"/>
-				<label for="I_accept_the_Terms_of_Use__Pri"> I accept the Terms of Use & Privacy Policy</label>
-				<!-- Tried making a checkbox input but is not working for some reason -->
+		</div>
+		<div id="Password" class="Password">
+			<svg class="Line_3" viewBox="0 0 503.851 1">
+				<path id="Line_3" d="M 0 0 L 503.8507080078125 0">
+				</path>
+			</svg>
+			<div id="Password_">
+				<span>Password</span>
 			</div>
-			<div id="Already_have_an_account_">
-				<span>Already have an account? </span>
+		</div>
+		<div id="Password_ba" class="Password">
+			<svg class="Line_3_" viewBox="0 0 512 1">
+				<path id="Line_3_" d="M 0 0 L 512 0">
+				</path>
+			</svg>
+			<div id="Confirm_password">
+				<span>Confirm password</span>
 			</div>
-			<div id="check">
-				<svg class="Path_11" viewBox="3 2.991 30 30.002">
-					<path id="Path_11" d="M 33 16.6200008392334 L 33 18 C 32.99620056152344 24.64302825927734 28.62344169616699 30.4923210144043 22.25302886962891 32.37585067749023 C 15.88261795043945 34.25938415527344 9.03209114074707 31.72846984863281 5.416434288024902 26.15559959411621 C 1.800775527954102 20.58273124694824 2.281294822692871 13.29545783996582 6.597411155700684 8.245607376098633 C 10.91352844238281 3.195756912231445 18.03706741333008 1.586286544799805 24.10500144958496 4.289999008178711">
-					</path>
-				</svg>
-				<svg class="Path_12" viewBox="13.5 6 19.5 15">
-					<path id="Path_12" d="M 13.5 16.5 L 18 21 L 33 6">
-					</path>
-				</svg>
+		</div>
+		<div id="Username_bb" class="Username">
+			<div id="First_name">
+				<span>First name</span>
 			</div>
-		</form>
+			<svg class="Line_2_bd" viewBox="0 0 228.333 1">
+				<path id="Line_2_bd" d="M 0 0 L 228.33251953125 1">
+				</path>
+			</svg>
+		</div>
+		<div id="Username_be" class="Username">
+			<div id="Last_name">
+				<span>Last name</span>
+			</div>
+			<svg class="Line_2_bg" viewBox="0 0 251 1">
+				<path id="Line_2_bg" d="M 0 0 L 251 1">
+				</path>
+			</svg>
+		</div>
+		<div onclick="application.goToTargetView(event)" id="Login_here">
+			<span>Login here</span>
+		</div>
+		<svg class="Rectangle_10">
+			<rect id="Rectangle_10" rx="0" ry="0" x="0" y="0" width="25" height="25">
+			</rect>
+		</svg>
+		<div id="I_accept_the_Terms_of_Use__Pri">
+			<span>I accept the Terms of Use & Privacy Policy</span>
+		</div>
+		<div id="Already_have_an_account_">
+			<span>Already have an account? </span>
+		</div>
+		<div id="check">
+			<svg class="Path_11" viewBox="3 2.991 30 30.002">
+				<path id="Path_11" d="M 33 16.6200008392334 L 33 18 C 32.99620056152344 24.64302825927734 28.62344169616699 30.4923210144043 22.25302886962891 32.37585067749023 C 15.88261795043945 34.25938415527344 9.03209114074707 31.72846984863281 5.416434288024902 26.15559959411621 C 1.800775527954102 20.58273124694824 2.281294822692871 13.29545783996582 6.597411155700684 8.245607376098633 C 10.91352844238281 3.195756912231445 18.03706741333008 1.586286544799805 24.10500144958496 4.289999008178711">
+				</path>
+			</svg>
+			<svg class="Path_12" viewBox="13.5 6 19.5 15">
+				<path id="Path_12" d="M 13.5 16.5 L 18 21 L 33 6">
+				</path>
+			</svg>
+		</div>
 	</div>
 </div>
 </body>
