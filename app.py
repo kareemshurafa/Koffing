@@ -72,7 +72,7 @@ def hello_world():
 
 @app.route("/map")
 def mapview():
-    return render_template('map.html')
+    return render_template('Air_Quality_Map.html')
 
 @app.route("/signup")
 def signupview():

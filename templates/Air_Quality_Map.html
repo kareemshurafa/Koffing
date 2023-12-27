@@ -26,7 +26,7 @@
 		width: 1920px;
 		height: 1022px;
 		background-color: rgba(255,255,255,1);
-		overflow: hidden;
+		overflow: auto;
 		--web-view-name: Air Quality Map;
 		--web-view-id: Air_Quality_Map;
 		--web-scale-on-resize: true;
@@ -354,6 +354,8 @@
 	#Rectangle_68 {
 		fill: rgba(231,240,252,1);
 	}
+
+
 	.Rectangle_68 {
 		position: absolute;
 		overflow: visible;
@@ -518,7 +520,7 @@
 		width: 7.578px;
 		height: 7.354px;
 		left: 15.487px;
-		top: 13.339px;
+		top: 13.339px;map
 		transform: matrix(1,0,0,1,0,0);
 	}
 	#Search_for_location_ {
@@ -535,16 +537,7 @@
 		font-size: 20px;
 		color: rgba(112,112,112,1);
 	}
-	#Rectangle_71 {
-		fill: rgba(255,255,255,1);
-		stroke: rgba(0,0,0,1);
-		stroke-width: 1.25px;
-		stroke-linejoin: miter;
-		stroke-linecap: butt;
-		stroke-miterlimit: 4;
-		shape-rendering: auto;
-	}
-	.Rectangle_71 {
+	#map{
 		position: absolute;
 		overflow: visible;
 		width: 972px;
@@ -552,6 +545,42 @@
 		left: 485px;
 		top: 199px;
 	}
+	.aqi-widget {
+		width: 200px;
+		border-radius: 20px;
+		padding: 15px;
+		color: gray;
+		font-family: Arial, sans-serif;
+		margin: 10px;
+		display: inline-block;
+		position: absolute;
+		left: 1550px;
+		top: 450px;
+	}
+	  .aqi-header {
+		font-size: 14px;
+		font-weight: bold;
+		color: black;
+	  }
+	  .aqi-level {
+		font-size: 24px;
+		margin: 10px 0;
+		color: black
+	  }
+	  .aqi-value {
+		font-size: 36px;
+		font-weight: bold;
+		color: black
+	  }
+	  .aqi-location {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black
+	  }
+	  .aqi-update-time {
+		font-size: 12px;
+		color: black
+	  }
 	#AIR_QUALITY_MAP_ {
 		left: 820px;
 		top: 126px;
@@ -3511,6 +3540,11 @@ var Application = function() {
 
 window.application = new Application();
 </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script type="module" src="{{ url_for('static', filename='script/map.js') }}" defer></script>
+<script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
 </head>
 <body>
 <div id="Air_Quality_Map">
@@ -3625,10 +3659,21 @@ window.application = new Application();
 	<div id="Search_for_location_">
 		<span>Search for location</span><span style="font-style:normal;font-weight:bold;color:rgba(255,255,255,1);"> </span>
 	</div>
-	<svg class="Rectangle_71">
-		<rect id="Rectangle_71" rx="0" ry="0" x="0" y="0" width="972" height="655">
-		</rect>
-	</svg>
+	<div id="map"></div>
+	<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio&callback=initMap&v=weekly"
+      defer
+    ></script>
+	<div class="aqi-widget" id="aqiWidget">
+		<div class="aqi-header">AIR QUALITY</div>
+		<div class="aqi-level" id="aqiLevel"></div>
+		<div class="aqi-value" id="aqiValue"></div>
+		<div class="aqi-location" id="aqiLocation"></div>
+		<div class="aqi-update-time" id="aqiUpdateTime"></div>
+	</div>
+	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
+	<div style="width: 1460px;left: 400px;top: 950px;position: relative;"><canvas id="acquisitions"></canvas></div>
+	
 	<div id="AIR_QUALITY_MAP_">
 		<span>AIR QUALITY MAP </span>
 	</div>
