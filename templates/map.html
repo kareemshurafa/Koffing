@@ -1,14 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Air Quality Map</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/aqi_widget.css')}}" />\
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <script type="module" src="{{ url_for('static', filename='script/map.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
   </head>
   <body>
     <h1>Air Quality Map</h1>
     <div id="map"></div>
-
+    <div class="aqi-widget" id="aqiWidget">
+      <div class="aqi-header">AIR QUALITY</div>
+      <div class="aqi-level" id="aqiLevel"></div>
+      <div class="aqi-value" id="aqiValue"></div>
+      <div class="aqi-location" id="aqiLocation"></div>
+      <div class="aqi-update-time" id="aqiUpdateTime"></div>
+  </div>
     <!-- 
       The `defer` attribute causes the callback to execute after the full HTML
       document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -20,5 +34,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio&callback=initMap&v=weekly"
       defer
     ></script>
+  <script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
+  <div style="width: 100%;"><canvas id="acquisitions"></canvas></div>
   </body>
 </html>
