@@ -11,8 +11,33 @@ import flash
 # from .models import GPDetails, UserDetails, PuffHistory
 from .extensions import db
 
-bp = Blueprint("bp", __name__)
-# app = create_bp()
+from flask import Flask
+from .extensions import db
+
+def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc5e731015a768577b68f1907654be99a76127df98811@ec2-63-34-69-123.eu-west-1.compute.amazonaws.com:5432/dfuerbg1k2hvm2'):
+    app = Flask(__name__)
+
+    ENV="dev"
+
+    if ENV == "dev":
+        app.debug = True
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_URI
+    else:
+        app.debug = False
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_URI
+
+    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # db.init_app(app)
+    # login_manager.init_app(app) 
+
+    
+    app.config['SECRET_KEY'] = 'Koffing123!' #Should likely hide this
+    app.register_blueprint(bp)
+    return app
+
+bp = Blueprint("main", __name__)
+# app = create_app()
 
 @bp.route("/")
 def home():
@@ -103,5 +128,5 @@ class UserForm(FlaskForm):
     email = StringField("Email", validators = [DataRequired()]) #Can change to email validator
     submit = SubmitField("Submitf!")
 
-# if __name__ == "__main__":
-#     app.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
