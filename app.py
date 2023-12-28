@@ -68,7 +68,7 @@ def add_user():
 
 @app.route("/")
 def hello_world():
-    return "<h2 style='color:red'>Hello Koffing! This is the final test!</h2>"
+    return(render_template("Initial_page.html"))
 
 @app.route("/map")
 def mapview():
