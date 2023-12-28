@@ -8,8 +8,8 @@ def app():
     #Setting up the app for the test
     app=create_app("sqlite://")
     # db=SQLAlchemy(app)
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
     yield app
 
 @pytest.fixture()
