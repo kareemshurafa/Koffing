@@ -3435,9 +3435,14 @@ window.application = new Application();
 		<img id="puffer_cartoon" src="puffer_cartoon.png" srcset="puffer_cartoon.png 1x, puffer_cartoon@2x.png 2x">
 			
 	</div>
+
+
+	<!-- Creating form for signup -->
+	<form action="/home" method = "POST">
 	<div id="Welcome_Back_please_log_in">
 		<span>Welcome Back, please log in</span>
 	</div>
+
 	<svg class="Line_11" viewBox="0 0 539.539 1">
 		<path id="Line_11" d="M 0 0 L 539.5390625 0">
 		</path>
@@ -3447,14 +3452,16 @@ window.application = new Application();
 		</path>
 	</svg>
 	<div onclick="application.goToTargetView(event)" id="Component_3__3" class="Component_3___3">
+		<!-- This needs to go to forgot password -->
 		<div id="Forgot_Password">
 			<span>Forgot Password?</span>
 		</div>
 	</div>
+
 	<div id="Component_23__1" class="Component_23___1">
 		<div id="Email">
 			<div id="johnsgmailcom">
-				<span>johns@gmail.com</span>
+				<input type="password" id="johnsgmailcom" name="Email" placeholder="Email Address/Username" size="50"> 
 			</div>
 			<div id="check">
 				<svg class="Path_11" viewBox="3 2.991 30 30.002">
@@ -3466,14 +3473,11 @@ window.application = new Application();
 					</path>
 				</svg>
 			</div>
-			<div id="Email_AddressUsername">
-				<span>Email Address/Username</span>
-			</div>
 		</div>
 		<div id="Password">
 			<div id="Password_bd" class="Password">
 				<div id="Password_be">
-					<span>Password</span>
+					<input type="password" id="Password_be" name="Password" placeholder = "Password" size="50">
 				</div>
 				<div id="Check_bf">
 					<svg class="Path_11_bg" viewBox="1.5 1.49 33 33.002">
@@ -3518,6 +3522,7 @@ window.application = new Application();
 		<div id="Login">
 			<span>Login</span>
 		</div>
+	</form>
 	</div>
 </div>
 </body>

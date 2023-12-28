@@ -40,13 +40,17 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 bp = Blueprint("main", __name__)
 # app = create_app()
 
-@bp.route("/")
+@bp.route("/home")
 def home():
-    return(render_template("Login_page_template.html"))
+    return(render_template("Home.html"))
 
-@bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
-def add_user():
-    return(render_template("html/Login_page.html"))
+@bp.route("/")
+def initial():
+    return(render_template("Initial_Page.html"))
+
+# @bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
+# def add_user():
+#     return(render_template("Login_page_template.html"))
 
 @bp.route("/map")
 def aqiview():
