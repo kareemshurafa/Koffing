@@ -1,6 +1,7 @@
 
 // Import modules according to ES6 spec
 import {aqiChart} from './historical_data.js'
+// import {updateWidget} from './aqi_widget.js'
 //--//
 
 //--(Reference) Mozilla function to Post data to API--//
@@ -63,6 +64,17 @@ function addParametersToURL(url, params) {
 }
 //--End of Reference--//
 
+
+// //Map InfoWindow Widget layout
+// const infoContent = '<div class="aqi-widget" id="aqiWidget">'+
+// '<div class="aqi-header">AIR QUALITY</div>'+
+// '<div class="aqi-level" id="aqiLevel"></div>'+
+// '<div class="aqi-value" id="aqiValue"></div>'+
+// '<div class="aqi-location" id="aqiLocation"></div>'+
+// '<div class="aqi-update-time" id="aqiUpdateTime"></div>'+
+// '</div>';
+
+
 // Initialise Google Map with AQI info
 async function initMap() {
 
@@ -82,20 +94,21 @@ async function initMap() {
 
     // Create the initial InfoWindow.
     let infoWindow = new google.maps.InfoWindow({  
-
+        // content: infoContent,
         position: location,
     });
-    // Get Historical AQI data from import function
-    
 
+    
     var dataLoc = {location:{latitude: 51.498356, longitude: -0.176894}, extraComputations:"HEALTH_RECOMMENDATIONS"};
 
     postData(getAQInfo, dataLoc, "POST").then((data) => {
         const outputData = data.indexes[0];
         outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-        infoWindow.setContent(JSON.stringify(outputData))
+        infoWindow.setContent(JSON.stringify(outputData));        
+        updateWidget(data, location.lat, location.lng);
     });
-    await aqiChart(location.lat, location.lng);
+    // Get Historical AQI data from import function
+    aqiChart(location.lat, location.lng);
 
     
     infoWindow.open(map);
@@ -115,15 +128,14 @@ async function initMap() {
             longitude: lng
         };
         
-        console.log(location.latitude);
         const extraComputations = "HEALTH_RECOMMENDATIONS";
         const dataLoc = {location, extraComputations};
         postData(getAQInfo, dataLoc,"POST").then((data) => {
             const outputData = data.indexes[0];
             outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-    
             infoWindow.setContent(JSON.stringify(outputData));
-        });  
+            updateWidget(data, location.latitude, location.longitude);
+        });
         
         infoWindow.open(map);
         aqiChart(location.latitude, location.longitude);

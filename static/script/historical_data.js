@@ -1,3 +1,4 @@
+// initialise AQI chart
 let currChart = null;
 
 // postData function
@@ -16,15 +17,15 @@ async function postDataHistorical(url = "", data = {}, mode) {
     }
 }
 
-// updateWidget function
-async function updateWidget(lat, long) {
+// get current historical data
+async function updateData(lat, long) {
     const dataH = {
         hours: 720, 
         pageSize: 100, 
         pageToken: "", 
         location: { latitude: lat, longitude: long }
     };
-    console.log(dataH.location.latitude)
+
     const historicalDataUrl = 'https://airquality.googleapis.com/v1/history:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio';
 
     let timeLabels = [];
@@ -35,10 +36,11 @@ async function updateWidget(lat, long) {
         try {
             const data = await postDataHistorical(historicalDataUrl, dataH, "POST");
 
+            //Filter data entries that are incomplete
             let filteredData = data.hoursInfo.filter(hourInfo => 
                 hourInfo.indexes && hourInfo.indexes.length > 0
             );
-
+            
             timeLabels = timeLabels.concat(
                 filteredData.map(info => new Date(info.dateTime).toLocaleString())
             );
@@ -56,13 +58,15 @@ async function updateWidget(lat, long) {
             state = false;
         }
     }
+    //List the datapoints in from earliest to latest
     return [aqiPoints.reverse(), timeLabels.reverse()];
 }
 
 // Exporting aqiChart as an ES6 module
 export async function aqiChart(lat, long) {
-    const [aqiPoints, timeLabels] = await updateWidget(lat, long);
-
+    const [aqiPoints, timeLabels] = await updateData(lat, long);
+    
+    //Format according to Chart.JS spec
     const data = {
         labels: timeLabels,
         datasets: [{
@@ -74,6 +78,8 @@ export async function aqiChart(lat, long) {
         }]
     };
 
+    
+    //Format according to Chart.JS spec
     const config = {
         type: 'line',
         data: data,
@@ -91,14 +97,15 @@ export async function aqiChart(lat, long) {
     };
 
     const ctx = document.getElementById('acquisitions');
+
+    //Check if there is chart output in Client-side
     if (currChart){
-    //     currChart.data.labels.pop();
-    //     currChart.data.dataset.pop();
         currChart.data.labels = data.labels;
         currChart.data.datasets = data.datasets;
         currChart.update('none');
     } else{
         currChart = new Chart(ctx, config);
     }
+    
     return currChart
 }
