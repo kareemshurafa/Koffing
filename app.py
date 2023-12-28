@@ -20,7 +20,8 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
     ENV="dev"
 
     if ENV == "dev":
-        app.debug = True
+        app.config['ENV'] = 'development'
+        app.config['DEBUG'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = database_URI
     else:
         app.debug = False
@@ -41,7 +42,7 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def home():
-    return "<h2 style='color:red'>Hello Koffing! This is the final test!</h2>"
+    return(render_template("Login_page_template.html"))
 
 @bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 def add_user():
