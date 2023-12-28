@@ -68,7 +68,7 @@ def add_user():
 
 @app.route("/")
 def hello_world():
-    return(render_template("Initial_page.html"))
+    return(render_template("Initial_Page.html"))
 
 @app.route("/map")
 def mapview():
