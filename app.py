@@ -1,84 +1,49 @@
-from flask import Flask, render_template,request, json, url_for
+from flask import Flask, render_template,request, json, url_for, Blueprint
 import requests
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import flash
-from models import *
+# from .models import GPDetails, UserDetails, PuffHistory
+from .extensions import db
 
-def create_app(ENV):
-    app = Flask(__name__)
+bp = Blueprint("bp", __name__)
+# app = create_bp()
 
-    if ENV == "dev":
-        app.debug = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc5e731015a768577b68f1907654be99a76127df98811@ec2-63-34-69-123.eu-west-1.compute.amazonaws.com:5432/dfuerbg1k2hvm2'
-    else:
-        app.debug = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = ''
+@bp.route("/")
+def home():
+    return "<h2 style='color:red'>Hello Koffing! This is the final test!</h2>"
 
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-        
-
-    app.config['SECRET_KEY'] = 'Koffing123!' #Should likely hide this
-
-    yield app
-
-create_app("dev")
-
-db = SQLAlchemy(app)
-
-#Initialize database
-
-@app.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
+@bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 def add_user():
     return(render_template("html/Login_page.html"))
 
-@app.route("/")
-def hello_world():
-    return "<h2 style='color:red'>Hello Koffing! This is the final test!</h2>"
-
-@app.route("/map")
+@bp.route("/map")
 def aqiview():
     return render_template('map.html')
 
-@app.route("/aqi")
+@bp.route("/aqi")
 def mapview():
     return render_template('aqi_widget.html')
 
-@app.route("/history")
+@bp.route("/history")
 def historyview():
     return render_template('historical_data.html')
 
-@app.route("/signup")
+@bp.route("/signup")
 def signupview():
     return render_template('Sign_up_page_template.html')
 
 ### Test on the form submission and visualisation in template ###
-
-# @app.route("/submitted", methods=['GET', 'POST'])
-# def submittedview():
-#     if request.method == 'POST':
-#         first_name = request.form.get('First_name')
-#         last_name = request.form.get('Last_name')
-#         email = request.form.get('Email_Address')
-#         password = request.form.get('Password')
-#     return render_template("submitted.html",
-#                            first_name = first_name,
-#                            last_name = last_name,
-#                            email = email,
-#                            password = password)
-
-
-@app.route("/login")
+@bp.route("/login")
 def loginview():
     return render_template('Login_page_template.html')
 
-@app.route("/logbook", methods=['GET', 'POST'])
+@bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
     if request.method == 'POST':
         first_name = request.form.get('First_name')
@@ -92,7 +57,7 @@ def logbookview():
                            password = password)
 
 #Create asthma log page:
-@app.route('/testlog', methods = ['GET','POST'])
+@bp.route('/testlog', methods = ['GET','POST'])
 def testlog():
     form = AsthmaLogForm()
     med = None
@@ -107,26 +72,11 @@ def testlog():
                            med = med)
 
 
-# @app.route('/user/add', methods = ['GET','POST'])
-# def add_users():
-#     name = None
-#     form = UserForm()
-        
-#     #Validate form
-#     if form.validate_on_submit(): 
-#         name = form.name.data
-#         user = UserData.query.filter_by(name = form.name.data).first()
-#         form.name.data = '' 
-#         flash("User Made Successfully")
-    
-#     return render_template("add_user.html",
-#                            form = form)
-
-@app.route('/test')
+@bp.route('/test')
 def index():
     return render_template('test.html')
 
-@app.route('/submit', methods=['POST'])
+@bp.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
         name = request.form['name']
@@ -153,5 +103,5 @@ class UserForm(FlaskForm):
     email = StringField("Email", validators = [DataRequired()]) #Can change to email validator
     submit = SubmitField("Submitf!")
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0')

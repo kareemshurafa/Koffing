@@ -1,4 +1,5 @@
 from .extensions import db
+from datetime import datetime
 
 class GPDetails(db.Model):
     __tablename__ = 'GPDetails'
