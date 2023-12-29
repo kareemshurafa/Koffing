@@ -1,0 +1,14 @@
+heroku pg:psql --app koffing HEROKU_POSTGRESQL_CHARCOAL_URL
+
+\d to see all tables
+\d to see details for a particular tables
+select * from tablename to view table contents
+
+
+https://devcenter.heroku.com/articles/managing-heroku-postgres-using-cli
+
+
+https://www.digitalocean.com/community/tutorials/how-to-use-a-postgresql-database-in-a-flask-application
+
+
+LOGIN INFO: https://www.youtube.com/watch?v=RLKW7ZMJOf4
