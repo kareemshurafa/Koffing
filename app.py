@@ -64,16 +64,43 @@ def loginview():
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
+    # This differentiates between the POST requests from signing up and updating the extra details form
+    # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
+    # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     if request.method == 'POST':
-        first_name = request.form.get('First_name')
-        last_name = request.form.get('Last_name')
-        email = request.form.get('Email_Address')
-        password = request.form.get('Password')
-    return render_template("Logbook_template.html",
-                           first_name = first_name,
-                           last_name = last_name,
-                           email = email,
-                           password = password)
+        if "sign_up_form" in request.form:
+            first_name = request.form.get('First_name')
+            last_name = request.form.get('Last_name')
+            email = request.form.get('Email_Address')
+            password = request.form.get('Password')
+            return render_template("New_Logbook_template.html",
+                                first_name = first_name,
+                                last_name = last_name,
+                                email = email,
+                                password = password)
+        elif "update_details_form" in request.form:
+            phone_number = request.form.get('phone_number')
+            dob = request.form.get('dob')
+            address = request.form.get('address')
+            gp_name = request.form.get('gp_name')
+            gp_surname = request.form.get('gp_surname')
+            gp_code = request.form.get('gp_code')
+            gp_phone_number = request.form.get('gp_phone_number')
+            gp_address = request.form.get('gp_address')
+            return render_template("New_Logbook_template.html",
+                                   phone_number = phone_number,
+                                   dob = dob,
+                                   address = address,
+                                   gp_name = gp_name,
+                                   gp_surname = gp_surname,
+                                   gp_code = gp_code,
+                                   gp_phone_number = gp_phone_number,
+                                   gp_address = gp_address)
+
+
+@app.route("/update", methods = ['GET', 'POST'])
+def updateview():
+    return render_template('Update_Details.html')
 
 
 @bp.route('/test')
