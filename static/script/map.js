@@ -1,4 +1,3 @@
-
 // Import modules according to ES6 spec
 import {aqiChart} from './historical_data.js'
 // import {updateWidget} from './aqi_widget.js'
