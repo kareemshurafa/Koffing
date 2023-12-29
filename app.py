@@ -58,11 +58,7 @@ def aqiview():
 
 @bp.route("/aqi")
 def mapview():
-    return render_template('aqi_widget.html')
-
-@bp.route("/history")
-def historyview():
-    return render_template('historical_data.html')
+    return render_template('Air_Quality_Map.html')
 
 @bp.route("/signup")
 def signupview():
