@@ -98,7 +98,7 @@ def logbookview():
                                    gp_address = gp_address)
 
 
-@app.route("/update", methods = ['GET', 'POST'])
+@bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
     return render_template('Update_Details.html')
 
