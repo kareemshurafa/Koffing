@@ -33,7 +33,7 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
     app.register_blueprint(bp)
     return app
 
-db=SQLAlchemy(app)
+db=SQLAlchemy()
 bp = Blueprint("main", __name__)
 # app = create_app()
 
