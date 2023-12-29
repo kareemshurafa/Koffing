@@ -9,10 +9,8 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import flash
 # from .models import GPDetails, UserDetails, PuffHistory
-from .extensions import db
 
-from flask import Flask
-from .extensions import db
+db=SQLAlchemy()
 
 def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc5e731015a768577b68f1907654be99a76127df98811@ec2-63-34-69-123.eu-west-1.compute.amazonaws.com:5432/dfuerbg1k2hvm2'):
     app = Flask(__name__)
@@ -38,7 +36,7 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
     return app
 
 bp = Blueprint("main", __name__)
-# app = create_app()
+
 
 @bp.route("/home")
 def home():
@@ -124,6 +122,8 @@ class UserForm(FlaskForm):
     name = StringField("What name?", validators = [DataRequired()]) #If not filled out, makes sure it gets filled   
     email = StringField("Email", validators = [DataRequired()]) #Can change to email validator
     submit = SubmitField("Submitf!")
+
+app = create_app()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
