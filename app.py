@@ -54,10 +54,6 @@ def initial():
 
 @bp.route("/map")
 def aqiview():
-    return render_template('map.html')
-
-@bp.route("/aqi")
-def mapview():
     return render_template('Air_Quality_Map.html')
 
 @bp.route("/signup")
