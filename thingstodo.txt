@@ -1,1 +1,8 @@
+29/12/2023
+
+Do message/site that flashes puff taken!
+Also need to implement checker on whether taking too long or sending an email
+Maybe add a video to the background for the initial page?
+
+Possibly :
 Create forgot password page
