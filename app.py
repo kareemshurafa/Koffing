@@ -29,8 +29,6 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
     # db.init_app(app)
     # login_manager.init_app(app) 
 
-    
-    app.config['SECRET_KEY'] = 'Koffing123!' #Should likely hide this
     app.register_blueprint(bp)
     return app
 
@@ -67,6 +65,8 @@ def logbookview():
     # This differentiates between the POST requests from signing up and updating the extra details form
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
+
+    
     if request.method == 'POST':
         if "sign_up_form" in request.form:
             first_name = request.form.get('First_name')
