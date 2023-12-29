@@ -4,7 +4,6 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from datetime import datetime
-from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import flash
@@ -17,7 +16,7 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
     ENV="dev"
 
-    if ENV == "dev":
+    if ENV  == "dev":
         app.config['ENV'] = 'development'
         app.config['DEBUG'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = database_URI
@@ -84,21 +83,6 @@ def logbookview():
                            email = email,
                            password = password)
 
-#Create asthma log page:
-@bp.route('/testlog', methods = ['GET','POST'])
-def testlog():
-    form = AsthmaLogForm()
-    med = None
-
-    #Validate form
-    if form.validate_on_submit(): 
-        #if submitted, make name this then clear it
-        med = form.med.data
-        form.med.data = ''
-    return render_template("testasthmalogform.html",
-                           form = form,
-                           med = med)
-
 
 @bp.route('/test')
 def index():
@@ -120,16 +104,6 @@ def submit():
             db.session.commit()
             return "<h2 style='color:red'>Yipee!</h2>"
         return render_template('test.html', message='You have already submitted')
-
-#Create a form class
-class AsthmaLogForm(FlaskForm):
-    med = StringField("What puff did you take?", validators = [DataRequired()]) #If not filled out, makes sure it gets filled
-    submit = SubmitField("Puff!")
-
-class UserForm(FlaskForm):
-    name = StringField("What name?", validators = [DataRequired()]) #If not filled out, makes sure it gets filled   
-    email = StringField("Email", validators = [DataRequired()]) #Can change to email validator
-    submit = SubmitField("Submitf!")
 
 app = create_app()
 
