@@ -2,12 +2,14 @@ from flask import Flask, render_template,request, json, url_for, Blueprint
 import requests
 import os
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from datetime import datetime
 from datetime import datetime
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import flash
 # from .models import GPDetails, UserDetails, PuffHistory
+from .models import *
 
 db=SQLAlchemy()
 
@@ -73,11 +75,15 @@ def logbookview():
             last_name = request.form.get('Last_name')
             email = request.form.get('Email_Address')
             password = request.form.get('Password')
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
+            # data = UserDetails(first_name, last_name, email, password, 'NULL', 'NULL', 'NULL', 3)
+            # db.session.add(data)
+            # db.session.commit()
             return render_template("New_Logbook_template.html",
                                 first_name = first_name,
                                 last_name = last_name,
                                 email = email,
-                                password = password)
+                                password = hashed_password)
         elif "update_details_form" in request.form:
             phone_number = request.form.get('phone_number')
             dob = request.form.get('dob')
@@ -125,6 +131,7 @@ def submit():
         return render_template('test.html', message='You have already submitted')
 
 app = create_app()
+bcrypt = Bcrypt(app)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
