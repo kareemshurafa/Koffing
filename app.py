@@ -9,7 +9,7 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import flash
 # from .models import GPDetails, UserDetails, PuffHistory
-# from .models import *
+    # from .models import *
 
 db=SQLAlchemy()
 
@@ -36,8 +36,8 @@ class UserDetails(db.Model):
     #Creating a one-to-many relationship to puffhistory
         #backref - gives email when puff.email is called
         #lazy = True - load the data as necessary 
-    asthmapuffs = db.relationship('PuffHistory',backref='id',lazy=True)
-    asthmadetails = db.relationship('AsthmaDetails',backref='id',lazy=True)
+    asthmapuffs = db.relationship('PuffHistory',backref='UserDetails',lazy=True)
+    asthmadetails = db.relationship('AsthmaDetails',backref='UserDetails',lazy=True)
 
 class AsthmaDetails(db.Model):
     __tablename__ = 'AsthmaDetails'
@@ -61,7 +61,7 @@ class PuffHistory(db.Model):
     datetaken = db.Column(db.DateTime,default=datetime.utcnow)
     timetaken = db.Column(db.DateTime,default=datetime.utcnow) #NEED TO MAKE SURE JUST TIME
 
-    user_id = db.Column(db.Integer, db.ForeignKey('userdetails.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
 
 # db.create_all()
 
@@ -122,20 +122,25 @@ def logbookview():
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     
     if request.method == 'POST':
-        if "sign_up_form" in request.form:
+        if "sign_up_form" in request.form:  
+            print(request.form)
             first_name = request.form.get('First_name')
             last_name = request.form.get('Last_name')
             email = request.form.get('Email_Address')
             password = request.form.get('Password')
             hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
-            # data = UserDetails(first_name, last_name, email, password, 'NULL', 'NULL', 'NULL', 3)
-            # db.session.add(data)
-            # db.session.commit()
+            
+            data = UserDetails(firstname=first_name, surname=last_name, email=email, password=hashed_password)
+            #Need to implement checker if email has already been written
+            db.session.add(data)
+            db.session.commit()
+            #Have to flash message that you have signed in
             return render_template("New_Logbook_template.html",
                                 first_name = first_name,
                                 last_name = last_name,
-                                email = email,
+                                email = email, #
                                 password = hashed_password)
+
         elif "update_details_form" in request.form:
             phone_number = request.form.get('phone_number')
             dob = request.form.get('dob')
@@ -155,6 +160,7 @@ def logbookview():
                                    gp_phone_number = gp_phone_number,
                                    gp_address = gp_address)
 
+    return(render_template("Initial_Page.html"))
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
