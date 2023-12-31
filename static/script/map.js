@@ -1,4 +1,3 @@
-
 // Import modules according to ES6 spec
 import {aqiChart} from './historical_data.js'
 // import {updateWidget} from './aqi_widget.js'
@@ -77,12 +76,13 @@ function addParametersToURL(url, params) {
 
 // Initialise Google Map with AQI info
 async function initMap() {
+      // Create the search box and link it to the UI element.
+
 
     const location = { lat: 51.498356, lng: -0.176894};
     let parameters = {}
     const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key={api_key}"
     parameters.api_key = "AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
-
 
     let getAQInfo = addParametersToURL(AQInfo_URL, parameters);
 
@@ -91,7 +91,8 @@ async function initMap() {
         zoom: 12,
         center: location,
         });
-
+    const input = document.getElementById("search-box");
+    const searchBox = new google.maps.places.SearchBox(input);
     // Create the initial InfoWindow.
     let infoWindow = new google.maps.InfoWindow({  
         // content: infoContent,
@@ -112,6 +113,32 @@ async function initMap() {
 
     
     infoWindow.open(map);
+
+    searchBox.addListener("places_changed", () =>{
+        const places = searchBox.getPlaces();
+        let lat = places[0].geometry.location.lat();
+        let lng = places[0].geometry.location.lng()
+        infoWindow.close();
+        infoWindow = new google.maps.InfoWindow({
+            position: { lat: lat, lng: lng},
+        });
+        const location = {
+            latitude: lat,
+            longitude: lng
+        };
+        
+        // const extraComputations = "HEALTH_RECOMMENDATIONS";
+        const dataLoc = {location};
+        postData(getAQInfo, dataLoc,"POST").then((data) => {
+            const outputData = data.indexes[0];
+            // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
+            infoWindow.setContent(JSON.stringify(outputData));
+            updateWidget(data, location.latitude, location.longitude);
+        });
+        
+        infoWindow.open(map);
+        aqiChart(location.latitude, location.longitude);        
+    });
     // Configure the click listener.
     map.addListener("click", (mapsMouseEvent) => {
       // Close the current InfoWindow.
@@ -128,11 +155,11 @@ async function initMap() {
             longitude: lng
         };
         
-        const extraComputations = "HEALTH_RECOMMENDATIONS";
-        const dataLoc = {location, extraComputations};
+        // const extraComputations = "HEALTH_RECOMMENDATIONS";
+        const dataLoc = {location};
         postData(getAQInfo, dataLoc,"POST").then((data) => {
             const outputData = data.indexes[0];
-            outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
+            // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
             infoWindow.setContent(JSON.stringify(outputData));
             updateWidget(data, location.latitude, location.longitude);
         });

@@ -26,7 +26,7 @@
 		width: 1920px;
 		height: 1022px;
 		background-color: rgba(255,255,255,1);
-		overflow: hidden;
+		overflow: scroll;
 		--web-view-name: Air Quality Map;
 		--web-view-id: Air_Quality_Map;
 		--web-scale-on-resize: true;
@@ -208,22 +208,58 @@
 		font-size: 20px;
 		color: rgba(112,112,112,1);
 	}
-	#Rectangle_71 {
-		fill: rgba(255,255,255,1);
-		stroke: rgba(0,0,0,1);
-		stroke-width: 1.25px;
-		stroke-linejoin: miter;
-		stroke-linecap: butt;
-		stroke-miterlimit: 4;
-		shape-rendering: auto;
+	#search-box {
+		position: absolute;
+		overflow: visible;
+		width: 366px;
+		height: 51px;
+		left: 1489px;
+		top: 225px;
+
 	}
-	.Rectangle_71 {
+	#map{
 		position: absolute;
 		overflow: visible;
 		width: 972px;
 		height: 655px;
 		left: 485px;
 		top: 199px;
+	}
+	.aqi-widget {
+		width: 200px;
+		border-radius: 20px;
+		padding: 15px;
+		color: gray;
+		font-family: Arial, sans-serif;
+		margin: 10px;
+		display: inline-block;
+		position: absolute;
+		left: 1550px;
+		top: 450px;
+	}
+	.aqi-header {
+		font-size: 14px;
+		font-weight: bold;
+		color: black;
+	}
+	.aqi-level {
+		font-size: 24px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-value {
+		font-size: 36px;
+		font-weight: bold;
+		color: black
+	}
+	.aqi-location {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-update-time {
+		font-size: 12px;
+		color: black
 	}
 	#AIR_QUALITY_MAP_ {
 		left: 820px;
@@ -470,6 +506,12 @@
 		cursor: pointer;
 	}
 </style>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script type="module" src="{{ url_for('static', filename='script/map.js') }}" defer></script>
+<script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
 <script id="applicationScript">
 ///////////////////////////////////////
 // INITIALIZATION
@@ -3404,10 +3446,7 @@ window.application = new Application();
 		<path id="Path_30_" d="M 42 0 L 1418 0 C 1441.195922851562 0 1460 18.80403900146484 1460 42 L 1460 786 C 1460 809.1959838867188 1441.195922851562 828 1418 828 L 42 828 C 18.80403900146484 828 0 809.1959838867188 0 786 L 0 42 C 0 18.80403900146484 18.80403900146484 0 42 0 Z">
 		</path>
 	</svg>
-	<svg class="Rectangle_60">
-		<rect id="Rectangle_60" rx="0" ry="0" x="0" y="0" width="366" height="51">
-		</rect>
-	</svg>
+
 	<div id="Icon_feather-search">
 		<svg class="Path_13" viewBox="4.5 4.5 18.141 15.088">
 			<path id="Path_13" d="M 22.64123344421387 12.04394435882568 C 22.64123344421387 16.21035003662109 18.58017921447754 19.587890625 13.57061672210693 19.587890625 C 8.561054229736328 19.587890625 4.500001430511475 16.21035003662109 4.5 12.04394626617432 C 4.5 7.877540588378906 8.561055183410645 4.5 13.57061767578125 4.500001430511475 C 18.58018112182617 4.500001430511475 22.64123344421387 7.877542018890381 22.64123344421387 12.04394817352295 Z">
@@ -3418,16 +3457,7 @@ window.application = new Application();
 			</path>
 		</svg>
 	</div>
-	<div id="Search_for_location_">
-		<span>Search for location</span><span style="font-style:normal;font-weight:bold;color:rgba(255,255,255,1);"> </span>
-	</div>
-	<svg class="Rectangle_71">
-		<rect id="Rectangle_71" rx="0" ry="0" x="0" y="0" width="972" height="655">
-		</rect>
-	</svg>
-	<div id="AIR_QUALITY_MAP_">
-		<span>AIR QUALITY MAP </span>
-	</div>
+
 	<svg class="Rectangle_66">
 		<rect id="Rectangle_66" rx="0" ry="0" x="0" y="0" width="341" height="1032">
 		</rect>
@@ -3456,6 +3486,26 @@ window.application = new Application();
 		<path id="Line_20" d="M 0 0 L 251 1">
 		</path>
 	</svg>
+	<input
+		id = "search-box"
+		class = "controls"
+		type = "text"
+		placeholder = "Search location..."
+	/>
+	<div id="map"></div>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio&callback=initMap&libraries=places&v=weekly"
+		defer
+	></script>
+	<div class="aqi-widget" id="aqiWidget">
+		<div class="aqi-header">AIR QUALITY</div>
+		<div class="aqi-level" id="aqiLevel"></div>
+		<div class="aqi-value" id="aqiValue"></div>
+		<div class="aqi-location" id="aqiLocation"></div>
+		<div class="aqi-update-time" id="aqiUpdateTime"></div>
+	</div>
+	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
+	<div style="width: 1460px;left: 400px;top: 950px;position: relative;"><canvas id="acquisitions"></canvas></div>
 	<div id="Settings__">
 		<span>Settings </span><br/>
 	</div>

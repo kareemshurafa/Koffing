@@ -1,3 +1,4 @@
+from .extensions import db
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from . import create_app
