@@ -1,7 +1,6 @@
-import .extensions
+from .extensions import db
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from .app import app
 
 db=SQLAlchemy()
 
@@ -54,6 +53,4 @@ class PuffHistory(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('userdetails.id'))
 
-with app.app_context():
-    db.init_app(app)
-    db.create_all()
+db.create_all()

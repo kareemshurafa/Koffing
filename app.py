@@ -105,7 +105,6 @@ def logbookview():
 def updateview():
     return render_template('Update_Details.html')
 
-
 @bp.route('/test')
 def index():
     return render_template('test.html')
