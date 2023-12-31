@@ -10,8 +10,6 @@ from wtforms.validators import DataRequired
 import flash
 # from .models import GPDetails, UserDetails, PuffHistory
 
-db=SQLAlchemy()
-
 def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc5e731015a768577b68f1907654be99a76127df98811@ec2-63-34-69-123.eu-west-1.compute.amazonaws.com:5432/dfuerbg1k2hvm2'):
     app = Flask(__name__)
 
@@ -36,7 +34,6 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
     return app
 
 bp = Blueprint("main", __name__)
-
 
 @bp.route("/home")
 def home():

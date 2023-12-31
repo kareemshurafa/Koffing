@@ -1,45 +1,45 @@
-from .app import db
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from . import create_app
 
-class GPDetails(db.Model):
-    __tablename__ = 'GPDetails'
-    id = db.Column(db.Integer,primary_key = True)
-    GPname = db.Column(db.String(200),nullable=False)
-    GPcode = db.Column(db.String(30),nullable=False)
-    address = db.Column(db.String(200), nullable = False)
-    GPnum = db.Column(db.Integer(),nullable=True) #Set to unique=True?
-
-    def __init__(self,GPname,GPcode,address,GPnum):
-        self.GPname = GPname
-        self.GPcode = GPcode
-        self.address = address
-        self.GPnum = GPnum
+db=SQLAlchemy()
 
 class UserDetails(db.Model):
     __tablename__ = 'UserDetails'
     id = db.Column(db.Integer,primary_key = True)
+    #Login Details
     firstname = db.Column(db.String(30),nullable = False)
     surname = db.Column(db.String(30),nullable = False)
-    email = db.Column(db.String(50),nullable=False, unique=True) 
+    email = db.Column(db.String(50),nullable=False, unique=True)
+    password = db.Column(db.String(128),nullable = False)
+
     phonenum = db.Column(db.Integer,nullable=True,unique=True)
-    dob = db.Column(db.DateTime,default=datetime.utcnow)
+    dob = db.Column(db.DateTime,default=datetime.utcnow,nullable=True)
     address = db.Column(db.String(50),nullable=True)
+
+    GPname = db.Column(db.String(200),nullable=True)
+    GPsurname = db.Column(db.String(50),nullable=True)
+    GPcode = db.Column(db.String(30),nullable=True)
+    GPaddress = db.Column(db.String(200), nullable = True)
+    GPnum = db.Column(db.Integer(),nullable=True) 
+
     #Creating a one-to-many relationship to puffhistory
         #backref - gives email when puff.email is called
         #lazy = True - load the data as necessary 
-    asthmapuffs = db.relationship('PuffHistory',backref='email',lazy=True)
-    
-    #Linking GP to user - One to One relationship
-    gpid = db.Column(db.Integer,db.ForeignKey(GPDetails.id))
-    #Not 100% sure that this actually queries GPDetails.id
+    asthmapuffs = db.relationship('PuffHistory',backref='id',lazy=True)
+    asthmadetails = db.relationship('AsthmaDetails',backref='id',lazy=True)
 
-    def __init__(self,firstname,surname,email,phonenum,dob,address):
-        self.firstname = firstname
-        self.surname = surname
-        self.email = email
-        self.phonenum = phonenum
-        self.dob = dob
-        self.address = address
+class AsthmaDetails(db.Model):
+    __tablename__ = 'AsthmaDetails'
+    id = db.Column(db.Integer,primary_key = True)
+    asthmastep = db.Column(db.String(50),nullable=True)
+    actscore = db.Column(db.String(50),nullable=True)
+    peakflowvar =  db.Column(db.String(50),nullable=True)
+    fev1 = db.Column(db.String(50),nullable=True)
+    fevsratio = db.Column(db.String(50),nullable=True)
+    peakflowreading = db.Column(db.String(50),nullable=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('userdetails.id'))
 
 
 class PuffHistory(db.Model):
@@ -51,15 +51,8 @@ class PuffHistory(db.Model):
     puffno = db.Column(db.Integer,nullable=False)
     datetaken = db.Column(db.DateTime,default=datetime.utcnow)
     timetaken = db.Column(db.DateTime,default=datetime.utcnow) #NEED TO MAKE SURE JUST TIME
-    
-    def __init__(self,inhalertype,medname,dosageamt,puffno,datetaken,timetaken):
-        self.inhalertype = inhalertype
-        self.medname = medname
-        self.dosageamt=dosageamt
-        self.puffno=puffno
-        self.datetaken = datetaken
-        self.timetaken = timetaken
 
+    user_id = db.Column(db.Integer, db.ForeignKey('userdetails.id'))
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
