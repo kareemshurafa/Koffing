@@ -16,4 +16,4 @@ def test_registration(client, app):
         assert UserDetails.query.first().firstname == "testname"
         assert UserDetails.query.first().surname == "testsur"
         assert UserDetails.query.first().email == "test@koffing.com"
-        assert bcrypt(app).check_password_hash(UserDetails.query.first().password,'testpassword' ) == True
+        assert bcrypt(app).check_password_hash(UserDetails.query.first().password, 'testpassword') == True
