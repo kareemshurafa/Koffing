@@ -1,7 +1,7 @@
-from .extensions import db
+import .extensions
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from . import create_app
+from .app import app
 
 db=SQLAlchemy()
 
@@ -40,8 +40,7 @@ class AsthmaDetails(db.Model):
     fevsratio = db.Column(db.String(50),nullable=True)
     peakflowreading = db.Column(db.String(50),nullable=True)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('userdetails.id'))
-
+    user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
 
 class PuffHistory(db.Model):
     __tablename__='PuffHistory'
@@ -56,4 +55,5 @@ class PuffHistory(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('userdetails.id'))
 
 with app.app_context():
+    db.init_app(app)
     db.create_all()
