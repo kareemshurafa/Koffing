@@ -1,5 +1,4 @@
 import pytest
-
 from flask_sqlalchemy import SQLAlchemy
 from Koffing.app import create_app,db
 
