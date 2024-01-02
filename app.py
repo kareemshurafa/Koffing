@@ -8,8 +8,6 @@ from datetime import datetime
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import flash
-# from .models import GPDetails, UserDetails, PuffHistory
-    # from .models import *
 
 db=SQLAlchemy()
 
