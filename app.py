@@ -88,7 +88,7 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
-@bp.route("/home")
+@bp.route("/home", methods=['GET','POST'])
 def home():
     return(render_template("Home.html"))
 
@@ -109,8 +109,14 @@ def signupview():
     return render_template('Sign_up_page_template.html')
 
 ### Test on the form submission and visualisation in template ###
-@bp.route("/login")
+@bp.route("/login", methods=['GET','POST'])
 def loginview():
+#After logging in, have to m
+
+    if request.nethod == 'POST':
+        email = request.form.get('Email_Address')
+        password = request.form.get('Password')
+
     return render_template('Login_page_template.html')
 
 @bp.route("/logbook", methods=['GET', 'POST'])
@@ -148,6 +154,9 @@ def logbookview():
             gp_code = request.form.get('gp_code')
             gp_phone_number = request.form.get('gp_phone_number')
             gp_address = request.form.get('gp_address')
+
+            #This is a roundabout method, realistically:
+            #Pull from the user's database, then render everything based on that, not get it straight from the form
             return render_template("New_Logbook_template.html",
                                    phone_number = phone_number,
                                    dob = dob,

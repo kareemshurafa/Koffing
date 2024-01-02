@@ -532,21 +532,22 @@
 		top: 0px;
 	}
 	#Login_bx {
-		left: 220px;
+		left: 0px;
 		top: 24px;
 		position: absolute;
 		overflow: visible;
 		width: 539px;
 		white-space: nowrap;
-		text-align: left;
-		font-family: Adobe Clean;
+		text-align: center;
 		font-style: normal;
 		font-weight: bold;
 		font-size: 37px;
 		color: rgba(0,0,0,1);
+		background-color: transparent; 
 	}
 
 	#Login:hover #Rectangle_49_bw{
+		fill:transparent;
         fill: url(#blueGradient); 
 	}
 	#Forgot_Password:hover  {
@@ -554,6 +555,7 @@
 	}
 	
 	#Login:hover #Login_bx {
+		fill:transparent;
 	    color: white; 
 	}
 
@@ -3512,7 +3514,7 @@ window.application = new Application();
 
 
 	<!-- Creating form for signup -->
-	<form action="/home" method = "POST">
+	<form action="/home" method ="POST">
 	<div id="Welcome_Back_please_log_in">
 		<span>Welcome Back, please log in</span>
 	</div>
@@ -3580,6 +3582,7 @@ window.application = new Application();
 			</rect>
 		</svg>
 		<div id="Login" class="Login">
+			
 			<svg class="Rectangle_49_bw">
 				<linearGradient id="Rectangle_49_bw" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
 					<stop offset="0" stop-color="#bbbfc1" stop-opacity="1"></stop>
@@ -3588,10 +3591,11 @@ window.application = new Application();
 				<rect id="Rectangle_49_bw" rx="40" ry="40" x="0" y="0" width="539" height="96">
 				</rect>
 			</svg>
-			<div id="Login_bx">
-				<span>Login</span>
-			</div>
+			<div>
+				<input type="submit" id="Login_bx" value="Login">
+			</div>	
 		</div>
+		
 	</div>
 </div>
 	<script>
@@ -3602,6 +3606,7 @@ window.application = new Application();
 		    });
 		    loginButton.addEventListener('click', function() {
 		        window.location.href = 'home'; // Assuming 'Home – 1.html' is the correct path
+				
 		    });
 		});
 		document.addEventListener('DOMContentLoaded', function() {
@@ -3612,6 +3617,7 @@ window.application = new Application();
     
 });
 		</script>
+</form>
 
 </body>
 </html>
