@@ -113,7 +113,7 @@ def signupview():
 def loginview():
 #After logging in, have to m
 
-    if request.nethod == 'POST':
+    if request.method == 'POST':
         email = request.form.get('Email_Address')
         password = request.form.get('Password')
 
