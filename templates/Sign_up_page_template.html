@@ -465,6 +465,7 @@
 }
 
 #Send_Request {
+	background-color: transparent;
     left: 110px;
     top: 95px;
     position: absolute;
@@ -485,13 +486,12 @@
         color: white; 
     }
 
-
 	#Login_here:hover  {
     color: white; 
     
 }
 #Rectangle_88 {
-		fill: rgba(255,255,255,1);
+		fill: rgb(255, 255, 255);
 		stroke: rgba(112,112,112,1);
 		stroke-width: 1px;
 		stroke-linejoin: miter;
@@ -3541,27 +3541,25 @@ window.application = new Application();
 				<rect id="Rectangle_49_bi" rx="40" ry="40" x="0" y="0" width="362" height="96">
 				</rect>
 			</svg>
-			<div id="Send_Request">
-				<span>Sign-Up</span>
+			<div>
+				<input type="submit" id="Send_Request" value="Sign-Up" name="sign_up_form">
 			</div>
 		</div>
 		<svg class="Rectangle_88">
+<!-- 			
 			<rect id="Rectangle_88" rx="0" ry="0" x="0" y="0" width="27" height="27">
-			</rect>
+			</rect> -->
 		</svg>
-		
 		<div id="Already_have_an_account_">
 			<span>Already have an account? </span>
 		</div>
-		
 	</div>
-	<div id="I_accept_the_Terms_of_Use__Pri">
-		<span>I accept the Terms of Use & Privacy Policy</span>
+	<div>
+		<input type="checkbox" id="Rectangle_88" rx="0" ry="0" x="0" y="0" width="27" height="27" name="accept-terms" class="terms-checkbox">
+		<!-- Removed the required part for submission -->
+		<!-- <input type="checkbox" id="Rectangle_88" rx="0" ry="0" x="0" y="0" width="27" height="27" name="accept-terms" class="terms-checkbox" required> -->
+		<label for="accept-terms" id="I_accept_the_Terms_of_Use__Pri">I accept the Terms of Use & Privacy Policy</label>
 	</div>
-</div>
-<div class="terms-checkbox-container">
-    <input type="checkbox" id="accept-terms" name="accept-terms" class="terms-checkbox" required>
-    <label for="accept-terms">I accept the Terms of Use & Privacy Policy</label>
 </div>
 </body>
 </html>
