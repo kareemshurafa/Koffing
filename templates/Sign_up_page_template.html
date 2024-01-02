@@ -3460,54 +3460,57 @@ window.application = new Application();
 			
 	</div>
 	<div id="Group_9">
-		<div id="Welcome_please_sign_up">
-			<span>Welcome, please sign up</span>
-		</div>
-		<div id="Username" class="Username">
-			<div id="Email_Address">
-				<span>Email Address</span>
+
+		<form action="/logbook" method="POST">
+			<div id="Welcome_please_sign_up">
+				<span>Welcome, please sign up</span>
 			</div>
-			<svg class="Line_2" viewBox="0 0 503.851 1">
-				<path id="Line_2" d="M 0 0 L 503.8507080078125 0">
-				</path>
-			</svg>
-		</div>
-		<div id="Password" class="Password">
-			<svg class="Line_3" viewBox="0 0 503.851 1">
-				<path id="Line_3" d="M 0 0 L 503.8507080078125 0">
-				</path>
-			</svg>
-			<div id="Password_bd">
-				<span>Password</span>
+			<div id="Username" class="Username">
+				<div id="Email_Address">
+					<!-- Add input field after the div id tag, replacing the span tag text -->
+					<input type="email" id="Email_Address" name="Email_Address" placeholder="Email Address" size="50"> 
+				</div>
+				<svg class="Line_2" viewBox="0 0 503.851 1">
+					<path id="Line_2" d="M 0 0 L 503.8507080078125 0">
+					</path>
+				</svg>
 			</div>
-		</div>
-		<div id="Password_be" class="Password">
-			<svg class="Line_3_bf" viewBox="0 0 512 1">
-				<path id="Line_3_bf" d="M 0 0 L 512 0">
-				</path>
-			</svg>
-			<div id="Confirm_password">
-				<span>Confirm password</span>
+			<div id="Password" class="Password">
+				<svg class="Line_3" viewBox="0 0 503.851 1">
+					<path id="Line_3" d="M 0 0 L 503.8507080078125 0">
+					</path>
+				</svg>
+				<div id="Password_bd">
+					<input type="password" id="Password_bd" name="Password" placeholder="Password" size="50">
+				</div>
 			</div>
-		</div>
-		<div id="Username_bh" class="Username">
-			<div id="First_name">
-				<span>First name</span>
+			<div id="Password_be" class="Password">
+				<svg class="Line_3_bf" viewBox="0 0 512 1">
+					<path id="Line_3_bf" d="M 0 0 L 512 0">
+					</path>
+				</svg>
+				<div id="Confirm_password">
+					<input type="password" id="Confirm_password" name="Confirm_password" placeholder="Confirm password" size="50">
+				</div>
 			</div>
-			<svg class="Line_2_bj" viewBox="0 0 228.333 1">
-				<path id="Line_2_bj" d="M 0 0 L 228.33251953125 1">
-				</path>
-			</svg>
-		</div>
-		<div id="Username_bk" class="Username">
-			<div id="Last_name">
-				<span>Last name</span>
+			<div id="Username_bh" class="Username">
+				<div id="First_name">
+					<input type="text" id="First_name" name="First_name" placeholder="First Name" size="10">
+				</div>
+				<svg class="Line_2_bj" viewBox="0 0 228.333 1">
+					<path id="Line_2_bj" d="M 0 0 L 228.33251953125 1">
+					</path>
+				</svg>
 			</div>
-			<svg class="Line_2_bm" viewBox="0 0 251 1">
-				<path id="Line_2_bm" d="M 0 0 L 251 1">
-				</path>
-			</svg>
-		</div>
+			<div id="Username_bk" class="Username">
+				<div id="Last_name">
+					<input type="text" id="Last_name" name="Last_name" placeholder="Last Name" size="10">
+				</div>
+				<svg class="Line_2_bm" viewBox="0 0 251 1">
+					<path id="Line_2_bm" d="M 0 0 L 251 1">
+					</path>
+				</svg>
+			</div>
 		<div onclick="application.goToTargetView(event)" id="Login_here">
 			<span>Login here</span>
 		</div>
