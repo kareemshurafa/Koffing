@@ -138,6 +138,7 @@ def logbookview():
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     
     tester = db.session.query(UserDetails).filter_by(email="test@gmail.com").first()
+    print(tester.id)
     name = tester.firstname
     surname = tester.surname
     email = tester.email
