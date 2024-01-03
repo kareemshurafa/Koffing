@@ -148,7 +148,7 @@ def loginpost():
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
     if not session.get('logged_in'):
-        return "you are not logged in silly :3"
+        return "you are not logged in"
 
     if request.method == 'POST':
         if "sign_up_form" in request.form:  
