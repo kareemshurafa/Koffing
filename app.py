@@ -131,6 +131,7 @@ def loginpost():
         return redirect("/signup")
     
     # Obtain record
+    global record
     record = db.session.query(UserDetails).filter_by(email=Email).first()
     
     # Boolean check if password is correct
@@ -149,10 +150,6 @@ def logbookview():
     if not session.get('logged_in'):
         return "you are not logged in silly :3"
 
-    # This differentiates between the POST requests from signing up and updating the extra details form
-    # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
-    # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
-    
     if request.method == 'POST':
         if "sign_up_form" in request.form:  
             print(request.form)
@@ -195,7 +192,7 @@ def logbookview():
                                    gp_phone_number = gp_phone_number,
                                    gp_address = gp_address)
 
-    return(render_template("New_Logbook_template.html"))
+    return(render_template("New_Logbook_template.html", first_name = record.firstname))
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
