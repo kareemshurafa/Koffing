@@ -140,11 +140,15 @@ def loginpost():
     if not pswrd:
         return redirect("/login")
 
-    # Email and Password checks correct
+    # All checks passed - create user session and redirect to home page
+    session['logged_in'] = True
     return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
+    if not session.get('logged_in'):
+        return "you are not logged in silly :3"
+
     # This differentiates between the POST requests from signing up and updating the extra details form
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
@@ -191,7 +195,7 @@ def logbookview():
                                    gp_phone_number = gp_phone_number,
                                    gp_address = gp_address)
 
-    return(render_template("Initial_Page.html"))
+    return(render_template("New_Logbook_template.html"))
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
@@ -203,6 +207,7 @@ def index():
 
 @bp.route('/logout')
 def logoutview():
+    session.pop('logged_in', None)
     return redirect("/")
 
 # @bp.route('/submit', methods=['POST'])
