@@ -4,7 +4,7 @@ def test_home(client):
     response = client.get("/")
     
     # assert b"<h2 style='color:red'>Hello Koffing! This is the final test!</h2>" in response.data
-    assert b"<h2>Hello Koffing! This is the final test!</h2>" in response.data
+    assert b'<img id="Asthma" src="Asthma.png" srcset="Asthma.png 1x, Asthma@2x.png 2x">' in response.data
     #assert used to check if it exists
 
 

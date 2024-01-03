@@ -8,10 +8,62 @@ from datetime import datetime
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import flash
-# from .models import GPDetails, UserDetails, PuffHistory
-# from .models import *
 
 db=SQLAlchemy()
+
+#--------------Models---------------------
+class UserDetails(db.Model):
+    __tablename__ = 'UserDetails'
+    id = db.Column(db.Integer,primary_key = True)
+    #Login Details
+    firstname = db.Column(db.String(30),nullable = False)
+    surname = db.Column(db.String(30),nullable = False)
+    email = db.Column(db.String(50),nullable=False, unique=True)
+    password = db.Column(db.String(128),nullable = False)
+
+    phonenum = db.Column(db.Integer,nullable=True,unique=True)
+    dob = db.Column(db.DateTime,default=datetime.utcnow,nullable=True)
+    address = db.Column(db.String(50),nullable=True)
+
+    GPname = db.Column(db.String(200),nullable=True)
+    GPsurname = db.Column(db.String(50),nullable=True)
+    GPcode = db.Column(db.String(30),nullable=True)
+    GPaddress = db.Column(db.String(200), nullable = True)
+    GPnum = db.Column(db.Integer(),nullable=True) 
+
+    #Creating a one-to-many relationship to puffhistory
+        #backref - gives email when puff.email is called
+        #lazy = True - load the data as necessary 
+    asthmapuffs = db.relationship('PuffHistory',backref='UserDetails',lazy=True)
+    asthmadetails = db.relationship('AsthmaDetails',backref='UserDetails',lazy=True)
+
+class AsthmaDetails(db.Model):
+    __tablename__ = 'AsthmaDetails'
+    id = db.Column(db.Integer,primary_key = True)
+    asthmastep = db.Column(db.String(50),nullable=True)
+    actscore = db.Column(db.String(50),nullable=True)
+    peakflowvar =  db.Column(db.String(50),nullable=True)
+    fev1 = db.Column(db.String(50),nullable=True)
+    fevsratio = db.Column(db.String(50),nullable=True)
+    peakflowreading = db.Column(db.String(50),nullable=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
+
+class PuffHistory(db.Model):
+    __tablename__='PuffHistory'
+    id = db.Column(db.Integer,primary_key = True)
+    inhalertype = db.Column(db.String(40),nullable=False)
+    medname = db.Column(db.String(40),nullable=False)
+    dosageamt = db.Column(db.Integer,nullable=False)
+    puffno = db.Column(db.Integer,nullable=False)
+    datetaken = db.Column(db.DateTime,default=datetime.utcnow)
+    timetaken = db.Column(db.DateTime,default=datetime.utcnow) #NEED TO MAKE SURE JUST TIME
+
+    user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
+
+# db.create_all()
+
+#----------------------------------------------------------
 
 def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc5e731015a768577b68f1907654be99a76127df98811@ec2-63-34-69-123.eu-west-1.compute.amazonaws.com:5432/dfuerbg1k2hvm2'):
     app = Flask(__name__)
@@ -36,8 +88,7 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
-
-@bp.route("/home")
+@bp.route("/home", methods=['GET','POST'])
 def home():
     return(render_template("Home.html"))
 
@@ -58,8 +109,14 @@ def signupview():
     return render_template('Sign_up_page_template.html')
 
 ### Test on the form submission and visualisation in template ###
-@bp.route("/login")
+@bp.route("/login", methods=['GET','POST'])
 def loginview():
+#After logging in, have to m
+
+    if request.method == 'POST':
+        email = request.form.get('Email_Address')
+        password = request.form.get('Password')
+
     return render_template('Login_page_template.html')
 
 @bp.route("/logbook", methods=['GET', 'POST'])
@@ -67,23 +124,27 @@ def logbookview():
     # This differentiates between the POST requests from signing up and updating the extra details form
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
-
     
     if request.method == 'POST':
-        if "sign_up_form" in request.form:
+        if "sign_up_form" in request.form:  
+            print(request.form)
             first_name = request.form.get('First_name')
             last_name = request.form.get('Last_name')
             email = request.form.get('Email_Address')
             password = request.form.get('Password')
             hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
-            # data = UserDetails(first_name, last_name, email, password, 'NULL', 'NULL', 'NULL', 3)
-            # db.session.add(data)
-            # db.session.commit()
+            
+            data = UserDetails(firstname=first_name, surname=last_name, email=email, password=hashed_password)
+            #Need to implement checker if email has already been written
+            db.session.add(data)
+            db.session.commit()
+            #Have to flash message that you have signed in
             return render_template("New_Logbook_template.html",
                                 first_name = first_name,
                                 last_name = last_name,
-                                email = email,
+                                email = email, #
                                 password = hashed_password)
+
         elif "update_details_form" in request.form:
             phone_number = request.form.get('phone_number')
             dob = request.form.get('dob')
@@ -93,6 +154,9 @@ def logbookview():
             gp_code = request.form.get('gp_code')
             gp_phone_number = request.form.get('gp_phone_number')
             gp_address = request.form.get('gp_address')
+
+            #This is a roundabout method, realistically:
+            #Pull from the user's database, then render everything based on that, not get it straight from the form
             return render_template("New_Logbook_template.html",
                                    phone_number = phone_number,
                                    dob = dob,
@@ -103,11 +167,11 @@ def logbookview():
                                    gp_phone_number = gp_phone_number,
                                    gp_address = gp_address)
 
+    return(render_template("Initial_Page.html"))
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
     return render_template('Update_Details.html')
-
 
 @bp.route('/test')
 def index():
@@ -131,6 +195,7 @@ def submit():
         return render_template('test.html', message='You have already submitted')
 
 app = create_app()
+db.init_app(app)
 bcrypt = Bcrypt(app)
 
 if __name__ == "__main__":
