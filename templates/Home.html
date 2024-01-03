@@ -115,7 +115,7 @@
 	#Repeat_Grid_2 {
 		position: absolute;
 		width: 260px;
-		height: 330px;
+		height: 400px;
 		left: 32px;
 		top: 234px;
 		overflow: hidden;
@@ -344,6 +344,35 @@
 		font-size: 22px;
 		color: rgba(255,255,255,1);
 	}
+
+	#Group_Logout {
+		position: absolute;
+		width: 208px;
+		height: 26px;
+		left: 262px;
+		top: 348px;
+		overflow: visible;
+	}
+	#Logout {
+		left: 13px;
+		top: 320px;
+		position: absolute;
+		overflow: visible;
+		width: 209px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		cursor: pointer;
+		color: rgba(255,255,255,1);
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: logout;
+
+	}
+
 	#Resources_ {
 		left: 400px;
 		top: 895px;
@@ -3648,6 +3677,11 @@ window.application = new Application();
 		<div id="Group_bj" class="">
 			<div id="Asthma_Information_bk">
 				<span>Asthma Information</span>
+			</div>
+		</div>
+		<div id="Group_logout" class="">
+			<div onclick="application.goToTargetView(event)" id="Logout">
+				<span>Logout</span>
 			</div>
 		</div>
 	</div>

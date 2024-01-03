@@ -120,19 +120,35 @@ def loginview():
 ### Creating a login_post route to handle login logic and re-routing ###
 @bp.route("/login", methods=['POST'])
 def loginpost():
-    email = request.form.get('Email_Address')
+    Email = request.form.get('Email')
     password = request.form.get('Password')
-    # user = UserDetails.query.first()
-    user = db.session.query(UserDetails).filter(UserDetails.email==email).first()
-    pswrd = bcrypt.check_password_hash(db.session.query(UserDetails).first().password, password)
+ 
+    # Boolean check if they have an account in the database
+    exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
 
-    if not user or not pswrd:
+    # If they do not have an account - redirect to sign-up
+    if not exists:
+        return redirect("/signup")
+    
+    # Obtain record
+    record = db.session.query(UserDetails).filter_by(email=Email).first()
+    
+    # Boolean check if password is correct
+    pswrd = bcrypt.check_password_hash(record.password, password)
+
+    # If they use an incorrect password - redirect to try again
+    if not pswrd:
         return redirect("/login")
-        
+
+    # All checks passed - create user session and redirect to home page
+    session['logged_in'] = True
     return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
+    if not session.get('logged_in'):
+        return "you are not logged in silly :3"
+
     # This differentiates between the POST requests from signing up and updating the extra details form
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
@@ -213,7 +229,11 @@ def logbookview():
     #                                gp_phone_number = gp_phone_number,
     #                                gp_address = gp_address)
 
+<<<<<<< HEAD
     # return(render_template("New_Logbook_template.html"))
+=======
+    return(render_template("New_Logbook_template.html"))
+>>>>>>> FormImplementation
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
@@ -222,6 +242,11 @@ def updateview():
 @bp.route('/test')
 def index():
     return render_template('test.html')
+
+@bp.route('/logout')
+def logoutview():
+    session.pop('logged_in', None)
+    return redirect("/")
 
 # @bp.route('/submit', methods=['POST'])
 # def submit():
