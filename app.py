@@ -123,7 +123,7 @@ def loginpost():
     email = request.form.get('Email_Address')
     password = request.form.get('Password')
     # user = UserDetails.query.first()
-    user = db.session.query(UserDetails).filter_by(email=email).first()
+    user = db.session.query(UserDetails).filter(UserDetails.email==email).first()
     pswrd = bcrypt.check_password_hash(db.session.query(UserDetails).first().password, password)
 
     if not user or not pswrd:
