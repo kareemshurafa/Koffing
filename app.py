@@ -137,49 +137,82 @@ def logbookview():
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     
-    if request.method == 'POST':
-        if "sign_up_form" in request.form:  
-            print(request.form)
-            first_name = request.form.get('First_name')
-            last_name = request.form.get('Last_name')
-            email = request.form.get('Email_Address')
-            password = request.form.get('Password')
-            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
+    tester = db.session.query(UserDetails).filter_by(email="test@gmail.com").first()
+    name = tester.firstname
+    surname = tester.surname
+    email = tester.email
+
+    phonenum = tester.phonenum
+    dob = tester.dob
+    address = tester.address
+
+    GPname = tester.GPname
+    GPsurname=tester.GPsurname
+    GPcode = tester.GPcode
+    GPaddress = tester.GPaddress
+    GPnum = tester.GPnum
+
+    #Just need to implement logic that checks consecutive submissions for each day
+    # asthmastreak
+
+    #Need to implement peak flow graph
+
+    return render_template("New_Logbook_template.html",
+                    first_name = name,
+                    surname = surname,
+                    email = email, 
+                    phonenum = phonenum,
+                    dob = dob,
+                    address = address,
+                    GPname = GPname,
+                    GPsurname = GPsurname,
+                    GPcode = GPcode,
+                    GPnum = GPnum,)
+
+
+    # if request.method == 'POST':
+    #     if "sign_up_form" in request.form:  
+    #         print(request.form)
+    #         first_name = request.form.get('First_name')
+    #         last_name = request.form.get('Last_name')
+    #         email = request.form.get('Email_Address')
+    #         password = request.form.get('Password')
+    #         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
             
-            data = UserDetails(firstname=first_name, surname=last_name, email=email, password=hashed_password)
-            #Need to implement checker if email has already been written
-            db.session.add(data)
-            db.session.commit()
-            #Have to flash message that you have signed in
-            return render_template("New_Logbook_template.html",
-                                first_name = first_name,
-                                last_name = last_name,
-                                email = email, #
-                                password = hashed_password)
+    #         data = UserDetails(firstname=first_name, surname=last_name, email=email, password=hashed_password)
+    #         #Need to implement checker if email has already been written
+    #         db.session.add(data)
+    #         db.session.commit()
+    #         #Have to flash message that you have signed in
+    #         return render_template("New_Logbook_template.html",
+    #                             first_name = first_name,
+    #                             last_name = last_name,
+    #                             email = email, #
+    #                             password = hashed_password)
 
-        elif "update_details_form" in request.form:
-            phone_number = request.form.get('phone_number')
-            dob = request.form.get('dob')
-            address = request.form.get('address')
-            gp_name = request.form.get('gp_name')
-            gp_surname = request.form.get('gp_surname')
-            gp_code = request.form.get('gp_code')
-            gp_phone_number = request.form.get('gp_phone_number')
-            gp_address = request.form.get('gp_address')
+    #     elif "update_details_form" in request.form:
+    #         phone_number = request.form.get('phone_number')
+    #         dob = request.form.get('dob')
+    #         address = request.form.get('address')
+    #         gp_name = request.form.get('gp_name')
+    #         gp_surname = request.form.get('gp_surname')
+    #         gp_code = request.form.get('gp_code')
+    #         gp_phone_number = request.form.get('gp_phone_number')
+    #         gp_address = request.form.get('gp_address')
 
-            #This is a roundabout method, realistically:
-            #Pull from the user's database, then render everything based on that, not get it straight from the form
-            return render_template("New_Logbook_template.html",
-                                   phone_number = phone_number,
-                                   dob = dob,
-                                   address = address,
-                                   gp_name = gp_name,
-                                   gp_surname = gp_surname,
-                                   gp_code = gp_code,
-                                   gp_phone_number = gp_phone_number,
-                                   gp_address = gp_address)
+    #         #This is a roundabout method, realistically:
+    #         #Pull from the user's database, then render everything based on that, not get it straight from the form
+    #         return render_template("New_Logbook_template.html",
+    #                                phone_number = phone_number,
+    #                                dob = dob,
+    #                                address = address,
+    #                                gp_name = gp_name,
+    #                                gp_surname = gp_surname,
+    #                                gp_code = gp_code,
+    #                                gp_phone_number = gp_phone_number,
+    #                                gp_address = gp_address)
 
-    return(render_template("Initial_Page.html"))
+    # return(render_template("New_Logbook_template.html"))
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
