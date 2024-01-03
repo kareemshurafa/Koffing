@@ -120,15 +120,27 @@ def loginview():
 ### Creating a login_post route to handle login logic and re-routing ###
 @bp.route("/login", methods=['POST'])
 def loginpost():
-    email = request.form.get('Email_Address')
+    Email = request.form.get('Email')
     password = request.form.get('Password')
-    # user = UserDetails.query.first()
-    user = db.session.query(UserDetails).filter(UserDetails.email==email).first()
-    pswrd = bcrypt.check_password_hash(db.session.query(UserDetails).first().password, password)
+ 
+    # Boolean check if they have an account in the database
+    exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
 
-    if not user or not pswrd:
+    # If they do not have an account - redirect to sign-up
+    if not exists:
+        return redirect("/signup")
+    
+    # Obtain record
+    record = db.session.query(UserDetails).filter_by(email=Email).first()
+    
+    # Boolean check if password is correct
+    pswrd = bcrypt.check_password_hash(record.password, password)
+
+    # If they use an incorrect password - redirect to try again
+    if not pswrd:
         return redirect("/login")
-        
+
+    # Email and Password checks correct
     return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
