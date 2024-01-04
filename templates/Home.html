@@ -721,10 +721,10 @@
 	}
 
 	#Puff_button {
-		left: 1300px;
-		top: 726px;
+		left: 830px;
+		top: 750px;
 		position: absolute;
-		width: 400px;
+		width: 900px;
 		height: 80px;
 		text-align: center;
 		font-family: Adobe Clean;
@@ -738,8 +738,8 @@
 	}
 
 	#Date_taken {
-		left: 725px;
-		top: 525px;
+		left: 675px;
+		top: 508px;
 		position: absolute;
 		width: 300px;
 		height: 60px;
@@ -747,7 +747,7 @@
 		font-family: Adobe Clean;
 		font-style: normal;
 		font-weight: bold;
-		font-size: 40px;
+		font-size: 30px;
 		color: rgba(70,69,69,1);
 		border-radius: 20px;
 		border-color: black;
@@ -755,32 +755,160 @@
 	}
 
 	#Date_taken_label{
-		left: 500px;
-		top: 525px;
+		left: 455px;
+		top: 515px;
 		position: absolute;
 		text-align: center;
 		font-family: Adobe Clean;
 		font-style: normal;
 		font-weight: bold;
-		font-size: 40px;
+		font-size: 35px;
 		color: rgba(70,69,69,1);
 	}
 	
 	#Time_taken {
-		left: 1000px;
-		top: 550px;
+		left: 1280px;
+		top: 508px;
 		position: absolute;
-		width: 400px;
-		height: 80px;
+		width: 300px;
+		height: 60px;
 		text-align: center;
 		font-family: Adobe Clean;
 		font-style: normal;
 		font-weight: bold;
-		font-size: 50px;
+		font-size: 30px;
 		color: rgba(70,69,69,1);
 		border-radius: 20px;
 		border-color: black;
 		background-color: white;
+	}
+
+	#Time_taken_label {
+		left: 1050px;
+		top: 515px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+
+	#Inhaler_type{
+		left: 455px;
+		top: 650px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Inhaler_type_label{
+		left: 455px;
+		top: 600px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+	
+	#Number_of_puffs{
+		left: 830px;
+		top: 650px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Number_of_puffs_label{
+		left: 830px;
+		top: 600px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+
+	#Dosage{
+		left: 1230px;
+		top: 650px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Dosage_label{
+		left: 1200px;
+		top: 600px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+
+	#Medname{
+		left: 455px;
+		top: 780px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+	
+	#Medname_label{
+		left: 455px;
+		top: 725px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
 	}
 </style>
 <script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
@@ -3855,8 +3983,24 @@ window.application = new Application();
 		<label for="Date_taken" id="Date_taken_label">Date Taken:</label>
 		<input id="Date_taken" type="date" name="Date_taken">
 
-		<label for="Time_taken" id="Time_taken">Time Taken:</label>
+		<label for="Time_taken" id="Time_taken_label">Time Taken:</label>
 		<input id="Time_taken" type="time" name="Time_taken">
+
+		<label for="Inhaler_type" id="Inhaler_type_label">Type of inhaler:</label>
+		<select id="Inhaler_type" name="Inhaler_type">
+			<option value="Reliever">Reliever</option>
+			<option value="Long-acting">Long-acting</option>
+			<option value="Combination">Combination</option>
+		</select>
+
+		<label for="Number_of_puffs" id="Number_of_puffs_label">Number of puffs:</label>
+		<input id="Number_of_puffs" type="number" name="Number_of_puffs">
+
+		<label for="Dosage" id="Dosage_label">Dosage amount (mg):</label>
+		<input id="Dosage" type="number" name="Dosage">
+
+		<label for="Medname" id="Medname_label">Inhaler name:</label>
+		<input id="Medname" type="text" name="Medname">
 
 		<button id="Puff_button" type="button" onclick="alert('Puff Taken!')">Puff!</button>
 	</form>
