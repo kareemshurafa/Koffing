@@ -521,7 +521,29 @@
     font-weight: bold;
     font-size: 30px;
     color: rgba(0,0,0,1);
+
+	
 }
+
+#Submit { /* Added in this CSS for the submit button for testing */
+		left: 75%;
+		top: 68% ;
+		position: absolute;
+		overflow: visible;
+		width: 249px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: italic;
+		font-weight: normal;
+		font-size: 35px;
+		color: rgba(0,0,0,1);
+		background-color: transparent; 
+		border-width: 0px;
+		border: none;
+		outline: none;
+		width: 503.851px;
+	}
 
 </style>
 
@@ -3559,9 +3581,12 @@ window.application = new Application();
 		<span>I accept the Terms of Use & Privacy Policy</span>
 	</div>
 </div>
-<div class="terms-checkbox-container">
+<!-- <div class="terms-checkbox-container">
     <input type="checkbox" id="accept-terms" name="accept-terms" class="terms-checkbox" required>
     <label for="accept-terms">I accept the Terms of Use & Privacy Policy</label>
+</div> -->
+<div>
+	<input type="submit" value="Submit" id="Submit" name="sign_up_form">
 </div>
 </body>
 </html>

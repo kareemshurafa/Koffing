@@ -293,7 +293,7 @@
 		top: 3.009px;
 		transform: matrix(1,0,0,1,0,0);
 	}
-	#Email_AddressUsername {
+	#Email_Address{
 		fill: transparent;
 		left: 0px;
 		top: 3px;
@@ -3489,7 +3489,7 @@ window.application = new Application();
 
 
 	<!-- Creating form for signup -->
-	<form action="/home" method ="POST">
+	<form action="/login" method ="POST">
 	<div id="Welcome_Back_please_log_in">
 		<span>Welcome Back, please log in</span>
 	</div>
@@ -3506,8 +3506,8 @@ window.application = new Application();
 
 	<div id="Component_23__1" class="Component_23___1">
 		<div id="Email">
-			<div id="Email_AddressUsername">
-				<input type="email" id="Email_AddressUsername" name="Email" placeholder="Email Address"> 
+			<div id="Email_Address">
+				<input type="email" id="Email_Address" name="Email" placeholder="Email Address"> 
 			</div>
 			<div id="check">
 				<svg class="Path_11" viewBox="3 2.991 30 30.002">
@@ -3578,10 +3578,10 @@ window.application = new Application();
 		    loginButton.addEventListener('mouseover', function() {
 		        this.style.cursor = 'pointer';
 		    });
-		    loginButton.addEventListener('click', function() {
-		        window.location.href = 'home'; // Assuming 'Home – 1.html' is the correct path
+		    // loginButton.addEventListener('click', function() {
+		    //     window.location.href = 'home'; // Assuming 'Home – 1.html' is the correct path
 				
-		    });
+		    // });
 		});
 		document.addEventListener('DOMContentLoaded', function() {
     var loginButton = document.getElementById('Forgot_Password'); // Removed the '#' prefix

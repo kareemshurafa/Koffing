@@ -1,15 +1,18 @@
-from flask import Flask, render_template,request, json, url_for, Blueprint
+from flask import Flask, render_template, request, json, url_for, Blueprint, session, redirect, url_for
 import requests
 import os
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import exists
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 from datetime import datetime
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
+from flask_login import LoginManager
 import flash
 
 db=SQLAlchemy()
+login_manager = LoginManager()
 
 #--------------Models---------------------
 class UserDetails(db.Model):
@@ -109,22 +112,43 @@ def signupview():
     return render_template('Sign_up_page_template.html')
 
 ### Test on the form submission and visualisation in template ###
-@bp.route("/login", methods=['GET','POST'])
+@bp.route("/login")
 def loginview():
 #After logging in, have to m
-
-    if request.method == 'POST':
-        email = request.form.get('Email_Address')
-        password = request.form.get('Password')
-
     return render_template('Login_page_template.html')
+
+### Creating a login_post route to handle login logic and re-routing ###
+@bp.route("/login", methods=['POST'])
+def loginpost():
+    Email = request.form.get('Email')
+    password = request.form.get('Password')
+ 
+    # Boolean check if they have an account in the database
+    exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
+
+    # If they do not have an account - redirect to sign-up
+    if not exists:
+        return redirect("/signup")
+    
+    # Obtain record
+    record = db.session.query(UserDetails).filter_by(email=Email).first()
+    
+    # Boolean check if password is correct
+    pswrd = bcrypt.check_password_hash(record.password, password)
+
+    # If they use an incorrect password - redirect to try again
+    if not pswrd:
+        return redirect("/login")
+
+    # All checks passed - create user session and redirect to home page
+    # session['logged_in'] = True
+    # return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
-    # This differentiates between the POST requests from signing up and updating the extra details form
-    # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
-    # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
-    
+#     if not session.get('logged_in'):
+#         return "you are not logged in"
+
     if request.method == 'POST':
         if "sign_up_form" in request.form:  
             print(request.form)
@@ -177,26 +201,32 @@ def updateview():
 def index():
     return render_template('test.html')
 
-@bp.route('/submit', methods=['POST'])
-def submit():
-    if request.method == 'POST':
-        name = request.form['name']
-        inhaler = request.form['inhaler']
-        # print(name,inhaler)
-        if name =='' or inhaler=='':
-            return render_template('test.html', message='Please enter required fields')
+# @bp.route('/logout')
+# def logoutview():
+#     session.pop('logged_in', None)
+#     return redirect("/")
 
-        if db.session.query(TestModel).filter(TestModel.name == name).count() == 0:
-             #Says that the customer does not exist
-            data = TestModel(name,inhaler) #Form data that we want to submit
-            db.session.add(data)
-            db.session.commit()
-            return "<h2 style='color:red'>Yipee!</h2>"
-        return render_template('test.html', message='You have already submitted')
+# @bp.route('/submit', methods=['POST'])
+# def submit():
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         inhaler = request.form['inhaler']
+#         # print(name,inhaler)
+#         if name =='' or inhaler=='':
+#             return render_template('test.html', message='Please enter required fields')
+
+#         if db.session.query(TestModel).filter(TestModel.name == name).count() == 0:
+#              #Says that the customer does not exist
+#             data = TestModel(name,inhaler) #Form data that we want to submit
+#             db.session.add(data)
+#             db.session.commit()
+#             return "<h2 style='color:red'>Yipee!</h2>"
+#         return render_template('test.html', message='You have already submitted')
 
 app = create_app()
 db.init_app(app)
 bcrypt = Bcrypt(app)
+app.secret_key = b'8dh3w90fph#3r'
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
