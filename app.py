@@ -131,7 +131,6 @@ def loginpost():
         return redirect("/signup")
     
     # Obtain record
-    global record
     record = db.session.query(UserDetails).filter_by(email=Email).first()
     
     # Boolean check if password is correct
@@ -142,13 +141,13 @@ def loginpost():
         return redirect("/login")
 
     # All checks passed - create user session and redirect to home page
-    session['logged_in'] = True
-    return redirect("/home")
+    # session['logged_in'] = True
+    # return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
-    if not session.get('logged_in'):
-        return "you are not logged in"
+#     if not session.get('logged_in'):
+#         return "you are not logged in"
 
     if request.method == 'POST':
         if "sign_up_form" in request.form:  
@@ -192,7 +191,7 @@ def logbookview():
                                    gp_phone_number = gp_phone_number,
                                    gp_address = gp_address)
 
-    return(render_template("New_Logbook_template.html", first_name = record.firstname))
+    return(render_template("New_Logbook_template.html"))
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
@@ -202,10 +201,10 @@ def updateview():
 def index():
     return render_template('test.html')
 
-@bp.route('/logout')
-def logoutview():
-    session.pop('logged_in', None)
-    return redirect("/")
+# @bp.route('/logout')
+# def logoutview():
+#     session.pop('logged_in', None)
+#     return redirect("/")
 
 # @bp.route('/submit', methods=['POST'])
 # def submit():
