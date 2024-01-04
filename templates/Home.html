@@ -719,6 +719,69 @@
 		font-size: 27px;
 		color: rgba(70,69,69,1);
 	}
+
+	#Puff_button {
+		left: 1300px;
+		top: 726px;
+		position: absolute;
+		width: 400px;
+		height: 80px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 50px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Date_taken {
+		left: 725px;
+		top: 525px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 40px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Date_taken_label{
+		left: 500px;
+		top: 525px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 40px;
+		color: rgba(70,69,69,1);
+	}
+	
+	#Time_taken {
+		left: 1000px;
+		top: 550px;
+		position: absolute;
+		width: 400px;
+		height: 80px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 50px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
 </style>
 <script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
 <script id="applicationScript">
@@ -3785,8 +3848,18 @@ window.application = new Application();
 	<img id="Asthma-Attack-Symptoms-and-Fir" src="Asthma-Attack-Symptoms-and-Fir.png" srcset="Asthma-Attack-Symptoms-and-Fir.png 1x, Asthma-Attack-Symptoms-and-Fir@2x.png 2x">
 		
 	<div id="My_Inhaler_Information_">
-		<span>My Inhaler Information </span>
+		<span>My Inhaler Information</span>
 	</div>
+	<!-- Adding in Puff button functionality-->
+	<form>
+		<label for="Date_taken" id="Date_taken_label">Date Taken:</label>
+		<input id="Date_taken" type="date" name="Date_taken">
+
+		<label for="Time_taken" id="Time_taken">Time Taken:</label>
+		<input id="Time_taken" type="time" name="Time_taken">
+
+		<button id="Puff_button" type="button" onclick="alert('Puff Taken!')">Puff!</button>
+	</form>
 	<div id="Settings__">
 		<span>Settings </span><br/>
 	</div>
