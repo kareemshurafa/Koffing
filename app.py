@@ -167,7 +167,7 @@ def logbookview():
                                    gp_phone_number = gp_phone_number,
                                    gp_address = gp_address)
 
-    return(render_template("Initial_Page.html"))
+    return(render_template("New_Logbook_template.html"))
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
