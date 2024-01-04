@@ -131,6 +131,7 @@ def loginpost():
         return redirect("/signup")
     
     # Obtain record
+    global record
     record = db.session.query(UserDetails).filter_by(email=Email).first()
     
     # Boolean check if password is correct
@@ -153,8 +154,8 @@ def logbookview():
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     
-    tester = db.session.query(UserDetails).filter_by(email="test@gmail.com").first()
-    print(tester.id)
+    tester=record
+    # tester = db.session.query(UserDetails).filter_by(email="test@gmail.com").first()
     name = tester.firstname
     surname = tester.surname
     email = tester.email
@@ -229,11 +230,7 @@ def logbookview():
     #                                gp_phone_number = gp_phone_number,
     #                                gp_address = gp_address)
 
-<<<<<<< HEAD
     # return(render_template("New_Logbook_template.html"))
-=======
-    return(render_template("New_Logbook_template.html"))
->>>>>>> FormImplementation
 
 @bp.route("/update", methods = ['GET', 'POST'])
 def updateview():
