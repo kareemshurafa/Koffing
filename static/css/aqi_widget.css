@@ -1,11 +1,15 @@
 .aqi-widget {
-  width: 200px;
+  width: 250px;
   border-radius: 20px;
   padding: 15px;
   color: white;
   font-family: Arial, sans-serif;
   margin: 10px;
   display: inline-block;
+  position: absolute;
+  left: 703px;
+  top: 50px;
+  background-color: gray;
 }
 .aqi-header {
   font-size: 14px;

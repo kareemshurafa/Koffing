@@ -63,17 +63,6 @@ function addParametersToURL(url, params) {
 }
 //--End of Reference--//
 
-
-// //Map InfoWindow Widget layout
-// const infoContent = '<div class="aqi-widget" id="aqiWidget">'+
-// '<div class="aqi-header">AIR QUALITY</div>'+
-// '<div class="aqi-level" id="aqiLevel"></div>'+
-// '<div class="aqi-value" id="aqiValue"></div>'+
-// '<div class="aqi-location" id="aqiLocation"></div>'+
-// '<div class="aqi-update-time" id="aqiUpdateTime"></div>'+
-// '</div>';
-
-
 // Initialise Google Map with AQI info
 async function initMap() {
       // Create the search box and link it to the UI element.

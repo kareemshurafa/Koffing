@@ -480,8 +480,6 @@
 	}
 	#Rectangle_67_bw {
 		fill: rgba(231,240,252,1);
-	}
-	.Rectangle_67_bw {
 		position: absolute;
 		overflow: visible;
 		width: 491px;
@@ -627,19 +625,42 @@
 		top: 496px;
 		transform: matrix(1,0,0,1,0,0);
 	}
-	#Widget_API {
-		left: 1337px;
-		top: 199px;
+	.aqi-widget {
+		width: 250px;
+		border-radius: 20px;
+		padding: 15px;
+		color: white;
+		font-family: Arial, sans-serif;
+		margin: 10px;
+		display: inline-block;
 		position: absolute;
-		overflow: visible;
-		width: 163px;
-		white-space: nowrap;
-		text-align: left;
-		font-family: Adobe Clean;
-		font-style: normal;
+		left: 703px;
+		top: 50px;
+		background-color: gray;
+	}
+	.aqi-header {
+		font-size: 14px;
 		font-weight: bold;
-		font-size: 35px;
-		color: rgba(0,0,0,1);
+		color: black;
+	}
+	.aqi-level {
+		font-size: 24px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-value {
+		font-size: 36px;
+		font-weight: bold;
+		color: black
+	}
+	.aqi-location {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-update-time {
+		font-size: 12px;
+		color: black
 	}
 	#In_case_of_an_emergency_ {
 		left: 1347px;
@@ -670,7 +691,10 @@
 		color: rgba(70,69,69,1);
 	}
 </style>
+<script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
 <script id="applicationScript">
+
+
 ///////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////
@@ -3684,11 +3708,39 @@ window.application = new Application();
 			<rect id="Rectangle_70" rx="26" ry="26" x="0" y="0" width="52" height="53">
 			</rect>
 		</svg>
-		<svg class="Rectangle_67_bw">
-			<rect id="Rectangle_67_bw" rx="98" ry="98" x="0" y="0" width="491" height="300">
-			</rect>
-		</svg>
+		
+		<div class="aqi-widget" id="aqiWidget">
+				<div class="aqi-header">AIR QUALITY</div>
+				<div class="aqi-level" id="aqiLevel"></div>
+				<div class="aqi-value" id="aqiValue"></div>
+				<div class="aqi-location" id="aqiLocation"></div>
+				<div class="aqi-update-time" id="aqiUpdateTime"></div>
+		</div>
+		
 	</div>
+
+	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
+	<script>
+			async function postData(url = "", data = {}, mode) {
+				// Default options are marked with *
+				try{
+				const response = await fetch(url, {
+					method: mode, // *GET, POST, PUT, DELETE, etc.
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(data), // body data type must match "Content-Type" header
+					});
+					// console.log(JSON.stringify(data))
+					return response.json(); // parses JSON response into native JavaScript objects
+				} catch (error) {
+					console.error('Error fetching data:', error);
+				}
+			};
+			const currLoc = {location:{latitude: 51.498356, longitude: -0.176894}};
+			const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+			postData(AQInfo_URL, currLoc, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
+	</script>
 	<div id="Have_you_taken_your__medicatio">
 		<span>Have you taken your <br/>medication today?</span>
 	</div>
@@ -3720,9 +3772,8 @@ window.application = new Application();
 		<path id="Line_21" d="M 0 0 L 1288 0">
 		</path>
 	</svg>
-	<div id="Widget_API">
-		<span>Widget API</span>
-	</div>
+	
+	
 	<div id="In_case_of_an_emergency_">
 		<span>In case of an emergency:</span><br/>
 	</div>
