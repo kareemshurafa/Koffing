@@ -85,7 +85,9 @@ export async function aqiChart(lat, long) {
         data: data,
         options: {
             scales: {
-                y: { beginAtZero: true },
+                y: { beginAtZero: true,
+                    max: 100
+                },
                 // Uncomment and configure x-axis if needed
             },
             elements: { point: { radius: 0 } },
