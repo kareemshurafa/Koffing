@@ -34,6 +34,9 @@ class UserDetails(db.Model):
     GPaddress = db.Column(db.String(200), nullable = True)
     GPnum = db.Column(db.Integer(),nullable=True) 
 
+    latitude = db.Column(db.Float(), nullable = True)
+    longitude = db.Column(db.Float(), nullable = True)
+
     #Creating a one-to-many relationship to puffhistory
         #backref - gives email when puff.email is called
         #lazy = True - load the data as necessary 
@@ -64,7 +67,7 @@ class PuffHistory(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
 
-# db.create_all()
+
 
 #----------------------------------------------------------
 
@@ -266,6 +269,8 @@ app = create_app()
 db.init_app(app)
 bcrypt = Bcrypt(app)
 app.secret_key = b'8dh3w90fph#3r'
+# with app.app_context():
+#     db.create_all()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
