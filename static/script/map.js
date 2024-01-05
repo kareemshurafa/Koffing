@@ -63,17 +63,6 @@ function addParametersToURL(url, params) {
 }
 //--End of Reference--//
 
-
-// //Map InfoWindow Widget layout
-// const infoContent = '<div class="aqi-widget" id="aqiWidget">'+
-// '<div class="aqi-header">AIR QUALITY</div>'+
-// '<div class="aqi-level" id="aqiLevel"></div>'+
-// '<div class="aqi-value" id="aqiValue"></div>'+
-// '<div class="aqi-location" id="aqiLocation"></div>'+
-// '<div class="aqi-update-time" id="aqiUpdateTime"></div>'+
-// '</div>';
-
-
 // Initialise Google Map with AQI info
 async function initMap() {
       // Create the search box and link it to the UI element.
@@ -94,9 +83,9 @@ async function initMap() {
     const input = document.getElementById("search-box");
     const searchBox = new google.maps.places.SearchBox(input);
     // Create the initial InfoWindow.
-    let infoWindow = new google.maps.InfoWindow({  
-        // content: infoContent,
+    let marker = new google.maps.Marker({  
         position: location,
+        map: map,
     });
 
     
@@ -105,22 +94,25 @@ async function initMap() {
     postData(getAQInfo, dataLoc, "POST").then((data) => {
         const outputData = data.indexes[0];
         outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-        infoWindow.setContent(JSON.stringify(outputData));        
+        // infoWindow.setContent(JSON.stringify(outputData));        
         updateWidget(data, location.lat, location.lng);
     });
     // Get Historical AQI data from import function
     aqiChart(location.lat, location.lng);
 
-    
-    infoWindow.open(map);
+
 
     searchBox.addListener("places_changed", () =>{
         const places = searchBox.getPlaces();
         let lat = places[0].geometry.location.lat();
-        let lng = places[0].geometry.location.lng()
-        infoWindow.close();
-        infoWindow = new google.maps.InfoWindow({
+        let lng = places[0].geometry.location.lng();
+        map.setCenter({lat: lat, lng:lng});
+        // Removes and add new marker
+        marker.setMap(null);
+        marker = null;
+        marker = new google.maps.Marker({
             position: { lat: lat, lng: lng},
+            map: map,
         });
         const location = {
             latitude: lat,
@@ -132,21 +124,23 @@ async function initMap() {
         postData(getAQInfo, dataLoc,"POST").then((data) => {
             const outputData = data.indexes[0];
             // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-            infoWindow.setContent(JSON.stringify(outputData));
+            // infoWindow.setContent(JSON.stringify(outputData));
             updateWidget(data, location.latitude, location.longitude);
         });
         
-        infoWindow.open(map);
+        // infoWindow.open(map);
         aqiChart(location.latitude, location.longitude);        
     });
     // Configure the click listener.
     map.addListener("click", (mapsMouseEvent) => {
-      // Close the current InfoWindow.
-        infoWindow.close();
-        // Create a new InfoWindow.
-        infoWindow = new google.maps.InfoWindow({
+        // Removes and add new marker
+        marker.setMap(null);
+        marker = null;
+        marker = new google.maps.Marker({
             position: mapsMouseEvent.latLng,
+            map: map
         });
+        
         let newLoc = mapsMouseEvent.latLng.toJSON();
 
         const {lat, lng} = newLoc;
@@ -160,18 +154,19 @@ async function initMap() {
         postData(getAQInfo, dataLoc,"POST").then((data) => {
             const outputData = data.indexes[0];
             // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-            infoWindow.setContent(JSON.stringify(outputData));
+            // infoWindow.setContent(JSON.stringify(outputData));
             updateWidget(data, location.latitude, location.longitude);
         });
         
-        infoWindow.open(map);
+        // infoWindow.open(map);
         aqiChart(location.latitude, location.longitude);
         });
         
         
 
-    let airQualityOverlayVisible = false; // Initial state of heatmap (OFF)
+    let airQualityOverlayVisible = true; // Initial state of heatmap (ON)
     const airQualitymap = new AirQualityHeatmap(new google.maps.Size(256, 256));
+    map.overlayMapTypes.insertAt(0, airQualitymap);
     
     //Create Heatmap Toggle Button
     var toggleButton = document.createElement('button');
