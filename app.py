@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exists
 from flask_bcrypt import Bcrypt
 from datetime import datetime
-from datetime import datetime
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_login import LoginManager
@@ -40,29 +39,29 @@ class UserDetails(db.Model):
         #backref - gives email when puff.email is called
         #lazy = True - load the data as necessary 
     asthmapuffs = db.relationship('PuffHistory',backref='UserDetails',lazy=True)
-    asthmadetails = db.relationship('AsthmaDetails',backref='UserDetails',lazy=True)
 
-class AsthmaDetails(db.Model):
-    __tablename__ = 'AsthmaDetails'
-    id = db.Column(db.Integer,primary_key = True)
-    asthmastep = db.Column(db.String(50),nullable=True)
-    actscore = db.Column(db.String(50),nullable=True)
-    peakflowvar =  db.Column(db.String(50),nullable=True)
-    fev1 = db.Column(db.String(50),nullable=True)
-    fevsratio = db.Column(db.String(50),nullable=True)
-    peakflowreading = db.Column(db.String(50),nullable=True)
+# class AsthmaDetails(db.Model):
+#     __tablename__ = 'AsthmaDetails'
+#     id = db.Column(db.Integer,primary_key = True)
+#     asthmastep = db.Column(db.String(50),nullable=True)
+#     actscore = db.Column(db.String(50),nullable=True)
+#     peakflowvar =  db.Column(db.String(50),nullable=True)
+#     fev1 = db.Column(db.String(50),nullable=True)
+#     fevsratio = db.Column(db.String(50),nullable=True)
+#     peakflowreading = db.Column(db.String(50),nullable=True)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
+#     user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
 
 class PuffHistory(db.Model):
     __tablename__='PuffHistory'
     id = db.Column(db.Integer,primary_key = True)
     inhalertype = db.Column(db.String(40),nullable=False)
-    medname = db.Column(db.String(40),nullable=False)
+    medname = db.Column(db.String(40),nullable=True)
     dosageamt = db.Column(db.Integer,nullable=False)
     puffno = db.Column(db.Integer,nullable=False)
-    datetaken = db.Column(db.DateTime,default=datetime.utcnow)
-    timetaken = db.Column(db.DateTime,default=datetime.utcnow) #NEED TO MAKE SURE JUST TIME
+    datetaken = db.Column(db.DateTime,default=datetime.now().date())
+    timetaken = db.Column(db.DateTime,default=datetime.now().time()) #NEED TO MAKE SURE JUST TIME
+    peakflow = db.Column(db.Float,nullable=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
 
@@ -93,6 +92,12 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/home", methods=['GET','POST'])
 def home():
+    # date = request.form.get('datetaken')
+    # time = request.form.get('timetaken')
+    # inhalertype = request.form.get('inhalertype')
+    # dose = request.form.get('dose')
+    # puffno = request.form.get('puffno')
+    # peakflow = request.form.get('peakflow')
     return(render_template("Home.html"))
 
 @bp.route("/")
@@ -107,14 +112,17 @@ def initial():
 def aqiview():
     return render_template('Air_Quality_Map.html')
 
+@bp.route("/airqualitystats")
+def statsview():
+    return render_template("Air_Quality_Stats.html")
+
 @bp.route("/signup")
 def signupview():
     return render_template("Sign_up_page_template.html")
-
     
 @bp.route("/signup", methods=['POST'])
 def signuppost():
-     if request.method == 'POST':
+    if request.method == 'POST':
         name = request.form.get('First_name')
         surname = request.form.get('Last_name')
         email = request.form.get('Email_Address')
@@ -128,13 +136,21 @@ def signuppost():
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
         db.session.add(data)
         db.session.commit()
-        return redirect("/home")
+    return redirect("/login")
 
 ### Test on the form submission and visualisation in template ###
 @bp.route("/login")
 def loginview():
 #After logging in, have to m
     return render_template('Login_page_template.html')
+
+@bp.route("/asthmainfo")
+def asthmainfoview():
+    return render_template('Asthma_Info.html')
+
+@bp.route("/faq")
+def faqview():
+    return render_template("FAQPage.html")
 
 ### Creating a login_post route to handle login logic and re-routing ###
 @bp.route("/login", methods=['POST'])
@@ -173,6 +189,7 @@ def logbookview():
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     
+    record = db.session.query(UserDetails).filter_by(email="test@test.com").first()
     tester=record
     # tester = db.session.query(UserDetails).filter_by(email="test@gmail.com").first()
     name = tester.firstname
@@ -285,8 +302,8 @@ app = create_app()
 db.init_app(app)
 bcrypt = Bcrypt(app)
 app.secret_key = b'8dh3w90fph#3r'
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
