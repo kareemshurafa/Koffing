@@ -145,8 +145,8 @@ def loginpost():
         return redirect("/login")
 
     # All checks passed - create user session and redirect to home page
-    session['logged_in'] = True
-    return redirect("/home")
+    # session['logged_in'] = True
+    # return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
@@ -243,10 +243,10 @@ def updateview():
 def index():
     return render_template('test.html')
 
-@bp.route('/logout')
-def logoutview():
-    session.pop('logged_in', None)
-    return redirect("/")
+# @bp.route('/logout')
+# def logoutview():
+#     session.pop('logged_in', None)
+#     return redirect("/")
 
 # @bp.route('/submit', methods=['POST'])
 # def submit():
