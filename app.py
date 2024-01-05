@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, json, url_for, Blueprint, session, redirect, url_for
+from flask import Flask, render_template, request, json, url_for, Blueprint, session, redirect, url_for, flash
 import requests
 import os
 from flask_sqlalchemy import SQLAlchemy
@@ -9,7 +9,6 @@ from datetime import datetime
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_login import LoginManager
-import flash
 
 db=SQLAlchemy()
 login_manager = LoginManager()
@@ -67,8 +66,6 @@ class PuffHistory(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
 
-
-
 #----------------------------------------------------------
 
 def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc5e731015a768577b68f1907654be99a76127df98811@ec2-63-34-69-123.eu-west-1.compute.amazonaws.com:5432/dfuerbg1k2hvm2'):
@@ -112,7 +109,26 @@ def aqiview():
 
 @bp.route("/signup")
 def signupview():
-    return render_template('Sign_up_page_template.html')
+    return render_template("Sign_up_page_template.html")
+
+    
+@bp.route("/signup", methods=['POST'])
+def signuppost():
+     if request.method == 'POST':
+        name = request.form.get('First_name')
+        surname = request.form.get('Last_name')
+        email = request.form.get('Email_Address')
+        password = request.form.get('Password')
+        confpass = request.form.get('Confirm_Password')
+        # if password != confpass:
+        #     # return redirect("/signup")
+        #     flash("Passwords do not match!")
+        # else:
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
+        data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
+        db.session.add(data)
+        db.session.commit()
+        return redirect("/home")
 
 ### Test on the form submission and visualisation in template ###
 @bp.route("/login")
@@ -145,8 +161,8 @@ def loginpost():
         return redirect("/login")
 
     # All checks passed - create user session and redirect to home page
-    # session['logged_in'] = True
-    # return redirect("/home")
+    session['logged_in'] = True
+    return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():

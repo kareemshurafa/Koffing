@@ -526,13 +526,12 @@
 }
 
 #Submit { /* Added in this CSS for the submit button for testing */
-		left: 75%;
-		top: 68% ;
+		left: 0%;
+		top: 100% ;
 		position: absolute;
 		overflow: visible;
-		width: 249px;
 		white-space: nowrap;
-		text-align: left;
+		text-align: center;
 		font-family: Adobe Clean;
 		font-style: italic;
 		font-weight: normal;
@@ -542,7 +541,7 @@
 		border-width: 0px;
 		border: none;
 		outline: none;
-		width: 503.851px;
+		width: 362px;
 	}
 
 </style>
@@ -3501,7 +3500,7 @@ window.application = new Application();
 	</div>
 	<div id="Group_9">
 
-		<form action="/logbook" method="POST">
+		<form action="/signup" method="POST">
 			<div id="Welcome_please_sign_up">
 				<span>Welcome, please sign up</span>
 			</div>
@@ -3563,8 +3562,8 @@ window.application = new Application();
 				<rect id="Rectangle_49_bi" rx="40" ry="40" x="0" y="0" width="362" height="96">
 				</rect>
 			</svg>
-			<div id="Send_Request">
-				<span>Sign-Up</span>
+			<div id="Submit">
+				<input type="submit" value="Submit" id="Submit" name="sign_up_form">
 			</div>
 		</div>
 		<svg class="Rectangle_88">
@@ -3585,8 +3584,5 @@ window.application = new Application();
     <input type="checkbox" id="accept-terms" name="accept-terms" class="terms-checkbox" required>
     <label for="accept-terms">I accept the Terms of Use & Privacy Policy</label>
 </div> -->
-<div>
-	<input type="submit" value="Submit" id="Submit" name="sign_up_form">
-</div>
 </body>
 </html>
