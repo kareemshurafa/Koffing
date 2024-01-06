@@ -654,7 +654,7 @@
 		font-size: 22px;
 		color: rgba(255,255,255,1);
 	}
-	#London_Air_Quality_Info {
+	#Air_Quality_Info {
 		left: 45px;
 		top: 267px;
 		position: absolute;
@@ -663,7 +663,7 @@
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Air_Quality_Map.html;
+		--web-action-target: map_info;
 		cursor: pointer;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -3792,7 +3792,7 @@ window.application = new Application();
 		<div class="aqi-widget" id="aqiWidget">
 			<div class="aqi-header">AIR QUALITY</div>
 			<div class="aqi-level" id="aqiLevel"></div>
-			<div class="aqi-value" id="aqiValue"></div>
+			<div class="aqi-value" id="aqiValue">Loading Data... Please Wait</div>
 			<div class="aqi-location" id="aqiLocation"></div>
 			<div class="aqi-health" id="aqiHealthRecc"></div>
 			<div class="aqi-update-time" id="aqiUpdateTime"></div>
@@ -3928,8 +3928,8 @@ window.application = new Application();
 	<div onclick="application.goToTargetView(event)" id="Asthma_Information">
 		<span>Asthma Information</span>
 	</div>
-	<div onclick="application.goToTargetView(event)" id="London_Air_Quality_Info">
-		<span>London Air Quality Info</span>
+	<div onclick="application.goToTargetView(event)" id="Air_Quality_Info">
+		<span>Air Quality Map and Info</span>
 	</div>
 	<div onclick="application.goToTargetView(event)" id="Air_Quality_Statistics_">
 		<span>Air Quality Statistics </span>

@@ -320,7 +320,7 @@
 		font-size: 22px;
 		color: rgba(255,255,255,1);
 	}
-	#London_Air_Quality_Info {
+	#Air_Quality_Info {
 		left: 45px;
 		top: 267px;
 		position: absolute;
@@ -523,8 +523,8 @@
 </style>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js "></script>
+<script src=" https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js "></script>
 <script type="module" src="{{ url_for('static', filename='script/map.js') }}" defer></script>
 <script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
 <script id="applicationScript">
@@ -3480,8 +3480,8 @@ window.application = new Application();
 	<div onclick="application.goToTargetView(event)" id="Asthma_Information">
 		<span>Asthma Information</span>
 	</div>
-	<div id="London_Air_Quality_Info">
-		<span>London Air Quality Info</span>
+	<div id="Air_Quality_Info">
+		<span>Air Quality Map and Info</span>
 	</div>
 	<div onclick="application.goToTargetView(event)" id="Air_Quality_Statistics_">
 		<span>Air Quality Statistics </span>
@@ -3516,13 +3516,15 @@ window.application = new Application();
 	<div class="aqi-widget" id="aqiWidget">
 		<div class="aqi-header">AIR QUALITY</div>
 		<div class="aqi-level" id="aqiLevel"></div>
-		<div class="aqi-value" id="aqiValue"></div>
+		<div class="aqi-value" id="aqiValue">Loading Data... Please Wait</div>
 		<div class="aqi-location" id="aqiLocation"></div>
 		<div class="aqi-health" id="aqiHealthRecc"></div>
 		<div class="aqi-update-time" id="aqiUpdateTime"></div>
 	</div>
 	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
-	<div style="width: 1460px;left: 400px;top: 950px;position: relative;"><canvas id="acquisitions"></canvas></div>
+	<div id = "aqiChart">
+		<div style="width: 1460px;left: 400px;top: 950px;position: relative;"><canvas id="acquisitions"></canvas></div>	
+	</div>
 	<div id="Settings__">
 		<span>Settings </span><br/>
 	</div>

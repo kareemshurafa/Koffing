@@ -103,7 +103,7 @@ def initial():
 # def add_user():
 #     return(render_template("Login_page_template.html"))
 
-@bp.route("/map")
+@bp.route("/map_info")
 def aqiview():
     return render_template('Air_Quality_Map.html')
 

@@ -36,7 +36,16 @@ function addParametersToURL(url, params) {
 }
 //--End of Reference--//
 
-// function getAQI
+// Get Air Quality Data from API
+async function getAQIData(dataLoc){
+    const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+    postData(AQInfo_URL, dataLoc, "POST").then((data) => {
+        updateWidget(data, dataLoc.location.latitude, dataLoc.location.longitude);
+        
+    });
+    // Get Historical AQI data from import function
+    aqiChart(dataLoc.location.latitude, dataLoc.location.longitude);
+}
 
 // Get Heatmap according to API spec
 class AirQualityHeatmap{
@@ -76,7 +85,7 @@ async function initMap() {
 
     //Initialise map
     const map = await new google.maps.Map(document.getElementById("map"), {
-        zoom: 12,
+        zoom: 15,
         center: location,
         });
     const input = document.getElementById("search-box");
@@ -89,23 +98,14 @@ async function initMap() {
 
     
     var dataLoc = {location:{latitude: 51.498356, longitude: -0.176894}, extraComputations:"HEALTH_RECOMMENDATIONS"};
-
-    postData(AQInfo_URL, dataLoc, "POST").then((data) => {
-        // const outputData = data.indexes[0];
-        // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-        // infoWindow.setContent(JSON.stringify(outputData));        
-        updateWidget(data, location.lat, location.lng);
-    });
-    // Get Historical AQI data from import function
-    aqiChart(location.lat, location.lng);
-
-
+    getAQIData(dataLoc);
 
     searchBox.addListener("places_changed", () =>{
         const places = searchBox.getPlaces();
         let lat = places[0].geometry.location.lat();
         let lng = places[0].geometry.location.lng();
         map.setCenter({lat: lat, lng:lng});
+        map.setZoom(15);
         // Removes and add new marker
         marker.setMap(null);
         marker = null;
@@ -120,15 +120,7 @@ async function initMap() {
         
         // const extraComputations = "HEALTH_RECOMMENDATIONS";
         const dataLoc = {location, extraComputations:"HEALTH_RECOMMENDATIONS"};
-        postData(AQInfo_URL, dataLoc,"POST").then((data) => {
-            const outputData = data.indexes[0];
-            // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-            // infoWindow.setContent(JSON.stringify(outputData));
-            updateWidget(data, location.latitude, location.longitude);
-        });
-        
-        // infoWindow.open(map);
-        aqiChart(location.latitude, location.longitude);        
+        getAQIData(dataLoc);
     });
     // Configure the click listener.
     map.addListener("click", (mapsMouseEvent) => {
@@ -139,7 +131,8 @@ async function initMap() {
             position: mapsMouseEvent.latLng,
             map: map
         });
-        
+        map.setCenter(mapsMouseEvent.latLng);
+        map.setZoom(15);
         let newLoc = mapsMouseEvent.latLng.toJSON();
 
         const {lat, lng} = newLoc;
@@ -150,17 +143,11 @@ async function initMap() {
         
         // const extraComputations = "HEALTH_RECOMMENDATIONS";
         const dataLoc = {location, extraComputations:"HEALTH_RECOMMENDATIONS"};
-        postData(AQInfo_URL, dataLoc,"POST").then((data) => {
-            const outputData = data.indexes[0];
-            updateWidget(data, location.latitude, location.longitude);
-        });
+        getAQIData(dataLoc);
         
-        // infoWindow.open(map);
-        aqiChart(location.latitude, location.longitude);
-        });
-        
-        
-
+    });
+    
+    //Grab image from API
     let airQualityOverlayVisible = true; // Initial state of heatmap (ON)
     const airQualitymap = new AirQualityHeatmap(new google.maps.Size(256, 256));
     map.overlayMapTypes.insertAt(0, airQualitymap);
