@@ -22,33 +22,6 @@ async function postData(url = "", data = {}, mode) {
 }
 //--End of Reference--//
 
-// Get Heatmap according to API spec
-class AirQualityHeatmap{
-    tileSize;
-    minZoom = 0;
-    maxZoom = 16;
-    name = "Air Quality Heatmap";
-    alt = "Heatmap";
-
-    constructor(tileSize) {
-        this.tileSize = tileSize;
-    }
-    getTile(coord, zoom, ownerDocument) {
-        const div = ownerDocument.createElement('div');
-        let heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/UAQI_INDIGO_PERSIAN/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
-        let params = {};
-        params.zoom = zoom;
-        params.x = coord.x;
-        params.y = coord.y;
-        const opacity = 0.45
-
-        heatmapURl = addParametersToURL(heatmapURl, params);
-        div.innerHTML = `<img style="opacity: ${opacity}"src="${heatmapURl}" alt="Air Quality Tile">`;
-        return div;
-    };
-}
-
-
 //--(ChatGPT) Function to add parameters to the URL--//
 function addParametersToURL(url, params) {
     let urlWithParams = url;
@@ -63,17 +36,43 @@ function addParametersToURL(url, params) {
 }
 //--End of Reference--//
 
+// function getAQI
+
+// Get Heatmap according to API spec
+class AirQualityHeatmap{
+    tileSize;
+    minZoom = 0;
+    maxZoom = 16;
+    name = "Air Quality Heatmap";
+    alt = "Heatmap";
+
+    constructor(tileSize) {
+        this.tileSize = tileSize;
+    }
+    getTile(coord, zoom, ownerDocument) {
+        const div = ownerDocument.createElement('div');
+        let params = {};
+        params.zoom = zoom;
+        params.x = coord.x;
+        params.y = coord.y;
+        const opacity = 0.45
+        let heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/UAQI_INDIGO_PERSIAN/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+        heatmapURl = addParametersToURL(heatmapURl, params);
+        div.innerHTML = `<img style="opacity: ${opacity}"src="${heatmapURl}" alt="Air Quality Tile">`;
+        return div;
+    };
+}
+
+
+
+
 // Initialise Google Map with AQI info
 async function initMap() {
       // Create the search box and link it to the UI element.
 
 
     const location = { lat: 51.498356, lng: -0.176894};
-    let parameters = {}
-    const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key={api_key}"
-    parameters.api_key = "AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
-
-    let getAQInfo = addParametersToURL(AQInfo_URL, parameters);
+    const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
 
     //Initialise map
     const map = await new google.maps.Map(document.getElementById("map"), {
@@ -91,9 +90,9 @@ async function initMap() {
     
     var dataLoc = {location:{latitude: 51.498356, longitude: -0.176894}, extraComputations:"HEALTH_RECOMMENDATIONS"};
 
-    postData(getAQInfo, dataLoc, "POST").then((data) => {
-        const outputData = data.indexes[0];
-        outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
+    postData(AQInfo_URL, dataLoc, "POST").then((data) => {
+        // const outputData = data.indexes[0];
+        // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
         // infoWindow.setContent(JSON.stringify(outputData));        
         updateWidget(data, location.lat, location.lng);
     });
@@ -120,8 +119,8 @@ async function initMap() {
         };
         
         // const extraComputations = "HEALTH_RECOMMENDATIONS";
-        const dataLoc = {location};
-        postData(getAQInfo, dataLoc,"POST").then((data) => {
+        const dataLoc = {location, extraComputations:"HEALTH_RECOMMENDATIONS"};
+        postData(AQInfo_URL, dataLoc,"POST").then((data) => {
             const outputData = data.indexes[0];
             // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
             // infoWindow.setContent(JSON.stringify(outputData));
@@ -150,11 +149,9 @@ async function initMap() {
         };
         
         // const extraComputations = "HEALTH_RECOMMENDATIONS";
-        const dataLoc = {location};
-        postData(getAQInfo, dataLoc,"POST").then((data) => {
+        const dataLoc = {location, extraComputations:"HEALTH_RECOMMENDATIONS"};
+        postData(AQInfo_URL, dataLoc,"POST").then((data) => {
             const outputData = data.indexes[0];
-            // outputData.rec = data.healthRecommendations["lungDiseasePopulation"];
-            // infoWindow.setContent(JSON.stringify(outputData));
             updateWidget(data, location.latitude, location.longitude);
         });
         

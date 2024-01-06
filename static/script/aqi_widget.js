@@ -35,6 +35,7 @@ function updateWidget(data, lat, lng) {
     document.getElementById('aqiLevel').innerText = data.indexes[0].category;
     document.getElementById('aqiValue').innerText = aqiValue;
     document.getElementById('aqiUpdateTime').innerText = `Updated ${new Date(data.dateTime).toLocaleTimeString()}`;
+    document.getElementById('aqiHealthRecc').innerText = data.healthRecommendations["generalPopulation"];
     getData(locationFinder(lat, lng)).then((data) => {
         document.getElementById('aqiLocation').innerText = data.results[0].address_components[2].long_name;    
     })

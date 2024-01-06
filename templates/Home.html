@@ -333,6 +333,12 @@
 		margin: 10px 0;
 		color: black
 	}
+	.aqi-health {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black;
+		font-weight: bold;
+	}
 	.aqi-update-time {
 		font-size: 15px;
 		color: black
@@ -3788,6 +3794,7 @@ window.application = new Application();
 			<div class="aqi-level" id="aqiLevel"></div>
 			<div class="aqi-value" id="aqiValue"></div>
 			<div class="aqi-location" id="aqiLocation"></div>
+			<div class="aqi-health" id="aqiHealthRecc"></div>
 			<div class="aqi-update-time" id="aqiUpdateTime"></div>
 		</div>
 	</div>
@@ -3809,7 +3816,7 @@ window.application = new Application();
 				console.error('Error fetching data:', error);
 			}
 		};
-		const currLoc = {location:{latitude: 51.498356, longitude: -0.176894}};
+		const currLoc = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
 		const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
 		postData(AQInfo_URL, currLoc, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
 	</script>

@@ -232,8 +232,9 @@
 		left: 485px;
 		top: 199px;
 	}
+	
 	.aqi-widget {
-		width: 200px;
+		width: 300px;
 		border-radius: 20px;
 		padding: 15px;
 		color: gray;
@@ -241,8 +242,9 @@
 		margin: 10px;
 		display: inline-block;
 		position: absolute;
-		left: 1550px;
-		top: 450px;
+		left: 1520px;
+		top: 420px;
+		background-color: gray;
 	}
 	.aqi-header {
 		font-size: 14px;
@@ -263,6 +265,12 @@
 		font-size: 16px;
 		margin: 10px 0;
 		color: black
+	}
+	.aqi-health {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black;
+		font-weight: bold;
 	}
 	.aqi-update-time {
 		font-size: 12px;
@@ -290,7 +298,7 @@
 		position: absolute;
 		overflow: visible;
 		width: 359px;
-		height: 1050px;
+		height: 100%;
 		left: 0px;
 		top: 0px;
 	}
@@ -3466,7 +3474,7 @@ window.application = new Application();
 	</div>
 
 	<svg class="Rectangle_66">
-		<rect id="Rectangle_66" rx="0" ry="0" x="0" y="0" width="341" height="1032">
+		<rect id="Rectangle_66" rx="0" ry="0" x="0" y="0" width="341" height="2000">
 		</rect>
 	</svg>
 	<div onclick="application.goToTargetView(event)" id="Asthma_Information">
@@ -3510,6 +3518,7 @@ window.application = new Application();
 		<div class="aqi-level" id="aqiLevel"></div>
 		<div class="aqi-value" id="aqiValue"></div>
 		<div class="aqi-location" id="aqiLocation"></div>
+		<div class="aqi-health" id="aqiHealthRecc"></div>
 		<div class="aqi-update-time" id="aqiUpdateTime"></div>
 	</div>
 	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
