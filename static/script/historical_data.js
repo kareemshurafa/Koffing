@@ -64,50 +64,77 @@ async function updateData(lat, long) {
 
 // Exporting aqiChart as an ES6 module
 export async function aqiChart(lat, long) {
+    //Format according to Chart.JS spec
+
+    if(!currChart){
+        const config = {
+            type: 'line',
+            data: {
+                labels: 'Loading',
+                datasets: [{
+                    label: 'Historical Data is Loading... Please Wait',
+                    data: [],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true,
+                        max: 100
+                    }, 
+                },
+                elements: { point: { radius: 0 } },
+                plugins: {
+                    tooltip: { enabled: true },
+                    decimation: { enabled: true },
+                    annotation: {
+                        annotations: {
+                            line: {
+                                type: 'line',
+                                // label: {
+                                //     // backgroundColor: 'red',
+                                //     // content: 'Unhealthy',
+                                //     display: true
+                                // },
+                                yMin: 60,
+                                yMax: 60,
+                                borderWidth: 3,
+                                borderColor: 'red',
+                                position:{
+                                    x:0,
+                                    y:0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        const ctx = document.getElementById('acquisitions');
+        currChart = new Chart(ctx, config);   
+    } else {
+        // Clear the chart data before replotting
+        currChart.data.labels = []; // Clear the labels
+        currChart.data.datasets.forEach((dataset) => {
+            dataset.data = []; // Clear the data points
+            dataset.label = 'Historical Data is Loading... Please Wait';
+        });
+        currChart.update();
+    };
+
     const [aqiPoints, timeLabels] = await updateData(lat, long);
     
-    //Format according to Chart.JS spec
-    const data = {
-        labels: timeLabels,
-        datasets: [{
-            label: 'AQI',
-            data: aqiPoints,
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-        }]
-    };
-
+    // Update the chart with the new data
+    currChart.data.labels = timeLabels; // Set the new labels
+    currChart.data.datasets.forEach((dataset) => {
+        dataset.data = aqiPoints; // Set the new data points
+        dataset.label = 'Air Quality Index'; // Update the label
+    });
+    currChart.update();
     
-    //Format according to Chart.JS spec
-    const config = {
-        type: 'line',
-        data: data,
-        options: {
-            scales: {
-                y: { beginAtZero: true,
-                    max: 100
-                },
-                // Uncomment and configure x-axis if needed
-            },
-            elements: { point: { radius: 0 } },
-            plugins: {
-                tooltip: { enabled: true },
-                decimation: { enabled: true }
-            }
-        }
-    };
 
-    const ctx = document.getElementById('acquisitions');
-
-    //Check if there is chart output in Client-side
-    if (currChart){
-        currChart.data.labels = data.labels;
-        currChart.data.datasets = data.datasets;
-        currChart.update('none');
-    } else{
-        currChart = new Chart(ctx, config);
-    }
     
     return currChart
 }

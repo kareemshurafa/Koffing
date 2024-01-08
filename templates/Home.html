@@ -300,6 +300,49 @@
 		top: 234px;
 		transform: matrix(1,0,0,1,0,0);
 	}
+	.aqi-widget {
+		width: 430px;
+		border-radius: 20px;
+		padding: 15px;
+		color: white;
+		font-family: Arial, sans-serif;
+		margin: 10px;
+		display: inline-block;
+		position: absolute;
+		left: 30px;
+		top: 330px;
+		background-color: gray;
+	}
+	.aqi-header {
+		font-size: 20px;
+		font-weight: bold;
+		color: black;
+	}
+	.aqi-level {
+		font-size: 30px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-value {
+		font-size: 40px;
+		font-weight: bold;
+		color: black
+	}
+	.aqi-location {
+		font-size: 20px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-health {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black;
+		font-weight: bold;
+	}
+	.aqi-update-time {
+		font-size: 15px;
+		color: black
+	}
 	#Rectangle_81 {
 		fill: rgba(255,255,255,1);
 		stroke: rgba(112,112,112,1);
@@ -611,7 +654,7 @@
 		font-size: 22px;
 		color: rgba(255,255,255,1);
 	}
-	#London_Air_Quality_Info {
+	#Air_Quality_Info {
 		left: 45px;
 		top: 267px;
 		position: absolute;
@@ -620,7 +663,7 @@
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Air_Quality_Map.html;
+		--web-action-target: map_info;
 		cursor: pointer;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -808,6 +851,8 @@
 		transform: matrix(1,0,0,1,0,0);
 	}
 </style>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
 <script id="applicationScript">
 ///////////////////////////////////////
 // INITIALIZATION
@@ -3745,15 +3790,37 @@ window.application = new Application();
 			<path id="Path_32" d="M 98 0 L 390 0 C 444.1239013671875 0 488 43.87609100341797 488 98 L 488 135 C 488 189.1239013671875 444.1239013671875 233 390 233 L 98 233 C 43.87609100341797 233 0 189.1239013671875 0 135 L 0 98 C 0 43.87609100341797 43.87609100341797 0 98 0 Z">
 			</path>
 		</svg>
-		<svg class="Rectangle_67_">
-			<linearGradient id="Rectangle_67_" spreadMethod="pad" x1="0.5" x2="-0.052" y1="0" y2="3.274">
-				<stop offset="0" stop-color="#e7f0fc" stop-opacity="1"></stop>
-				<stop offset="1" stop-color="#74787e" stop-opacity="1"></stop>
-			</linearGradient>
-			<rect id="Rectangle_67_" rx="98" ry="98" x="0" y="0" width="491" height="300">
-			</rect>
-		</svg>
+		<div class="aqi-widget" id="aqiWidget">
+			<div class="aqi-header">AIR QUALITY</div>
+			<div class="aqi-level" id="aqiLevel"></div>
+			<div class="aqi-value" id="aqiValue">Loading Data... Please Wait</div>
+			<div class="aqi-location" id="aqiLocation"></div>
+			<div class="aqi-health" id="aqiHealthRecc"></div>
+			<div class="aqi-update-time" id="aqiUpdateTime"></div>
+		</div>
 	</div>
+	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
+	<script>
+		async function postData(url = "", data = {}, mode) {
+			// Default options are marked with *
+			try{
+			const response = await fetch(url, {
+				method: mode, // *GET, POST, PUT, DELETE, etc.
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(data), // body data type must match "Content-Type" header
+				});
+				// console.log(JSON.stringify(data))
+				return response.json(); // parses JSON response into native JavaScript objects
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+		};
+		const currLoc = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
+		const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+		postData(AQInfo_URL, currLoc, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
+	</script>
 	<div id="Have_you_taken_your__medicatio">
 		<span>Have you taken your <br/>medication today?</span>
 	</div>
@@ -3761,9 +3828,6 @@ window.application = new Application();
 		
 	<img id="Air_Pollution" src="Air_Pollution.png" srcset="Air_Pollution.png 1x, Air_Pollution@2x.png 2x">
 		
-	<div id="Widget_API">
-		<span>Widget API</span>
-	</div>
 	<div id="In_case_of_an_emergency_">
 		<span>In case of an emergency:</span><br/>
 	</div>
@@ -3865,8 +3929,8 @@ window.application = new Application();
 	<div onclick="application.goToTargetView(event)" id="Asthma_Information">
 		<span>Asthma Information</span>
 	</div>
-	<div onclick="application.goToTargetView(event)" id="London_Air_Quality_Info">
-		<span>London Air Quality Info</span>
+	<div onclick="application.goToTargetView(event)" id="Air_Quality_Info">
+		<span>Air Quality Map and Info</span>
 	</div>
 	<div onclick="application.goToTargetView(event)" id="Air_Quality_Statistics_">
 		<span>Air Quality Statistics </span>

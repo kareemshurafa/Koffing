@@ -168,7 +168,7 @@
 		top: 64px;
 		overflow: visible;
 	}
-	#London_Air_Quality_Info {
+	#Air_Quality_Info {
 		left: 0px;
 		top: 0px;
 		position: absolute;
@@ -443,7 +443,7 @@
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Air_Quality_Map.html;
+		--web-action-target: home;
 		cursor: pointer;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -465,7 +465,7 @@
 		transform: matrix(1,0,0,1,0,0);
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Air_Quality_Map.html;
+		--web-action-target: home;
 		cursor: pointer;
 	}
 	#Component_37__7 {
@@ -847,6 +847,7 @@
 		color: rgba(0,0,0,1);
 	}
 </style>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript">
 ///////////////////////////////////////
 // INITIALIZATION
@@ -3788,8 +3789,8 @@ window.application = new Application();
 			</div>
 		</div>
 		<div id="Group_ba" class="">
-			<div id="London_Air_Quality_Info">
-				<span>London Air Quality Info</span>
+			<div id="Air_Quality_Info">
+				<span>Air Quality Map and Info</span>
 			</div>
 		</div>
 		<div id="Group_bb" class="">

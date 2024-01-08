@@ -230,7 +230,7 @@
 		font-size: 22px;
 		color: rgba(255,255,255,1);
 	}
-	#London_Air_Quality_Info {
+	#Air_Quality_Info {
 		left: 45px;
 		top: 267px;
 		position: absolute;
@@ -239,7 +239,7 @@
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: map;
+		--web-action-target: map_info;
 		cursor: pointer;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -435,6 +435,7 @@
 		cursor: pointer;
 	}
 </style>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript">
 ///////////////////////////////////////
 // INITIALIZATION
@@ -3371,14 +3372,14 @@ window.application = new Application();
 	<div id="Koffing_is_a_web-based_app_tha">
 		<span>Koffing is a web-based app that offers a novel approach to asthma tracking. Our mission is to <br/>ease everyday  life of asthma sufferers and raise awareness of the disease. <br/><br/>Koffing:<br/>        •allows people with asthma to log their use of their reliever (inhaler), prompt when they need to <br/>         get a new one, and warn them if they are using it too often. <br/>        •provides details of what to do in an emergency.<br/>        •provides information about different areas of London:-<br/></span><br/>
 	</div>
-	<img id="lung" src="../static/images/lung.png">
+	<img id="lung" src="lung.png" srcset="lung.png 1x, lung@2x.png 2x">
 		
 	<div id="ASTHMA_">
 		<span>ASTHMA </span>
 	</div>
-	<img id="homespage1" src="../static/images/homespage1.png" >
+	<img id="homespage1" src="homespage1.png" srcset="homespage1.png 1x, homespage1@2x.png 2x">
 		
-	<img id="homespage2" src="../static/images/homespage2.png" >
+	<img id="homespage2" src="homespage2.png" srcset="homespage2.png 1x, homespage2@2x.png 2x">
 		
 	<svg class="Rectangle_66">
 		<rect id="Rectangle_66" rx="0" ry="0" x="0" y="0" width="341" height="1282">
@@ -3387,8 +3388,8 @@ window.application = new Application();
 	<div id="Asthma_Information">
 		<span>Asthma Information</span>
 	</div>
-	<div onclick="application.goToTargetView(event)" id="London_Air_Quality_Info">
-		<span>London Air Quality Info</span>
+	<div onclick="application.goToTargetView(event)" id="Air_Quality_Info">
+		<span>Air Quality Map and Info</span>
 	</div>
 	<div onclick="application.goToTargetView(event)" id="Air_Quality_Statistics_">
 		<span>Air Quality Statistics </span>
@@ -3402,7 +3403,7 @@ window.application = new Application();
 	<div id="Koffing">
 		<span>Koffing</span>
 	</div>
-	<img id="puffer" src="../static/images/puffer_cartoon.png">
+	<img id="puffer" src="puffer.png" srcset="puffer.png 1x, puffer@2x.png 2x">
 		
 	<svg class="Line_20" viewBox="0 0 251 1">
 		<path id="Line_20" d="M 0 0 L 251 1">
