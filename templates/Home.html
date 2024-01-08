@@ -850,6 +850,198 @@
 		top: 767.616px;
 		transform: matrix(1,0,0,1,0,0);
 	}
+
+	#Puff_button {
+		left: 1160px;
+		top: 700px;
+		position: absolute;
+		width: 640px;
+		height: 150px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 50px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Date_taken {
+		left: 1160px;
+		top: 300px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Date_taken_label{
+		left: 1160px;
+		top: 250px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+	
+	#Time_taken {
+		left: 1500px;
+		top: 300px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Time_taken_label {
+		left: 1500px;
+		top: 250px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+
+	#Inhaler_type{
+		left: 1160px;
+		top: 450px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Inhaler_type_label{
+		left: 1160px;
+		top: 390px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+	
+	#Number_of_puffs{
+		left: 1500px;
+		top: 450px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Number_of_puffs_label{
+		left: 1500px;
+		top: 390px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+
+	#Dosage{
+		left: 1160px;
+		top: 600px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+
+	#Dosage_label{
+		left: 1160px;
+		top: 540px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+
+	#Medname{
+		left: 1500px;
+		top: 600px;
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
+		background-color: white;
+	}
+	
+	#Medname_label{
+		left: 1500px;
+		top: 540px;
+		position: absolute;
+		text-align: center;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(70,69,69,1);
+	}
+
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script type="module" src="{{ url_for('static', filename='script/aqi_widget.js') }}" defer></script>
@@ -3854,78 +4046,31 @@ window.application = new Application();
 		<path id="Line_21" d="M 0 0 L 677 0">
 		</path>
 	</svg>
-	<svg class="Rectangle_81">
-		<rect id="Rectangle_81" rx="0" ry="0" x="0" y="0" width="213" height="75">
-		</rect>
-	</svg>
-	<svg class="Rectangle_82">
-		<rect id="Rectangle_82" rx="0" ry="0" x="0" y="0" width="213" height="75">
-		</rect>
-	</svg>
-	<div id="Data">
-		<span>Data</span>
-	</div>
-	<div id="Time">
-		<span>Time</span>
-	</div>
-	<div id="Component_54__1" class="Component_54___1">
-		<svg class="Rectangle_83">
-			<rect id="Rectangle_83" rx="0" ry="0" x="0" y="0" width="560" height="75">
-			</rect>
-		</svg>
-		<div id="Type_of_inhaler">
-			<span>Type of inhaler:</span>
-		</div>
-		<img id="puffer" src="puffer.png" srcset="puffer.png 1x, puffer@2x.png 2x">
-			
-		<svg class="Polygon_1" viewBox="0 0 25 22">
-			<path id="Polygon_1" d="M 12.49999904632568 0 L 25 22 L 0 22 Z">
-			</path>
-		</svg>
-	</div>
-	<div id="Component_55__1" class="Component_55___1">
-		<svg class="Rectangle_84">
-			<rect id="Rectangle_84" rx="0" ry="0" x="0" y="0" width="135" height="129">
-			</rect>
-		</svg>
-		<div id="Dose">
-			<span>Dose:</span>
-		</div>
-	</div>
-	<div id="Component_56__1" class="Component_56___1">
-		<svg class="Rectangle_85">
-			<rect id="Rectangle_85" rx="0" ry="0" x="0" y="0" width="135" height="129">
-			</rect>
-		</svg>
-		<div id="Puff_number">
-			<span>Puff number:</span>
-		</div>
-	</div>
-	<svg class="Rectangle_87_bx">
-		<linearGradient id="Rectangle_87_bx" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-			<stop offset="0" stop-color="#bbbfc1" stop-opacity="1"></stop>
-			<stop offset="1" stop-color="#5e6061" stop-opacity="1"></stop>
-		</linearGradient>
-		<rect id="Rectangle_87_bx" rx="40" ry="40" x="0" y="0" width="270" height="87">
-		</rect>
-	</svg>
-	<div id="PUFF_">
-		<span>PUFF </span>
-	</div>
-	<div id="Icon_akar-check-box" class="Icon_akar_check_box">
-		<svg class="Path_33" viewBox="4.5 4.5 60 60">
-			<path id="Path_33" d="M 17.83333396911621 4.5 L 51.16666412353516 4.5 C 58.53046417236328 4.5 64.5 10.46953678131104 64.5 17.83333015441895 L 64.5 51.16665267944336 C 64.5 58.53045654296875 58.53046417236328 64.49999237060547 51.16666412353516 64.49999237060547 L 17.83333396911621 64.49999237060547 C 10.4695348739624 64.49999237060547 4.5 58.53045654296875 4.5 51.16665267944336 L 4.5 17.83333015441895 C 4.5 10.46953678131104 10.46953868865967 4.499998092651367 17.83333587646484 4.5 Z">
-			</path>
-		</svg>
-		<svg class="Path_34" viewBox="13.5 15 40 40">
-			<path id="Path_34" d="M 13.5 35 L 28.50000190734863 55 L 53.5 15">
-			</path>
-		</svg>
-	</div>
-	<svg class="Rectangle_66">
-		<rect id="Rectangle_66" rx="0" ry="0" x="0" y="0" width="341" height="1309">
-		</rect>
-	</svg>
+	<form>
+		<label for="Date_taken" id="Date_taken_label">Date Taken:</label>
+		<input id="Date_taken" type="date" name="Date_taken">
+
+		<label for="Time_taken" id="Time_taken_label">Time Taken:</label>
+		<input id="Time_taken" type="time" name="Time_taken">
+
+		<label for="Inhaler_type" id="Inhaler_type_label">Type of inhaler:</label>
+		<select id="Inhaler_type" name="Inhaler_type">
+			<option value="Reliever">Reliever</option>
+			<option value="Long-acting">Long-acting</option>
+			<option value="Combination">Combination</option>
+		</select>
+
+		<label for="Number_of_puffs" id="Number_of_puffs_label">Number of puffs:</label>
+		<input id="Number_of_puffs" type="number" name="Number_of_puffs">
+
+		<label for="Dosage" id="Dosage_label">Dosage (mg):</label>
+		<input id="Dosage" type="number" name="Dosage">
+
+		<label for="Medname" id="Medname_label">Name (optional):</label>
+		<input id="Medname" type="text" name="Medname">
+
+		<button id="Puff_button" type="button" onclick="alert('Puff Taken!')">Puff!</button>
+	</form>
 	<div onclick="application.goToTargetView(event)" id="Asthma_Information">
 		<span>Asthma Information</span>
 	</div>
