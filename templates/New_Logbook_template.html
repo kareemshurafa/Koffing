@@ -4016,20 +4016,29 @@ window.application = new Application();
 			<span>{{first_name}}</span>
 		</div>
 		<div id="Surname">
-			<span>Surname</span>
+			<span>{{surname}}</span>
 		</div>
 		<div id="Email">
-			<span>Email</span>
-		</div>
-		<div id="Date_of_Birth">
-			<span>Date of Birth</span>
-		</div>
-		<div id="Address">
-			<span>Address</span>
+			<span>{{email}}</span>
 		</div>
 		<div id="Phone_Number">
-			<span>Phone Number</span>
+			{% if phonenum == None or phonenum== null %}
+				<span>Phone Number</span>
+				{%else%}
+				<span>{{phonenum}}</span>
+				{%endif%}
 		</div>
+		<div id="Date_of_Birth">
+			<span>{{dob}}</span>
+		</div>
+		<div id="Address">
+				{% if address == None %}
+				<span>Address</span>
+				{%else%}
+				<span>{{address}}</span>
+				{%endif%}
+		</div>
+		
 	</div>
 	<div id="Component_15__2" class="Component_15___2">
 		<svg class="Rectangle_13">
@@ -4040,10 +4049,10 @@ window.application = new Application();
 			<ellipse id="Ellipse_6" rx="42.5" ry="42" cx="42.5" cy="42">
 			</ellipse>
 		</svg>
-		<img id="puffer_cartoon" src="puffer_cartoon.png" srcset="puffer_cartoon.png 1x, puffer_cartoon@2x.png 2x">
+		<img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">
 			
 		<div id="Name_Surname_">
-			<span>Name Surname </span>
+			<span>{{first_name}} {{surname}}</span>
 		</div>
 	</div>
 	<div id="Component_13__8" class="Component_13___8">
@@ -4077,19 +4086,39 @@ window.application = new Application();
 			</rect>
 		</svg>
 		<div id="GP_Name">
-			<span>GP Name</span>
+			{% if GPname == None %}
+				<span>GP Name</span>
+				{%else%}
+				<span>{{GPname}}</span>
+				{%endif%}
 		</div>
 		<div id="GP_Surname">
-			<span>GP Surname</span>
+			{% if GPsurname == None %}
+				<span>GP Surname</span>
+				{%else%}
+				<span>{{GPsurname}}</span>
+				{%endif%}
 		</div>
 		<div id="GP_surgery_code">
-			<span>GP surgery code</span>
+			{% if GPcode == None %}
+				<span>GP Surgery Code</span>
+				{%else%}
+				<span>{{GPcode}}</span>
+				{%endif%}
 		</div>
 		<div id="GP_Address">
-			<span>GP Address</span>
+			{% if GPaddress == None or GPaddress == null%}
+				<span>GP Address</span>
+				{%else%}
+				<span>{{GPaddress}}</span>
+				{%endif%}
 		</div>
 		<div id="Telephone_Number">
-			<span>Telephone Number</span>
+			{% if GPnum == None or GPnum == null %}
+				<span>GP Number</span>
+				{%else%}
+				<span>{{GPnum}}</span>
+				{%endif%}
 		</div>
 	</div>
 	<div id="Home">

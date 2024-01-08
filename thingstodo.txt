@@ -1,5 +1,16 @@
 29/12/2023
 
+Need to flash message that says email already exists
+Need to flash message that says Passwords do not match
+FAQ page, drop downs don't work
+Some hyperlinks don't work on all pages - need to run through and fix
+Need to fix links to all images  
+Login and Signup pages scaling issues   
+
+
+
+
+
 Do message/site that flashes puff taken!
 Also need to implement checker on whether taking too long or sending an email
 Maybe add a video to the background for the initial page?
@@ -7,3 +18,5 @@ Change the fonts for everything
 
 Possibly :
 Create forgot password page
+
+
