@@ -183,7 +183,7 @@ def loginpost():
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
     if not session.get('logged_in'):
-        return "you are not logged in silly :3"
+        return "you are not logged in - please login before accesing the logbook"
 
     # This differentiates between the POST requests from signing up and updating the extra details form
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
