@@ -178,6 +178,7 @@ def loginpost():
 
     # All checks passed - create user session and redirect to home page
     session['logged_in'] = True
+    session['email'] = Email
     return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
@@ -189,8 +190,7 @@ def logbookview():
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
     # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     
-    record = db.session.query(UserDetails).filter_by(email="test@test.com").first()
-    tester=record
+    tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
     # tester = db.session.query(UserDetails).filter_by(email="test@gmail.com").first()
     name = tester.firstname
     surname = tester.surname
