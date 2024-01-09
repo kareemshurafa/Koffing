@@ -90,15 +90,31 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
-@bp.route("/home", methods=['GET','POST'])
-def home():
-    # date = request.form.get('datetaken')
-    # time = request.form.get('timetaken')
-    # inhalertype = request.form.get('inhalertype')
-    # dose = request.form.get('dose')
-    # puffno = request.form.get('puffno')
-    # peakflow = request.form.get('peakflow')
+@bp.route("/home")
+def homeview():
     return(render_template("Home.html"))
+
+@bp.route("/home", methods = ['POST'])
+def homepost():
+    if request.method == 'POST':
+        date_format = '%Y/%m/%d'
+        time_format = '%H:%M %p'
+        date = datetime.strptime(request.form.get('Date_taken'),date_format)
+        time = datetime.strptime(request.form.get('Time_taken'),time_format)
+        inhalertype = request.form.get('Inhaler_type')
+        dosageamt = request.form.get('Dosage')
+        puffno = request.form.get('Number_of_puffs')
+        medname = request.form.get('Medname')
+        # peakflow = request.form.get('peakflow')
+        puff = PuffHistory(inhalertype = inhalertype,
+                        medname = medname,
+                        dosageamt = dosageamt,
+                        puffno = puffno,
+                        datetaken = date,
+                        timetaken = time,
+                        UserDetails = session['id'])    
+        db.session.add(puff)
+        db.session.commit()  
 
 @bp.route("/")
 def initial():
@@ -108,7 +124,7 @@ def initial():
 # def add_user():
 #     return(render_template("Login_page_template.html"))
 
-@bp.route("/map_info")
+@bp.route("/map")
 def aqiview():
     return render_template('Air_Quality_Map.html')
 
@@ -166,7 +182,6 @@ def loginpost():
         return redirect("/signup")
     
     # Obtain record
-    global record
     record = db.session.query(UserDetails).filter_by(email=Email).first()
     
     # Boolean check if password is correct
@@ -178,6 +193,10 @@ def loginpost():
 
     # All checks passed - create user session and redirect to home page
     session['logged_in'] = True
+<<<<<<< Updated upstream
+=======
+    session['id'] = record.id
+>>>>>>> Stashed changes
     session['email'] = Email
     return redirect("/home")
 

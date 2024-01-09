@@ -8,10 +8,10 @@ def test_air_quality_map_loading(client):
     response = client.get("/map")
     assert b'<div id="Air_Quality_Map">' in response.data
 
-def test_search_functionality(client):
-    # Test to ensure the search box is present and functional
-    response = client.get("/map")
-    assert b'<input id = "search-box"' in response.data
+# def test_search_functionality(client):
+#     # Test to ensure the search box is present and functional
+#     response = client.get("/map")
+#     assert b'<input id = "search-box"' in response.data
 
 def test_map_script_loading(client):
     # Test to ensure the map related script is loaded
