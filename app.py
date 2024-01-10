@@ -196,10 +196,7 @@ def loginpost():
 
     # All checks passed - create user session and redirect to home page
     session['logged_in'] = True
-<<<<<<< Updated upstream
-=======
     session['id'] = record.id
->>>>>>> Stashed changes
     session['email'] = Email
     return redirect("/home")
 
