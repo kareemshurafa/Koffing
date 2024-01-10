@@ -97,24 +97,40 @@ def homeview():
 @bp.route("/home", methods = ['POST'])
 def homepost():
     if request.method == 'POST':
-        date_format = '%Y/%m/%d'
-        time_format = '%H:%M %p'
+        date_format = '%Y-%m-%d'
+        time_format = '%H:%M'
         date = datetime.strptime(request.form.get('Date_taken'),date_format)
         time = datetime.strptime(request.form.get('Time_taken'),time_format)
         inhalertype = request.form.get('Inhaler_type')
         dosageamt = request.form.get('Dosage')
         puffno = request.form.get('Number_of_puffs')
         medname = request.form.get('Medname')
+        inhalername = ["Reliever","Long-Acting","Combination"]
         # peakflow = request.form.get('peakflow')
+        user = db.session.query(UserDetails).filter_by(id=session['id']).first()
         puff = PuffHistory(inhalertype = inhalertype,
                         medname = medname,
                         dosageamt = dosageamt,
                         puffno = puffno,
                         datetaken = date,
                         timetaken = time,
-                        UserDetails = session['id'])    
+                        UserDetails = user)    
         db.session.add(puff)
         db.session.commit()  
+        return redirect("/asthmalogpull")
+
+@bp.route("/asthmalogpull", methods=['GET'])
+def logpull():
+    tester = db.session.query(PuffHistory).filter_by( user_id =session['id']).first()
+    return(render_template("log.html", 
+                           date = tester.datetaken,
+                           time = tester.timetaken,
+                           type = tester.inhalertype,
+                           dosage = tester.dosageamt,
+                           puffno = tester.puffno,
+                           medname = tester.medname,
+                           userid = tester.user_id))
+
 
 @bp.route("/")
 def initial():

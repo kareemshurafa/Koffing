@@ -4046,7 +4046,7 @@ window.application = new Application();
 		<path id="Line_21" d="M 0 0 L 677 0">
 		</path>
 	</svg>
-	<form action="/home">
+	<form action="/home" method = "POST">
 		<label for="Date_taken" id="Date_taken_label">Date Taken:</label>
 		<input id="Date_taken" type="date" name="Date_taken">
 
@@ -4069,7 +4069,7 @@ window.application = new Application();
 		<label for="Medname" id="Medname_label">Name (optional):</label>
 		<input id="Medname" type="text" name="Medname">
 
-		<button id="Puff_button" type="submit" onclick="alert('Puff Taken!')">Puff!</button>
+		<input id="Puff_button" type="submit" onclick="alert('Puff Taken!')" value="Puff!">
 	</form>
 	<svg class="Rectangle_66">
 		<rect id="Rectangle_66" rx="0" ry="0" x="0" y="0" width="341" height="2000">
