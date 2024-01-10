@@ -73,16 +73,36 @@ class AirQualityHeatmap{
 }
 
 
+async function geocoder(address) {
+    let geocoder = new google.maps.Geocoder();
+    let addressGeo = { address: address };
+
+    // Make a request on the geocoder service and only proceed with code if request is processed
+    return new Promise((resolve, reject) => {
+        geocoder.geocode(addressGeo, (results, status) => {
+            if (status === 'OK') {
+                const latitude = results[0].geometry.location.lat();
+                const longitude = results[0].geometry.location.lng();
+                const location = { lat: latitude, lng: longitude };
+                resolve(location); //sent info back
+            } else {
+                reject('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    });
+}
 
 
 // Initialise Google Map with AQI info
 async function initMap() {
       // Create the search box and link it to the UI element.
-
-
-    const location = { lat: 51.498356, lng: -0.176894};
-    const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
-
+    let location;
+    if(address){
+        location =  await geocoder(address);
+    } else{
+        location = { lat: 51.498356, lng: -0.176894};
+    };
+    
     //Initialise map
     const map = await new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
@@ -97,7 +117,7 @@ async function initMap() {
     });
 
     
-    var dataLoc = {location:{latitude: 51.498356, longitude: -0.176894}, extraComputations:"HEALTH_RECOMMENDATIONS"};
+    var dataLoc = {location:{latitude:location.lat, longitude: location.lng}, extraComputations:"HEALTH_RECOMMENDATIONS"};
     getAQIData(dataLoc);
 
     searchBox.addListener("places_changed", () =>{

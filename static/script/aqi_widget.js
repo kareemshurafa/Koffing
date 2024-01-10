@@ -37,6 +37,7 @@ function updateWidget(data, lat, lng) {
     document.getElementById('aqiUpdateTime').innerText = `Updated ${new Date(data.dateTime).toLocaleTimeString()}`;
     document.getElementById('aqiHealthRecc').innerText = data.healthRecommendations["generalPopulation"];
     getData(locationFinder(lat, lng)).then((data) => {
-        document.getElementById('aqiLocation').innerText = data.results[0].address_components[2].long_name;    
+        console.log(data.results[0])
+        document.getElementById('aqiLocation').innerText = data.results[0].address_components[0].long_name.concat(", ",data.results[0].address_components[1].long_name);    
     })
 }

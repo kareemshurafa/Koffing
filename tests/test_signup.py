@@ -1,10 +1,10 @@
 #Write for form submission
 #Write unit test to also see if it exists in the database 
-from Koffing.app import UserDetails
+from ..app import UserDetails
 from flask_bcrypt import Bcrypt as bcrypt
 
 def test_registration(client, app):
-    response = client.post("/logbook", data={"First_name":"testname", 
+    response = client.post("/signup", data={"First_name":"testname", 
     "Last_name":"testsur",
     "Email_Address":"test@koffing.com",
     "Password":"testpassword", 
