@@ -1,6 +1,7 @@
 import pytest
 from flask_sqlalchemy import SQLAlchemy
-from ..app import create_app,db,session
+from ..app import create_app,db
+from flask import session
 from flask_bcrypt import Bcrypt
 
 @pytest.fixture()
@@ -11,12 +12,17 @@ def app():
     bcrypt = Bcrypt(app)
     with app.app_context():
         db.create_all()
+    app.secret_key = b'8dh3w90fph#3r'
 
     print("Creating Database")
     yield app
 
 @pytest.fixture()
 def client(app):
-    return app.test_client()
+     with app.test_client() as testing_client:
+        with testing_client.session_transaction() as session:
+            session['id'] = 1
+
+        yield testing_client  # Return to caller.
 
 

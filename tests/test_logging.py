@@ -1,14 +1,15 @@
 from ..app import UserDetails,PuffHistory,db
 from flask_bcrypt import Bcrypt as bcrypt
 from datetime import datetime
-currenttime = "12:56 PM"
-currentdate = "2024/01/01"
 
-date_format = '%Y/%m/%d'
-time_format = '%H:%M %p'
+#Written in form of html submission
+currenttime = "12:56"
+currentdate = "2024-01-01"
+
+date_format = '%Y-%m-%d'
+time_format = '%H:%M'
 
 def test_logging(client,app):
-    
     response = client.post("/home", data = {"Date_taken":currentdate,
                                             "Time_taken":currenttime,                                         
                                             "Inhaler_type":"Reliever",
