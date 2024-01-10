@@ -681,7 +681,7 @@
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Air_Quality_Stats.html;
+		--web-action-target: airqualitystats;
 		cursor: pointer;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -692,14 +692,14 @@
 	}
 	#FAQ {
 		left: 45px;
-		top: 400px;
+		top: 333px;
 		position: absolute;
 		overflow: visible;
 		width: 45px;
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: FAQPage.html;
+		--web-action-target: faq;
 		cursor: pointer;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -717,7 +717,7 @@
 		white-space: nowrap;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Learn_More.html;
+		--web-action-target: learnmore;
 		cursor: pointer;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -3979,7 +3979,7 @@ window.application = new Application();
 	</svg>
 	<div id="check_button" class="check_button">
 		<svg class="Path_32" viewBox="0 0 488 233">
-			<path id="Path_32" d="M 98 0 L 390 0 C 444.1239013671875 0 488 43.87609100341797 488 98 L 488 135 C 488 189.1239013671875 444.1239013671875 233 390 233 L 98 233 C 43.87609100341797 233 0 189.1239013671875 0 135 L 0 98 C 0 43.87609100341797 43.87609100341797 0 98 0 Z">
+			<path id="Path_32" d="M 98 0 L 390 0 C 444.1239013671875 0 488 43.87609100341797 488 98 L 488 135 C 488 189.1239013671875 444.1239013671875 233 390 233 L 98 233 C 43.87609100341797 233 0 189.1239013671875 0 135 L 0 98 C 0 43.87609100341797 43.87609100341797 0 98 0 Z">		
 			</path>
 		</svg>
 		<div class="aqi-widget" id="aqiWidget">
@@ -4013,12 +4013,14 @@ window.application = new Application();
 		const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
 		postData(AQInfo_URL, currLoc, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
 	</script>
-	<div id="Have_you_taken_your__medicatio">
-		<span>Have you taken your <br/>medication today?</span>
+	<form method="POST" action="/home">
+	<div>
+		<input id="Have_you_taken_your__medicatio" type="submit" name="quickpuff" value="Quick Puff!">
 	</div>
-	<img id="Asthma-Attack-Symptoms-and-Fir" src="Asthma-Attack-Symptoms-and-Fir.png" srcset="Asthma-Attack-Symptoms-and-Fir.png 1x, Asthma-Attack-Symptoms-and-Fir@2x.png 2x">
+	</form>
+	<img id="Asthma-Attack-Symptoms-and-Fir" src="../static/images/Asthma-Attack-Symptoms-and-Fir.png">
 		
-	<img id="Air_Pollution" src="Air_Pollution.png" srcset="Air_Pollution.png 1x, Air_Pollution@2x.png 2x">
+	<img id="Air_Pollution" src="../static/images/Air Pollution.jpeg">
 		
 	<div id="In_case_of_an_emergency_">
 		<span>In case of an emergency:</span><br/>
@@ -4069,7 +4071,7 @@ window.application = new Application();
 		<label for="Medname" id="Medname_label">Name (optional):</label>
 		<input id="Medname" type="text" name="Medname">
 
-		<input id="Puff_button" type="submit" onclick="alert('Puff Taken!')" value="Puff!">
+		<input id="Puff_button" type="submit" onclick="alert('Puff Taken!')" value="Puff!" name="regpuff">
 	</form>
 	<svg class="Rectangle_66">
 		<rect id="Rectangle_66" rx="0" ry="0" x="0" y="0" width="341" height="2000">
@@ -4081,19 +4083,13 @@ window.application = new Application();
 	<div onclick="application.goToTargetView(event)" id="Air_Quality_Info">
 		<span>Air Quality Map and Info</span>
 	</div>
-	<div onclick="application.goToTargetView(event)" id="Air_Quality_Statistics_">
-		<span>Air Quality Statistics </span>
-	</div>
 	<div onclick="application.goToTargetView(event)" id="FAQ">
 		<span>FAQ</span>
-	</div>
-	<div onclick="application.goToTargetView(event)" id="Learn_More">
-		<span>Learn More</span>
 	</div>
 	<div id="Koffing">
 		<span>Koffing</span>
 	</div>
-	<img id="puffer_b" src="puffer_b.png" srcset="puffer_b.png 1x, puffer_b@2x.png 2x">
+	<img id="puffer_b" src="../static/images/puffer_cartoon.png">
 		
 	<svg class="Line_20" viewBox="0 0 251 1">
 		<path id="Line_20" d="M 0 0 L 251 1">
