@@ -17,22 +17,22 @@ window.application.goToTargetView = function(event) {
     case 'Asthma_Information_bc':
     case 'Asthma_Information_bg':
     case 'Asthma_Information_bk':
-      targetUrl = 'Asthma_Info.html';
+      targetUrl = 'asthmainfo';
       break;
-    case 'London_Air_Quality_Info':
-      targetUrl = 'Air_Quality_Map.html';
+    case 'Air_Quality_Info':
+      targetUrl = 'mapinfo';
       break;
     case 'Group_bc':
       targetUrl = 'Air_Quality_Stats.html';
       break;
     case 'FAQ':
-      targetUrl = 'FAQPage.html';
+      targetUrl = 'faq';
       break;
     case 'Learn_More':
-      targetUrl = 'Asthma_Info.html';
+      targetUrl = 'asthmainfo';
       break;
     case 'Home':
-      targetUrl = 'Home__1.html';
+      targetUrl = 'home';
       break;
     default:
       console.error('No target URL defined for element ID:', targetId);

@@ -14,16 +14,18 @@ function locationFinder(lat, lng) {
 
 // Change Widget Colour 
 function getAqiColor(aqiValue) {
-    if (aqiValue <= 20) {
-        return '#75008D'; // Hazardous (Maroon)
-    } else if (aqiValue <= 40) {
-        return '##B40C22';// Very Unhealthy (Purple)
-    } else if (aqiValue <= 60) {
-        return '#FA5800'; // Unhealthy (Red)
-    } else if (aqiValue <= 80) {
-        return '#FDF90C'; //Moderate (Yellow)
-    } else if (aqiValue <= 100) {
-        return '#05b1a2'; // Excellent (Cyan)
+    if (aqiValue >= 1 && aqiValue <= 19) {
+        return '#800000'; // Hazardous (Maroon)
+    }else if (aqiValue >= 1 && aqiValue <= 19) {
+        return '#FF0000'; // Hazardous (Maroon)
+    } else if (aqiValue >= 20 && aqiValue <= 39) {
+        return '#FF8C00';// Very Unhealthy (Purple)
+    } else if (aqiValue >= 40 && aqiValue <= 59) {
+        return '#FFFF00'; // Unhealthy (Red)
+    } else if (aqiValue >= 60 && aqiValue <= 79) {
+        return '#84CF33'; //Moderate (Yellow)
+    } else if (aqiValue >= 80 && aqiValue <= 100) {
+        return '#009E3A'; // Excellent (Cyan)
     }
 }
 
