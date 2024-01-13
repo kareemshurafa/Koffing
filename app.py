@@ -168,10 +168,11 @@ def initial():
 
 @bp.route("/mapinfo")
 def aqiview():
-    tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
-    tester.address = "W2 3ET"
-    address = tester.address
-    return render_template('Air_Quality_Map.html', address = address)
+    # tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
+    # tester.address = "W2 3ET"
+    # address = tester.address
+    # return render_template('Air_Quality_Map.html', address = address)
+    return render_template('Air_Quality_Map.html')
 
 @bp.route("/airqualitystats")
 def statsview():

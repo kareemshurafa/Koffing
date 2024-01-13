@@ -65,7 +65,7 @@ class AirQualityHeatmap{
         params.x = coord.x;
         params.y = coord.y;
         const opacity = 0.45
-        let heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/UAQI_INDIGO_PERSIAN/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+        let heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/UAQI_RED_GREEN/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
         heatmapURl = addParametersToURL(heatmapURl, params);
         div.innerHTML = `<img style="opacity: ${opacity}"src="${heatmapURl}" alt="Air Quality Tile">`;
         return div;
@@ -106,6 +106,8 @@ async function initMap() {
     //Initialise map
     const map = await new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
+        minZoom: 3,
+        maxZoom: 16,
         center: location,
         });
     const input = document.getElementById("search-box");

@@ -19,7 +19,7 @@ def app():
 
 @pytest.fixture()
 def client(app):
-     with app.test_client() as testing_client:
+    with app.test_client() as testing_client:
         with testing_client.session_transaction() as session:
             session['id'] = 1
             session['logged_in'] = True
