@@ -376,9 +376,67 @@ def logbookview():
 
     # return(render_template("New_Logbook_template.html"))
 
-@bp.route("/update", methods = ['GET', 'POST'])
+@bp.route("/update")
 def updateview():
     return render_template('Update_Details.html')
+
+@bp.route("/update", methods=['POST'])
+def updatepost():
+    
+    user = db.session.query(UserDetails).filter_by(email=session['email']).first()
+
+    phone_number = request.form.get('phone_number')
+    dob = request.form.get('dob')
+    address = request.form.get('address')
+    gp_name = request.form.get('gp_name')
+    gp_surname = request.form.get('gp_surname')
+    gp_code = request.form.get('gp_code')
+    gp_phone = request.form.get('gp_phone_number')
+    gp_address = request.form.get('gp_address')
+
+    # if something inputted, normal
+    # if empty - forget about it
+
+    if phone_number != None or "":
+        user.phonenum = phone_number
+        # db.session.commit()
+    
+    if dob != None or "":
+        user.dob = dob
+        # db.session.commit()
+
+    if address != None or "":
+        user.address = address
+        # db.session.commit()
+
+    if gp_name != None or "":
+        user.GPname = gp_name
+        # db.session.commit()
+
+    if gp_surname != None or "":
+        user.GPsurname = gp_surname
+        # db.session.commit()
+
+    if gp_code != None or "":
+        user.GPcode = gp_code
+        # db.session.commit()
+
+    if gp_address != None or "":
+        user.GPaddress = gp_address
+        # db.session.commit()
+
+    if gp_phone != None or "":
+        user.GPnum = gp_phone
+        # db.session.commit()
+
+    
+
+    
+
+        
+
+
+    pass
 
 @bp.route('/test')
 def index():
