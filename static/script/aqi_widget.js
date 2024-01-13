@@ -38,8 +38,12 @@ function updateWidget(data, lat, lng) {
     document.getElementById('aqiValue').innerText = aqiValue;
     document.getElementById('aqiUpdateTime').innerText = `Updated ${new Date(data.dateTime).toLocaleTimeString()}`;
     document.getElementById('aqiHealthRecc').innerText = data.healthRecommendations["generalPopulation"];
+    document.getElementById('aqiDomPollution').innerText = `Dominant Pollutant: ${data.indexes[0].dominantPollutant}`;
     getData(locationFinder(lat, lng)).then((data) => {
-        console.log(data.results[0])
-        document.getElementById('aqiLocation').innerText = data.results[0].address_components[0].long_name.concat(", ",data.results[0].address_components[1].long_name);    
+        if (data.results[0].address_components[1] === undefined){
+            document.getElementById('aqiLocation').innerText = data.results[0].address_components[0].long_name;
+        } else {
+            document.getElementById('aqiLocation').innerText = data.results[0].address_components[0].long_name.concat(", ",data.results[0].address_components[1].long_name); 
+        }   
     })
 }

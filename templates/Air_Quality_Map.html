@@ -277,6 +277,11 @@
 		font-size: 12px;
 		color: black
 	}
+	.aqi-pollutants {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black
+	}
 	#AIR_QUALITY_MAP_ {
 		left: 820px;
 		top: 126px;
@@ -626,6 +631,7 @@
 		<div class="aqi-value" id="aqiValue">Loading Data... Please Wait</div>
 		<div class="aqi-location" id="aqiLocation"></div>
 		<div class="aqi-health" id="aqiHealthRecc"></div>
+		<div class ="aqi-pollutants" id= "aqiDomPollution"></div>
 		<div class="aqi-update-time" id="aqiUpdateTime"></div>
 	</div>
 	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
