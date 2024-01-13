@@ -90,6 +90,50 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
+#-----------------------------------------------------------
+
+
+@bp.route("/")
+def initial():
+    if request.method == 'GET' and session['logged_in'] == True:
+        return redirect("/home")
+    else:
+        return(render_template("Initial_Page.html"))
+    
+@bp.route("/login", methods=['POST', 'GET'])
+def loginpost():
+    if request.method == 'POST':
+        Email = request.form.get('Email')
+        password = request.form.get('Password')
+    
+        # Boolean check if they have an account in the database
+        exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
+
+        # If they do not have an account - redirect to sign-up
+        if not exists:
+            return redirect("/signup")
+        
+        # Obtain record
+        record = db.session.query(UserDetails).filter_by(email=Email).first()
+        
+        # Boolean check if password is correct
+        pswrd = bcrypt.check_password_hash(record.password, password)
+
+        # If they use an incorrect password - redirect to try again
+        if not pswrd:
+            return redirect("/login")
+
+        # All checks passed - create user session and redirect to home page
+        session['logged_in'] = True
+        session['id'] = record.id
+        session['email'] = Email
+        return redirect("/home")
+    if request.method == 'GET' and session['logged_in'] == True:
+        return redirect("/home")
+    else:
+        return render_template('Login_page_template.html')
+
+
 @bp.route("/home", methods = ['POST','GET'])
 def homepost():
     puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
@@ -158,10 +202,6 @@ def logpull():
                            medname = tester.medname,
                            userid = tester.user_id))
 
-@bp.route("/")
-def initial():
-    return(render_template("Initial_Page.html"))
-
 # @bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 # def add_user():
 #     return(render_template("Login_page_template.html"))
@@ -200,9 +240,7 @@ def signuppost():
     else:
         return redirect("/login")
     
-
 ### Test on the form submission and visualisation in template ###
-
 
 @bp.route("/asthmainfo")
 def asthmainfoview():
@@ -213,38 +251,7 @@ def faqview():
     return render_template("FAQPage.html")
 
 ### Creating a login_post route to handle login logic and re-routing ###
-@bp.route("/login", methods=['POST', 'GET'])
-def loginpost():
-    if request.method == 'POST':
-        Email = request.form.get('Email')
-        password = request.form.get('Password')
-    
-        # Boolean check if they have an account in the database
-        exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
 
-        # If they do not have an account - redirect to sign-up
-        if not exists:
-            return redirect("/signup")
-        
-        # Obtain record
-        record = db.session.query(UserDetails).filter_by(email=Email).first()
-        
-        # Boolean check if password is correct
-        pswrd = bcrypt.check_password_hash(record.password, password)
-
-        # If they use an incorrect password - redirect to try again
-        if not pswrd:
-            return redirect("/login")
-
-        # All checks passed - create user session and redirect to home page
-        session['logged_in'] = True
-        session['id'] = record.id
-        session['email'] = Email
-        return redirect("/home")
-    if request.method == 'GET' and session['logged_in'] == True:
-        return redirect("/home")
-    else:
-        return render_template('Login_page_template.html')
         
 
 
