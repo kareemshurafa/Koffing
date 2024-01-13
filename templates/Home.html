@@ -4015,9 +4015,15 @@ window.application = new Application();
 		postData(AQInfo_URL, currLoc, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
 	</script>
 	<form method="POST" action="/home">
+	{% if puffcount == 0 %}
+	<div>
+		<input id="Have_you_taken_your__medicatio" type="submit" onclick="alert('Please Submit a puff normally')" name="nopuffs" value="Quick Puff!">
+	</div>
+	{%else%}
 	<div>
 		<input id="Have_you_taken_your__medicatio" type="submit" onclick="alert('Quick Puff Taken!')" name="quickpuff" value="Quick Puff!">
 	</div>
+	{%endif%}
 	</form>
 	<img id="Asthma-Attack-Symptoms-and-Fir" src="../static/images/Asthma-Attack-Symptoms-and-Fir.png">
 		
