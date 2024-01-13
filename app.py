@@ -196,23 +196,6 @@ def homepost():
     if request.method == 'GET':
         return(render_template("Home.html",puffcount = puffcount, address = currAddress))
 
-
-@bp.route("/asthmalogpull", methods=['GET'])
-def logpull():
-    tester = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])[0]
-    return(render_template("log.html", 
-                           date = tester.datetaken,
-                           time = tester.timetaken,
-                           type = tester.inhalertype,
-                           dosage = tester.dosageamt,
-                           puffno = tester.puffno,
-                           medname = tester.medname,
-                           userid = tester.user_id))
-
-# @bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
-# def add_user():
-#     return(render_template("Login_page_template.html"))
-
 @bp.route("/mapinfo")
 def aqiview():
     # tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
@@ -246,7 +229,7 @@ def signuppost():
         if request.method == 'GET' and session['logged_in'] == True:
             return redirect("/home")
     except:
-        return redirect("/login")
+        return render_template("Sign_up_page_template.html")
     
 ### Test on the form submission and visualisation in template ###
 
@@ -257,11 +240,6 @@ def asthmainfoview():
 @bp.route("/faq")
 def faqview():
     return render_template("FAQPage.html")
-
-### Creating a login_post route to handle login logic and re-routing ###
-
-        
-
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
