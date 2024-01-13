@@ -12,6 +12,7 @@ from flask_login import LoginManager
 db=SQLAlchemy()
 login_manager = LoginManager()
 
+
 #--------------Models---------------------
 class UserDetails(db.Model):
     __tablename__ = 'UserDetails'
@@ -90,8 +91,57 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
+
+#-----------------------------------------------------------
+
+
+@bp.route("/")
+def initial():
+    try:
+        if request.method == 'GET' and session['logged_in'] == True:
+            return redirect("/home")
+    except:
+        return(render_template("Initial_Page.html"))
+    
+@bp.route("/login", methods=['POST', 'GET'])
+def loginpost():
+    if request.method == 'POST':
+        Email = request.form.get('Email')
+        password = request.form.get('Password')
+    
+        # Boolean check if they have an account in the database
+        exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
+
+        # If they do not have an account - redirect to sign-up
+        if not exists:
+            return redirect("/signup")
+        
+        # Obtain record
+        record = db.session.query(UserDetails).filter_by(email=Email).first()
+        
+        # Boolean check if password is correct
+        pswrd = bcrypt.check_password_hash(record.password, password)
+
+        # If they use an incorrect password - redirect to try again
+        if not pswrd:
+            return redirect("/login")
+
+        # All checks passed - create user session and redirect to home page
+        session['logged_in'] = True
+        session['id'] = record.id
+        session['email'] = Email
+        return redirect("/home")
+    try:
+        if request.method == 'GET' and session['logged_in'] == True:
+            return redirect("/home")
+    except:
+        return render_template('Login_page_template.html')
+
+
 @bp.route("/home", methods = ['POST','GET'])
 def homepost():
+    puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
+    puffcount = puffs.count()
     if request.method == 'POST':
         if 'regpuff' in request.form:
             date_format = '%Y-%m-%d'
@@ -117,25 +167,31 @@ def homepost():
         if 'quickpuff' in request.form:
             #Get current time and date, then submit the previous records details
             user = db.session.query(UserDetails).filter_by(id=session['id']).first()
-            lastpuff = db.session.query(PuffHistory).filter_by(user_id = session['id']).first()
-            date = datetime.now()
-            time = datetime.now()
-            inhalertype = lastpuff.inhalertype
-            dosageamt = lastpuff.dosageamt
-            puffno = lastpuff.puffno
-            medname = lastpuff.medname
-            puff = PuffHistory(inhalertype = inhalertype,
-                            medname = medname,
-                            dosageamt = dosageamt,
-                            puffno = puffno,
-                            datetaken = date,
-                            timetaken = time,
-                            UserDetails = user)    
-            db.session.add(puff)
-            db.session.commit()  
+            # puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
+            if puffs.count() != 0:
+                user = db.session.query(UserDetails).filter_by(id=session['id']).first()
+                lastpuff = db.session.query(PuffHistory).filter_by(user_id = session['id']).first()
+                date = datetime.now()
+                time = datetime.now()
+                inhalertype = lastpuff.inhalertype
+                dosageamt = lastpuff.dosageamt
+                puffno = lastpuff.puffno
+                medname = lastpuff.medname
+                puff = PuffHistory(inhalertype = inhalertype,
+                                medname = medname,
+                                dosageamt = dosageamt,
+                                puffno = puffno,
+                                datetaken = date,
+                                timetaken = time,
+                                UserDetails = user)    
+                db.session.add(puff)
+                db.session.commit()  
+                return redirect("/home")
+        if 'nopuffs' in request.form:
             return redirect("/home")
+                
     if request.method == 'GET':
-        return(render_template("Home.html"))
+        return(render_template("Home.html",puffcount = puffcount))
 
 
 @bp.route("/asthmalogpull", methods=['GET'])
@@ -149,10 +205,6 @@ def logpull():
                            puffno = tester.puffno,
                            medname = tester.medname,
                            userid = tester.user_id))
-
-@bp.route("/")
-def initial():
-    return(render_template("Initial_Page.html"))
 
 # @bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
 # def add_user():
@@ -169,12 +221,8 @@ def aqiview():
 @bp.route("/airqualitystats")
 def statsview():
     return render_template("Air_Quality_Stats.html")
-
-@bp.route("/signup")
-def signupview():
-    return render_template("Sign_up_page_template.html")
     
-@bp.route("/signup", methods=['POST'])
+@bp.route("/signup", methods=['POST','GET'])
 def signuppost():
     if request.method == 'POST':
         name = request.form.get('First_name')
@@ -190,13 +238,14 @@ def signuppost():
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
         db.session.add(data)
         db.session.commit()
-    return redirect("/login")
-
+    #NEED TO DOUBLE CHECK AFTER LOGGING OUT
+    try: 
+        if request.method == 'GET' and session['logged_in'] == True:
+            return redirect("/home")
+    except:
+        return redirect("/login")
+    
 ### Test on the form submission and visualisation in template ###
-@bp.route("/login")
-def loginview():
-#After logging in, have to m
-    return render_template('Login_page_template.html')
 
 @bp.route("/asthmainfo")
 def asthmainfoview():
@@ -207,33 +256,9 @@ def faqview():
     return render_template("FAQPage.html")
 
 ### Creating a login_post route to handle login logic and re-routing ###
-@bp.route("/login", methods=['POST'])
-def loginpost():
-    Email = request.form.get('Email')
-    password = request.form.get('Password')
- 
-    # Boolean check if they have an account in the database
-    exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
 
-    # If they do not have an account - redirect to sign-up
-    if not exists:
-        return redirect("/signup")
-    
-    # Obtain record
-    record = db.session.query(UserDetails).filter_by(email=Email).first()
-    
-    # Boolean check if password is correct
-    pswrd = bcrypt.check_password_hash(record.password, password)
+        
 
-    # If they use an incorrect password - redirect to try again
-    if not pswrd:
-        return redirect("/login")
-
-    # All checks passed - create user session and redirect to home page
-    session['logged_in'] = True
-    session['id'] = record.id
-    session['email'] = Email
-    return redirect("/home")
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
@@ -265,26 +290,28 @@ def logbookview():
     ############Asthma Streak###########
     #Check if puff happened in the past 24 hours, if yes, count number of puffs within every 24 hours
     #else : 0
-    puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
-    lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
-    print("from app:")
-    for i in range(0,puffs.count()):
-        print(puffs[i].datetaken.date())
-    # print(lastpuff)
     streak = 0
+    puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
+    if puffs.count() != 0:
+        lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
+        print("from app:")
+        for i in range(0,puffs.count()):
+            print(puffs[i].datetaken.date())
+        # print(lastpuff)
+        
 
     #CAN UNIT TEST THIS!!!!!!!!!!!!
-    if lastpuff == timedelta(days=0):
-        streak += 1
-        #Run for loop for length of puffs, if time delta is more than 
-        for i in range(1, puffs.count()):
-            delta = (puffs[i].datetaken.date())- puffs[i-1].datetaken.date()
-            if delta <= timedelta(days=1):
-                streak += 1
-            else:
-                break
-    else:
-        streak = "More than one day"
+        if lastpuff == timedelta(days=0):
+            streak += 1
+            #Run for loop for length of puffs, if time delta is more than 
+            for i in range(1, puffs.count()):
+                delta = (puffs[i].datetaken.date())- puffs[i-1].datetaken.date()
+                if delta <= timedelta(days=1):
+                    streak += 1
+                else:
+                    break
+        else:
+            streak = 0
 
     #Just need to implement logic that checks consecutive submissions for each day
     # asthmastreak

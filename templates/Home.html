@@ -59,7 +59,6 @@
 	}
 	@keyframes  {
 	
-	
 	}
 	#Component_14__6 {
 		position: absolute;
@@ -84,6 +83,10 @@
 		font-family: Trebuchet MS; 
 		font-style: normal;
 		font-weight: bold;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: logbook;
+		cursor: pointer;
 		font-size: 27px;
 		color: rgba(70,69,69,1);
 	}
@@ -1052,7 +1055,7 @@
 <div id="Home__1">
 	<div onclick="application.goToTargetView(event)" id="Component_14__6" class="Component_14___6">
 		<div id="My_Logbook_">
-			<span>My Logbook </span>
+			<span>My Logbook</span>
 		</div>
 	</div>
 	<svg class="Icon_awesome-user-alt" viewBox="0 0 27 27">
@@ -1106,9 +1109,15 @@
 		postData(AQInfo_URL, currLoc, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
 	</script>
 	<form method="POST" action="/home">
+	{% if puffcount == 0 %}
+	<div>
+		<input id="Have_you_taken_your__medicatio" type="submit" onclick="alert('Please Submit a puff normally')" name="nopuffs" value="Quick Puff!">
+	</div>
+	{%else%}
 	<div>
 		<input id="Have_you_taken_your__medicatio" type="submit" onclick="alert('Quick Puff Taken!')" name="quickpuff" value="Quick Puff!">
 	</div>
+	{%endif%}
 	</form>
 	<img id="Asthma-Attack-Symptoms-and-Fir" src="../static/images/Asthma-Attack-Symptoms-and-Fir.png">
 		
