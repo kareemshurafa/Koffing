@@ -6,7 +6,7 @@ const threshold ={
     type: 'line',
     label: {
         backgroundColor: 'red',
-        content: 'AQI Above This Level Indicates Good Living Conditions',
+        content: 'Average AQI Above This Level Indicates Good Living Conditions',
         display: false
     },
     yMin: 60,
