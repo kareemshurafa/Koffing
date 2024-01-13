@@ -12,6 +12,7 @@ from flask_login import LoginManager
 db=SQLAlchemy()
 login_manager = LoginManager()
 
+
 #--------------Models---------------------
 class UserDetails(db.Model):
     __tablename__ = 'UserDetails'
@@ -90,14 +91,16 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
+
 #-----------------------------------------------------------
 
 
 @bp.route("/")
 def initial():
-    if request.method == 'GET' and session['logged_in'] == True:
-        return redirect("/home")
-    else:
+    try:
+        if request.method == 'GET' and session['logged_in'] == True:
+            return redirect("/home")
+    except:
         return(render_template("Initial_Page.html"))
     
 @bp.route("/login", methods=['POST', 'GET'])
@@ -128,9 +131,10 @@ def loginpost():
         session['id'] = record.id
         session['email'] = Email
         return redirect("/home")
-    if request.method == 'GET' and session['logged_in'] == True:
-        return redirect("/home")
-    else:
+    try:
+        if request.method == 'GET' and session['logged_in'] == True:
+            return redirect("/home")
+    except:
         return render_template('Login_page_template.html')
 
 
@@ -235,9 +239,10 @@ def signuppost():
         db.session.add(data)
         db.session.commit()
     #NEED TO DOUBLE CHECK AFTER LOGGING OUT
-    if request.method == 'GET' and session['logged_in'] == True:
-        return redirect("/home")
-    else:
+    try: 
+        if request.method == 'GET' and session['logged_in'] == True:
+            return redirect("/home")
+    except:
         return redirect("/login")
     
 ### Test on the form submission and visualisation in template ###
