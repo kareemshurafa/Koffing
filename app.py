@@ -275,9 +275,9 @@ def logbookview():
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
     if puffs.count() != 0:
         lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
-        print("from app:")
-        for i in range(0,puffs.count()):
-            print(puffs[i].datetaken.date())
+        # print("from app:")
+        # for i in range(0,puffs.count()):
+        #     print(puffs[i].datetaken.date())
         # print(lastpuff)
         
 
