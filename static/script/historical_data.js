@@ -4,11 +4,11 @@ let currChart = null;
 // set healthy threshold line
 const threshold ={
     type: 'line',
-    // label: {
-    //     // backgroundColor: 'red',
-    //     // content: 'Unhealthy',
-    //     display: true
-    // },
+    label: {
+        backgroundColor: 'red',
+        content: 'AQI Above This Level Indicates Good Living Conditions',
+        display: false
+    },
     yMin: 60,
     yMax: 60,
     borderWidth: 3,
@@ -16,6 +16,14 @@ const threshold ={
     position:{
         x:0,
         y:0
+    },
+    enter({element}, event) {
+        element.label.options.display = true;
+        return true;
+    },
+    leave({element}, event) {
+    element.label.options.display = false;
+    return true;
     }
 };
 

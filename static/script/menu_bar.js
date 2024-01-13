@@ -34,6 +34,12 @@ window.application.goToTargetView = function(event) {
     case 'Home':
       targetUrl = 'home';
       break;
+    case 'Icon_awesome-user-alt':
+      targetUrl = 'logbook';
+      break
+    case 'Component_14__6':
+      targetUrl = 'logbook';
+      break
     default:
       console.error('No target URL defined for element ID:', targetId);
       return;
