@@ -12,8 +12,9 @@ def test_registration(client, app):
 
     #'sign_up_form': 'Submit'  is present due to the logic for the logbook  
     with app.app_context():
-        assert UserDetails.query.count() == 1
-        assert UserDetails.query.first().firstname == "testname"
-        assert UserDetails.query.first().surname == "testsur"
-        assert UserDetails.query.first().email == "test@koffing.com"
-        assert bcrypt(app).check_password_hash(UserDetails.query.first().password, 'testpassword') == True
+        user = UserDetails.query.filter_by(email="test@koffing.com")
+        assert user.count() == 1
+        assert user.first().firstname == "testname"
+        assert user.first().surname == "testsur"
+        assert user.first().email == "test@koffing.com"
+        assert bcrypt(app).check_password_hash(user.first().password, 'testpassword') == True

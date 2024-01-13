@@ -4,7 +4,7 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exists
 from flask_bcrypt import Bcrypt
-from datetime import datetime
+from datetime import datetime,timedelta
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_login import LoginManager
@@ -90,38 +90,57 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
-@bp.route("/home")
-def homeview():
-    return(render_template("Home.html"))
-
-@bp.route("/home", methods = ['POST'])
+@bp.route("/home", methods = ['POST','GET'])
 def homepost():
     if request.method == 'POST':
-        date_format = '%Y-%m-%d'
-        time_format = '%H:%M'
-        date = datetime.strptime(request.form.get('Date_taken'),date_format)
-        time = datetime.strptime(request.form.get('Time_taken'),time_format)
-        inhalertype = request.form.get('Inhaler_type')
-        dosageamt = request.form.get('Dosage')
-        puffno = request.form.get('Number_of_puffs')
-        medname = request.form.get('Medname')
-        inhalername = ["Reliever","Long-Acting","Combination"]
-        # peakflow = request.form.get('peakflow')
-        user = db.session.query(UserDetails).filter_by(id=session['id']).first()
-        puff = PuffHistory(inhalertype = inhalertype,
-                        medname = medname,
-                        dosageamt = dosageamt,
-                        puffno = puffno,
-                        datetaken = date,
-                        timetaken = time,
-                        UserDetails = user)    
-        db.session.add(puff)
-        db.session.commit()  
-        return redirect("/asthmalogpull")
+        if 'regpuff' in request.form:
+            date_format = '%Y-%m-%d'
+            time_format = '%H:%M'
+            date = datetime.strptime(request.form.get('Date_taken'),date_format)
+            time = datetime.strptime(request.form.get('Time_taken'),time_format)
+            inhalertype = request.form.get('Inhaler_type')
+            dosageamt = request.form.get('Dosage')
+            puffno = request.form.get('Number_of_puffs')
+            medname = request.form.get('Medname')
+            # peakflow = request.form.get('peakflow')
+            user = db.session.query(UserDetails).filter_by(id=session['id']).first()
+            puff = PuffHistory(inhalertype = inhalertype,
+                            medname = medname,
+                            dosageamt = dosageamt,
+                            puffno = puffno,
+                            datetaken = date,
+                            timetaken = time,
+                            UserDetails = user)    
+            db.session.add(puff)
+            db.session.commit()  
+            return redirect("/home")
+        if 'quickpuff' in request.form:
+            #Get current time and date, then submit the previous records details
+            user = db.session.query(UserDetails).filter_by(id=session['id']).first()
+            lastpuff = db.session.query(PuffHistory).filter_by(user_id = session['id']).first()
+            date = datetime.now()
+            time = datetime.now()
+            inhalertype = lastpuff.inhalertype
+            dosageamt = lastpuff.dosageamt
+            puffno = lastpuff.puffno
+            medname = lastpuff.medname
+            puff = PuffHistory(inhalertype = inhalertype,
+                            medname = medname,
+                            dosageamt = dosageamt,
+                            puffno = puffno,
+                            datetaken = date,
+                            timetaken = time,
+                            UserDetails = user)    
+            db.session.add(puff)
+            db.session.commit()  
+            return redirect("/home")
+    if request.method == 'GET':
+        return(render_template("Home.html"))
+
 
 @bp.route("/asthmalogpull", methods=['GET'])
 def logpull():
-    tester = db.session.query(PuffHistory).filter_by( user_id =session['id']).first()
+    tester = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])[0]
     return(render_template("log.html", 
                            date = tester.datetaken,
                            time = tester.timetaken,
@@ -130,7 +149,6 @@ def logpull():
                            puffno = tester.puffno,
                            medname = tester.medname,
                            userid = tester.user_id))
-
 
 @bp.route("/")
 def initial():
@@ -235,7 +253,7 @@ def logbookview():
     email = tester.email
 
     phonenum = tester.phonenum
-    dob = tester.dob
+    dob = tester.dob.date()
     address = tester.address
 
     GPname = tester.GPname
@@ -243,6 +261,30 @@ def logbookview():
     GPcode = tester.GPcode
     GPaddress = tester.GPaddress
     GPnum = tester.GPnum
+
+    ############Asthma Streak###########
+    #Check if puff happened in the past 24 hours, if yes, count number of puffs within every 24 hours
+    #else : 0
+    puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
+    lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
+    print("from app:")
+    for i in range(0,puffs.count()):
+        print(puffs[i].datetaken.date())
+    # print(lastpuff)
+    streak = 0
+
+    #CAN UNIT TEST THIS!!!!!!!!!!!!
+    if lastpuff == timedelta(days=0):
+        streak += 1
+        #Run for loop for length of puffs, if time delta is more than 
+        for i in range(1, puffs.count()):
+            delta = (puffs[i].datetaken.date())- puffs[i-1].datetaken.date()
+            if delta <= timedelta(days=1):
+                streak += 1
+            else:
+                break
+    else:
+        streak = "More than one day"
 
     #Just need to implement logic that checks consecutive submissions for each day
     # asthmastreak
@@ -259,7 +301,8 @@ def logbookview():
                     GPname = GPname,
                     GPsurname = GPsurname,
                     GPcode = GPcode,
-                    GPnum = GPnum,)
+                    GPnum = GPnum,
+                    streak = streak)
 
 
     # if request.method == 'POST':
