@@ -20,6 +20,7 @@
 		padding: 0;
 		box-sizing: border-box;
 		border: none;
+		font-family: Trebuchet MS; 
 	}
 	#Air_Quality_Map {
 		position: absolute;
@@ -80,7 +81,7 @@
 		overflow: visible;
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Logbook.html;
+		--web-action-target: logbook;
 		cursor: pointer;
 	}
 	#My_Logbook_ {
@@ -110,7 +111,7 @@
 		transform: matrix(1,0,0,1,0,0);
 		--web-animation: fadein undefineds undefined;
 		--web-action-type: page;
-		--web-action-target: Logbook.html;
+		--web-action-target: logbook;
 		cursor: pointer;
 	}
 	#n__ {
@@ -354,7 +355,7 @@
 	}
 	#FAQ {
 		left: 45px;
-		top: 400px;
+		top: 333px;
 		position: absolute;
 		overflow: visible;
 		width: 45px;
@@ -3484,14 +3485,8 @@ window.application = new Application();
 	<div id="Air_Quality_Info">
 		<span>Air Quality Map and Info</span>
 	</div>
-	<div onclick="application.goToTargetView(event)" id="Air_Quality_Statistics_">
-		<span>Air Quality Statistics </span>
-	</div>
 	<div onclick="application.goToTargetView(event)" id="FAQ">
 		<span>FAQ</span>
-	</div>
-	<div onclick="application.goToTargetView(event)" id="Learn_More">
-		<span>Learn More</span>
 	</div>
 	<div id="Koffing">
 		<span>Koffing</span>

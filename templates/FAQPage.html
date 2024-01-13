@@ -133,6 +133,10 @@
 		white-space: nowrap;
 		text-align: left;
 		font-family: Helvetica Neue;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: asthmainfo;
+		cursor: pointer;
 		font-style: normal;
 		font-weight: bold;
 		font-size: 22px;
@@ -178,6 +182,10 @@
 		text-align: left;
 		font-family: Helvetica Neue;
 		font-style: normal;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: mapinfo;
+		cursor: pointer;
 		font-weight: bold;
 		font-size: 22px;
 		color: rgba(255,255,255,1);
@@ -253,7 +261,7 @@
 		width: 44px;
 		height: 26px;
 		left: 13px;
-		top: 196px;
+		top: 130px;
 		overflow: visible;
 	}
 	#FAQ {
@@ -3779,28 +3787,18 @@ window.application = new Application();
 	</svg>
 	<div id="Repeat_Grid_2">
 		<div id="Group" class="">
-			<div id="Asthma_Information">
+			<div id="Asthma_Information" onclick="application.goToTargetView(event)">
 				<span>Asthma Information</span>
 			</div>
 		</div>
-		<div id="Group_" class="">
-			<div id="Asthma_Information_">
-				<span>Asthma Information</span>
-			</div>
-		</div>
-		<div id="Group_ba" class="">
-			<div id="Air_Quality_Info">
+		<div id="Group_ba" class="" onclick="application.goToTargetView(event)">
+			<div onclick="application.goToTargetView(event)" id="Air_Quality_Info" >
 				<span>Air Quality Map and Info</span>
 			</div>
 		</div>
 		<div id="Group_bb" class="">
 			<div id="Asthma_Information_ba">
 				<span>Asthma Information</span>
-			</div>
-		</div>
-		<div id="Group_bc" class="">
-			<div id="Air_Quality_Statistics_">
-				<span>Air Quality Statistics </span>
 			</div>
 		</div>
 		<div id="Group_bd" class="">
@@ -3818,11 +3816,6 @@ window.application = new Application();
 				<span>Asthma Information</span>
 			</div>
 		</div>
-		<div id="Group_bh" class="">
-			<div id="Learn_More">
-				<span>Learn More</span>
-			</div>
-		</div>
 		<div id="Group_bj" class="">
 			<div id="Asthma_Information_bk">
 				<span>Asthma Information</span>
@@ -3832,7 +3825,7 @@ window.application = new Application();
 	<div id="Koffing">
 		<span>Koffing</span>
 	</div>
-	<img id="puffer" src="puffer.png" srcset="puffer.png 1x, puffer@2x.png 2x">
+	<img id="puffer" src="../static/images/puffer_cartoon.png">
 		
 	<svg class="Line_20" viewBox="0 0 251 1">
 		<path id="Line_20" d="M 0 0 L 251 1">

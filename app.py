@@ -90,11 +90,7 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
 
 bp = Blueprint("main", __name__)
 
-@bp.route("/home")
-def homeview():
-    return(render_template("Home.html"))
-
-@bp.route("/home", methods = ['POST'])
+@bp.route("/home", methods = ['POST','GET'])
 def homepost():
     if request.method == 'POST':
         if 'regpuff' in request.form:
@@ -117,7 +113,7 @@ def homepost():
                             UserDetails = user)    
             db.session.add(puff)
             db.session.commit()  
-            return redirect("/asthmalogpull")
+            return redirect("/home")
         if 'quickpuff' in request.form:
             #Get current time and date, then submit the previous records details
             user = db.session.query(UserDetails).filter_by(id=session['id']).first()
@@ -137,7 +133,9 @@ def homepost():
                             UserDetails = user)    
             db.session.add(puff)
             db.session.commit()  
-            return redirect("/asthmalogpull")
+            return redirect("/home")
+    if request.method == 'GET':
+        return(render_template("Home.html"))
 
 
 @bp.route("/asthmalogpull", methods=['GET'])
@@ -151,7 +149,6 @@ def logpull():
                            puffno = tester.puffno,
                            medname = tester.medname,
                            userid = tester.user_id))
-
 
 @bp.route("/")
 def initial():
@@ -255,7 +252,7 @@ def logbookview():
     email = tester.email
 
     phonenum = tester.phonenum
-    dob = tester.dob
+    dob = tester.dob.date()
     address = tester.address
 
     GPname = tester.GPname
@@ -269,15 +266,24 @@ def logbookview():
     #else : 0
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
     lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
-    print(puffs[0].datetaken.date())
-    print(lastpuff)
+    print("from app:")
+    for i in range(0,puffs.count()):
+        print(puffs[i].datetaken.date())
+    # print(lastpuff)
+    streak = 0
 
     #CAN UNIT TEST THIS!!!!!!!!!!!!
     if lastpuff == timedelta(days=0):
+        streak += 1
         #Run for loop for length of puffs, if time delta is more than 
-        streak = 1
+        for i in range(1, puffs.count()):
+            delta = (puffs[i].datetaken.date())- puffs[i-1].datetaken.date()
+            if delta <= timedelta(days=1):
+                streak += 1
+            else:
+                break
     else:
-        streak = 0
+        streak = "More than one day"
 
     #Just need to implement logic that checks consecutive submissions for each day
     # asthmastreak
