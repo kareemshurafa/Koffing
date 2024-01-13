@@ -384,10 +384,10 @@ def updateview():
 def index():
     return render_template('test.html')
 
-# @bp.route('/logout')
-# def logoutview():
-#     session.pop('logged_in', None)
-#     return redirect("/")
+@bp.route('/logout')
+def logoutview():
+    session.pop('logged_in', None)
+    return redirect("/")
 
 # @bp.route('/submit', methods=['POST'])
 # def submit():
