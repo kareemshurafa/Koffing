@@ -177,12 +177,8 @@ def aqiview():
 @bp.route("/airqualitystats")
 def statsview():
     return render_template("Air_Quality_Stats.html")
-
-@bp.route("/signup")
-def signupview():
-    return render_template("Sign_up_page_template.html")
     
-@bp.route("/signup", methods=['POST'])
+@bp.route("/signup", methods=['POST','GET'])
 def signuppost():
     if request.method == 'POST':
         name = request.form.get('First_name')
@@ -198,13 +194,15 @@ def signuppost():
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
         db.session.add(data)
         db.session.commit()
-    return redirect("/login")
+    #NEED TO DOUBLE CHECK AFTER LOGGING OUT
+    if request.method == 'GET' and session['logged_in'] == True:
+        return redirect("/home")
+    else:
+        return redirect("/login")
+    
 
 ### Test on the form submission and visualisation in template ###
-@bp.route("/login")
-def loginview():
-#After logging in, have to m
-    return render_template('Login_page_template.html')
+
 
 @bp.route("/asthmainfo")
 def asthmainfoview():
@@ -215,33 +213,40 @@ def faqview():
     return render_template("FAQPage.html")
 
 ### Creating a login_post route to handle login logic and re-routing ###
-@bp.route("/login", methods=['POST'])
+@bp.route("/login", methods=['POST', 'GET'])
 def loginpost():
-    Email = request.form.get('Email')
-    password = request.form.get('Password')
- 
-    # Boolean check if they have an account in the database
-    exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
-
-    # If they do not have an account - redirect to sign-up
-    if not exists:
-        return redirect("/signup")
+    if request.method == 'POST':
+        Email = request.form.get('Email')
+        password = request.form.get('Password')
     
-    # Obtain record
-    record = db.session.query(UserDetails).filter_by(email=Email).first()
-    
-    # Boolean check if password is correct
-    pswrd = bcrypt.check_password_hash(record.password, password)
+        # Boolean check if they have an account in the database
+        exists = db.session.query(UserDetails).filter_by(email=Email).first() is not None
 
-    # If they use an incorrect password - redirect to try again
-    if not pswrd:
-        return redirect("/login")
+        # If they do not have an account - redirect to sign-up
+        if not exists:
+            return redirect("/signup")
+        
+        # Obtain record
+        record = db.session.query(UserDetails).filter_by(email=Email).first()
+        
+        # Boolean check if password is correct
+        pswrd = bcrypt.check_password_hash(record.password, password)
 
-    # All checks passed - create user session and redirect to home page
-    session['logged_in'] = True
-    session['id'] = record.id
-    session['email'] = Email
-    return redirect("/home")
+        # If they use an incorrect password - redirect to try again
+        if not pswrd:
+            return redirect("/login")
+
+        # All checks passed - create user session and redirect to home page
+        session['logged_in'] = True
+        session['id'] = record.id
+        session['email'] = Email
+        return redirect("/home")
+    if request.method == 'GET' and session['logged_in'] == True:
+        return redirect("/home")
+    else:
+        return render_template('Login_page_template.html')
+        
+
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
