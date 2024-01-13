@@ -226,7 +226,9 @@ def signuppost():
         if request.method == 'GET' and session['logged_in'] == True:
             return redirect("/home")
     except:
-        return redirect("/login")
+        return render_template("Sign_up_page_template.html")
+    
+### Test on the form submission and visualisation in template ###
 
 @bp.route("/asthmainfo")
 def asthmainfoview():
