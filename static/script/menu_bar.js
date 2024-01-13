@@ -40,6 +40,9 @@ window.application.goToTargetView = function(event) {
     case 'Component_14__8':
       targetUrl = 'logbook';
       break;
+    case 'Icon_awesome-user-alt':
+        targetUrl = 'logbook';
+        break
     default:
       console.error('No target URL defined for element ID:', targetId);
       return;

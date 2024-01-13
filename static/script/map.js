@@ -177,6 +177,7 @@ async function initMap() {
     //Create Heatmap Toggle Button
     var toggleButton = document.createElement('button');
     toggleButton.textContent = 'Air Pollution Heatmap';
+    toggleButton.classList.add('air_heatmap_button');
     toggleButton.addEventListener('click', function () {
         if (airQualityOverlayVisible) {
             // If the overlay is visible, remove it
