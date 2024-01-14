@@ -224,10 +224,10 @@ def signuppost():
         surname = request.form.get('Last_name')
         email = request.form.get('Email_Address')
         password = request.form.get('Password')
-        confpass = request.form.get('Confirm_Password')
+        confpass = request.form.get('Confirm_password')
         
         if password != confpass:
-            error = "The passwords don't match"
+            error = "Invalid credentials"
             return render_template("Sign_up_page_template.html", error = error)
         
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
