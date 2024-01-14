@@ -485,15 +485,14 @@
 #Request:hover #Rectangle_49_bi {
         fill: url(#blueGradient); 
     }
-    #Request:hover #Send_Request {
-        color: white; 
-    }
+   
 
 
 	#Login_here:hover  {
     color: white; 
     
 }
+
 #Rectangle_88 {
 		fill: rgba(255,255,255,1);
 		stroke: rgba(112,112,112,1);
@@ -547,6 +546,9 @@
 		outline: none;
 		width: 362px;
 	}
+	#Submit:hover  {
+        color: white; 
+    }
 
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -657,9 +659,15 @@
 					<stop offset="0" stop-color="#bbbfc1" stop-opacity="1"></stop>
 					<stop offset="1" stop-color="#5e6061" stop-opacity="1"></stop>
 				</linearGradient>
+				<linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+					<stop offset="0%" style="stop-color:#b6d0ff;"/>
+					<stop offset="100%" style="stop-color:#7a9bea;"/>
+				</linearGradient>
+				
 				<rect id="Rectangle_49_bi" rx="40" ry="40" x="0" y="0" width="362" height="96">
 				</rect>
 			</svg>
+			
 			<div id="Submit">
 				<input type="submit" value="Sign-Up" id="Submit" name="sign_up_form">
 			</div>

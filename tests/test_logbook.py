@@ -62,3 +62,12 @@ def test_table(client,app):
 def test_presence(client,app):
     response = client.get("/logbook")
     assert b'<img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">' in response.data
+
+def test_logbook(client):
+    response = client.get("/logbook")
+    info = response.data.decode() #decode binary to string
+
+    assert response.status_code == 200
+
+    #assertions checking existence of some elements, mainly HTML
+

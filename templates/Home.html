@@ -1144,7 +1144,11 @@
 				let addressURL = "https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
 				addressURL = addressURL.replace("{address}", modAddress);
 				let data = await postData(addressURL, {}, "GET");
+				if (data.status == "ZERO_RESULTS"){
+					geolocation = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
+				}else{
 				geolocation = {location: {latitude: data.results[0].geometry.location.lat, longitude: data.results[0].geometry.location.lng},  extraComputations:"HEALTH_RECOMMENDATIONS"};
+				};
 			}
 			return geolocation
 		}
