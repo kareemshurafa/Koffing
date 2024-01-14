@@ -102,7 +102,7 @@ def initial():
         if request.method == 'GET' and session['logged_in'] == True:
             return redirect("/home")
     except:
-        return(render_template("Initial_Page.html"))
+        return(render_template("Initial_Page.html", api_key=os.environ.get('GOOGLE_API')))
     
 @bp.route("/signup", methods=['POST','GET'])
 def signuppost():
