@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- These pages are referenced from AdobeXD, with modifications made to css and html code  -->
+<!-- Java Script added at the end is not referenced and is fully original work-->
 <html>
 <head>
 <meta charset="utf-8"/>
@@ -6,6 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Air Quality Map</title>
 <style id="applicationStylesheet" type="text/css">
+	
+	/* CSS code for page and component styles */
+
 	.mediaViewInfo {
 		--web-view-name: Air Quality Map;
 		--web-view-id: Air_Quality_Map;
@@ -22,6 +27,9 @@
 		border: none;
 		font-family: Trebuchet MS; 
 	}
+
+	/* Styles for the Air Quality Map */
+
 	#Air_Quality_Map {
 		position: absolute;
 		width: 100%;
@@ -233,6 +241,8 @@
 		left: 485px;
 		top: 199px;
 	}
+
+	/* styling API widgets */
 	
 	.aqi-widget {
 		width: 300px;
@@ -544,6 +554,8 @@
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
+<!--javascript for the menu sidebar and map api and widgets added-->
+
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js "></script>
 <script src=" https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js "></script>
@@ -553,6 +565,9 @@
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
 </head>
 <body>
+
+<!--Main HTML code for the page-->
+
 <div id="Air_Quality_Map">
 	<div onclick="application.goToTargetView(event)" id="Component_14__7" class="Component_14___7">
 		<div id="My_Logbook_">
@@ -654,6 +669,9 @@
 		</path>
 	</svg>
 </div>
+<!-- End of AdobeXD reference (note the whole code wasn't extracted however majority of CSS and HTML were, modifications and additional code was added as needed)-->
+<!--Adding dynamics to the static pages by implementing javascript-->
+
 <script src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
 <script type="module" src="{{ url_for('static', filename='script/menu_bar.js') }}" defer></script>
 
