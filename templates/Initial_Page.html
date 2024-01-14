@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- These pages are referenced from adobe_xd, with modifications made to css and html code  -->
+<!-- Java Script added at the end is not referenced and is fully original work-->
 <html>
 <head>
 <meta charset="utf-8"/>
@@ -6,6 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Initial Page</title>
 <style id="applicationStylesheet" type="text/css">
+
+	/* set initial properties for the web view */
 	.mediaViewInfo {
 		--web-view-name: Initial Page;
 		--web-view-id: Initial_Page;
@@ -15,6 +19,8 @@
 	:root {
 		--web-view-ids: Initial_Page;
 	}
+
+	/* Universal reset styles. Maintain consistency and avoid default browser styling */
 	* {
 		margin: 0;
 		padding: 0;
@@ -22,10 +28,12 @@
 		border: none;
 		font-family: Trebuchet MS; 
 	}
+
+	/* Styles for the main container of the initial page. */
 	#Initial_Page {
 		position: absolute;
-		width: 100%;
-		height: 100%;
+		width: 1920px;
+		height: 1080px;
 		background-color: rgba(231,240,252,1);
 		overflow: hidden;
 		--web-view-name: Initial Page;
@@ -39,7 +47,7 @@
 	}
 	@keyframes  {
 	
-	
+	/* Heading and subheading */
 	}
 	#WELCOME_TO_KOFFING__An_Imperia {
 		left: 325px;
@@ -55,6 +63,8 @@
 		font-size: 40px;
 		color: rgba(0,0,0,1);
 	}
+
+    /* Adding the buttons */
 	#LogIn_Button {
 		position: absolute;
 		width: 436.673px;
@@ -163,6 +173,8 @@
 		font-size: 35px;
 		color: rgba(112,112,112,1);
 	}
+
+	/* Images on the side of the screen */
 	#Asthma {
 		position: absolute;
 		width: 612px;
@@ -179,6 +191,8 @@
 		top: 538px;
 		overflow: visible;
 	}
+
+	/* Add the button hovering and change of colour */
 	#LogIn_Button:hover  #Log_In{
 		fill:transparent;
 	    color: white; 
@@ -198,13 +212,17 @@
 	
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<!-- Adding dynamics to the page using Java scripts-->
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
 </head>
 <body>
 <div id="Initial_Page">
+	<!-- Title and subheading -->
 	<div id="WELCOME_TO_KOFFING__An_Imperia">
 		<span>WELCOME TO KOFFING</span><br/><span style="font-family:Impact;font-style:normal;font-weight:normal;font-size:27px;"> </span><span style="font-style:normal;font-weight:normal;font-size:35px;">An Imperial College London based web app offering a novel approach to asthma tracking</span><span style="font-family:Impact;font-style:normal;font-weight:normal;font-size:27px;"> </span>
 	</div>
+
+	<!-- Adding dynamics to teh page using Java Script-->
 	<div onclick="application.goToTargetView(event)" id="LogIn_Button" class="LogIn_Button">
 		<div id="Component_2__1" class="Component_2___1">
 			<svg class="Rectangle_7">
@@ -217,18 +235,21 @@
 			<span>Log In</span>
 		</div>
 	</div>
+	<!-- Adding the buttons -->
 	<div id="Account_Button" class="Account_Button">
 		<svg class="Rectangle_9">
 			<rect id="Rectangle_9" rx="35" ry="35" x="0" y="0" width="436.672" height="85">
 			</rect>
 		</svg>
 		
+		<!-- Adding dynamics to teh page using Java Script-->
 		<div onclick="application.goToTargetView(event)" id="Create_Account_">
 			<span>Create Account </span>
 		</div>
 	</div>
 	<svg>
 		<defs>
+			<!-- Adding the gradient colour for hobvering button -->
 			<linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
 				<stop offset="0%" style="stop-color:#b6d0ff;"/>
 				<stop offset="100%" style="stop-color:#7a9bea;"/>
@@ -239,10 +260,12 @@
 	<div id="Text">
 		<span></span>
 	</div>
+	<!-- Add the two images -->
 	<img id="Asthma" src="../static/images/Asthma.png">
 		
 	<img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">
 		
 </div>
 </body>
+<!-- End of reference-->
 </html>
