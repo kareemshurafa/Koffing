@@ -42,18 +42,6 @@ class UserDetails(db.Model):
         #lazy = True - load the data as necessary 
     asthmapuffs = db.relationship('PuffHistory',backref='UserDetails',lazy=True)
 
-# class AsthmaDetails(db.Model):
-#     __tablename__ = 'AsthmaDetails'
-#     id = db.Column(db.Integer,primary_key = True)
-#     asthmastep = db.Column(db.String(50),nullable=True)
-#     actscore = db.Column(db.String(50),nullable=True)
-#     peakflowvar =  db.Column(db.String(50),nullable=True)
-#     fev1 = db.Column(db.String(50),nullable=True)
-#     fevsratio = db.Column(db.String(50),nullable=True)
-#     peakflowreading = db.Column(db.String(50),nullable=True)
-
-#     user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
-
 class PuffHistory(db.Model):
     __tablename__='PuffHistory'
     id = db.Column(db.Integer,primary_key = True)
@@ -62,12 +50,12 @@ class PuffHistory(db.Model):
     dosageamt = db.Column(db.Integer,nullable=False)
     puffno = db.Column(db.Integer,nullable=False)
     datetaken = db.Column(db.DateTime,default=datetime.now().date())
-    timetaken = db.Column(db.DateTime,default=datetime.now().time()) #NEED TO MAKE SURE JUST TIME
+    timetaken = db.Column(db.DateTime,default=datetime.now().time())
     peakflow = db.Column(db.Float,nullable=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('UserDetails.id'))
 
-#----------------------------------------------------------
+#--------------------App Creation---------------------
 
 def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc5e731015a768577b68f1907654be99a76127df98811@ec2-63-34-69-123.eu-west-1.compute.amazonaws.com:5432/dfuerbg1k2hvm2'):
     app = Flask(__name__)
@@ -80,21 +68,14 @@ def create_app(database_URI = 'postgresql://hvjmvqxxszylxg:3d1cdb2f1927cdb2ab1dc
         app.config['SQLALCHEMY_DATABASE_URI'] = database_URI
     else:
         app.debug = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = database_URI
-
-    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    # db.init_app(app)
-    # login_manager.init_app(app) 
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_URI 
 
     app.register_blueprint(bp)
     return app
 
 bp = Blueprint("main", __name__)
 
-
-#-----------------------------------------------------------
-
+#------------------Routes---------------------
 
 @bp.route("/")
 def initial():
@@ -107,30 +88,34 @@ def initial():
 @bp.route("/signup", methods=['POST','GET'])
 def signuppost():
     if request.method == 'POST':
+
         name = request.form.get('First_name')
         surname = request.form.get('Last_name')
         email = request.form.get('Email_Address')
         password = request.form.get('Password')
-        confpass = request.form.get('Confirm_Password')
-        # if password != confpass:
-        #     # return redirect("/signup")
-        #     flash("Passwords do not match!")
-        # else:
+        confpass = request.form.get('Confirm_password')
+
         exists = db.session.query(UserDetails).filter_by(email=email).first() is not None
+
         if exists:
             error = "User already exists"
+            return render_template('Sign_up_page_template.html', error = error)
+        
+        if password != confpass:
+            error = "Passwords do not match"
             return render_template('Sign_up_page_template.html', error = error)
 
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
+        record = db.session.query(UserDetails).filter_by(email=email).first()
+        
         db.session.add(data)
         db.session.commit()
+
         session['logged_in'] = True
-        record = db.session.query(UserDetails).filter_by(email=email).first()
         session['id'] = record.id
         session['email'] = email
         return redirect("/home")
-    #NEED TO DOUBLE CHECK AFTER LOGGING OUT
     try: 
         if request.method == 'GET' and session['logged_in'] == True:
             return redirect("/home")
@@ -181,10 +166,12 @@ def loginpost():
 def homepost():
     if not session.get('logged_in'):
         return render_template("Login_Redirect.html")
+    
     puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
     user = db.session.query(UserDetails).filter_by(id=session['id']).first()
     currAddress = user.address
     puffcount = puffs.count()
+
     if request.method == 'POST':
         if 'regpuff' in request.form:
             date_format = '%Y-%m-%d'
@@ -196,12 +183,11 @@ def homepost():
             puffno = request.form.get('Number_of_puffs')
             medname = request.form.get('Medname')
 
-            #If someone tries to submit a time in the future, just default it to the current time
+            #Defaults to current time if future time passed
             timediff = datetime.combine(datetime.today(), time.time()) - datetime.now()
             if timediff > timedelta(seconds=0):
                 time = datetime.now()
-            # peakflow = request.form.get('peakflow')
-            user = db.session.query(UserDetails).filter_by(id=session['id']).first()
+
             puff = PuffHistory(inhalertype = inhalertype,
                             medname = medname,
                             dosageamt = dosageamt,
@@ -212,10 +198,10 @@ def homepost():
             db.session.add(puff)
             db.session.commit()  
             return redirect("/home")
+        
         if 'quickpuff' in request.form:
             #Get current time and date, then submit the previous records details
-            user = db.session.query(UserDetails).filter_by(id=session['id']).first()
-            # puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
+            
             if puffs.count() != 0:
                 user = db.session.query(UserDetails).filter_by(id=session['id']).first()
                 lastpuff = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id = session['id']).first()
@@ -225,6 +211,7 @@ def homepost():
                 dosageamt = lastpuff.dosageamt
                 puffno = lastpuff.puffno
                 medname = lastpuff.medname
+
                 puff = PuffHistory(inhalertype = inhalertype,
                                 medname = medname,
                                 dosageamt = dosageamt,
@@ -255,10 +242,6 @@ def aqiview():
 def statsview():
     return render_template("Air_Quality_Stats.html")
     
-
-    
-### Test on the form submission and visualisation in template ###
-
 @bp.route("/asthmainfo")
 def asthmainfoview():
     if not session.get('logged_in'):
@@ -274,15 +257,9 @@ def faqview():
 def logbookview():
     if not session.get('logged_in'):
         return render_template("Login_Redirect.html")
-
-    # This differentiates between the POST requests from signing up and updating the extra details form
-    # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
-    # That might have to do with Flask User Sessions but we'll see - main thing is to get the connection with the database !!
     
     tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
-    # tester = db.session.query(UserDetails).filter_by(email="test@gmail.com").first()
-    # tester.address = "Wellington House, 133-135 Waterloo Road, London, SE1 8UG"
-    # db.commit()
+
     name = tester.firstname
     surname = tester.surname
     email = tester.email
@@ -299,7 +276,7 @@ def logbookview():
 
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.datetaken.desc()).filter_by(user_id=session['id'])
 
-    ############Asthma Log Table#############
+    #-------------Asthma Log Table-------------
     puffsdict = {
         1 : {
             "time" : "",
@@ -340,7 +317,7 @@ def logbookview():
     if puffs.count() != 0:
         for i in range(0,puffs.count()):
             if i > 4:
-                #Table cannot go more than 5
+                #As table cannot go more than 5
                 break
             if puffs[i] is not None:
                 lastpuff = datetime.now().date()-(puffs[i].datetaken.date())
@@ -350,7 +327,7 @@ def logbookview():
                     time2 = puffs[i].timetaken.time()
                     timediff = datetime.now() - datetime.combine(datetime.today(), time2)
                     timediff = str(timediff.seconds//3600) + " hours ago"
-                    # timediff = str(24-timediff.seconds//3600) + " hours ago"
+
                 else:
                     #Display in days ago
                     timediff = str(abs(lastpuff))[0] + " days ago"
@@ -361,9 +338,10 @@ def logbookview():
             else:   
                 pass
 
-    ############Asthma Streak###########
-    #Check if puff happened in the past 24 hours, if yes, count number of puffs within every 24 hours
-    #else : 0
+    #--------------Asthma Streak-------------
+    #Check if puff happened in the past 24 hours, 
+    #true: count total number of puffs
+    #else: 0
     streak = 0
 
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.datetaken.desc()).filter_by(user_id=session['id'])
@@ -373,7 +351,7 @@ def logbookview():
 
         if lastpuff == timedelta(days=0):
             streak += 1
-            #Run for loop for length of puffs, if time delta is more than 
+
             for i in range(1, puffs.count()):
                 delta = (puffs[i].datetaken.date())- puffs[i-1].datetaken.date()
                 if abs(delta) <= timedelta(days=1):
@@ -414,8 +392,6 @@ def updatepost():
 
         # if something inputted, normal
         # if empty - forget about it
-
-        print(phone_number)
 
         if phone_number != "":
             user.phonenum = phone_number
@@ -460,27 +436,11 @@ def logoutview():
     session.pop('logged_in', None)
     return redirect("/")
 
-# @bp.route('/submit', methods=['POST'])
-# def submit():
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         inhaler = request.form['inhaler']
-#         # print(name,inhaler)
-#         if name =='' or inhaler=='':
-#             return render_template('test.html', message='Please enter required fields')
-
-#         if db.session.query(TestModel).filter(TestModel.name == name).count() == 0:
-#              #Says that the customer does not exist
-#             data = TestModel(name,inhaler) #Form data that we want to submit
-#             db.session.add(data)
-#             db.session.commit()
-#             return "<h2 style='color:red'>Yipee!</h2>"
-#         return render_template('test.html', message='You have already submitted')
-
 app = create_app()
 db.init_app(app)
 bcrypt = Bcrypt(app)
 app.secret_key = b'8dh3w90fph#3r'
+#ONLY TO BE RUN IF REMAKING DATABASES:
 # with app.app_context():
 #     db.drop_all()
 #     db.create_all()
