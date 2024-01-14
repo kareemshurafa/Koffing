@@ -1,20 +1,25 @@
+// Get Google API Key securely
 var apiKey = document.getElementById('apiKey').dataset.key;
 
 // GET method
 async function getData(url = "") {
+    try{
         const response = await fetch(url, {
-            method: "GET", 
-            });
-            return response.json();
+            method: "GET"
+        });
+        return response.json();
+    }catch (error) {
+        console.error('Error fetching data:', error);
+    }
 }
 
-// Parse location coordinate to API
+// Parse location coordinate into Address
 function locationFinder(lat, lng) {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`;
     return url;
 }
 
-// Change Widget Colour 
+// Change Widget Colour according to current value
 function getAqiColor(aqiValue) {
     if (aqiValue >= 1 && aqiValue <= 19) {
         return '#800000'; // Hazardous (Maroon)
@@ -33,16 +38,20 @@ function getAqiColor(aqiValue) {
 
 // Update Widget based on data given
 function updateWidget(data, lat, lng) {
+    // Get Widget from HTML file
     var widget = document.getElementById('aqiWidget');
     var aqiValue = data.indexes[0].aqi;
     widget.style.backgroundColor = getAqiColor(aqiValue);
+
+    //Update Widget information and elements
     document.getElementById('aqiLevel').innerText = data.indexes[0].category;
     document.getElementById('aqiValue').innerText = aqiValue;
     document.getElementById('aqiUpdateTime').innerText = `Updated ${new Date(data.dateTime).toLocaleTimeString()}`;
     document.getElementById('aqiHealthRecc').innerText = data.healthRecommendations["generalPopulation"];
     document.getElementById('aqiDomPollution').innerText = `Dominant Pollutant: ${data.indexes[0].dominantPollutant}`;
-    getData(locationFinder(lat, lng)).then((data) => {
-        console.log(data);
+
+    // Get Current Location from coordinates
+    getData(locationFinder(lat, lng)).then((data) => {;
         if (data.results[0].address_components[1] === undefined){
             document.getElementById('aqiLocation').innerText = data.results[0].address_components[0].long_name;
         } else {
