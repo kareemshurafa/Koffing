@@ -38,7 +38,8 @@ function addParametersToURL(url, params) {
 
 // Get Air Quality Data from API
 async function getAQIData(dataLoc){
-    const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+    const AQInfo_URL = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${apiKey}`;
+    console.log(AQInfo_URL)
     postData(AQInfo_URL, dataLoc, "POST").then((data) => {
         updateWidget(data, dataLoc.location.latitude, dataLoc.location.longitude);
     });
@@ -64,7 +65,8 @@ class AirQualityHeatmap{
         params.x = coord.x;
         params.y = coord.y;
         const opacity = 0.45
-        let heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/UAQI_RED_GREEN/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+        let heatmapURl = `https://airquality.googleapis.com/v1/mapTypes/UAQI_RED_GREEN/heatmapTiles/${zoom}/${coord.x}/${coord.y}?key=${apiKey}`;
+        console.log(heatmapURl)
         heatmapURl = addParametersToURL(heatmapURl, params);
         div.innerHTML = `<img style="opacity: ${opacity}"src="${heatmapURl}" alt="Air Quality Tile">`;
         return div;
@@ -96,11 +98,8 @@ async function geocoder(address) {
 async function initMap() {
       // Create the search box and link it to the UI element.
     let location;
-    if(address){
-        location =  await geocoder(address);
-    } else{
-        location = { lat: 51.498356, lng: -0.176894};
-    };
+
+    location = { lat: 51.498356, lng: -0.176894};
     
     //Initialise map
     const map = await new google.maps.Map(document.getElementById("map"), {
