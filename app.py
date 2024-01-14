@@ -104,6 +104,30 @@ def initial():
     except:
         return(render_template("Initial_Page.html"))
     
+@bp.route("/signup", methods=['POST','GET'])
+def signuppost():
+    if request.method == 'POST':
+        name = request.form.get('First_name')
+        surname = request.form.get('Last_name')
+        email = request.form.get('Email_Address')
+        password = request.form.get('Password')
+        confpass = request.form.get('Confirm_Password')
+        # if password != confpass:
+        #     # return redirect("/signup")
+        #     flash("Passwords do not match!")
+        # else:
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
+        data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
+        db.session.add(data)
+        db.session.commit()
+        return redirect("/home")
+    #NEED TO DOUBLE CHECK AFTER LOGGING OUT
+    try: 
+        if request.method == 'GET' and session['logged_in'] == True:
+            return redirect("/home")
+    except:
+        return render_template("Sign_up_page_template.html")
+    
 @bp.route("/login", methods=['POST', 'GET'])
 def loginpost():
     if request.method == 'POST':
@@ -157,6 +181,9 @@ def homepost():
             dosageamt = request.form.get('Dosage')
             puffno = request.form.get('Number_of_puffs')
             medname = request.form.get('Medname')
+            delt = time - datetime.now()
+            if delt > timedelta(seconds=0):
+                time = datetime.now()
             # peakflow = request.form.get('peakflow')
             user = db.session.query(UserDetails).filter_by(id=session['id']).first()
             puff = PuffHistory(inhalertype = inhalertype,
@@ -212,29 +239,7 @@ def aqiview():
 def statsview():
     return render_template("Air_Quality_Stats.html")
     
-@bp.route("/signup", methods=['POST','GET'])
-def signuppost():
-    if request.method == 'POST':
-        name = request.form.get('First_name')
-        surname = request.form.get('Last_name')
-        email = request.form.get('Email_Address')
-        password = request.form.get('Password')
-        confpass = request.form.get('Confirm_Password')
-        # if password != confpass:
-        #     # return redirect("/signup")
-        #     flash("Passwords do not match!")
-        # else:
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
-        data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
-        db.session.add(data)
-        db.session.commit()
-        return redirect("/home")
-    #NEED TO DOUBLE CHECK AFTER LOGGING OUT
-    try: 
-        if request.method == 'GET' and session['logged_in'] == True:
-            return redirect("/home")
-    except:
-        return render_template("Sign_up_page_template.html")
+
     
 ### Test on the form submission and visualisation in template ###
 
@@ -325,8 +330,11 @@ def logbookview():
                 lastpuff = datetime.now().date()-(puffs[i].datetaken.date())
                 if lastpuff == timedelta(days=0):
                     #Display in hours ago
-                    timediff = datetime.now() - (puffs[i].timetaken)
+                    time1 = datetime.now().time()
+                    time2 = puffs[i].timetaken.time()
+                    timediff = datetime.combine(datetime.today(), time2) - datetime.combine(datetime.today(), time1)
                     timediff = str(timediff.seconds//3600) + " hours ago"
+                    # timediff = str(24-timediff.seconds//3600) + " hours ago"
                 else:
                     #Display in days ago
                     timediff = str(abs(lastpuff))[0] + " days ago"
