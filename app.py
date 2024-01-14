@@ -218,7 +218,7 @@ def homepost():
             # puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
             if puffs.count() != 0:
                 user = db.session.query(UserDetails).filter_by(id=session['id']).first()
-                lastpuff = db.session.query(PuffHistory).filter_by(user_id = session['id']).first()
+                lastpuff = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id = session['id']).first()
                 date = datetime.now()
                 time = datetime.now()
                 inhalertype = lastpuff.inhalertype
