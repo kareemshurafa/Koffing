@@ -53,6 +53,7 @@ def test_table(client,app):
                                             })
     
     response = client.get("/logbook")
+    assert response.status_code == 200
     for i in range(1,6):
         currentdateobj = currentdateobj + delta
         currentdate = currentdateobj.strftime(date_format)
@@ -62,25 +63,5 @@ def test_table(client,app):
 def test_presence(client,app):
     response = client.get("/logbook")
     assert b'<img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">' in response.data
-
-def test_logbook(client):
-    response = client.get("/logbook")
-    info = response.data.decode() #decode binary to string
-
-    assert response.status_code == 200
-    def test_web_1920_2(client):
-    response = client.get("/web_1920_2")
-    info = response.data.decode()  # Decode binary to string
-
-    assert response.status_code == 200
-    
-    #assertions checking existence of important HTML elements
-    assert '<div id="Home">' in info  # Home button or link
-    assert '<table id="Component_53__1">' in info  # Table for displaying data
-    assert 'First Name: {{first_name}}' in info  # Placeholder for first name
-    assert 'Surname: {{surname}}' in info  # Placeholder for surname
-    assert 'Email: {{email}}' in info  # Placeholder for email
-    assert '<button id="Update_Details_Button"' in info  # Check for Update Details button
-
     
 

@@ -297,7 +297,7 @@ def logbookview():
     GPaddress = tester.GPaddress
     GPnum = tester.GPnum
 
-    puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
+    puffs = db.session.query(PuffHistory).order_by(PuffHistory.datetaken.desc()).filter_by(user_id=session['id'])
 
     ############Asthma Log Table#############
     puffsdict = {
@@ -366,6 +366,8 @@ def logbookview():
     #else : 0
     streak = 0
 
+    puffs = db.session.query(PuffHistory).order_by(PuffHistory.datetaken.desc()).filter_by(user_id=session['id'])
+
     if puffs.count() != 0:
         lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
 
@@ -374,13 +376,12 @@ def logbookview():
             #Run for loop for length of puffs, if time delta is more than 
             for i in range(1, puffs.count()):
                 delta = (puffs[i].datetaken.date())- puffs[i-1].datetaken.date()
-                if delta <= timedelta(days=1):
+                if abs(delta) <= timedelta(days=1):
                     streak += 1
                 else:
                     break
         else:
             streak = 0
-
 
     return render_template("New_Logbook_template.html",
                     first_name = name,
