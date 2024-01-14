@@ -1033,6 +1033,7 @@
 		position: absolute;
 		overflow: visible;
 		width: 184px;
+		height: 200px;
 		white-space: nowrap;
 		text-align: left;
 		font-family: Helvetica Neue;
@@ -1043,6 +1044,21 @@
 	}
 	#Home:hover  {
 	    color: black;	
+	}
+	#Update_Details_Button {
+		left: 200px;
+		top: 1000px;
+		position: absolute;
+		width: 300px;
+		height: 50px;
+		text-align: center;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(70,69,69,1);
+		border-radius: 20px;
+		border-color: black;
 	}
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -1199,7 +1215,7 @@
 				{%endif%}
 		</div>
 		<div id="GP_Address">
-			{% if GPaddress == None or GPaddress == null%}
+			{% if GPaddress == None or GPaddress == null %}
 				<span>GP Address</span>
 				{%else%}
 				<span>{{GPaddress}}</span>
@@ -1363,6 +1379,11 @@
         window.location.href = 'home'; 
     });
 	</script>
+	<div>
+		<a href="/update">
+		<button id="Update_Details_Button" href="/update">Update Details</button>
+		</a>
+	</div>
 </div>
 </body>
 </html>

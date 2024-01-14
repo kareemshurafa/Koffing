@@ -312,6 +312,7 @@ def logbookview():
                     GPsurname = GPsurname,
                     GPcode = GPcode,
                     GPnum = GPnum,
+                    GPaddress = GPaddress,
                     streak = streak)
 
 
@@ -382,38 +383,30 @@ def updatepost():
 
     print(phone_number)
 
-    if phone_number != None or "":
+    if phone_number != "":
         user.phonenum = phone_number
-        # db.session.commit()
-    
-    if dob != None or "":
+
+    if dob != "":
         user.dob = dob
-        # db.session.commit()
 
-    if address != None or "":
+    if address != "":
         user.address = address
-        # db.session.commit()
 
-    if gp_name != None or "":
+    if gp_name != "":
         user.GPname = gp_name
-        # db.session.commit()
 
-    if gp_surname != None or "":
+    if gp_surname != "":
         user.GPsurname = gp_surname
-        # db.session.commit()
 
-    if gp_code != None or "":
+    if gp_code != "":
         user.GPcode = gp_code
-        # db.session.commit()
 
-    if gp_address != None or "":
+    if gp_address != "":
         user.GPaddress = gp_address
-        # db.session.commit()
 
-    if gp_phone != None or "":
+    if gp_phone != "":
         user.GPnum = gp_phone
-        # db.session.commit()
-    
+
     db.session.commit()
     return redirect("/logbook")
 
