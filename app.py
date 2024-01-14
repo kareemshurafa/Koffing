@@ -211,7 +211,7 @@ def aqiview():
     # tester.address = "W2 3ET"
     # address = tester.address
     # return render_template('Air_Quality_Map.html', address = address)
-    return render_template('Air_Quality_Map.html')
+    return render_template('Air_Quality_Map.html', api_key=os.environ.get('GOOGLE_API'))
 
 @bp.route("/airqualitystats")
 def statsview():
