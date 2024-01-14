@@ -1096,6 +1096,7 @@
 		<path id="Line_19" d="M 0 5 L 1415 0">
 		</path>
 	</svg>
+	<div id="apiKey" data-key="{{ api_key }}" style="display: none;"></div>
 	<div id="check_button" class="check_button">
 		<svg class="Path_32" width="400" height="180">
 			<rect x="50" y="20" rx="20" ry="20" width="600" height="300"
@@ -1138,15 +1139,15 @@
 					console.error('Error fetching data:', error);
 				}
 		};
-		
+		var apiKey = document.getElementById('apiKey').dataset.key;
 		async function getLocation(address){
 			let geolocation;
 			if (address.length === 0 || address == "None"){
 				geolocation = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
 			} else{
 				let modAddress = address.replace(/ /gi, "%20");
-				let addressURL = "https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
-				addressURL = addressURL.replace("{address}", modAddress);
+				let addressURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${modAddress}&key=${apiKey}`
+				console.log(addressURL);
 				let data = await postData(addressURL, {}, "GET");
 				if (data.status == "ZERO_RESULTS"){
 					geolocation = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
