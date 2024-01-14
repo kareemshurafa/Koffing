@@ -110,7 +110,7 @@ def signuppost():
         
         db.session.add(data)
         db.session.commit()
-        
+
         record = db.session.query(UserDetails).filter_by(email=email).first()
 
         session['logged_in'] = True
@@ -358,7 +358,40 @@ def logbookview():
                     break
         else:
             streak = 0
+    
+    #--------- Have to prompt when to get a new inhaler, when they are taking too many----------
+    #When to get a new inhaler:
+            #If for a specific name of inhaler, the number of puffs
+            #If it exceeds an amount, put a suggestion "you may need to replace your {medname} inhaler"
+    if puffs.count() != 0:
+        totaldose = 0
+        replace = []
+        puffs = db.session.query(PuffHistory).order_by(PuffHistory.medname.desc()).filter_by(user_id=session['id']) 
+        #Puffs filtered by the medicine name
+        puffname = puffs.first().medname()
+        for i in range(0,len(puffs)):
+            if puffs.medname() == puffname:
+                totaldose += puffs[i].dosageamt
+                if totaldose >= 200:
+                    replace += puffname
+                    replacemsg = f"You may need to replace your {replace} inhaler"                 
+            else:
+                puffname = puffs[i+1].medname()
+                totaldose = 0
+    #If taking too many:
+            #Find number of puffs x the number of entries in a specific day
+            #If it exceeds 4 for reliever, combination or long-acting, suggest you may be taking too many
+    if puffs.count() != 0:
+        puffs = db.session.query(PuffHistory).filter_by(user_id=session['id'])
+        puffs = puffs.filter_by(datetaken=datetime.now().date())
+        entries = 0
+        for puff in puffs:
+            entries += puff.puffno
+        if entries > 4:
+            exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more."
 
+    
+   
     return render_template("New_Logbook_template.html",
                     first_name = name,
                     surname = surname,
