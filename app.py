@@ -274,6 +274,9 @@ def logbookview():
 
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.datetaken.desc()).filter_by(user_id=session['id'])
 
+    replacemsg = None
+    exceedmsg = None
+
     #-------------Asthma Log Table-------------
     puffsdict = {
         1 : {
@@ -405,7 +408,9 @@ def logbookview():
                     GPnum = GPnum,
                     GPaddress = GPaddress,
                     streak = streak,
-                    puffs = puffsdict)
+                    puffs = puffsdict,
+                    replacemsg = replacemsg,
+                    exceedmsg = exceedmsg)
 
 @bp.route("/update", methods=['POST', 'GET'])
 def updatepost():
