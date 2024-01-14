@@ -41,7 +41,6 @@ async function getAQIData(dataLoc){
     const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
     postData(AQInfo_URL, dataLoc, "POST").then((data) => {
         updateWidget(data, dataLoc.location.latitude, dataLoc.location.longitude);
-        
     });
     // Get Historical AQI data from import function
     aqiChart(dataLoc.location.latitude, dataLoc.location.longitude);

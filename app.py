@@ -8,6 +8,7 @@ from datetime import datetime,timedelta
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_login import LoginManager
+import yagmail
 
 db=SQLAlchemy()
 login_manager = LoginManager()
@@ -23,7 +24,7 @@ class UserDetails(db.Model):
     email = db.Column(db.String(50),nullable=False, unique=True)
     password = db.Column(db.String(128),nullable = False)
 
-    phonenum = db.Column(db.Integer,nullable=True,unique=True)
+    phonenum = db.Column(db.String,nullable=True,unique=True)
     dob = db.Column(db.DateTime,default=datetime.utcnow,nullable=True)
     address = db.Column(db.String(50),nullable=True)
 
@@ -31,7 +32,7 @@ class UserDetails(db.Model):
     GPsurname = db.Column(db.String(50),nullable=True)
     GPcode = db.Column(db.String(30),nullable=True)
     GPaddress = db.Column(db.String(200), nullable = True)
-    GPnum = db.Column(db.Integer(),nullable=True) 
+    GPnum = db.Column(db.String(),nullable=True) 
 
     latitude = db.Column(db.Float(), nullable = True)
     longitude = db.Column(db.Float(), nullable = True)
@@ -141,6 +142,8 @@ def loginpost():
 @bp.route("/home", methods = ['POST','GET'])
 def homepost():
     puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
+    user = db.session.query(UserDetails).filter_by(id=session['id']).first()
+    currAddress = user.address
     puffcount = puffs.count()
     if request.method == 'POST':
         if 'regpuff' in request.form:
@@ -191,24 +194,7 @@ def homepost():
             return redirect("/home")
                 
     if request.method == 'GET':
-        return(render_template("Home.html",puffcount = puffcount))
-
-
-@bp.route("/asthmalogpull", methods=['GET'])
-def logpull():
-    tester = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])[0]
-    return(render_template("log.html", 
-                           date = tester.datetaken,
-                           time = tester.timetaken,
-                           type = tester.inhalertype,
-                           dosage = tester.dosageamt,
-                           puffno = tester.puffno,
-                           medname = tester.medname,
-                           userid = tester.user_id))
-
-# @bp.route('/database/test', methods = ['GET', 'POST'] ) #Double check these methods
-# def add_user():
-#     return(render_template("Login_page_template.html"))
+        return(render_template("Home.html",puffcount = puffcount, address = currAddress))
 
 @bp.route("/mapinfo")
 def aqiview():
@@ -243,7 +229,7 @@ def signuppost():
         if request.method == 'GET' and session['logged_in'] == True:
             return redirect("/home")
     except:
-        return redirect("/login")
+        return render_template("Sign_up_page_template.html")
     
 ### Test on the form submission and visualisation in template ###
 
@@ -254,11 +240,6 @@ def asthmainfoview():
 @bp.route("/faq")
 def faqview():
     return render_template("FAQPage.html")
-
-### Creating a login_post route to handle login logic and re-routing ###
-
-        
-
 
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
@@ -294,13 +275,14 @@ def logbookview():
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
     if puffs.count() != 0:
         lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
-        print("from app:")
-        for i in range(0,puffs.count()):
-            print(puffs[i].datetaken.date())
+        # print("from app:")
+        # for i in range(0,puffs.count()):
+        #     print(puffs[i].datetaken.date())
         # print(lastpuff)
         
+        # for i in range(1,puffs.count()):
+        #     puff1 = 
 
-    #CAN UNIT TEST THIS!!!!!!!!!!!!
         if lastpuff == timedelta(days=0):
             streak += 1
             #Run for loop for length of puffs, if time delta is more than 
@@ -312,6 +294,7 @@ def logbookview():
                     break
         else:
             streak = 0
+
 
     #Just need to implement logic that checks consecutive submissions for each day
     # asthmastreak
@@ -462,8 +445,9 @@ app = create_app()
 db.init_app(app)
 bcrypt = Bcrypt(app)
 app.secret_key = b'8dh3w90fph#3r'
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.drop_all()
+#     db.create_all()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

@@ -24,8 +24,8 @@
 	}
 	#Initial_Page {
 		position: absolute;
-		width: 1918px;
-		height: 1078px;
+		width: 100%;
+		height: 100%;
 		background-color: rgba(231,240,252,1);
 		overflow: hidden;
 		--web-view-name: Initial Page;
@@ -179,6 +179,23 @@
 		top: 538px;
 		overflow: visible;
 	}
+	#LogIn_Button:hover  #Log_In{
+		fill:transparent;
+	    color: white; 
+	}
+	#LogIn_Button:hover #Rectangle_7{
+		fill:transparent;
+        fill: url(#blueGradient); 
+	}
+	#Account_Button:hover #Rectangle_9{
+		fill:transparent;
+        fill: url(#blueGradient); 
+	}
+	#Account_Button:hover #Create_Account_ {
+		fill:transparent;
+	    color: white; 
+	}
+	
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
@@ -194,6 +211,7 @@
 				<rect id="Rectangle_7" rx="42.5" ry="42.5" x="0" y="0" width="436.673" height="85">
 				</rect>
 			</svg>
+			
 		</div>
 		<div id="Log_In">
 			<span>Log In</span>
@@ -204,10 +222,20 @@
 			<rect id="Rectangle_9" rx="35" ry="35" x="0" y="0" width="436.672" height="85">
 			</rect>
 		</svg>
+		
 		<div onclick="application.goToTargetView(event)" id="Create_Account_">
 			<span>Create Account </span>
 		</div>
 	</div>
+	<svg>
+		<defs>
+			<linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+				<stop offset="0%" style="stop-color:#b6d0ff;"/>
+				<stop offset="100%" style="stop-color:#7a9bea;"/>
+			</linearGradient>
+		</defs>
+		
+	</svg>
 	<div id="Text">
 		<span></span>
 	</div>

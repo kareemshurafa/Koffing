@@ -343,6 +343,11 @@
 		color: black;
 		font-weight: bold;
 	}
+	.aqi-pollutants {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black
+	}
 	.aqi-update-time {
 		font-size: 15px;
 		color: black
@@ -1083,30 +1088,59 @@
 			<div class="aqi-value" id="aqiValue">Loading Data... Please Wait</div>
 			<div class="aqi-location" id="aqiLocation"></div>
 			<div class="aqi-health" id="aqiHealthRecc"></div>
+			<div class ="aqi-pollutants" id= "aqiDomPollution"></div>
 			<div class="aqi-update-time" id="aqiUpdateTime"></div>
 		</div>
 	</div>
+	<script>
+		var address = '{{address}}';
+	</script>
 	<script src="{{ url_for('static', filename='script/aqi_widget.js') }}"></script>
 	<script>
 		async function postData(url = "", data = {}, mode) {
 			// Default options are marked with *
 			try{
-			const response = await fetch(url, {
-				method: mode, // *GET, POST, PUT, DELETE, etc.
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data), // body data type must match "Content-Type" header
-				});
-				// console.log(JSON.stringify(data))
-				return response.json(); // parses JSON response into native JavaScript objects
-			} catch (error) {
-				console.error('Error fetching data:', error);
-			}
+				if (mode == "POST"){
+					const response = await fetch(url, {
+						method: "POST", // *GET, POST, PUT, DELETE, etc.
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(data), // body data type must match "Content-Type" header
+						});
+						return response.json(); // parses JSON response into native JavaScript objects
+					} else{
+						const response = await fetch(url, {
+							method: "GET", // *GET, POST, PUT, DELETE, etc.
+						});
+						return response.json(); // parses JSON response into native JavaScript objects
+					}
+				} catch (error) {
+					console.error('Error fetching data:', error);
+				}
 		};
-		const currLoc = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
+		
+		async function getLocation(address){
+			let geolocation;
+			if (address.length === 0 || address == "None"){
+				geolocation = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
+			} else{
+				let modAddress = address.replace(/ /gi, "%20");
+				let addressURL = "https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio"
+				addressURL = addressURL.replace("{address}", modAddress);
+				let data = await postData(addressURL, {}, "GET");
+				geolocation = {location: {latitude: data.results[0].geometry.location.lat, longitude: data.results[0].geometry.location.lng},  extraComputations:"HEALTH_RECOMMENDATIONS"};
+			}
+			return geolocation
+		}
 		const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
-		postData(AQInfo_URL, currLoc, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
+
+		getLocation(address).then((data) => {
+			const currLoc = data;
+			postData(AQInfo_URL, data, "POST").then((data) => {updateWidget(data, currLoc.location.latitude, currLoc.location.longitude)});
+		});
+		
+		
 	</script>
 	<form method="POST" action="/home">
 	{% if puffcount == 0 %}
