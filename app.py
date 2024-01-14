@@ -8,6 +8,7 @@ from datetime import datetime,timedelta
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_login import LoginManager
+import yagmail
 
 db=SQLAlchemy()
 login_manager = LoginManager()
@@ -141,6 +142,8 @@ def loginpost():
 @bp.route("/home", methods = ['POST','GET'])
 def homepost():
     puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
+    user = db.session.query(UserDetails).filter_by(id=session['id']).first()
+    currAddress = user.address
     puffcount = puffs.count()
     if request.method == 'POST':
         if 'regpuff' in request.form:
@@ -191,7 +194,7 @@ def homepost():
             return redirect("/home")
                 
     if request.method == 'GET':
-        return(render_template("Home.html",puffcount = puffcount))
+        return(render_template("Home.html",puffcount = puffcount, address = currAddress))
 
 @bp.route("/mapinfo")
 def aqiview():
@@ -272,9 +275,9 @@ def logbookview():
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
     if puffs.count() != 0:
         lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
-        print("from app:")
-        for i in range(0,puffs.count()):
-            print(puffs[i].datetaken.date())
+        # print("from app:")
+        # for i in range(0,puffs.count()):
+        #     print(puffs[i].datetaken.date())
         # print(lastpuff)
         
 
