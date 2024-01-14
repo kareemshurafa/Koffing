@@ -66,6 +66,10 @@
 		left: 0px;
 		top: 0px;
 	}
+	table, th, td {
+  	border: 1px solid black;
+  	border-collapse: collapse;
+	}	
 	#Rectangle_20_ {
 		fill: url(#Rectangle_20_);
 		stroke: rgba(112,112,112,1);
@@ -1259,7 +1263,7 @@
 	<div id="n_01_">
 		<span>{{streak}}!</span>
 	</div>
-	<div id="Component_53__1" class="Component_53___1">
+	<!-- <div id="Component_53__1" class="Component_53___1">
 		<div id="calendar" class="calendar">
 			<svg class="Rectangle_74_cb">
 				<linearGradient id="Rectangle_74_cb" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
@@ -1370,7 +1374,37 @@
 		<div id="S_c">
 			<span>S</span>
 		</div>
-	</div>
+	</div> -->
+	<table  id="Component_53__1">
+		<thead>
+			<tr>
+				<th>Time taken</th>
+				<th>Inhaler Type</th>
+				<th>Number of Puffs</th>
+				<th>Dosage(mg)</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for i in range(1,6) %}
+			{%if puffs[i]["time"] == "" %}
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td> 
+			</tr>
+			{%else%}
+			<tr>
+				<td>{{puffs[i]["time"]}}</td>
+				<td>{{puffs[i]["inhalertype"]}}</td>
+				<td>{{puffs[i]["puffno"]}}</td>
+				<td>{{puffs[i]["dosage"]}}</td> 
+			</tr>
+			{%endif%}
+		{% endfor %}
+		</tbody>
+	</table>
+	<!-- <h2 id = "Component_53__1">{{puffs[2]}}</h2> -->
 	<svg class="Rectangle_80">
 		<rect id="Rectangle_80" rx="0" ry="0" x="0" y="0" width="563" height="252">
 		</rect>
