@@ -68,6 +68,19 @@ def test_logbook(client):
     info = response.data.decode() #decode binary to string
 
     assert response.status_code == 200
+    def test_web_1920_2(client):
+    response = client.get("/web_1920_2")
+    info = response.data.decode()  # Decode binary to string
 
-    #assertions checking existence of some elements, mainly HTML
+    assert response.status_code == 200
+    
+    #assertions checking existence of important HTML elements
+    assert '<div id="Home">' in info  # Home button or link
+    assert '<table id="Component_53__1">' in info  # Table for displaying data
+    assert 'First Name: {{first_name}}' in info  # Placeholder for first name
+    assert 'Surname: {{surname}}' in info  # Placeholder for surname
+    assert 'Email: {{email}}' in info  # Placeholder for email
+    assert '<button id="Update_Details_Button"' in info  # Check for Update Details button
+
+    
 
