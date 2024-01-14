@@ -13,9 +13,9 @@ def test_home(client):
     assert '<svg class="Icon_awesome-user-alt"' in info  
 
     #Logging puffer button, dropdown, input options, and form submission 
-    assert b'<form action="/home" method = "POST">' in info
-    assert b'<input id="Puff_button"' in info
-    assert b'<select id="Inhaler_type"' in info
-    assert b'<input id="Number_of_puffs"' in info
-    assert b'<input id="Dosage"' in info
-    assert b'<input id="Medname"' in info
+    assert '<form action="/home" method = "POST">' in info
+    assert '<input id="Puff_button"' in info
+    assert '<select id="Inhaler_type"' in info
+    assert '<input id="Number_of_puffs"' in info
+    assert '<input id="Dosage"' in info
+    assert '<input id="Medname"' in info

@@ -285,14 +285,6 @@ def logbookview():
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.id.desc()).filter_by(user_id=session['id'])
 
     ############Asthma Log Table#############
-
-    #run a for loop 5 times
-    #Each time, check if there is data in the puff
-    #if so, assign the variables to a dictionary
-    #if not, assign empty values to the dictionary
-    #Pass it to the render template
-    #Write for loop within the html to read it 
-
     puffsdict = {
         1 : {
             "time" : "",
@@ -328,13 +320,14 @@ def logbookview():
             "puffno" : "",
             "dosage" : ""
         }
-    }
+    }   
 
     if puffs.count() != 0:
         for i in range(0,puffs.count()):
+            if i > 4:
+                #Table cannot go more than 5
+                break
             if puffs[i] is not None:
-                #Have to calculate the time taken
-                #Find the timedelta and output it as either 2 hours ago or 2 days ago
                 lastpuff = datetime.now().date()-(puffs[i].datetaken.date())
                 if lastpuff == timedelta(days=0):
                     #Display in hours ago
@@ -342,19 +335,19 @@ def logbookview():
                     timediff = str(timediff.seconds//3600) + " hours ago"
                 else:
                     #Display in days ago
-                    timediff = str(lastpuff)[0] + " days ago"
+                    timediff = str(abs(lastpuff))[0] + " days ago"
                 puffsdict[i+1]["time"] = timediff
                 puffsdict[i+1]["inhalertype"] = str(puffs[i].inhalertype)
                 puffsdict[i+1]["puffno"] = str(puffs[i].puffno)
                 puffsdict[i+1]["dosage"] = str(puffs[i].dosageamt)
-            else:
+            else:   
                 pass
 
     ############Asthma Streak###########
     #Check if puff happened in the past 24 hours, if yes, count number of puffs within every 24 hours
     #else : 0
     streak = 0
-    
+
     if puffs.count() != 0:
         lastpuff = (puffs[0].datetaken.date())-datetime.now().date()
 
@@ -386,55 +379,58 @@ def logbookview():
                     streak = streak,
                     puffs = puffsdict)
 
-@bp.route("/update")
-def updateview():
-    return render_template('Update_Details.html')
-
-@bp.route("/update", methods=['POST'])
+@bp.route("/update", methods=['POST', 'GET'])
 def updatepost():
-    
-    user = db.session.query(UserDetails).filter_by(email=session['email']).first()
+    if request.method == 'POST' and session['logged_in'] == True:
+        user = db.session.query(UserDetails).filter_by(email=session['email']).first()
 
-    phone_number = request.form.get('phone_number')
-    dob = request.form.get('dob')
-    address = request.form.get('address')
-    gp_name = request.form.get('gp_name')
-    gp_surname = request.form.get('gp_surname')
-    gp_code = request.form.get('gp_code')
-    gp_phone = request.form.get('gp_phone_number')
-    gp_address = request.form.get('gp_address')
+        phone_number = request.form.get('phone_number')
+        dob = request.form.get('dob')
+        address = request.form.get('address')
+        gp_name = request.form.get('gp_name')
+        gp_surname = request.form.get('gp_surname')
+        gp_code = request.form.get('gp_code')
+        gp_phone = request.form.get('gp_phone_number')
+        gp_address = request.form.get('gp_address')
 
-    # if something inputted, normal
-    # if empty - forget about it
+        # if something inputted, normal
+        # if empty - forget about it
 
-    print(phone_number)
+        print(phone_number)
 
-    if phone_number != "":
-        user.phonenum = phone_number
+        if phone_number != "":
+            user.phonenum = phone_number
 
-    if dob != "":
-        user.dob = dob
+        if dob != "":
+            date_format = '%Y-%m-%d'
+            date = datetime.strptime(dob,date_format)
+            user.dob = date
 
-    if address != "":
-        user.address = address
+        if address != "":
+            user.address = address
 
-    if gp_name != "":
-        user.GPname = gp_name
+        if gp_name != "":
+            user.GPname = gp_name
 
-    if gp_surname != "":
-        user.GPsurname = gp_surname
+        if gp_surname != "":
+            user.GPsurname = gp_surname
 
-    if gp_code != "":
-        user.GPcode = gp_code
+        if gp_code != "":
+            user.GPcode = gp_code
 
-    if gp_address != "":
-        user.GPaddress = gp_address
+        if gp_address != "":
+            user.GPaddress = gp_address
 
-    if gp_phone != "":
-        user.GPnum = gp_phone
+        if gp_phone != "":
+            user.GPnum = gp_phone
 
-    db.session.commit()
-    return redirect("/logbook")
+        db.session.commit()
+        return redirect("/logbook")
+    if request.method == 'GET' and session['logged_in'] == True:
+        return render_template('Update_Details.html')
+    else:
+        return render_template('Update_Details.html')
+
 
 @bp.route('/test')
 def index():
