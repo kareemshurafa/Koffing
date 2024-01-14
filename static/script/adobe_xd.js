@@ -1,3 +1,5 @@
+//-- Reference - taken from Adobe XD --//
+
 ///////////////////////////////////////
 // INITIALIZATION
 ///////////////////////////////////////
@@ -2906,3 +2908,4 @@ var Application = function() {
 }
 
 window.application = new Application();
+//-- End of Adobe XD reference --//

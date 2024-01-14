@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, json, url_for, Blueprint, session, redirect, url_for, flash
-import requests
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exists
@@ -8,7 +7,6 @@ from datetime import datetime,timedelta
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_login import LoginManager
-import yagmail
 
 db=SQLAlchemy()
 login_manager = LoginManager()

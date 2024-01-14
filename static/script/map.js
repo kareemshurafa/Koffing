@@ -4,7 +4,7 @@ import {aqiChart} from './historical_data.js'
 // Get Google API Key securely
 var apiKey = document.getElementById('apiKey').dataset.key;
 
-//--(Reference) Mozilla function to Post data to API--//
+//--(Reference) Mozilla function to Post data to API; taken from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options--//
 async function postData(url = "", data = {}, mode) {
     // Default options are marked with *
     try{
@@ -20,7 +20,7 @@ async function postData(url = "", data = {}, mode) {
         console.error('Error fetching data:', error);
     }
 }
-//--End of Reference--//
+//--End of Mozilla Reference--//
 
 
 // Get Air Quality Data from API
