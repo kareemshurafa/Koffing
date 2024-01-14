@@ -362,8 +362,7 @@ def logbookview():
         else:
             streak = 0
     
-    #--------- Have to prompt when to get a new inhaler, when they are taking too many----------
-    #When to get a new inhaler:
+    #-----------When to get a new inhaler--------------
             #If for a specific name of inhaler, the number of puffs
             #If it exceeds an amount, put a suggestion to replace the users inhalers
     if puffs.count() != 0:
@@ -392,7 +391,7 @@ def logbookview():
         if len(replace) != 0 :
             replacemsg = f"You may need to replace these inhalers : {replace}"
             
-    #If taking too many:
+    #---------------If taking too many-------------------
             #Find number of puffs x the number of entries in a specific day
             #If it exceeds 4 for reliever, combination or long-acting, suggest you may be taking too many
     puffs = db.session.query(PuffHistory).filter_by(user_id=session['id'])
