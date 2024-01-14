@@ -102,7 +102,7 @@ def initial():
         if request.method == 'GET' and session['logged_in'] == True:
             return redirect("/home")
     except:
-        return(render_template("Initial_Page.html", api_key=os.environ.get('GOOGLE_API')))
+        return(render_template("Initial_Page.html"))
     
 @bp.route("/signup", methods=['POST','GET'])
 def signuppost():
@@ -239,7 +239,7 @@ def homepost():
             return redirect("/home")
                 
     if request.method == 'GET':
-        return(render_template("Home.html",puffcount = puffcount, address = currAddress))
+        return(render_template("Home.html",puffcount = puffcount, address = currAddress, api_key=os.environ.get('GOOGLE_API')))
 
 @bp.route("/mapinfo")
 def aqiview():

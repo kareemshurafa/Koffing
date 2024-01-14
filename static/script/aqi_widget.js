@@ -1,3 +1,5 @@
+var apiKey = document.getElementById('apiKey').dataset.key;
+
 // GET method
 async function getData(url = "") {
         const response = await fetch(url, {
@@ -8,7 +10,7 @@ async function getData(url = "") {
 
 // Parse location coordinate to API
 function locationFinder(lat, lng) {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`;
     return url;
 }
 
@@ -40,6 +42,7 @@ function updateWidget(data, lat, lng) {
     document.getElementById('aqiHealthRecc').innerText = data.healthRecommendations["generalPopulation"];
     document.getElementById('aqiDomPollution').innerText = `Dominant Pollutant: ${data.indexes[0].dominantPollutant}`;
     getData(locationFinder(lat, lng)).then((data) => {
+        console.log(data);
         if (data.results[0].address_components[1] === undefined){
             document.getElementById('aqiLocation').innerText = data.results[0].address_components[0].long_name;
         } else {
