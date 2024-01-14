@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- These pages are referenced from adobe_xd, with modifications made to css and html code  -->
+<!-- Java Script added at the end is not referenced and is fully original work-->
 <html>
 <head>
 <meta charset="utf-8"/>
@@ -25,8 +27,8 @@
 	}
 	#Sign_up_page {
 		position: absolute;
-		width: 100%;
-		height: 100%;
+		width: 1881px;
+		height: 1056px;
 		background-color: rgba(255,255,255,1);
 		overflow: hidden;
 		--web-view-name: Sign up page;
@@ -36,7 +38,7 @@
 	}
 	@keyframes  {
 	
-	
+	/* Background component syles */
 	}
 	#Component_9__4 {
 		position: absolute;
@@ -155,6 +157,8 @@
 		transform: translate(0px, 0px) matrix(1,0,0,1,1558.3828,-51.3618) rotate(32deg);
 		transform-origin: center;
 	}
+
+	/* Adding images */
 	#puffer_cartoon {
 		position: absolute;
 		/* width: 704px;
@@ -173,6 +177,8 @@
 		top: 86px;
 		overflow: visible;
 	}
+
+	/* Title */
 	#Welcome_please_sign_up {
 		left: 4.075px;
 		top: 0px;
@@ -187,6 +193,8 @@
 		font-size: 37px;
 		color: rgba(0,0,0,1);
 	}
+
+	/* Fill in details for emaail, address and password for sign up */
 	#Username {
 		position: absolute;
 		width: 503.851px;
@@ -546,6 +554,7 @@
 </head>
 <body>
 <div id="Sign_up_page">
+	<!-- Background components -->
 	<div id="Component_9__4" class="Component_9___4">
 		
 		<svg class="Rectangle_5">
@@ -586,7 +595,7 @@
 			
 	</div>
 	<div id="Group_9">
-
+	<!--Adding email passward and otehr details to create account-->
 		<form action="/signup" method="POST">
 			<div id="Welcome_please_sign_up">
 				<span>Welcome, please sign up</span>
@@ -637,6 +646,8 @@
 					</path>
 				</svg>
 			</div>
+
+			<!-- Adding dynamics using javascript-->
 		<div onclick="application.goToTargetView(event)" id="Login_here">
 			<span>Login here</span>
 		</div>
@@ -654,11 +665,6 @@
 			</div>
 		</div>
 		<input type="checkbox" id="accept-terms" name="accept-terms" required class="Rectangle_88">
-		<!-- <svg class="Rectangle_88">
-			<input type="checkbox" id="accept-terms" name="accept-terms" class="terms-checkbox" required>
-			<rect id="Rectangle_88" rx="0" ry="0" x="0" y="0" width="27" height="27">
-			</rect>
-		</svg> -->
 		
 		<div id="Already_have_an_account_">
 			<span>Already have an account? </span>
@@ -669,10 +675,8 @@
 		<span>I accept the Terms of Use & Privacy Policy</span>
 	</div>
 </div>
-<!-- <div class="terms-checkbox-container">
-    <input type="checkbox" id="accept-terms" name="accept-terms" class="terms-checkbox" required>
-    <label for="accept-terms">I accept the Terms of Use & Privacy Policy</label>
-</div> -->
+ <!-- Adding teh image-->
 <img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">
 </body>
+<!-- End of reference-->
 </html>
