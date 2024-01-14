@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- These pages are referenced from adobe_xd, with modifications made to css and html code  -->
+<!-- Java Script added at the end is not referenced and is fully original work-->
 <html>
 <head>
 <meta charset="utf-8"/>
@@ -7,6 +9,7 @@
 <title>Login page</title>
 
 <style id="applicationStylesheet" type="text/css">
+	/* set initial properties for the web view */
 	.mediaViewInfo {
 		--web-view-name: Login page;
 		--web-view-id: Login_page;
@@ -16,6 +19,7 @@
 	:root {
 		--web-view-ids: Login_page;
 	}
+	/* Universal reset styles. Maintain consistency and avoid default browser styling */
 	* {
 		margin: 0;
 		padding: 0;
@@ -23,10 +27,11 @@
 		border: none;
 		font-family: 'Trebuchet MS';
 	}
+	/* Styles for the main container of the log in page. */
 	#Login_page {
 		position: absolute;
-		width: 100%;
-		height: 100%;
+		width: 1881px;
+		height: 1056px;
 		background-color: rgba(255,255,255,1);
 		overflow: hidden;
 		--web-view-name: Login page;
@@ -34,6 +39,8 @@
 		--web-scale-on-resize: true;
 		--web-enable-deep-linking: true;
 	}
+
+	/* Adding the background components */
 	#Component_9__1 {
 		position: absolute;
 		width: 1054.883px;
@@ -160,6 +167,8 @@
 		right:-250px;
 		overflow: visible;
 	}
+
+	/* Title */
 	#Welcome_Back_please_log_in {
 		left: 148.616px;
 		top: 406px;
@@ -174,6 +183,8 @@
 		font-size: 37px;
 		color: rgba(0,0,0,1);
 	}
+
+	/* Fill in fro email and password */
 	#Line_11 {
 		fill: transparent;
 		stroke: rgba(0,0,0,1);
@@ -408,6 +419,8 @@
 		left: 0.384px;
 		top: 297px;
 	}
+
+	/* Adding the buttons */
 	#Login {
 		position: absolute;
 		width: 539px;
@@ -460,7 +473,8 @@
 		color: rgba(0,0,0,1);
 		background-color: transparent; 
 	}
-
+ 
+	/* Button hovering and change of colour */
 	#Login:hover #Rectangle_49_bw{
 		fill:transparent;
         fill: url(#blueGradient); 
@@ -482,6 +496,7 @@
 </head>
 <body>
 <div id="Login_page">
+	<!-- Background components -->
 	<div id="Component_9__1" class="Component_9___1">
 		<svg class="Rectangle_5">
 			<rect id="Rectangle_5" rx="0" ry="0" x="0" y="0" width="1813.883" height="1245">
@@ -576,12 +591,13 @@
 		</svg>
 		<svg>
     <defs>
+		<!-- Adding the gradient colour for hobvering button -->
         <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" style="stop-color:#b6d0ff;"/>
             <stop offset="100%" style="stop-color:#7a9bea;"/>
         </linearGradient>
     </defs>
-    <!-- Your SVG content here -->
+    
 </svg>
 		<div id="Login" class="Login">
 			
@@ -600,6 +616,7 @@
 		
 	</div>
 </div>
+<!-- Adding dynamics to teh page using Java Script-->
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 		    var loginButton = document.getElementById('Login');
@@ -622,4 +639,5 @@
 </form>
 <img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">
 </body>
+<!-- End of reference-->
 </html>

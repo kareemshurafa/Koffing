@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- These pages are referenced from AdobeXD, with modifications made to css and html code  -->
+<!-- Java Script added at the end is not referenced and is fully original work-->
 <html>
 <head>
 <meta charset="utf-8"/>
@@ -6,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Air Quality Stats</title>
 <style id="applicationStylesheet" type="text/css">
+	/* CSS code for page and component styles */
 	.mediaViewInfo {
 		--web-view-name: Air Quality Stats;
 		--web-view-id: Air_Quality_Stats;
@@ -21,6 +24,7 @@
 		box-sizing: border-box;
 		border: none;
 	}
+	
 	#Air_Quality_Stats {
 		position: absolute;
 		width: 1920px;
@@ -461,9 +465,13 @@
 		--web-action-target: Home___1.html;
 		cursor: pointer;
 	}
+	/* CSS code for page and component styles end here */
 </style>
+<!-- linking the images and adding javascript for dynamics of the page-->
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
+
+<!-- Start of HTML code for the page -->
 </head>
 <body>
 <div id="Air_Quality_Stats">
@@ -561,6 +569,8 @@
 		</path>
 	</svg>
 </div>
+<!-- End of AdobeXD reference (note the whole code wasn't extracted however majority of CSS and HTML were, modifications and additional code was added as needed)-->
+<!--Adding dynamics to the static pages by implementing javascript-->
 
 <script src="menu_bar.js" defer></script>
 

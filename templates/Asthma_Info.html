@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- These pages are referenced from AdobeXD, with modifications made to css and html code  -->
+<!-- Java Script added at the end is not referenced and is fully original work-->
 <html>
 <head>
 <meta charset="utf-8"/>
@@ -6,6 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asthma Info</title>
 <style id="applicationStylesheet" type="text/css">
+	
+	/* CSS code for page and component styles */
+	
 	.mediaViewInfo {
 		--web-view-name: Asthma Info;
 		--web-view-id: Asthma_Info;
@@ -400,6 +405,8 @@
 		cursor: pointer;
 	}
 </style>
+<!--Adding main body of HTML code-->
+<!--Adding javascript to static files for dynamic functionalities -->
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
 </head>
@@ -475,6 +482,8 @@
 		</path>
 	</svg>
 </div>
+<!-- End of AdobeXD reference (note the whole code wasn't extracted however majority of CSS and HTML were, modifications and additional code was added as needed)-->
+<!--Adding dynamics to the static pages by implementing javascript-->
 
 <script type="module" src="{{ url_for('static', filename='script/menu_bar.js') }}" defer></script>
 
