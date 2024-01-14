@@ -42,6 +42,7 @@ function updateWidget(data, lat, lng) {
     document.getElementById('aqiHealthRecc').innerText = data.healthRecommendations["generalPopulation"];
     document.getElementById('aqiDomPollution').innerText = `Dominant Pollutant: ${data.indexes[0].dominantPollutant}`;
     getData(locationFinder(lat, lng)).then((data) => {
+        console.log(data);
         if (data.results[0].address_components[1] === undefined){
             document.getElementById('aqiLocation').innerText = data.results[0].address_components[0].long_name;
         } else {
