@@ -550,6 +550,22 @@
         color: white; 
     }
 
+	#error{
+		left: 4.075px;
+		top: 50px;
+		position: absolute;
+		overflow: visible;
+		width: 495px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: 'Trebuchet MS';
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgb(255, 0, 0);
+	}
+	
+
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
@@ -602,10 +618,14 @@
 			<div id="Welcome_please_sign_up">
 				<span>Welcome, please sign up</span>
 			</div>
+			{% if error %}
+			<div id="error">
+				<span>{{error}}</span>
+			</div>
+			{% endif %}
 			<div id="Username" class="Username">
 				<div id="Email_Address">
-					<!-- Add input field after the div id tag, replacing the span tag text -->
-					<input type="email" id="Email_Address" name="Email_Address" placeholder="Email Address" size="50"> 
+					<input type="email" id="Email_Address" name="Email_Address" placeholder="Email Address" size="50" required> 
 				</div>
 				<svg class="Line_2" viewBox="0 0 503.851 1">
 					<path id="Line_2" d="M 0 0 L 503.8507080078125 0">
@@ -618,7 +638,7 @@
 					</path>
 				</svg>
 				<div id="Password_bd">
-					<input type="password" id="Password_bd" name="Password" placeholder="Password" size="50">
+					<input type="password" id="Password_bd" name="Password" placeholder="Password" size="50" required>
 				</div>
 			</div>
 			<div id="Password_be" class="Password">
@@ -627,12 +647,12 @@
 					</path>
 				</svg>
 				<div id="Confirm_password">
-					<input type="password" id="Confirm_password" name="Confirm_password" placeholder="Confirm password" size="50">
+					<input type="password" id="Confirm_password" name="Confirm_password" placeholder="Confirm password" size="50" required>
 				</div>
 			</div>
 			<div id="Username_bh" class="Username">
 				<div id="First_name">
-					<input type="text" id="First_name" name="First_name" placeholder="First Name" size="10">
+					<input type="text" id="First_name" name="First_name" placeholder="First Name" size="10" required>
 				</div>
 				<svg class="Line_2_bj" viewBox="0 0 228.333 1">
 					<path id="Line_2_bj" d="M 0 0 L 228.33251953125 1">
@@ -641,7 +661,7 @@
 			</div>
 			<div id="Username_bk" class="Username">
 				<div id="Last_name">
-					<input type="text" id="Last_name" name="Last_name" placeholder="Last Name" size="10">
+					<input type="text" id="Last_name" name="Last_name" placeholder="Last Name" size="10" required>
 				</div>
 				<svg class="Line_2_bm" viewBox="0 0 251 1">
 					<path id="Line_2_bm" d="M 0 0 L 251 1">

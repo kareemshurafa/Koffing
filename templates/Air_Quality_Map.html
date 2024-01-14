@@ -637,8 +637,9 @@
 		defer
 	></script>
 	
-	<script>
-		var address = '{{address}}';
+	<script type="text/javascript">
+		window.apiKey = "{{ api_key }}";
+		console.log(window.apiKey);
 	</script>
 	<div class="aqi-widget" id="aqiWidget">
 		<div class="aqi-header">AIR QUALITY</div>

@@ -130,6 +130,9 @@ def signuppost():
     
 @bp.route("/login", methods=['POST', 'GET'])
 def loginpost():
+    
+    error = None
+
     if request.method == 'POST':
         Email = request.form.get('Email')
         password = request.form.get('Password')
@@ -139,7 +142,8 @@ def loginpost():
 
         # If they do not have an account - redirect to sign-up
         if not exists:
-            return redirect("/signup")
+            error = "Invalid credentials"
+            return render_template('Login_page_template.html', error = error)
         
         # Obtain record
         record = db.session.query(UserDetails).filter_by(email=Email).first()
@@ -149,7 +153,8 @@ def loginpost():
 
         # If they use an incorrect password - redirect to try again
         if not pswrd:
-            return redirect("/login")
+            error = "Invalid credentials"
+            return render_template('Login_page_template.html', error = error)
 
         # All checks passed - create user session and redirect to home page
         session['logged_in'] = True
@@ -233,7 +238,7 @@ def aqiview():
     # tester.address = "W2 3ET"
     # address = tester.address
     # return render_template('Air_Quality_Map.html', address = address)
-    return render_template('Air_Quality_Map.html')
+    return render_template('Air_Quality_Map.html', api_key=os.environ.get('GOOGLE_API'))
 
 @bp.route("/airqualitystats")
 def statsview():
