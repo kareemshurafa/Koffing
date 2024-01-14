@@ -549,6 +549,20 @@
 	#Submit:hover  {
         color: white; 
     }
+	#error{
+		left: 5px;
+		top: 50px;
+		position: absolute;
+		overflow: visible;
+		width: 495px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: 'Trebuchet MS';
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgb(255, 0, 0);
+	}
 
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -602,6 +616,11 @@
 			<div id="Welcome_please_sign_up">
 				<span>Welcome, please sign up</span>
 			</div>
+			{% if error %}
+			<div id="error">
+				<span>{{error}}</span>
+			</div>
+			{% endif %}
 			<div id="Username" class="Username">
 				<div id="Email_Address">
 					<!-- Add input field after the div id tag, replacing the span tag text -->
@@ -686,7 +705,7 @@
 
 <!-- Adding dynamics to teh page using Java Script-->
 <div onclick="application.goToTargetView(event)" id="Create_Account_">
-	<span>Create Account </span>
+	<span>Create Account</span>
 </div>
 <script>document.addEventListener('DOMContentLoaded', function() {
     // Select the element with the ID 'Login_here'
@@ -697,7 +716,7 @@
         // Add a click event listener to the element
         loginElement.addEventListener('click', function() {
             // Redirect to the desired URL
-            window.location.href = 'templates/Home.html';
+            window.location.href = '/login';
         });
     }
 });</script>

@@ -13,7 +13,6 @@ import yagmail
 db=SQLAlchemy()
 login_manager = LoginManager()
 
-
 #--------------Models---------------------
 class UserDetails(db.Model):
     __tablename__ = 'UserDetails'
@@ -107,10 +106,12 @@ def signuppost():
 
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
-        record = db.session.query(UserDetails).filter_by(email=email).first()
+        
         
         db.session.add(data)
         db.session.commit()
+        
+        record = db.session.query(UserDetails).filter_by(email=email).first()
 
         session['logged_in'] = True
         session['id'] = record.id
@@ -230,13 +231,11 @@ def homepost():
 
 @bp.route("/mapinfo")
 def aqiview():
-    if not session.get('logged_in'):
+    if session.get('logged_in'):
+        return render_template('Air_Quality_Map.html', api_key=os.environ.get('GOOGLE_API'))
+    else:
         return render_template("Login_Redirect.html")
-    # tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
-    # tester.address = "W2 3ET"
-    # address = tester.address
-    # return render_template('Air_Quality_Map.html', address = address)
-    return render_template('Air_Quality_Map.html', api_key=os.environ.get('GOOGLE_API'))
+        
 
 @bp.route("/airqualitystats")
 def statsview():
@@ -246,7 +245,6 @@ def statsview():
 def asthmainfoview():
     if not session.get('logged_in'):
         return render_template("Login_Redirect.html")
-    
     return render_template('Asthma_Info.html')
 
 @bp.route("/faq")
@@ -425,7 +423,6 @@ def updatepost():
         return render_template('Update_Details.html')
     else:
         return render_template('Update_Details.html')
-
 
 @bp.route('/test')
 def index():
