@@ -631,15 +631,15 @@
 		type = "text"
 		placeholder = "Search location..."
 	/>
+	<div id="apiKey" data-key="{{ api_key }}" style="display: none;"></div>
 	<div id="map"></div>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio&callback=initMap&libraries=places&v=weekly"
+		src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap&libraries=places&v=weekly"
 		defer
+
 	></script>
 	
-	<script>
-		var address = '{{address}}';
-	</script>
+	
 	<div class="aqi-widget" id="aqiWidget">
 		<div class="aqi-header">AIR QUALITY</div>
 		<div class="aqi-level" id="aqiLevel"></div>

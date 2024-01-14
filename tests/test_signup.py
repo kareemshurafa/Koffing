@@ -8,6 +8,7 @@ def test_registration(client, app):
     "Last_name":"testsur",
     "Email_Address":"test@koffing.com",
     "Password":"testpassword", 
+    "Confirm_password":"testpassword",
     'sign_up_form': 'Submit'})
 
     #'sign_up_form': 'Submit'  is present due to the logic for the logbook  

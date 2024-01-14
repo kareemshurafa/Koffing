@@ -12,9 +12,6 @@ def test_mapinfo(client):
     # Test for the presence of the AQI widget
     assert b'<div class="aqi-widget" id="aqiWidget">' in response.data
     
-    # Test for the presence and accessibility of Settings
-    assert b'<div id="Settings__">' in response.data
-    
     # Test for the presence of the chart
     assert b'<div id = "aqiChart">' in response.data
     

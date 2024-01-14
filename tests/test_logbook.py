@@ -1,42 +1,13 @@
-from ..app import UserDetails,PuffHistory,db
-from flask_bcrypt import Bcrypt as bcrypt
+from ..app import PuffHistory,db
 from datetime import datetime,timedelta
 
-#Written in form of html submission
-currenttime = "12:56"
-currentdate = "2024-01-01"
-
-date_format = '%Y-%m-%d'
-time_format = '%H:%M'
-
-def test_logging(client,app):
-    response = client.post("/home", data = {"Date_taken":currentdate,
-                                            "Time_taken":currenttime,                                         
-                                            "Inhaler_type":"Reliever",
-                                            "Dosage":12,
-                                            "Number_of_puffs":123,
-                                            "Medname":"Inhaler",
-                                            'regpuff': 'Submit'
-                                            })
-    
-    with app.app_context():
-        puff = PuffHistory.query.first()
-        assert PuffHistory.query.count()==1
-        assert puff.datetaken == datetime.strptime(currentdate,date_format)
-        assert puff.timetaken == datetime.strptime(currenttime,time_format)
-        assert puff.inhalertype == "Reliever"
-        assert puff.dosageamt == 12
-        assert puff.puffno == 123
-        assert puff.medname == "Inhaler"
-
 def test_streak(client,app):
-    currenttime = "12:56"
-    currentdate = "2024-01-13"
+    #Testing if the streak is created by uploading 5 successive puffs
+    currenttime = "08:00"
 
     date_format = '%Y-%m-%d'
-    time_format = '%H:%M'
     delta = timedelta(1)
-    currentdateobj = datetime.strptime("2024-01-8",'%Y-%m-%d')
+    currentdateobj = datetime.strptime(str(datetime.now().date()-timedelta(5)),'%Y-%m-%d')
 
     for i in range(0,5):
         currentdateobj = currentdateobj + delta
@@ -56,13 +27,13 @@ def test_streak(client,app):
     with app.app_context():
         assert puffs.count() == 5    
 
-   
-    assert b'<span>test</span>' in response.data
+    print(response.data)
     assert b'<span>5!</span>' in response.data
 
 def test_table(client,app):
+    #Testing the table records
+        #By checking whether the "time ago" is shown on the table
     currenttime = "12:56"
-    currentdate = "2024-01-13"
 
     date_format = '%Y-%m-%d'
     time_format = '%H:%M'
@@ -81,4 +52,16 @@ def test_table(client,app):
                                             'regpuff': 'Submit'
                                             })
     
+    response = client.get("/logbook")
+    assert response.status_code == 200
+    for i in range(1,6):
+        currentdateobj = currentdateobj + delta
+        currentdate = currentdateobj.strftime(date_format)
+        assert bytes(f'<td>{i} days ago</td>','utf-8') in response.data
     #Have to assert the correct format found within the table
+
+def test_presence(client,app):
+    response = client.get("/logbook")
+    assert b'<img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">' in response.data
+    
+

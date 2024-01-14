@@ -485,15 +485,14 @@
 #Request:hover #Rectangle_49_bi {
         fill: url(#blueGradient); 
     }
-    #Request:hover #Send_Request {
-        color: white; 
-    }
+   
 
 
 	#Login_here:hover  {
     color: white; 
     
 }
+
 #Rectangle_88 {
 		fill: rgba(255,255,255,1);
 		stroke: rgba(112,112,112,1);
@@ -546,6 +545,23 @@
 		border: none;
 		outline: none;
 		width: 362px;
+	}
+	#Submit:hover  {
+        color: white; 
+    }
+	#error{
+		left: 5px;
+		top: 50px;
+		position: absolute;
+		overflow: visible;
+		width: 495px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: 'Trebuchet MS';
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgb(255, 0, 0);
 	}
 
 </style>
@@ -600,6 +616,11 @@
 			<div id="Welcome_please_sign_up">
 				<span>Welcome, please sign up</span>
 			</div>
+			{% if error %}
+			<div id="error">
+				<span>{{error}}</span>
+			</div>
+			{% endif %}
 			<div id="Username" class="Username">
 				<div id="Email_Address">
 					<!-- Add input field after the div id tag, replacing the span tag text -->
@@ -651,15 +672,22 @@
 		<div onclick="application.goToTargetView(event)" id="Login_here">
 			<span>Login here</span>
 		</div>
+		
 		<div id="Request" class="Request">
 			<svg class="Rectangle_49_bi">
 				<linearGradient id="Rectangle_49_bi" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
 					<stop offset="0" stop-color="#bbbfc1" stop-opacity="1"></stop>
 					<stop offset="1" stop-color="#5e6061" stop-opacity="1"></stop>
 				</linearGradient>
+				<linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+					<stop offset="0%" style="stop-color:#b6d0ff;"/>
+					<stop offset="100%" style="stop-color:#7a9bea;"/>
+				</linearGradient>
+				
 				<rect id="Rectangle_49_bi" rx="40" ry="40" x="0" y="0" width="362" height="96">
 				</rect>
 			</svg>
+			
 			<div id="Submit">
 				<input type="submit" value="Sign-Up" id="Submit" name="sign_up_form">
 			</div>
@@ -674,6 +702,24 @@
 	<div id="I_accept_the_Terms_of_Use__Pri">
 		<span>I accept the Terms of Use & Privacy Policy</span>
 	</div>
+
+<!-- Adding dynamics to teh page using Java Script-->
+<div onclick="application.goToTargetView(event)" id="Create_Account_">
+	<span>Create Account</span>
+</div>
+<script>document.addEventListener('DOMContentLoaded', function() {
+    // Select the element with the ID 'Login_here'
+    var loginElement = document.querySelector('#Login_here');
+
+    // Check if the element exists
+    if (loginElement) {
+        // Add a click event listener to the element
+        loginElement.addEventListener('click', function() {
+            // Redirect to the desired URL
+            window.location.href = '/login';
+        });
+    }
+});</script>
 </div>
  <!-- Adding teh image-->
 <img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">

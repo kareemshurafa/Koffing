@@ -4,16 +4,16 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web 1920 – 2</title>
+<title>Logbook</title>
 <style id="applicationStylesheet" type="text/css">
 	.mediaViewInfo {
-		--web-view-name: Web 1920 – 2;
+		--web-view-name: Logbook;
 		--web-view-id: Web_1920__2;
 		--web-scale-on-resize: true;
 		--web-enable-deep-linking: true;
 	}
 	:root {
-		--web-view-ids: Web_1920__2;
+		--web-view-ids: Logbook;
 	}
 	* {
 		margin: 0;
@@ -1149,29 +1149,29 @@
 			</rect>
 		</svg>
 		<div id="Name">
-			<span>{{first_name}}</span>
+			<span>First Name: {{first_name}}</span>
 		</div>
 		<div id="Surname">
-			<span>{{surname}}</span>
+			<span>Surname: {{surname}}</span>
 		</div>
 		<div id="Email">
-			<span>{{email}}</span>
+			<span>Email: {{email}}</span>
 		</div>
 		<div id="Phone_Number">
 			{% if phonenum == None or phonenum== null %}
 				<span>Phone Number</span>
 				{%else%}
-				<span>{{phonenum}}</span>
+				<span> Phone Number: {{phonenum}}</span>
 				{%endif%}
 		</div>
 		<div id="Date_of_Birth">
-			<span>{{dob}}</span>
+			<span>Date Of Birth: {{dob}}</span>
 		</div>
 		<div id="Address">
 				{% if address == None %}
 				<span>Address</span>
 				{%else%}
-				<span>{{address}}</span>
+				<span>Address: {{address}}</span>
 				{%endif%}
 		</div>
 		
@@ -1225,35 +1225,35 @@
 			{% if GPname == None %}
 				<span>GP Name</span>
 				{%else%}
-				<span>{{GPname}}</span>
+				<span>GP Name: {{GPname}}</span>
 				{%endif%}
 		</div>
 		<div id="GP_Surname">
 			{% if GPsurname == None %}
 				<span>GP Surname</span>
 				{%else%}
-				<span>{{GPsurname}}</span>
+				<span>GP Surname: {{GPsurname}}</span>
 				{%endif%}
 		</div>
 		<div id="GP_surgery_code">
 			{% if GPcode == None %}
 				<span>GP Surgery Code</span>
 				{%else%}
-				<span>{{GPcode}}</span>
+				<span>GP code: {{GPcode}}</span>
 				{%endif%}
 		</div>
 		<div id="GP_Address">
 			{% if GPaddress == None or GPaddress == null %}
 				<span>GP Address</span>
 				{%else%}
-				<span>{{GPaddress}}</span>
+				<span>GP Address: {{GPaddress}}</span>
 				{%endif%}
 		</div>
 		<div id="Telephone_Number">
 			{% if GPnum == None or GPnum == null %}
 				<span>GP Number</span>
 				{%else%}
-				<span>{{GPnum}}</span>
+				<span>GP Number: {{GPnum}}</span>
 				{%endif%}
 		</div>
 	</div>
@@ -1287,118 +1287,6 @@
 	<div id="n_01_">
 		<span>{{streak}}!</span>
 	</div>
-	<!-- <div id="Component_53__1" class="Component_53___1">
-		<div id="calendar" class="calendar">
-			<svg class="Rectangle_74_cb">
-				<linearGradient id="Rectangle_74_cb" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<rect id="Rectangle_74_cb" rx="0" ry="0" x="0" y="0" width="574" height="72">
-				</rect>
-			</svg>
-			<svg class="Rectangle_75_cd">
-				<linearGradient id="Rectangle_75_cd" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<rect id="Rectangle_75_cd" rx="0" ry="0" x="0" y="0" width="574" height="72">
-				</rect>
-			</svg>
-			<svg class="Rectangle_76_cf">
-				<linearGradient id="Rectangle_76_cf" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<rect id="Rectangle_76_cf" rx="0" ry="0" x="0" y="0" width="574" height="72">
-				</rect>
-			</svg>
-			<svg class="Rectangle_77_ch">
-				<linearGradient id="Rectangle_77_ch" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<rect id="Rectangle_77_ch" rx="0" ry="0" x="0" y="0" width="574" height="72">
-				</rect>
-			</svg>
-			<svg class="Rectangle_78_cj">
-				<linearGradient id="Rectangle_78_cj" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<rect id="Rectangle_78_cj" rx="0" ry="0" x="0" y="0" width="574" height="72">
-				</rect>
-			</svg>
-			<svg class="Rectangle_79_cl">
-				<linearGradient id="Rectangle_79_cl" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<rect id="Rectangle_79_cl" rx="0" ry="0" x="0" y="0" width="574" height="72">
-				</rect>
-			</svg>
-			<svg class="Line_22" viewBox="0 0 1 430.5">
-				<path id="Line_22" d="M 1 0 L 0 430.5">
-				</path>
-			</svg>
-			<svg class="Path_27_co" viewBox="0 1.735 1 429.375">
-				<linearGradient id="Path_27_co" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<path id="Path_27_co" d="M 0 1.7353515625 L 0 431.1103820800781">
-				</path>
-			</svg>
-			<svg class="Path_26_cq" viewBox="0 -1.375 1 431.375">
-				<linearGradient id="Path_26_cq" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<path id="Path_26_cq" d="M 0 -1.375 L 0 430">
-				</path>
-			</svg>
-			<svg class="Line_25" viewBox="0 0 2 432.5">
-				<path id="Line_25" d="M 2 0 L 0 432.5">
-				</path>
-			</svg>
-			<svg class="Line_26" viewBox="0 0 1 432.5">
-				<path id="Line_26" d="M 1 0 L 0 432.5">
-				</path>
-			</svg>
-			<svg class="Path_25_cu" viewBox="4 0 1 432.848">
-				<linearGradient id="Path_25_cu" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#d8d8d8" stop-opacity="0.11"></stop>
-					<stop offset="1" stop-color="#6c6c6c" stop-opacity="0.29"></stop>
-				</linearGradient>
-				<path id="Path_25_cu" d="M 4 0 L 4 432.84765625">
-				</path>
-			</svg>
-		</div>
-		<div id="M">
-			<span>M</span>
-		</div>
-		<div id="T">
-			<span>T</span>
-		</div>
-		<div id="W">
-			<span>W</span>
-		</div>
-		<div id="T_cy">
-			<span>T</span>
-		</div>
-		<div id="F_c">
-			<span>F</span>
-		</div>
-		<div id="F_c">
-			<span>F</span>
-		</div>
-		<div id="S">
-			<span>S</span>
-		</div>
-		<div id="S_c">
-			<span>S</span>
-		</div>
-	</div> -->
 	<table id="Component_53__1">
 		<thead>
 			<tr id="headers">

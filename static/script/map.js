@@ -1,7 +1,8 @@
-// Import modules according to ES6 spec
+// Import chart according to ES6 spec
 import {aqiChart} from './historical_data.js'
-// import {updateWidget} from './aqi_widget.js'
-//--//
+
+// Get Google API Key securely
+var apiKey = document.getElementById('apiKey').dataset.key;
 
 //--(Reference) Mozilla function to Post data to API--//
 async function postData(url = "", data = {}, mode) {
@@ -14,7 +15,6 @@ async function postData(url = "", data = {}, mode) {
         },
         body: JSON.stringify(data), // body data type must match "Content-Type" header
         });
-        // console.log(JSON.stringify(data))
         return response.json(); // parses JSON response into native JavaScript objects
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -22,23 +22,10 @@ async function postData(url = "", data = {}, mode) {
 }
 //--End of Reference--//
 
-//--(ChatGPT) Function to add parameters to the URL--//
-function addParametersToURL(url, params) {
-    let urlWithParams = url;
-
-    // Replace placeholders in the URL with actual values
-    for (let key in params) {
-        if (params.hasOwnProperty(key)) {
-        urlWithParams = urlWithParams.replace(`{${key}}`, encodeURIComponent(params[key]));
-        }
-    }
-    return urlWithParams;
-}
-//--End of Reference--//
 
 // Get Air Quality Data from API
 async function getAQIData(dataLoc){
-    const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+    const AQInfo_URL = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${apiKey}`;
     postData(AQInfo_URL, dataLoc, "POST").then((data) => {
         updateWidget(data, dataLoc.location.latitude, dataLoc.location.longitude);
     });
@@ -58,49 +45,22 @@ class AirQualityHeatmap{
         this.tileSize = tileSize;
     }
     getTile(coord, zoom, ownerDocument) {
+        //Create a heatmap according to Google Map tile
         const div = ownerDocument.createElement('div');
-        let params = {};
-        params.zoom = zoom;
-        params.x = coord.x;
-        params.y = coord.y;
         const opacity = 0.45
-        let heatmapURl = "https://airquality.googleapis.com/v1/mapTypes/UAQI_RED_GREEN/heatmapTiles/{zoom}/{x}/{y}?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
-        heatmapURl = addParametersToURL(heatmapURl, params);
+        let heatmapURl = `https://airquality.googleapis.com/v1/mapTypes/UAQI_RED_GREEN/heatmapTiles/${zoom}/${coord.x}/${coord.y}?key=${apiKey}`;
+        //Pass Heatmap tile to Google Map
         div.innerHTML = `<img style="opacity: ${opacity}"src="${heatmapURl}" alt="Air Quality Tile">`;
         return div;
     };
 }
 
 
-async function geocoder(address) {
-    let geocoder = new google.maps.Geocoder();
-    let addressGeo = { address: address };
-
-    // Make a request on the geocoder service and only proceed with code if request is processed
-    return new Promise((resolve, reject) => {
-        geocoder.geocode(addressGeo, (results, status) => {
-            if (status === 'OK') {
-                const latitude = results[0].geometry.location.lat();
-                const longitude = results[0].geometry.location.lng();
-                const location = { lat: latitude, lng: longitude };
-                resolve(location); //sent info back
-            } else {
-                reject('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    });
-}
-
-
 // Initialise Google Map with AQI info
 async function initMap() {
-      // Create the search box and link it to the UI element.
     let location;
-    if(address){
-        location =  await geocoder(address);
-    } else{
-        location = { lat: 51.498356, lng: -0.176894};
-    };
+
+    location = { lat: 51.498356, lng: -0.176894};
     
     //Initialise map
     const map = await new google.maps.Map(document.getElementById("map"), {
@@ -109,18 +69,22 @@ async function initMap() {
         maxZoom: 16,
         center: location,
         });
+    
+    // Create the search box and link it to the UI element.
     const input = document.getElementById("search-box");
     const searchBox = new google.maps.places.SearchBox(input);
-    // Create the initial InfoWindow.
+
+    // Create the initial Marker.
     let marker = new google.maps.Marker({  
         position: location,
         map: map,
     });
 
-    
+    // Format JSON file according to API spec
     var dataLoc = {location:{latitude:location.lat, longitude: location.lng}, extraComputations:"HEALTH_RECOMMENDATIONS"};
     getAQIData(dataLoc);
 
+    // Change map according to input on the search box
     searchBox.addListener("places_changed", () =>{
         const places = searchBox.getPlaces();
         let lat = places[0].geometry.location.lat();
@@ -138,12 +102,11 @@ async function initMap() {
             latitude: lat,
             longitude: lng
         };
-        
-        // const extraComputations = "HEALTH_RECOMMENDATIONS";
         const dataLoc = {location, extraComputations:"HEALTH_RECOMMENDATIONS"};
         getAQIData(dataLoc);
     });
-    // Configure the click listener.
+
+    // Configure the click listener on the map.
     map.addListener("click", (mapsMouseEvent) => {
         // Removes and add new marker
         marker.setMap(null);
@@ -161,14 +124,12 @@ async function initMap() {
             latitude: lat,
             longitude: lng
         };
-        
-        // const extraComputations = "HEALTH_RECOMMENDATIONS";
         const dataLoc = {location, extraComputations:"HEALTH_RECOMMENDATIONS"};
         getAQIData(dataLoc);
         
     });
     
-    //Grab image from API
+    // Air Quality Heatmap
     let airQualityOverlayVisible = true; // Initial state of heatmap (ON)
     const airQualitymap = new AirQualityHeatmap(new google.maps.Size(256, 256));
     map.overlayMapTypes.insertAt(0, airQualitymap);
@@ -185,10 +146,13 @@ async function initMap() {
             // If the overlay is not visible, add it
             map.overlayMapTypes.insertAt(0, airQualitymap);
         }
+        
+        //Change the current state of heatmap label
         airQualityOverlayVisible = !airQualityOverlayVisible;
     });
+
+    //Add the heatmap button to the map
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(toggleButton);
 }
-
 
 window.initMap = initMap;
