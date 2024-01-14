@@ -24,7 +24,7 @@
 	}
 	#Home__1 {
 		position: absolute;
-		width: 1920px;
+		width: 2000px;
 		height: 1309px;
 		background-color: rgba(255,255,255,1);
 		overflow: hidden;
@@ -73,7 +73,7 @@
 		cursor: pointer;
 	}
 	#My_Logbook_ {
-		left: 0px;
+		left: -50px;
 		top: 0px;
 		position: absolute;
 		overflow: visible;
@@ -98,7 +98,7 @@
 		position: absolute;
 		width: 27px;
 		height: 27px;
-		left: 1703.3px;
+		left: 1650.3px;
 		top: 33px;
 		transform: matrix(1,0,0,1,0,0);
 		--web-animation: fadein undefineds undefined;
@@ -160,6 +160,9 @@
 		top: 146px;
 		overflow: visible;
 	}
+	rect {
+		filter: drop-shadow(0px 8px 6px rgba(0, 0, 0, 0.161))
+    }
 	#Path_32 {
 		fill: rgba(231,240,252,1);
 	}
@@ -1078,10 +1081,10 @@
 		</path>
 	</svg>
 	<div id="check_button" class="check_button">
-		<svg class="Path_32" viewBox="0 0 488 233">
-			<path id="Path_32" d="M 98 0 L 390 0 C 444.1239013671875 0 488 43.87609100341797 488 98 L 488 135 C 488 189.1239013671875 444.1239013671875 233 390 233 L 98 233 C 43.87609100341797 233 0 189.1239013671875 0 135 L 0 98 C 0 43.87609100341797 43.87609100341797 0 98 0 Z">		
-			</path>
-		</svg>
+		<svg class="Path_32" width="400" height="180">
+			<rect x="50" y="20" rx="20" ry="20" width="600" height="300"
+			style="fill:#e7f0fc;opacity:0.5" />
+		  </svg>
 		<div class="aqi-widget" id="aqiWidget">
 			<div class="aqi-header">AIR QUALITY</div>
 			<div class="aqi-level" id="aqiLevel"></div>
