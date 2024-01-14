@@ -224,6 +224,7 @@ def signuppost():
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
         db.session.add(data)
         db.session.commit()
+        return redirect("/home")
     #NEED TO DOUBLE CHECK AFTER LOGGING OUT
     try: 
         if request.method == 'GET' and session['logged_in'] == True:
