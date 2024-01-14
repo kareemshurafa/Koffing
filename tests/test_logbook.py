@@ -38,7 +38,7 @@ def test_table(client,app):
     date_format = '%Y-%m-%d'
     time_format = '%H:%M'
     delta = timedelta(1)
-    currentdateobj = datetime.strptime("2024-01-8",'%Y-%m-%d')
+    currentdateobj = datetime.strptime(str(datetime.now().date()-timedelta(6)),'%Y-%m-%d')
 
     for i in range(0,5):
         currentdateobj = currentdateobj + delta
@@ -63,5 +63,6 @@ def test_table(client,app):
 def test_presence(client,app):
     response = client.get("/logbook")
     assert b'<img id="puffer_cartoon" src="../static/images/puffer_cartoon.png">' in response.data
+    
     
 

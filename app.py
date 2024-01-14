@@ -365,30 +365,39 @@ def logbookview():
     #--------- Have to prompt when to get a new inhaler, when they are taking too many----------
     #When to get a new inhaler:
             #If for a specific name of inhaler, the number of puffs
-            #If it exceeds an amount, put a suggestion "you may need to replace your {medname} inhaler"
+            #If it exceeds an amount, put a suggestion to replace the users inhalers
     if puffs.count() != 0:
         totaldose = 0
-        replace = []
+        replace = ""
         puffs = db.session.query(PuffHistory).order_by(PuffHistory.medname.desc()).filter_by(user_id=session['id']) 
         #Puffs filtered by the medicine name
         puffname = puffs.first().medname
         for i in range(0,puffs.count()):
-            if puffs[i].medname == puffname:
-                totaldose += puffs[i].dosageamt
+            if puffs[i].medname == puffname and puffs[i].medname != "":
+                totaldose += int(puffs[i].puffno)
                 if totaldose >= 200:
-                    replace += puffname                   
-            else:
-                puffname = puffs[i+1].medname
+                    if puffname not in replace:
+                        replace += str(puffname) + ", "  
+            elif  i<puffs.count() and puffs[i].medname != puffname and puffs[i].medname != "":
+                puffname = puffs[i].medname
                 totaldose = 0
+                totaldose += int(puffs[i].puffno)
+                if totaldose >= 200:
+                    if puffname not in replace:
+                        replace += str(puffname) + ", "  
+            elif i == puffs.count():
+                break
+
+        replace = replace[0:-2]                
         if len(replace) != 0 :
-            replacemsg = f"You may need to replace your {replace} inhalers"
+            replacemsg = f"You may need to replace these inhalers : {replace}"
             
     #If taking too many:
             #Find number of puffs x the number of entries in a specific day
             #If it exceeds 4 for reliever, combination or long-acting, suggest you may be taking too many
     if puffs.count() != 0:
         puffs = db.session.query(PuffHistory).filter_by(user_id=session['id'])
-        puffs = puffs.filter_by(datetaken=datetime.now().date())
+        puffs = puffs.filter_by(datetaken=str(datetime.now().date()))
         entries = 0
         for puff in puffs:
             entries += puff.puffno
