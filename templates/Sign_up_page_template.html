@@ -550,6 +550,22 @@
         color: white; 
     }
 
+	#error{
+		left: 4.075px;
+		top: 50px;
+		position: absolute;
+		overflow: visible;
+		width: 495px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: 'Trebuchet MS';
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgb(255, 0, 0);
+	}
+	
+
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
@@ -602,6 +618,11 @@
 			<div id="Welcome_please_sign_up">
 				<span>Welcome, please sign up</span>
 			</div>
+			{% if error %}
+			<div id="error">
+				<span>{{error}}</span>
+			</div>
+			{% endif %}
 			<div id="Username" class="Username">
 				<div id="Email_Address">
 					<!-- Add input field after the div id tag, replacing the span tag text -->
