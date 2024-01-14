@@ -87,7 +87,7 @@ def test_exceed(client,app):
     date_format = '%Y-%m-%d'
 
     currentdate = currentdate.strftime(date_format)
-    print(currentdate)
+
     client.post("/home", data = {"Date_taken":currentdate,
                                             "Time_taken":currenttime,                                         
                                             "Inhaler_type":"Reliever",

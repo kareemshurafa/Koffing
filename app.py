@@ -395,12 +395,13 @@ def logbookview():
     #If taking too many:
             #Find number of puffs x the number of entries in a specific day
             #If it exceeds 4 for reliever, combination or long-acting, suggest you may be taking too many
+    puffs = db.session.query(PuffHistory).filter_by(user_id=session['id'])
     if puffs.count() != 0:
-        puffs = db.session.query(PuffHistory).filter_by(user_id=session['id'])
-        puffs = puffs.filter_by(datetaken=str(datetime.now().date()))
-        entries = 0
-        for puff in puffs:
-            entries += puff.puffno
+        puffsfilt = puffs.filter_by(datetaken=str(datetime.now().date()))
+        entries = 0   
+        for i in range(0, puffsfilt.count()):
+            entries += puffsfilt[i].puffno
+            
         if entries > 4:
             exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more information."
 
