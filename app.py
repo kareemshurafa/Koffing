@@ -428,15 +428,9 @@ def updatepost():
     if gp_phone != None or "":
         user.GPnum = gp_phone
         # db.session.commit()
-
     
+    return redirect("/logbook")
 
-    
-
-        
-
-
-    pass
 
 @bp.route('/test')
 def index():
