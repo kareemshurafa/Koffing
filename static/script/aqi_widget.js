@@ -21,18 +21,18 @@ function locationFinder(lat, lng) {
 
 // Change Widget Colour according to current value
 function getAqiColor(aqiValue) {
-    if (aqiValue >= 1 && aqiValue <= 19) {
-        return '#800000'; // Hazardous (Maroon)
+    if (aqiValue < 1) {
+        return '#FF0000'; // Hazardous (Red)
     }else if (aqiValue >= 1 && aqiValue <= 19) {
-        return '#FF0000'; // Hazardous (Maroon)
+        return '#dd3311'; // Very Unhealthy (Light Red)
     } else if (aqiValue >= 20 && aqiValue <= 39) {
-        return '#FF8C00';// Very Unhealthy (Purple)
+        return '#FF8C00';// Unhealthy (Orange)
     } else if (aqiValue >= 40 && aqiValue <= 59) {
-        return '#FFFF00'; // Unhealthy (Red)
+        return '#FFFF00'; // Moderate (Yellow)
     } else if (aqiValue >= 60 && aqiValue <= 79) {
-        return '#84CF33'; //Moderate (Yellow)
+        return '#84CF33'; // Good (Light Green)
     } else if (aqiValue >= 80 && aqiValue <= 100) {
-        return '#009E3A'; // Excellent (Cyan)
+        return '#009E3A'; // Excellent (Dark Green)
     }
 }
 
