@@ -24,7 +24,7 @@ class UserDetails(db.Model):
     email = db.Column(db.String(50),nullable=False, unique=True)
     password = db.Column(db.String(128),nullable = False)
 
-    phonenum = db.Column(db.Integer,nullable=True,unique=True)
+    phonenum = db.Column(db.String,nullable=True,unique=True)
     dob = db.Column(db.DateTime,default=datetime.utcnow,nullable=True)
     address = db.Column(db.String(50),nullable=True)
 
@@ -32,7 +32,7 @@ class UserDetails(db.Model):
     GPsurname = db.Column(db.String(50),nullable=True)
     GPcode = db.Column(db.String(30),nullable=True)
     GPaddress = db.Column(db.String(200), nullable = True)
-    GPnum = db.Column(db.Integer(),nullable=True) 
+    GPnum = db.Column(db.String(),nullable=True) 
 
     latitude = db.Column(db.Float(), nullable = True)
     longitude = db.Column(db.Float(), nullable = True)
@@ -280,8 +280,9 @@ def logbookview():
         #     print(puffs[i].datetaken.date())
         # print(lastpuff)
         
+        # for i in range(1,puffs.count()):
+        #     puff1 = 
 
-    #CAN UNIT TEST THIS!!!!!!!!!!!!
         if lastpuff == timedelta(days=0):
             streak += 1
             #Run for loop for length of puffs, if time delta is more than 
@@ -293,6 +294,7 @@ def logbookview():
                     break
         else:
             streak = 0
+
 
     #Just need to implement logic that checks consecutive submissions for each day
     # asthmastreak
@@ -391,8 +393,9 @@ app = create_app()
 db.init_app(app)
 bcrypt = Bcrypt(app)
 app.secret_key = b'8dh3w90fph#3r'
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.drop_all()
+#     db.create_all()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
