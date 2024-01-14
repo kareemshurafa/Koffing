@@ -25,6 +25,32 @@
 		border: none;
 		font-family: Trebuchet MS; 
 	}
+	.faq-item {
+		margin-bottom: 10px;
+	}
+		
+	.faq-question {
+		padding: 10px;
+		background-color: #FFF;
+		border: 1px solid #707070;
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+		
+	.faq-answer {
+		display: none;
+		padding: 10px;
+		background-color: #FFF;
+		border: 1px solid #707070;
+		border-top: none;
+	}
+		
+	.plus-icon {
+		font-weight: bold;
+	}
+	
 	#FAQPage {
 		position: absolute;
 		width: 1920px;
@@ -940,6 +966,49 @@
 		<path onclick="application.goToTargetView(event)" id="Icon_awesome-home" d="M 13.97261714935303 8.49057674407959 L 4.784083366394043 16.64045906066895 L 4.784083366394043 25.4365348815918 C 4.784083366394043 25.91079711914062 5.141091346740723 26.29526519775391 5.581482410430908 26.29526519775391 L 11.16626930236816 26.27970123291016 C 11.60510349273682 26.27733993530273 11.95968723297119 25.89356231689453 11.95968246459961 25.42097091674805 L 11.95968246459961 20.28415679931641 C 11.95968246459961 19.80989265441895 12.31668949127197 19.4254264831543 12.75708198547363 19.4254264831543 L 15.94667911529541 19.4254264831543 C 16.38707160949707 19.4254264831543 16.74407958984375 19.80989265441895 16.74407958984375 20.28415679931641 L 16.74407958984375 25.41721153259277 C 16.74341773986816 25.64542579650879 16.82713508605957 25.86453819274902 16.97674942016602 26.02616310119629 C 17.12636375427246 26.18778610229492 17.32956314086914 26.27862739562988 17.54147911071777 26.27862739562988 L 23.12427139282227 26.29526519775391 C 23.56466293334961 26.29526519775391 23.92167091369629 25.91079711914062 23.92167091369629 25.4365348815918 L 23.92167091369629 16.63455581665039 L 14.73513031005859 8.49057674407959 C 14.51260471343994 8.29741382598877 14.19514465332031 8.29741382598877 13.97261714935303 8.49057674407959 Z M 28.48678398132324 14.02992057800293 L 24.32037162780762 10.3314790725708 L 24.32037162780762 2.897562980651855 C 24.32037162780762 2.541865587234497 24.05261611938477 2.253515720367432 23.72232246398926 2.253515720367432 L 20.93142318725586 2.253515720367432 C 20.60112953186035 2.253515720367432 20.3333740234375 2.541865587234497 20.3333740234375 2.897563219070435 L 20.3333740234375 6.794585704803467 L 15.87142467498779 2.841208696365356 C 14.98834228515625 2.058629035949707 13.71442317962646 2.058629035949707 12.83133983612061 2.841208696365356 L 0.2159809470176697 14.02992057800293 C -0.03871437162160873 14.25662422180176 -0.07442258298397064 14.66280555725098 0.1362411826848984 14.93695640563965 L 1.4070965051651 16.60074424743652 C 1.507983446121216 16.73285293579102 1.653525352478027 16.81631660461426 1.811622977256775 16.83272743225098 C 1.969720721244812 16.8491382598877 2.127386569976807 16.79714965820312 2.249848127365112 16.6882266998291 L 13.97261714935303 6.290081977844238 C 14.19514465332031 6.096919536590576 14.51260471343994 6.096919536590576 14.73513221740723 6.290082931518555 L 26.45839881896973 16.6882266998291 C 26.71297073364258 16.91509056091309 27.09014129638672 16.87663650512695 27.3006534576416 16.60235404968262 L 28.57150840759277 14.93856430053711 C 28.67256736755371 14.80614948272705 28.72044563293457 14.635817527771 28.70454406738281 14.46527671813965 C 28.68864250183105 14.29473400115967 28.61027336120605 14.13805389404297 28.48678779602051 14.02992057800293 Z">
 		</path>
 	</svg>
+
+	<div class="faq-item">
+    		<div class="faq-question" onclick="toggleAnswer('answer1')">
+			<span>Why should I use Koffing?</span>
+        		<button class="plus-icon">+</button>
+    		</div>
+    		<div id="faq1" class="faq-answer" style="display:none;">
+        	<!-- Answer Content -->
+        		<p>This is the answer to why you should use Koffing.</p>
+    		</div>
+	</div>
+
+	<div class="faq-item">
+    		<div class="faq-question" onclick="toggleAnswer('answer2')">
+			<span>How can I use Koffing</span>
+			<span class="plus-icon">+</span>
+		</div>
+		<div class="faq-answer" id="answer2" style="display: none;">
+			<p>Instructions on how to use Koffing...</p>
+		</div>
+	</div>
+
+		<div class="faq-item">
+    		<div class="faq-question" onclick="toggleAnswer('answer3')">
+			<span>How often do I need to renew my inhaler</span>
+        		<button class="plus-icon">+</button>
+    		</div>
+    		<div id="faq1" class="faq-answer" style="display:none;">
+        	<!-- Answer Content -->
+        		<p>This is the answer to why you should use Koffing.</p>
+    		</div>
+	</div>
+
+	<div class="faq-item">
+    		<div class="faq-question" onclick="toggleAnswer('answer4')">
+			<span>How does Air pollution affect asthma patients?</span>
+			<span class="plus-icon">+</span>
+		</div>
+		<div class="faq-answer" id="answer2" style="display: none;">
+			<p>Instructions on how to use Koffing...</p>
+		</div>
+	</div>
+	
 	<div id="Component_37__7" class="Component_37___7">
 		<div id="Component_167__1" class="Component_167___1">
 			<svg class="Rectangle_57">
@@ -1027,7 +1096,22 @@
 			<span>Why should I use Koffing?</span>
 		</div>
 	</div>
+
+
 </div>
+<script>
+    function toggleAnswer(faqId) {
+        var element = document.getElementById(faqId);
+        var button = element.previousElementSibling.querySelector('.plus-icon');
+        if (element.style.display === 'block') {
+            element.style.display = 'none';
+            button.textContent = '+';
+        } else {
+            element.style.display = 'block';
+            button.textContent = '-';
+        }
+    }
+</script>
 <!-- End of AdobeXD reference (note the whole code wasn't extracted however majority of CSS and HTML were, modifications and additional code was added as needed)-->
 
 </body>
