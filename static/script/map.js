@@ -2,6 +2,7 @@
 import {aqiChart} from './historical_data.js'
 // import {updateWidget} from './aqi_widget.js'
 //--//
+var apiKey = document.getElementById('apiKey').dataset.key;
 
 //--(Reference) Mozilla function to Post data to API--//
 async function postData(url = "", data = {}, mode) {
