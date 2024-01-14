@@ -380,6 +380,8 @@ def updatepost():
     # if something inputted, normal
     # if empty - forget about it
 
+    print(phone_number)
+
     if phone_number != None or "":
         user.phonenum = phone_number
         # db.session.commit()
@@ -412,8 +414,8 @@ def updatepost():
         user.GPnum = gp_phone
         # db.session.commit()
     
+    db.session.commit()
     return redirect("/logbook")
-
 
 @bp.route('/test')
 def index():
