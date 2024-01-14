@@ -40,7 +40,6 @@ function addParametersToURL(url, params) {
 // Get Air Quality Data from API
 async function getAQIData(dataLoc){
     const AQInfo_URL = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${apiKey}`;
-    console.log(AQInfo_URL)
     postData(AQInfo_URL, dataLoc, "POST").then((data) => {
         updateWidget(data, dataLoc.location.latitude, dataLoc.location.longitude);
     });
@@ -67,7 +66,6 @@ class AirQualityHeatmap{
         params.y = coord.y;
         const opacity = 0.45
         let heatmapURl = `https://airquality.googleapis.com/v1/mapTypes/UAQI_RED_GREEN/heatmapTiles/${zoom}/${coord.x}/${coord.y}?key=${apiKey}`;
-        console.log(heatmapURl)
         heatmapURl = addParametersToURL(heatmapURl, params);
         div.innerHTML = `<img style="opacity: ${opacity}"src="${heatmapURl}" alt="Air Quality Tile">`;
         return div;

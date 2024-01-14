@@ -1147,7 +1147,6 @@
 			} else{
 				let modAddress = address.replace(/ /gi, "%20");
 				let addressURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${modAddress}&key=${apiKey}`
-				console.log(addressURL);
 				let data = await postData(addressURL, {}, "GET");
 				if (data.status == "ZERO_RESULTS"){
 					geolocation = {location:{latitude: 51.498356, longitude: -0.176894},  extraComputations:"HEALTH_RECOMMENDATIONS"};
