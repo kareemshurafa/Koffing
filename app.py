@@ -274,6 +274,9 @@ def logbookview():
 
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.datetaken.desc()).filter_by(user_id=session['id'])
 
+    replacemsg = None
+    exceedmsg = None
+
     #-------------Asthma Log Table-------------
     puffsdict = {
         1 : {
@@ -374,7 +377,7 @@ def logbookview():
                 totaldose += puffs[i].dosageamt * puffs[i].puffno
                 if totaldose >= 200:
                     replace += puffname
-                    replacemsg = f"You may need to replace your {replace} inhaler"                 
+                    replacemsg = f"You may need to replace your {replace} inhaler."                 
             else:
                 puffname = puffs[i+1].medname
                 totaldose = 0
@@ -388,7 +391,7 @@ def logbookview():
         for puff in puffs:
             entries += puff.puffno
         if entries > 4:
-            exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more."
+            exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more information."
 
     
    
@@ -405,7 +408,9 @@ def logbookview():
                     GPnum = GPnum,
                     GPaddress = GPaddress,
                     streak = streak,
-                    puffs = puffsdict)
+                    puffs = puffsdict,
+                    replacemsg = replacemsg,
+                    exceedmsg = exceedmsg)
 
 @bp.route("/update", methods=['POST', 'GET'])
 def updatepost():
