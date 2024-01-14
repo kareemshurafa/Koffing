@@ -313,6 +313,7 @@ def logbookview():
                     GPsurname = GPsurname,
                     GPcode = GPcode,
                     GPnum = GPnum,
+                    GPaddress = GPaddress,
                     streak = streak)
 
 
@@ -360,9 +361,55 @@ def logbookview():
 
     # return(render_template("New_Logbook_template.html"))
 
-@bp.route("/update", methods = ['GET', 'POST'])
+@bp.route("/update")
 def updateview():
     return render_template('Update_Details.html')
+
+@bp.route("/update", methods=['POST'])
+def updatepost():
+    
+    user = db.session.query(UserDetails).filter_by(email=session['email']).first()
+
+    phone_number = request.form.get('phone_number')
+    dob = request.form.get('dob')
+    address = request.form.get('address')
+    gp_name = request.form.get('gp_name')
+    gp_surname = request.form.get('gp_surname')
+    gp_code = request.form.get('gp_code')
+    gp_phone = request.form.get('gp_phone_number')
+    gp_address = request.form.get('gp_address')
+
+    # if something inputted, normal
+    # if empty - forget about it
+
+    print(phone_number)
+
+    if phone_number != "":
+        user.phonenum = phone_number
+
+    if dob != "":
+        user.dob = dob
+
+    if address != "":
+        user.address = address
+
+    if gp_name != "":
+        user.GPname = gp_name
+
+    if gp_surname != "":
+        user.GPsurname = gp_surname
+
+    if gp_code != "":
+        user.GPcode = gp_code
+
+    if gp_address != "":
+        user.GPaddress = gp_address
+
+    if gp_phone != "":
+        user.GPnum = gp_phone
+
+    db.session.commit()
+    return redirect("/logbook")
 
 @bp.route('/test')
 def index():
