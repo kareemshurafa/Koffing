@@ -325,7 +325,8 @@ def logbookview():
                 lastpuff = datetime.now().date()-(puffs[i].datetaken.date())
                 if lastpuff == timedelta(days=0):
                     #Display in hours ago
-                    timediff = str(datetime.now().time() - (puffs[i].timetaken.time()))+ " hours ago"
+                    timediff = datetime.now() - (puffs[i].timetaken)
+                    timediff = str(timediff.seconds//3600) + " hours ago"
                 else:
                     #Display in days ago
                     timediff = str(lastpuff)[0] + " days ago"

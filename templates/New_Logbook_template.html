@@ -1064,6 +1064,30 @@
 		border-radius: 20px;
 		border-color: black;
 	}
+
+	table{
+		table-layout: fixed;
+    	width: 100px;
+	}
+
+	#tr {
+		height: 140px;
+		text-align: center;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-size: 20px;
+	}
+
+	#headers{
+		height: 30px;
+		text-align: center;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+	}
+	
+
 </style>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <script id="applicationScript" src="{{ url_for('static', filename='script/adobe_xd.js') }}" defer></script>
@@ -1375,9 +1399,9 @@
 			<span>S</span>
 		</div>
 	</div> -->
-	<table  id="Component_53__1">
+	<table id="Component_53__1">
 		<thead>
-			<tr>
+			<tr id="headers">
 				<th>Time taken</th>
 				<th>Inhaler Type</th>
 				<th>Number of Puffs</th>
@@ -1387,14 +1411,14 @@
 		<tbody>
 		{% for i in range(1,6) %}
 			{%if puffs[i]["time"] == "" %}
-			<tr>
+			<tr id="tr">
 				<td></td>
 				<td></td>
 				<td></td>
 				<td></td> 
 			</tr>
 			{%else%}
-			<tr>
+			<tr id="tr">
 				<td>{{puffs[i]["time"]}}</td>
 				<td>{{puffs[i]["inhalertype"]}}</td>
 				<td>{{puffs[i]["puffno"]}}</td>
@@ -1405,10 +1429,10 @@
 		</tbody>
 	</table>
 	<!-- <h2 id = "Component_53__1">{{puffs[2]}}</h2> -->
-	<svg class="Rectangle_80">
+	<!-- <svg class="Rectangle_80">
 		<rect id="Rectangle_80" rx="0" ry="0" x="0" y="0" width="563" height="252">
 		</rect>
-	</svg>
+	</svg> -->
 	<script>Home.addEventListener('click', function() {
         window.location.href = 'home'; 
     });
