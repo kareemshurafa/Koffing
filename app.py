@@ -371,13 +371,15 @@ def logbookview():
         puffname = puffs.first().medname
         for i in range(0,puffs.count()):
             if puffs[i].medname == puffname:
-                totaldose += puffs[i].dosageamt * puffs[i].puffno
+                totaldose += puffs[i].dosageamt
                 if totaldose >= 200:
-                    replace += puffname
-                    replacemsg = f"You may need to replace your {replace} inhaler"                 
+                    replace += puffname                   
             else:
                 puffname = puffs[i+1].medname
                 totaldose = 0
+        if len(replace) != 0 :
+            replacemsg = f"You may need to replace your {replace} inhalers"
+            
     #If taking too many:
             #Find number of puffs x the number of entries in a specific day
             #If it exceeds 4 for reliever, combination or long-acting, suggest you may be taking too many
@@ -388,10 +390,8 @@ def logbookview():
         for puff in puffs:
             entries += puff.puffno
         if entries > 4:
-            exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more."
+            exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more information."
 
-    
-   
     return render_template("New_Logbook_template.html",
                     first_name = name,
                     surname = surname,

@@ -21,3 +21,39 @@ def test_replace(client,app):
     response = client.get("/logbook")
     
     assert b'<span>You may need to replace your Salbutamol inhaler</span>' in response.data
+
+def test_replacemultiple(client,app):
+    client.post("/home", data = {"Date_taken":currentdate,
+                                            "Time_taken":currenttime,                                         
+                                            "Inhaler_type":"Reliever",
+                                            "Dosage":200,
+                                            "Number_of_puffs":100,
+                                            "Medname":"Salbutamol",
+                                            'regpuff': 'Submit'
+                                            })
+    client.post("/home", data = {"Date_taken":currentdate,
+                                            "Time_taken":currenttime,                                         
+                                            "Inhaler_type":"Reliever",
+                                            "Dosage":50,
+                                            "Number_of_puffs":100,
+                                            "Medname":"Turbuhaler",
+                                            'regpuff': 'Submit'
+                                            })
+    client.post("/home", data = {"Date_taken":currentdate,
+                                            "Time_taken":currenttime,                                         
+                                            "Inhaler_type":"Reliever",
+                                            "Dosage":10,
+                                            "Number_of_puffs":150,
+                                            "Medname":"Salbutamol",
+                                            'regpuff': 'Submit'
+                                            })
+    client.post("/home", data = {"Date_taken":currentdate,
+                                            "Time_taken":currenttime,                                         
+                                            "Inhaler_type":"Reliever",
+                                            "Dosage":12,
+                                            "Number_of_puffs":150,
+                                            "Medname":"Turbuhaler",
+                                            'regpuff': 'Submit'
+                                            })
+    response = client.get("/logbook")
+    assert b'<span>You may need to replace your Turbuhaler,Salbutamol inhaler</span>' in response.data
