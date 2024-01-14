@@ -141,6 +141,8 @@ def loginpost():
 
 @bp.route("/home", methods = ['POST','GET'])
 def homepost():
+    if not session.get('logged_in'):
+        return render_template("Login_Redirect.html")
     puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
     user = db.session.query(UserDetails).filter_by(id=session['id']).first()
     currAddress = user.address
@@ -198,6 +200,8 @@ def homepost():
 
 @bp.route("/mapinfo")
 def aqiview():
+    if not session.get('logged_in'):
+        return render_template("Login_Redirect.html")
     # tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
     # tester.address = "W2 3ET"
     # address = tester.address
@@ -236,6 +240,9 @@ def signuppost():
 
 @bp.route("/asthmainfo")
 def asthmainfoview():
+    if not session.get('logged_in'):
+        return render_template("Login_Redirect.html")
+    
     return render_template('Asthma_Info.html')
 
 @bp.route("/faq")
@@ -245,7 +252,7 @@ def faqview():
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
     if not session.get('logged_in'):
-        return "you are not logged in - please login before accesing the logbook"
+        return render_template("Login_Redirect.html")
 
     # This differentiates between the POST requests from signing up and updating the extra details form
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
