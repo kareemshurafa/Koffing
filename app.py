@@ -116,10 +116,19 @@ def signuppost():
         #     # return redirect("/signup")
         #     flash("Passwords do not match!")
         # else:
+        exists = db.session.query(UserDetails).filter_by(email=email).first() is not None
+        if exists:
+            error = "User already exists"
+            return render_template('Sign_up_page_template.html', error = error)
+
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
         db.session.add(data)
         db.session.commit()
+        session['logged_in'] = True
+        record = db.session.query(UserDetails).filter_by(email=email).first()
+        session['id'] = record.id
+        session['email'] = email
         return redirect("/home")
     #NEED TO DOUBLE CHECK AFTER LOGGING OUT
     try: 
@@ -144,7 +153,7 @@ def loginpost():
         if not exists:
             error = "Invalid credentials"
             return render_template('Login_page_template.html', error = error)
-        
+
         # Obtain record
         record = db.session.query(UserDetails).filter_by(email=Email).first()
         
@@ -186,8 +195,10 @@ def homepost():
             dosageamt = request.form.get('Dosage')
             puffno = request.form.get('Number_of_puffs')
             medname = request.form.get('Medname')
-            delt = time - datetime.now()
-            if delt > timedelta(seconds=0):
+
+            #If someone tries to submit a time in the future, just default it to the current time
+            timediff = datetime.combine(datetime.today(), time.time()) - datetime.now()
+            if timediff > timedelta(seconds=0):
                 time = datetime.now()
             # peakflow = request.form.get('peakflow')
             user = db.session.query(UserDetails).filter_by(id=session['id']).first()
@@ -337,7 +348,7 @@ def logbookview():
                     #Display in hours ago
                     time1 = datetime.now().time()
                     time2 = puffs[i].timetaken.time()
-                    timediff = datetime.combine(datetime.today(), time2) - datetime.combine(datetime.today(), time1)
+                    timediff = datetime.now() - datetime.combine(datetime.today(), time2)
                     timediff = str(timediff.seconds//3600) + " hours ago"
                     # timediff = str(24-timediff.seconds//3600) + " hours ago"
                 else:
