@@ -106,6 +106,9 @@ def initial():
     
 @bp.route("/login", methods=['POST', 'GET'])
 def loginpost():
+    
+    error = None
+
     if request.method == 'POST':
         Email = request.form.get('Email')
         password = request.form.get('Password')
@@ -115,7 +118,8 @@ def loginpost():
 
         # If they do not have an account - redirect to sign-up
         if not exists:
-            return redirect("/signup")
+            error = "Invalid credentials"
+            return render_template('Login_page_template.html', error = error)
         
         # Obtain record
         record = db.session.query(UserDetails).filter_by(email=Email).first()
@@ -125,7 +129,8 @@ def loginpost():
 
         # If they use an incorrect password - redirect to try again
         if not pswrd:
-            return redirect("/login")
+            error = "Invalid credentials"
+            return render_template('Login_page_template.html', error = error)
 
         # All checks passed - create user session and redirect to home page
         session['logged_in'] = True
@@ -220,10 +225,11 @@ def signuppost():
         email = request.form.get('Email_Address')
         password = request.form.get('Password')
         confpass = request.form.get('Confirm_Password')
-        # if password != confpass:
-        #     # return redirect("/signup")
-        #     flash("Passwords do not match!")
-        # else:
+        
+        if password != confpass:
+            error = "The passwords don't match"
+            return render_template("Sign_up_page_template.html", error = error)
+        
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8') # shows the hashed password in decoded format
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
         db.session.add(data)
