@@ -108,7 +108,7 @@ def signuppost():
         
         db.session.add(data)
         db.session.commit()
-        
+
         record = db.session.query(UserDetails).filter_by(email=email).first()
 
         session['logged_in'] = True
@@ -272,6 +272,9 @@ def logbookview():
 
     puffs = db.session.query(PuffHistory).order_by(PuffHistory.datetaken.desc()).filter_by(user_id=session['id'])
 
+    replacemsg = None
+    exceedmsg = None
+
     #-------------Asthma Log Table-------------
     puffsdict = {
         1 : {
@@ -356,6 +359,49 @@ def logbookview():
                     break
         else:
             streak = 0
+    
+    #--------- Have to prompt when to get a new inhaler, when they are taking too many----------
+    #When to get a new inhaler:
+            #If for a specific name of inhaler, the number of puffs
+            #If it exceeds an amount, put a suggestion to replace the users inhalers
+    if puffs.count() != 0:
+        totaldose = 0
+        replace = ""
+        puffs = db.session.query(PuffHistory).order_by(PuffHistory.medname.desc()).filter_by(user_id=session['id']) 
+        #Puffs filtered by the medicine name
+        puffname = puffs.first().medname
+        for i in range(0,puffs.count()):
+            if puffs[i].medname == puffname and puffs[i].medname != "":
+                totaldose += int(puffs[i].puffno)
+                if totaldose >= 200:
+                    if puffname not in replace:
+                        replace += str(puffname) + ", "  
+            elif  i<puffs.count() and puffs[i].medname != puffname and puffs[i].medname != "":
+                puffname = puffs[i].medname
+                totaldose = 0
+                totaldose += int(puffs[i].puffno)
+                if totaldose >= 200:
+                    if puffname not in replace:
+                        replace += str(puffname) + ", "  
+            elif i == puffs.count():
+                break
+
+        replace = replace[0:-2]                
+        if len(replace) != 0 :
+            replacemsg = f"You may need to replace these inhalers : {replace}"
+            
+    #If taking too many:
+            #Find number of puffs x the number of entries in a specific day
+            #If it exceeds 4 for reliever, combination or long-acting, suggest you may be taking too many
+    puffs = db.session.query(PuffHistory).filter_by(user_id=session['id'])
+    if puffs.count() != 0:
+        puffsfilt = puffs.filter_by(datetaken=str(datetime.now().date()))
+        entries = 0   
+        for i in range(0, puffsfilt.count()):
+            entries += puffsfilt[i].puffno
+            
+        if entries > 4:
+            exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more information."
 
     return render_template("New_Logbook_template.html",
                     first_name = name,
@@ -370,7 +416,9 @@ def logbookview():
                     GPnum = GPnum,
                     GPaddress = GPaddress,
                     streak = streak,
-                    puffs = puffsdict)
+                    puffs = puffsdict,
+                    replacemsg = replacemsg,
+                    exceedmsg = exceedmsg)
 
 @bp.route("/update", methods=['POST', 'GET'])
 def updatepost():

@@ -20,4 +20,3 @@ def test_home(client):
     assert '<input id="Dosage"' in info
     assert '<input id="Medname"' in info
 
-
