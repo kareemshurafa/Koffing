@@ -1,3 +1,6 @@
+// Get Google API Key securely
+var apiKey = document.getElementById('apiKey').dataset.key;
+
 // initialise AQI chart
 let currChart = null;
 
@@ -40,7 +43,6 @@ const meanLine ={
     borderDashOffset: 0,
     borderWidth: 3,
 
-    // borderColor: 'red',
     scaleID: 'y',
     value: (ctx) => average(ctx),
     enter({element}, event) {
@@ -54,7 +56,7 @@ const meanLine ={
     
 };
 
-// set std line according to data
+// set std line (+) according to data
 const posSTDLine ={
     type: 'line',
     label: {
@@ -67,7 +69,6 @@ const posSTDLine ={
     borderDashOffset: 0,
     borderWidth: 3,
 
-    // borderColor: 'red',
     scaleID: 'y',
     value: (ctx) => (std(ctx)+ average(ctx)),
     enter({element}, event) {
@@ -80,7 +81,7 @@ const posSTDLine ={
     }
 };
 
-// set negative std line according to data
+// set std line (-) according to data
 const negSTDLine ={
     type: 'line',
     label: {
@@ -93,7 +94,6 @@ const negSTDLine ={
     borderDashOffset: 0,
     borderWidth: 3,
 
-    // borderColor: 'red',
     scaleID: 'y',
     value: (ctx) => (average(ctx)- std(ctx)),
     enter({element}, event) {
@@ -126,6 +126,7 @@ async function postDataHistorical(url = "", data = {}, mode) {
 
 // get current historical data
 async function updateData(lat, long) {
+    // Format JSON request file according to API spec
     const dataH = {
         hours: 720, 
         pageSize: 100, 
@@ -133,12 +134,14 @@ async function updateData(lat, long) {
         location: { latitude: lat, longitude: long }
     };
 
-    const historicalDataUrl = 'https://airquality.googleapis.com/v1/history:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio';
+    // API URL
+    const historicalDataUrl = `https://airquality.googleapis.com/v1/history:lookup?key=${apiKey}`;
 
     let timeLabels = [];
     let aqiPoints = [];
     let state = true;
 
+    // Loop the request until have obtain all info
     while(state) {
         try {
             const data = await postDataHistorical(historicalDataUrl, dataH, "POST");
@@ -148,13 +151,16 @@ async function updateData(lat, long) {
                 hourInfo.indexes && hourInfo.indexes.length > 0
             );
             
+            // Obtain the time data of each datapoint
             timeLabels = timeLabels.concat(
                 filteredData.map(info => new Date(info.dateTime).toLocaleString())
             );
+            // Obtain the air quality data of each datapoint
             aqiPoints = aqiPoints.concat(
                 filteredData.map(info => info.indexes[0].aqi)
             );
-
+            
+            //Check if need to request for new batch of data
             if ('nextPageToken' in data) {
                 dataH.pageToken = data.nextPageToken;
             } else {
@@ -172,6 +178,7 @@ async function updateData(lat, long) {
 // Finding the average value of the historical data
 function average(ctx){
     const data = ctx.chart.data.datasets[0].data;
+    // Note: reduce function is needed to iterate and sum all the value in array
     const dataMean = data.reduce((currTotal, currIdx) => currTotal + currIdx, 0)/data.length;
     return dataMean
 }
@@ -188,8 +195,9 @@ function std(ctx){
 
 // Exporting aqiChart as an ES6 module
 export async function aqiChart(lat, long) {
-    //Format according to Chart.JS spec
 
+    // Check if there is a chart loaded at Client
+    //Format according to Chart.JS spec
     if(!currChart){
         const config = {
             type: 'line',

@@ -1,4 +1,4 @@
-// Import modules according to ES6 spec
+// Import chart according to ES6 spec
 import {aqiChart} from './historical_data.js'
 
 // Get Google API Key securely
