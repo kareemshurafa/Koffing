@@ -368,15 +368,15 @@ def logbookview():
         replace = []
         puffs = db.session.query(PuffHistory).order_by(PuffHistory.medname.desc()).filter_by(user_id=session['id']) 
         #Puffs filtered by the medicine name
-        puffname = puffs.first().medname()
-        for i in range(0,len(puffs)):
-            if puffs.medname() == puffname:
-                totaldose += puffs[i].dosageamt
+        puffname = puffs.first().medname
+        for i in range(0,puffs.count()):
+            if puffs[i].medname == puffname:
+                totaldose += puffs[i].dosageamt * puffs[i].puffno
                 if totaldose >= 200:
                     replace += puffname
                     replacemsg = f"You may need to replace your {replace} inhaler"                 
             else:
-                puffname = puffs[i+1].medname()
+                puffname = puffs[i+1].medname
                 totaldose = 0
     #If taking too many:
             #Find number of puffs x the number of entries in a specific day
