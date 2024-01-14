@@ -1,3 +1,5 @@
+var apiKey = document.getElementById('apiKey').dataset.key;
+
 // GET method
 async function getData(url = "") {
         const response = await fetch(url, {
@@ -8,7 +10,7 @@ async function getData(url = "") {
 
 // Parse location coordinate to API
 function locationFinder(lat, lng) {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`;
     return url;
 }
 

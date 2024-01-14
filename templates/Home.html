@@ -1156,7 +1156,7 @@
 			}
 			return geolocation
 		}
-		const AQInfo_URL = "https://airquality.googleapis.com/v1/currentConditions:lookup?key=AIzaSyD_oSOX6WnFcid5aYkNEcNIKeBQwcmzBio";
+		const AQInfo_URL = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${apiKey}`;
 
 		getLocation(address).then((data) => {
 			const currLoc = data;
