@@ -325,7 +325,7 @@ def logbookview():
     }
 
     if puffs.count() != 0:
-        for i in range(0,puffs.count()):
+        while i < 6:
             if puffs[i] is not None:
                 #Have to calculate the time taken
                 #Find the timedelta and output it as either 2 hours ago or 2 days ago
