@@ -24,7 +24,7 @@ class UserDetails(db.Model):
     email = db.Column(db.String(50),nullable=False, unique=True)
     password = db.Column(db.String(128),nullable = False)
 
-    phonenum = db.Column(db.Integer,nullable=True,unique=True)
+    phonenum = db.Column(db.String,nullable=True,unique=True)
     dob = db.Column(db.DateTime,default=datetime.utcnow,nullable=True)
     address = db.Column(db.String(50),nullable=True)
 
@@ -32,7 +32,7 @@ class UserDetails(db.Model):
     GPsurname = db.Column(db.String(50),nullable=True)
     GPcode = db.Column(db.String(30),nullable=True)
     GPaddress = db.Column(db.String(200), nullable = True)
-    GPnum = db.Column(db.Integer(),nullable=True) 
+    GPnum = db.Column(db.String(),nullable=True) 
 
     latitude = db.Column(db.Float(), nullable = True)
     longitude = db.Column(db.Float(), nullable = True)
@@ -141,6 +141,8 @@ def loginpost():
 
 @bp.route("/home", methods = ['POST','GET'])
 def homepost():
+    if not session.get('logged_in'):
+        return render_template("Login_Redirect.html")
     puffs = db.session.query(PuffHistory).filter_by(user_id = session['id'])
     user = db.session.query(UserDetails).filter_by(id=session['id']).first()
     currAddress = user.address
@@ -198,6 +200,8 @@ def homepost():
 
 @bp.route("/mapinfo")
 def aqiview():
+    if not session.get('logged_in'):
+        return render_template("Login_Redirect.html")
     # tester = db.session.query(UserDetails).filter_by(email=session['email']).first()
     # tester.address = "W2 3ET"
     # address = tester.address
@@ -224,6 +228,7 @@ def signuppost():
         data = UserDetails(firstname=name, surname=surname, email=email, password=hashed_password)
         db.session.add(data)
         db.session.commit()
+        return redirect("/home")
     #NEED TO DOUBLE CHECK AFTER LOGGING OUT
     try: 
         if request.method == 'GET' and session['logged_in'] == True:
@@ -235,6 +240,9 @@ def signuppost():
 
 @bp.route("/asthmainfo")
 def asthmainfoview():
+    if not session.get('logged_in'):
+        return render_template("Login_Redirect.html")
+    
     return render_template('Asthma_Info.html')
 
 @bp.route("/faq")
@@ -244,7 +252,7 @@ def faqview():
 @bp.route("/logbook", methods=['GET', 'POST'])
 def logbookview():
     if not session.get('logged_in'):
-        return "you are not logged in - please login before accesing the logbook"
+        return render_template("Login_Redirect.html")
 
     # This differentiates between the POST requests from signing up and updating the extra details form
     # What we need to do is be clear on how to handle first signing up and then normal logging in in terms of what is shown in the logbook
@@ -280,8 +288,9 @@ def logbookview():
         #     print(puffs[i].datetaken.date())
         # print(lastpuff)
         
+        # for i in range(1,puffs.count()):
+        #     puff1 = 
 
-    #CAN UNIT TEST THIS!!!!!!!!!!!!
         if lastpuff == timedelta(days=0):
             streak += 1
             #Run for loop for length of puffs, if time delta is more than 
@@ -293,6 +302,7 @@ def logbookview():
                     break
         else:
             streak = 0
+
 
     #Just need to implement logic that checks consecutive submissions for each day
     # asthmastreak
@@ -310,6 +320,7 @@ def logbookview():
                     GPsurname = GPsurname,
                     GPcode = GPcode,
                     GPnum = GPnum,
+                    GPaddress = GPaddress,
                     streak = streak)
 
 
@@ -357,9 +368,55 @@ def logbookview():
 
     # return(render_template("New_Logbook_template.html"))
 
-@bp.route("/update", methods = ['GET', 'POST'])
+@bp.route("/update")
 def updateview():
     return render_template('Update_Details.html')
+
+@bp.route("/update", methods=['POST'])
+def updatepost():
+    
+    user = db.session.query(UserDetails).filter_by(email=session['email']).first()
+
+    phone_number = request.form.get('phone_number')
+    dob = request.form.get('dob')
+    address = request.form.get('address')
+    gp_name = request.form.get('gp_name')
+    gp_surname = request.form.get('gp_surname')
+    gp_code = request.form.get('gp_code')
+    gp_phone = request.form.get('gp_phone_number')
+    gp_address = request.form.get('gp_address')
+
+    # if something inputted, normal
+    # if empty - forget about it
+
+    print(phone_number)
+
+    if phone_number != "":
+        user.phonenum = phone_number
+
+    if dob != "":
+        user.dob = dob
+
+    if address != "":
+        user.address = address
+
+    if gp_name != "":
+        user.GPname = gp_name
+
+    if gp_surname != "":
+        user.GPsurname = gp_surname
+
+    if gp_code != "":
+        user.GPcode = gp_code
+
+    if gp_address != "":
+        user.GPaddress = gp_address
+
+    if gp_phone != "":
+        user.GPnum = gp_phone
+
+    db.session.commit()
+    return redirect("/logbook")
 
 @bp.route('/test')
 def index():
@@ -391,8 +448,9 @@ app = create_app()
 db.init_app(app)
 bcrypt = Bcrypt(app)
 app.secret_key = b'8dh3w90fph#3r'
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.drop_all()
+#     db.create_all()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
