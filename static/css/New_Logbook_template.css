@@ -1,29 +1,20 @@
 .mediaViewInfo {
-    --web-view-name: Web 1920 – 2;
+    --web-view-name: Logbook;
     --web-view-id: Web_1920__2;
     --web-scale-on-resize: true;
     --web-enable-deep-linking: true;
 }
 :root {
-    --web-view-ids: Web_1920__2;
+    --web-view-ids: Logbook;
 }
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     border: none;
+    font-family: Trebuchet MS; 
 }
-#Web_1920__2 {
-    position: absolute;
-    width: 1920px;
-    height: 1080px;
-    background-color: rgba(255,255,255,1);
-    overflow: hidden;
-    --web-view-name: Web 1920 – 2;
-    --web-view-id: Web_1920__2;
-    --web-scale-on-resize: true;
-    --web-enable-deep-linking: true;
-}
+
 #Component_13__10 {
     position: absolute;
     width: 955px;
@@ -67,6 +58,10 @@
     left: 0px;
     top: 0px;
 }
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}	
 #Rectangle_20_ {
     fill: url(#Rectangle_20_);
     stroke: rgba(112,112,112,1);
@@ -381,7 +376,7 @@
     filter: drop-shadow(0px 8px 6px rgba(0, 0, 0, 0.161));
     overflow: visible;
     position: absolute;
-    width: 492px;
+    width: 474px;
     height: 454px;
     left: 0px;
     top: 0px;
@@ -635,7 +630,7 @@
     overflow: visible;
     width: 108px;
     white-space: nowrap;
-    text-align: left;
+    text-align: center;
     font-family: Helvetica Neue;
     font-style: normal;
     font-weight: bold;
@@ -666,7 +661,7 @@
     overflow: visible;
     width: 115px;
     white-space: nowrap;
-    text-align: left;
+    text-align: center;
     font-family: Helvetica Neue;
     font-style: normal;
     font-weight: bold;
@@ -1034,6 +1029,7 @@
     position: absolute;
     overflow: visible;
     width: 184px;
+    height: 200px;
     white-space: nowrap;
     text-align: left;
     font-family: Helvetica Neue;
@@ -1041,4 +1037,68 @@
     font-weight: bold;
     font-size: 35px;
     color: rgba(0,0,0,1);
+}
+#Home:hover  {
+    color: black;	
+}
+#Update_Details_Button {
+    left: 200px;
+    top: 1000px;
+    position: absolute;
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    font-family: Trebuchet MS; 
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgba(70,69,69,1);
+    border-radius: 20px;
+    border-color: black;
+}
+
+table{
+    table-layout: fixed;
+    width: 100px;
+}
+
+#tr {
+    height: 100px;
+    text-align: center;
+    font-family: Trebuchet MS; 
+    font-style: normal;
+    font-size: 20px;
+}
+
+#headers{
+    height: 30px;
+    text-align: center;
+    font-family: Trebuchet MS; 
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#exceedmsg{
+    left: 920px;
+    top: 850px;
+    position: absolute;
+    text-align: center;
+    font-family: Trebuchet MS; 
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    width: 900px;
+}
+
+#replacemsg{
+    left: 920px;
+    top: 950px;
+    position: absolute;
+    text-align: center;
+    font-family: Trebuchet MS; 
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    width: 900px;
 }

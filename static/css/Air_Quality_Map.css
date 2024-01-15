@@ -1,0 +1,543 @@
+	
+	/* CSS code for page and component styles */
+
+	.mediaViewInfo {
+		--web-view-name: Air Quality Map;
+		--web-view-id: Air_Quality_Map;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Air_Quality_Map;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+		font-family: Trebuchet MS; 
+	}
+
+	/* Styles for the Air Quality Map */
+
+	#Air_Quality_Map {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255,255,255,1);
+		overflow: scroll;
+		--web-view-name: Air Quality Map;
+		--web-view-id: Air_Quality_Map;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	    
+	html, body {
+        	width: 100%;
+        	height: 100%;
+        	margin: 0;
+        	padding: 0;
+    }
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	#Component_14__7 {
+		position: absolute;
+		width: 147px;
+		height: 33px;
+		left: 1742px;
+		top: 32px;
+		overflow: visible;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: logbook;
+		cursor: pointer;
+	}
+	#My_Logbook_ {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 148px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 27px;
+		color: rgba(70,69,69,1);
+	}
+	#Icon_awesome-user-alt {
+		fill: rgba(70,69,69,1);
+	}
+	.Icon_awesome-user-alt {
+		overflow: visible;
+		position: absolute;
+		width: 27px;
+		height: 27px;
+		left: 1703.3px;
+		top: 33px;
+		transform: matrix(1,0,0,1,0,0);
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: logbook;
+		cursor: pointer;
+	}
+	#n__ {
+		left: 688px;
+		top: 311px;
+		position: absolute;
+		overflow: visible;
+		width: 1px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(112,112,112,1);
+	}
+	#Path_30_ {
+		fill: url(#Path_30_);
+	}
+	.Path_30_ {
+		filter: drop-shadow(0px 8px 6px rgba(0, 0, 0, 0.161));
+		overflow: visible;
+		position: absolute;
+		width: 1478px;
+		height: 846px;
+		left: 409px;
+		top: 98px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Rectangle_60 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(0,0,0,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_60 {
+		position: absolute;
+		overflow: visible;
+		width: 366px;
+		height: 51px;
+		left: 1489px;
+		top: 225px;
+	}
+	#Icon_feather-search {
+		position: absolute;
+		width: 20.237px;
+		height: 17.865px;
+		left: 1805.381px;
+		top: 239.589px;
+		overflow: visible;
+	}
+	#Path_13 {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 2px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_13 {
+		overflow: visible;
+		position: absolute;
+		width: 20.141px;
+		height: 17.088px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_14 {
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 2px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_14 {
+		overflow: visible;
+		position: absolute;
+		width: 7.578px;
+		height: 7.354px;
+		left: 15.487px;
+		top: 13.339px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Search_for_location_ {
+		left: 1509px;
+		top: 237px;
+		position: absolute;
+		overflow: visible;
+		width: 182px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		color: rgba(112,112,112,1);
+	}
+	#search-box {
+		position: absolute;
+		overflow: visible;
+		width: 366px;
+		height: 51px;
+		left: 1489px;
+		top: 225px;
+
+	}
+	#map{
+		position: absolute;
+		overflow: visible;
+		width: 972px;
+		height: 655px;
+		left: 485px;
+		top: 199px;
+	}
+
+	/* styling API widgets */
+	
+	.aqi-widget {
+		width: 300px;
+		border-radius: 20px;
+		padding: 15px;
+		color: gray;
+		font-family: Arial, sans-serif;
+		margin: 10px;
+		display: inline-block;
+		position: absolute;
+		left: 1520px;
+		top: 420px;
+		background-color: gray;
+	}
+	.aqi-header {
+		font-size: 14px;
+		font-weight: bold;
+		color: black;
+	}
+	.aqi-level {
+		font-size: 24px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-value {
+		font-size: 36px;
+		font-weight: bold;
+		color: black
+	}
+	.aqi-location {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black
+	}
+	.aqi-health {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black;
+		font-weight: bold;
+	}
+	.aqi-update-time {
+		font-size: 12px;
+		color: black
+	}
+	.aqi-pollutants {
+		font-size: 16px;
+		margin: 10px 0;
+		color: black
+	}
+	#AIR_QUALITY_MAP_ {
+		left: 820px;
+		top: 126px;
+		position: absolute;
+		overflow: visible;
+		width: 281px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(0,0,0,1);
+	}
+	.air_heatmap_button {
+		background-color: #fff;
+		border: 0;
+		border-radius: 2px;
+		box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+		margin: 10px;
+		padding: 0 0.5em;
+		font: 400 18px Roboto, Arial, sans-serif;
+		overflow: hidden;
+		height: 40px;
+		cursor: pointer;
+	  }
+	  .air_heatmap_button:hover {
+		background: rgb(235, 235, 235);
+	  }
+	#Rectangle_66 {
+		fill: rgba(112,112,112,1);
+	}
+	.Rectangle_66 {
+		filter: drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.161));
+		position: absolute;
+		overflow: visible;
+		width: 359px;
+		height: 100%;
+		left: 0px;
+		top: 0px;
+	}
+	#Asthma_Information {
+		left: 45px;
+		top: 200px;
+		position: absolute;
+		overflow: visible;
+		width: 209px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: asthmainfo;
+		cursor: pointer;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Air_Quality_Info {
+		left: 45px;
+		top: 267px;
+		position: absolute;
+		overflow: visible;
+		width: 242px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Air_Quality_Statistics_ {
+		left: 45px;
+		top: 333px;
+		position: absolute;
+		overflow: visible;
+		width: 220px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: airqualitystats;
+		cursor: pointer;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#FAQ {
+		left: 45px;
+		top: 333px;
+		position: absolute;
+		overflow: visible;
+		width: 45px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: faq;
+		cursor: pointer;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Learn_More {
+		left: 45px;
+		top: 467px;
+		position: absolute;
+		overflow: visible;
+		width: 122px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: Learn_More.html;
+		cursor: pointer;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Koffing {
+		left: 92px;
+		top: 61px;
+		position: absolute;
+		overflow: visible;
+		width: 112px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgba(255,255,255,1);
+	}
+	#puffer {
+		position: absolute;
+		width: 82px;
+		height: 89px;
+		left: 21px;
+		top: 27px;
+		overflow: visible;
+	}
+	#Line_20 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 1.5px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_20 {
+		overflow: visible;
+		position: absolute;
+		width: 251.006px;
+		height: 2.5px;
+		left: 22px;
+		top: 125px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Logout {
+		left: 86px;
+		top: 714px;
+		position: absolute;
+		overflow: visible;
+		width: 93px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Icon_feather-logout {
+		position: absolute;
+		width: 27px;
+		height: 25.5px;
+		left: 48.5px;
+		top: 714.095px;
+		overflow: visible;
+	}
+	#Path_21 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 3px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_21 {
+		overflow: visible;
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		left: 9px;
+		top: 8.25px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_22 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 3px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_22 {
+		overflow: visible;
+		position: absolute;
+		width: 30px;
+		height: 28.5px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Home {
+		left: 86px;
+		top: 768px;
+		position: absolute;
+		overflow: visible;
+		width: 63px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: home;
+		cursor: pointer;
+		text-align: left;
+		font-family: Helvetica Neue;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Icon_awesome-home {
+		fill: rgba(255,255,255,1);
+	}
+	.Icon_awesome-home {
+		overflow: visible;
+		position: absolute;
+		width: 28.709px;
+		height: 24.042px;
+		left: 48.5px;
+		top: 767.616px;
+		transform: matrix(1,0,0,1,0,0);
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: home;
+		cursor: pointer;
+	}

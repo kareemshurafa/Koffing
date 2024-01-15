@@ -1,0 +1,395 @@
+/* CSS code for page and component styles */
+	
+	.mediaViewInfo {
+		--web-view-name: Asthma Info;
+		--web-view-id: Asthma_Info;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Asthma_Info;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: Trebuchet MS; 
+		border: none;
+	}
+	#Asthma_Info {
+		position: absolute;
+		width: 1920px;
+		height: 1282px;
+		background-color: rgba(255,255,255,1);
+		overflow: hidden;
+		--web-view-name: Asthma Info;
+		--web-view-id: Asthma_Info;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	@keyframes  {
+	
+	
+	}
+	#Component_14__8 {
+		position: absolute;
+		width: 147px;
+		height: 33px;
+		left: 1742px;
+		top: 32px;
+		overflow: visible;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: logbook;
+		cursor: pointer;
+	}
+	#My_Logbook_ {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 148px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 27px;
+		color: rgba(70,69,69,1);
+	}
+	#Icon_awesome-user-alt {
+		fill: rgba(112,112,112,1);
+	}
+	.Icon_awesome-user-alt {
+		overflow: visible;
+		position: absolute;
+		width: 27px;
+		height: 27px;
+		left: 1703.3px;
+		top: 33px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#n__ {
+		left: 688px;
+		top: 398px;
+		position: absolute;
+		overflow: visible;
+		width: 1px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 25px;
+		color: rgba(112,112,112,1);
+	}
+	#Asthma_is_a_chronic_respirator {
+		left: 442px;
+		top: 229px;
+		position: absolute;
+		overflow: hidden;
+		width: 1183px;
+		height: 466px;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 25px;
+		color: rgba(0,0,0,1);
+	}
+	#Scroll_Group_3 {
+		mix-blend-mode: normal;
+		position: absolute;
+		width: 500px;
+		height: 63px;
+		left: 442px;
+		top: 795px;
+		overflow: hidden;
+	}
+	#WHAT_DO_WE_DO {
+		left: 0px;
+		top: -1px;
+		position: absolute;
+		overflow: visible;
+		width: 600px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(23,78,180,1);
+	}
+	#Koffing_is_a_web-based_app_tha {
+		left: 442px;
+		top: 858px;
+		position: absolute;
+		overflow: visible;
+		width: 1106px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 27px;
+		color: rgba(0,0,0,1);
+	}
+	#lung {
+		filter: drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.161));
+		position: absolute;
+		width: 290px;
+		height: 263px;
+		left: 1600px;
+		top: 700px;
+		overflow: visible;
+	}
+	#ASTHMA_ {
+		left: 442px;
+		top: 158px;
+		position: absolute;
+		overflow: visible;
+		width: 160px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 35px;
+		color: rgba(0,0,0,1);
+	}
+	#homespage1 {
+		filter: drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.161));
+		position: absolute;
+		width: 195px;
+		height: 199px;
+		left: 1318px;
+		top: 323px;
+		overflow: visible;
+	}
+	#homespage2 {
+		filter: drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.161));
+		position: absolute;
+		width: 237px;
+		height: 193px;
+		left: 1547px;
+		top: 326px;
+		overflow: visible;
+	}
+	#Rectangle_66 {
+		fill: rgba(112,112,112,1);
+	}
+	.Rectangle_66 {
+		filter: drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.161));
+		position: absolute;
+		overflow: visible;
+		width: 359px;
+		height: 1300px;
+		left: 0px;
+		top: 0px;
+	}
+	#Asthma_Information {
+		left: 45px;
+		top: 200px;
+		position: absolute;
+		overflow: visible;
+		width: 209px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Air_Quality_Info {
+		left: 45px;
+		top: 267px;
+		position: absolute;
+		overflow: visible;
+		width: 242px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: mapinfo;
+		cursor: pointer;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#FAQ {
+		left: 45px;
+		top: 333px;
+		position: absolute;
+		overflow: visible;
+		width: 45px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: faq;
+		cursor: pointer;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Koffing {
+		left: 92px;
+		top: 61px;
+		position: absolute;
+		overflow: visible;
+		width: 112px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Adobe Clean;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 37px;
+		color: rgba(255,255,255,1);
+	}
+	#puffer {
+		position: absolute;
+		width: 82px;
+		height: 89px;
+		left: 21px;
+		top: 27px;
+		overflow: visible;
+	}
+	#Line_20 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 1.5px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_20 {
+		overflow: visible;
+		position: absolute;
+		width: 251.006px;
+		height: 2.5px;
+		left: 22px;
+		top: 125px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Logout {
+		left: 86px;
+		top: 714px;
+		position: absolute;
+		overflow: visible;
+		width: 93px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Icon_feather-logout {
+		position: absolute;
+		width: 27px;
+		height: 25.5px;
+		left: 48.5px;
+		top: 714.095px;
+		overflow: visible;
+	}
+	#Path_21 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 3px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_21 {
+		overflow: visible;
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		left: 9px;
+		top: 8.25px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_22 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 3px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Path_22 {
+		overflow: visible;
+		position: absolute;
+		width: 30px;
+		height: 28.5px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Home {
+		left: 86px;
+		top: 768px;
+		position: absolute;
+		overflow: visible;
+		width: 63px;
+		white-space: nowrap;
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: home;
+		cursor: pointer;
+		text-align: left;
+		font-family: Trebuchet MS; 
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(255,255,255,1);
+	}
+	#Icon_awesome-home {
+		fill: rgba(255,255,255,1);
+	}
+	.Icon_awesome-home {
+		overflow: visible;
+		position: absolute;
+		width: 28.709px;
+		height: 24.042px;
+		left: 48.5px;
+		top: 767.616px;
+		transform: matrix(1,0,0,1,0,0);
+		--web-animation: fadein undefineds undefined;
+		--web-action-type: page;
+		--web-action-target: home;
+		cursor: pointer;
+	}

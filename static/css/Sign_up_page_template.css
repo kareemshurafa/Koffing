@@ -1,0 +1,554 @@
+.mediaViewInfo {
+	--web-view-name: Sign up page;
+	--web-view-id: Sign_up_page;
+	--web-scale-on-resize: true;
+	--web-enable-deep-linking: true;
+}
+:root {
+	--web-view-ids: Sign_up_page;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: none;
+	font-family: Trebuchet MS; 
+}
+#Sign_up_page {
+	position: absolute;
+	width: 1881px;
+	height: 1056px;
+	background-color: rgba(255,255,255,1);
+	overflow: hidden;
+	--web-view-name: Sign up page;
+	--web-view-id: Sign_up_page;
+	--web-scale-on-resize: true;
+	--web-enable-deep-linking: true;
+}
+@keyframes  {
+
+/* Background component syles */
+}
+#Component_9__4 {
+	position: absolute;
+	width: 2054.883px;
+	height: 1724.086px;
+	left: 0px;
+	top: -374.543px;
+	overflow: visible;
+}
+#Rectangle_5 {
+	fill: rgba(231,240,252,1);
+	stroke: rgba(112,112,112,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+	
+}
+.Rectangle_5 {
+	position: absolute;
+	overflow: visible;
+	width: 1813.883px;
+	height: 1247px;
+	left: 0px;
+	top: 202.086px;
+}
+#Path_2 {
+	fill: rgba(245,210,237,1);
+	stroke: rgba(112,112,112,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: round;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Path_2 {
+	overflow: visible;
+	position: absolute;
+	width: 720.092px;
+	height: 1249.051px;
+	left: 944.754px;
+	top: 201.086px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Ellipse_1 {
+	fill: rgba(245,210,237,1);
+}
+.Ellipse_1 {
+	position: absolute;
+	overflow: visible;
+	width: 1090px;
+	height: 996px;
+	left: 964.883px;
+	top: 728.086px;
+}
+#Ellipse_2 {
+	fill: rgba(245,210,237,1);
+}
+.Ellipse_2 {
+	position: absolute;
+	overflow: visible;
+	width: 368px;
+	height: 1131px;
+	left: 1586.883px;
+	top: 95.086px;
+}
+#Ellipse_3 {
+	fill: rgba(245,210,237,1);
+}
+.Ellipse_3 {
+	position: absolute;
+	overflow: visible;
+	width: 217px;
+	height: 156px;
+	left: 1529.689px;
+	top: 616.086px;
+}
+#Ellipse_4 {
+	fill: rgba(245,210,237,1);
+}
+.Ellipse_4 {
+	position: absolute;
+	overflow: visible;
+	width: 331px;
+	height: 350px;
+	left: 956.465px;
+	top: 1272.086px;
+}
+#Path_3 {
+	fill: rgba(231,240,252,1);
+	stroke: rgba(112,112,112,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Path_3 {
+	overflow: visible;
+	position: absolute;
+	width: 371.003px;
+	height: 568.131px;
+	left: 1352.337px;
+	top: 201.586px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Ellipse_5 {
+	fill: rgba(231,240,252,1);
+}
+.Ellipse_5 {
+	width: 57px;
+	height: 874.809px;
+	position: absolute;
+	overflow: visible;
+	transform: translate(0px, 0px) matrix(1,0,0,1,1558.3828,-51.3618) rotate(32deg);
+	transform-origin: center;
+}
+
+/* Adding images */
+#puffer_cartoon {
+	position: absolute;
+	/* width: 704px;
+	height: 540px;
+	left: 1171.734px;
+	top: 909.086px; */
+	bottom:0;
+	right:-250px;
+	overflow: visible;
+}
+#Group_9 {
+	position: absolute;
+	width: 744.075px;
+	height: 906px;
+	left: 97.925px;
+	top: 86px;
+	overflow: visible;
+}
+
+/* Title */
+#Welcome_please_sign_up {
+	left: 4.075px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 430px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: normal;
+	font-weight: bold;
+	font-size: 37px;
+	color: rgba(0,0,0,1);
+}
+
+/* Fill in details for emaail, address and password for sign up */
+#Username {
+	position: absolute;
+	width: 503.851px;
+	height: 47px;
+	left: 4.075px;
+	top: 280px;
+	overflow: visible;
+}
+#Email_Address {
+	background-color: transparent; 
+	fill:transparent;
+	left: 20.5px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 400px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: italic;
+	font-weight: normal;
+	font-size: 35px;
+	color: rgba(0,0,0,1);
+}
+#Line_2 {
+	fill: transparent;
+	stroke: rgba(0,0,0,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Line_2 {
+	overflow: visible;
+	position: absolute;
+	width: 503.851px;
+	height: 1px;
+	left: 0px;
+	top: 46.5px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Password {
+	background-color: transparent; 
+	fill:transparent;
+	position: absolute;
+	width: 503.851px;
+	height: 50px;
+	left: 8.149px;
+	top: 445px;
+	overflow: visible;
+}
+#Line_3 {
+	fill: transparent;
+	stroke: rgba(0,0,0,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Line_3 {
+	overflow: visible;
+	position: absolute;
+	width: 503.851px;
+	height: 1px;
+	left: 0px;
+	top: 47px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Password_bd {
+	background-color: transparent; 
+	fill:transparent;
+	left: 25.5px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 400px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: italic;
+	font-weight: normal;
+	font-size: 35px;
+	color: rgba(0,0,0,1);
+}
+#Password_be {
+	background-color: transparent; 
+	fill:transparent;
+	position: absolute;
+	width: 512px;
+	height: 47px;
+	left: 0px;
+	top: 607.5px;
+	overflow: visible;
+}
+#Line_3_bf {
+	fill: transparent;
+	stroke: rgba(0,0,0,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Line_3_bf {
+	overflow: visible;
+	position: absolute;
+	width: 512px;
+	height: 1px;
+	left: 0px;
+	top: 47px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Confirm_password {
+	background-color: transparent; 
+	fill:transparent;
+	left: 16.5px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 400px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: italic;
+	font-weight: normal;
+	font-size: 35px;
+	color: rgba(0,0,0,1);
+}
+#Username_bh {
+	fill:transparent;
+	position: absolute;
+	width: 228.333px;
+	height: 47.5px;
+	left: 4.075px;
+	top: 117px;
+	overflow: visible;
+}
+#First_name {
+	fill:transparent;
+	background-color: transparent; 
+	left: 20.5px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 180px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: italic;
+	font-weight: normal;
+	font-size: 35px;
+	color: rgba(0,0,0,1);
+}
+#Line_2_bj {
+	fill: transparent;
+	stroke: rgba(0,0,0,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Line_2_bj {
+	overflow: visible;
+	position: absolute;
+	width: 228.337px;
+	height: 2px;
+	left: 0px;
+	top: 46.5px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Username_bk {
+	fill:transparent;
+	background-color: transparent; 
+	position: absolute;
+	width: 251px;
+	height: 48.5px;
+	left: 265.075px;
+	top: 116px;
+	overflow: visible;
+}
+#Last_name {
+	fill:transparent;
+	background-color: transparent; 
+	left: 20.5px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 180px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: italic;
+	font-weight: normal;
+	font-size: 35px;
+	color: rgba(0,0,0,1);
+}
+#Line_2_bm {
+	fill: transparent;
+	stroke: rgba(0,0,0,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Line_2_bm {
+	overflow: visible;
+	position: absolute;
+	width: 251.004px;
+	height: 2px;
+	left: 0px;
+	top: 47.5px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Login_here {
+	background-color: transparent; 
+	left: 460px;
+	top: 900px;
+	position: absolute;
+	overflow: visible;
+	width: 185px;
+	white-space: nowrap;
+	--web-animation: fadein undefineds undefined;
+	--web-action-type: page;
+	--web-action-target: login;
+	cursor: pointer;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: normal;
+	font-weight: bold;
+	font-size: 30px;
+	color: rgba(0,0,0,1);
+}
+
+#Already_have_an_account_ {
+	left: 6.075px;
+	top: 900px;
+	position: absolute;
+	overflow: visible;
+	width: 452px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Trebuchet MS; 
+	font-style: normal;
+	font-weight: bold;
+	font-size: 30px;
+	color: rgba(0,0,0,1);
+}
+#Request {
+position: absolute;
+width: 362px;
+height: 96px;
+left: 0px;
+top: 700px;
+overflow: visible;
+}
+
+#Rectangle_49_bi {
+fill: url(#Rectangle_49_bi);
+}
+
+.Rectangle_49_bi {
+position: absolute;
+overflow: visible;
+width: 362px;
+height: 96px;
+left: 0px;
+top: 70px;
+}
+
+#Send_Request {
+left: 110px;
+top: 95px;
+position: absolute;
+overflow: visible;
+width: 236px;
+white-space: nowrap;
+text-align: left;
+font-family: Trebuchet MS; 
+font-style: normal;
+font-weight: bold;
+font-size: 37px;
+color: rgba(0,0,0,1);
+}
+#Request:hover #Rectangle_49_bi {
+	fill: url(#blueGradient); 
+}
+
+
+
+#Login_here:hover  {
+color: white; 
+
+}
+
+#Rectangle_88 {
+	fill: rgba(255,255,255,1);
+	stroke: rgba(112,112,112,1);
+	stroke-width: 1px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.Rectangle_88 {
+	position: absolute;
+	overflow: visible;
+	width: 27px;
+	height: 27px;
+	left: 0px;
+	top: 700px;
+}
+
+#I_accept_the_Terms_of_Use__Pri {
+left: 150px;
+top: 781px;
+position: absolute;
+overflow: visible;
+width: 589px;
+white-space: nowrap;
+text-align: left;
+font-family: Trebuchet MS; 
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+color: rgba(0,0,0,1);
+
+
+}
+
+#Submit { /* Added in this CSS for the submit button for testing */
+	left: 0%;
+	top: 100% ;
+	position: absolute;
+	overflow: visible;
+	white-space: nowrap;
+	text-align: center;
+	font-family: Trebuchet MS; 
+	font-style: italic;
+	font-weight: normal;
+	font-size: 35px;
+	color: rgba(0,0,0,1);
+	background-color: transparent; 
+	border-width: 0px;
+	border: none;
+	outline: none;
+	width: 362px;
+}
+#Submit:hover  {
+	color: white; 
+}
+#error{
+	left: 5px;
+	top: 50px;
+	position: absolute;
+	overflow: visible;
+	width: 495px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: 'Trebuchet MS';
+	font-style: normal;
+	font-weight: bold;
+	font-size: 37px;
+	color: rgb(255, 0, 0);
+}
