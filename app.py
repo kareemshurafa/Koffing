@@ -399,7 +399,6 @@ def logbookview():
         entries = 0   
         for i in range(0, puffsfilt.count()):
             entries += puffsfilt[i].puffno
-            
         if entries > 4:
             exceedmsg = "You may be taking too many puffs for the day, please consult your Doctor for more information."
 
