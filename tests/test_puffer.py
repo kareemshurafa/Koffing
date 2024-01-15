@@ -2,7 +2,7 @@ from ..app import UserDetails,PuffHistory,db
 from datetime import datetime
 
 #Written in form of html submission
-currenttime = "12:56"
+currenttime = "00:00"
 currentdate = "2024-01-01"
 
 date_format = '%Y-%m-%d'

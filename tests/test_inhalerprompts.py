@@ -125,4 +125,5 @@ def test_exceed(client,app):
     
     response = client.get("/logbook")
     print(response.data)
+    print(currentdate)
     assert b'You may be taking too many puffs for the day, please consult your Doctor for more information.' in response.data

@@ -395,7 +395,12 @@ def logbookview():
             #If it exceeds 4 for reliever, combination or long-acting, suggest you may be taking too many
     puffs = db.session.query(PuffHistory).filter_by(user_id=session['id'])
     if puffs.count() != 0:
-        puffsfilt = puffs.filter_by(datetaken=str(datetime.now().date()))
+        currentdate = datetime.now().date()
+        date_format = '%Y-%m-%d'
+        currentdate = currentdate.strftime(date_format)
+        currentdate = datetime.strptime(currentdate,date_format)
+
+        puffsfilt = puffs.filter_by(datetaken=currentdate)
         entries = 0   
         for i in range(0, puffsfilt.count()):
             entries += puffsfilt[i].puffno
